@@ -28,7 +28,7 @@ import dev.nextftc.hardware.RobotController
  * @param cacheTolerance Tolerance used by the [Caching] delegate for
  * power updates; defaults to 0.01.
  */
-class NextCRServo(initializer: () -> CRServoImplEx, val cacheTolerance: Double = 0.01) {
+open class NextCRServo(initializer: () -> CRServoImplEx, val cacheTolerance: Double = 0.01) {
     @JvmOverloads constructor(name: String, cacheTolerance: Double = 0.01) : this(
         { RobotController.hardwareMap[name] as CRServoImplEx },
         cacheTolerance,
