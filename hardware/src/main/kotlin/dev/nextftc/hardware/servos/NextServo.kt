@@ -8,29 +8,50 @@
 
 package dev.nextftc.hardware.servos
 
+import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.hardware.PwmControl
-import com.qualcomm.robotcore.hardware.Servo
 import com.qualcomm.robotcore.hardware.ServoImplEx
+import com.qualcomm.robotcore.hardware.configuration.typecontainers.ServoConfigurationType
 import dev.nextftc.hardware.Caching
 import dev.nextftc.hardware.LazyHardware
 import dev.nextftc.hardware.RobotController
+import dev.nextftc.hardware.servoController
 
 /**
  * Lightweight wrapper around a [ServoImplEx] that provides a more user-friendly interface for controlling servo position and PWM range.
  * controls how sensitive the [position] caching delegate is to small changes.
  *
  * Example:
- *
+ * ```
  * val servo = NextServo("armServo")
  * servo.position = 0.5
  * servo.setPwmRange(500.0, 2500.0)
+ * ```
  *
  * @param initializer A function returning the backing [ServoImplEx]. It will be
  * invoked lazily the first time the servo is accessed.
  * @param cacheTolerance Tolerance used by the [Caching] delegate for
  * position updates; defaults to 0.01.
  */
-open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double = 0.01) {
+class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double = 0.01) {
+  /**
+   * Constructor to create a NextServo using a LynxModule and port number.
+   *
+   * Example:
+   * ```
+   * val servo = NextServo(RobotController.controlHub, 0) // Creates a NextServo on the Control Hub port 0
+   * ```
+   *
+   * @param module The Lynx Module, see [RobotController.controlHub], [RobotController.expansionHub],
+   * and [RobotController.servoHubs]
+   * @param port The servo port (in the range [0, 5])
+   * @param cacheTolerance Tolerance used by the [Caching] delegate for position updates; defaults to 0.01.
+   */
+  @JvmOverloads constructor(module: LynxModule, port: Int, cacheTolerance: Double = 0.01) : this(
+    { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
+    cacheTolerance,
+  )
+
   @JvmOverloads constructor(name: String, cacheTolerance: Double = 0.01) : this(
     { RobotController.hardwareMap[name] as ServoImplEx },
     cacheTolerance,
@@ -54,7 +75,7 @@ open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double 
    *
    * This property is backed by the `pwmRange` property of the `ServoImplEx` instance associated with this servo.
    */
-  var pwmRange
+  var pwmRange: PwmControl.PwmRange
     get() = servo.pwmRange
     set(value) {
       servo.pwmRange = value

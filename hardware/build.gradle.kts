@@ -41,6 +41,7 @@ dependencies {
   api(project(":control"))
   api(libs.functional.interfaces)
   compileOnly(libs.bundles.ftc)
+  implementation(libs.sloth)
 }
 
 description =
