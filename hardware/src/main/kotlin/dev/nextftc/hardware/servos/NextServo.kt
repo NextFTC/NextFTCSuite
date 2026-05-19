@@ -20,6 +20,7 @@ import dev.nextftc.hardware.RobotController
  * controls how sensitive the [position] caching delegate is to small changes.
  *
  * Example:
+ *
  * val servo = NextServo("armServo")
  * servo.position = 0.5
  * servo.setPwmRange(500.0, 2500.0)
@@ -29,7 +30,7 @@ import dev.nextftc.hardware.RobotController
  * @param cacheTolerance Tolerance used by the [Caching] delegate for
  * position updates; defaults to 0.01.
  */
-class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double = 0.01) {
+open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double = 0.01) {
   @JvmOverloads constructor(name: String, cacheTolerance: Double = 0.01) : this(
     { RobotController.hardwareMap[name] as ServoImplEx },
     cacheTolerance,
