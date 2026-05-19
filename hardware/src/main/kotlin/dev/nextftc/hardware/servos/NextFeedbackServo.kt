@@ -21,9 +21,11 @@ import dev.nextftc.hardware.RobotController
  * radians or degrees respectively from the feedback input.
  *
  * Example:
+ * ```
  * val arm = NextFeedbackServo("armServo", "armEncoder")
  * arm.position = 0.5
  * val angle = arm.angleInRadians  // where it actually is, in RADIANS
+ *```
  *
  * @param servoName Hardware map name of the servo.
  * @param feedbackName Hardware map name of the analog input.

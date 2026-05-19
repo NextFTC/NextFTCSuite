@@ -19,9 +19,12 @@ import dev.nextftc.hardware.RobotController
  * interface for controlling continuous-rotation servo power and direction.
  *
  * Example:
+ *
+ *```
  * val crServo = NextCRServo("intakeServo")
  * crServo.power = 0.75
  * crServo.direction = DcMotorSimple.Direction.REVERSE
+ *```
  *
  * @param initializer A function returning the backing [CRServoImplEx]. It will be
  * invoked lazily the first time the servo is accessed.
