@@ -46,7 +46,7 @@ data class ColorProfile @JvmOverloads constructor(
         val s = hsv[1]
         val v = hsv[2]
         val hueInRange = if (hueMin > hueMax) {
-            h >= hueMin || h <= hueMax   // wraparound: e.g. 350..10 means 350..360 OR 0..10
+            h >= hueMin || h <= hueMax   // wraparound: e.g. 350 to 10 means 350 to 360 OR 0 to 10
         } else {
             h in hueMin..hueMax           // normal range
         }
