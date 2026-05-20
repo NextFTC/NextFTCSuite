@@ -11,21 +11,25 @@ package dev.nextftc.hardware.sensors
 import android.graphics.Color
 import com.qualcomm.robotcore.hardware.DistanceSensor
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor
-import com.qualcomm.robotcore.hardware.NormalizedRGBA
 import dev.nextftc.hardware.LazyHardware
 import dev.nextftc.hardware.RobotController
+import dev.nextftc.hardware.sensors.colors.ColorProfile
+import dev.nextftc.hardware.sensors.colors.NextColor
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 
 
 /**
  * Combines a color sensor and an optional distance sensor into one class.
  * Call [update] each loop to read the hardware. Use [isColor] to check
- * against a [ColorProfile].
+ * against a [dev.nextftc.hardware.sensors.colors.ColorProfile].
  *
  * Example:
  * ```
- * val sensor = NextColorDistanceSensor("colorSensor", hasDistance = true)
- * val green  = ColorProfile(hueMin = 150f, hueMax = 185f, saturationMin = 0.2f)
+ * val green = ColorProfile(
+ *     space = ColorSpace.HSV,
+ *     color = NextColor.HSV(160f, 0.8f, 0.7f),
+ *     tolerance = NextColor.HSV(15f, 0.3f, 1f),
+ * )
  *
  * override fun periodic() {
  *     sensor.update()
@@ -33,7 +37,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
  * }
  * ```
  *
- * Use [debug] in telemetry to calibrate [ColorProfile]s.
+ * Use [debug] in telemetry to calibrate [dev.nextftc.hardware.sensors.colors.ColorProfile]s.
  *
  * @param colorInitializer Lazily resolves the backing [NormalizedColorSensor].
  * @param distanceInitializer Optional lazy distance sensor.
@@ -55,14 +59,15 @@ class NextColorDistanceSensor(
     private val colorSensor by LazyHardware(colorInitializer)
     private val distanceSensor: DistanceSensor? by lazy { distanceInitializer?.invoke() }
 
-    private var cachedColors: NormalizedRGBA? = null
     private var cachedDistanceCm: Double = Double.NaN
-    private val cachedHsv: FloatArray = FloatArray(3)
+
+    private var cachedColor: NextColor = NextColor.RGB(0f, 0f, 0f)
+    private var cachedHsv: FloatArray = FloatArray(3)
 
 
-    /** Last cached normalized RGBA reading, or null if [update] has not been called. */
-    val rgba: NormalizedRGBA?
-        get() = cachedColors
+    /** Last cached reading as a [NextColor]. Black until [update] is called. */
+    val color: NextColor
+        get() = cachedColor
 
     /** Last cached hue in degrees (0..360). */
     val hue: Float get() = cachedHsv[0]
@@ -82,27 +87,23 @@ class NextColorDistanceSensor(
 
     /** Reads the color sensor (and distance sensor, if present) and refreshes the cache. Call this once per loop, before reading any properties. */
     fun update() {
-        val colors = colorSensor.normalizedColors
-        cachedColors = colors
+        val c = colorSensor.normalizedColors
+        cachedColor = NextColor.RGB(c.red * 255, c.green * 255, c.blue * 255)
 
-        val r = (colors.red * 255).toInt()
-        val g = (colors.green * 255).toInt()
-        val b = (colors.blue * 255).toInt()
-
-        Color.RGBToHSV(r, g, b, cachedHsv)
+        Color.RGBToHSV(
+            cachedColor.red.toInt(),
+            cachedColor.green.toInt(),
+            cachedColor.blue.toInt(),
+            cachedHsv
+        )
 
         cachedDistanceCm = distanceSensor?.getDistance(DistanceUnit.CM) ?: Double.NaN
     }
 
+
     /** Returns the last cached distance converted to the requested [unit]. */
-    fun distance(unit: DistanceUnit = DistanceUnit.CM): Double {
-        return when (unit) {
-            DistanceUnit.CM -> cachedDistanceCm
-            DistanceUnit.MM -> cachedDistanceCm * 10
-            DistanceUnit.INCH -> cachedDistanceCm / 2.54
-            DistanceUnit.METER -> cachedDistanceCm / 100
-        }
-    }
+    fun distance(unit: DistanceUnit = DistanceUnit.CM): Double =
+        unit.fromUnit(DistanceUnit.CM, cachedDistanceCm)
 
     /** True if a distance sensor is attached and an object is within [threshold] centimeters. */
     fun isWithinDistance(threshold: Double, unit: DistanceUnit = DistanceUnit.CM): Boolean {
@@ -110,18 +111,16 @@ class NextColorDistanceSensor(
         return !distance.isNaN() && distance <= threshold
     }
 
-    /** True if the cached HSV reading falls inside [range]. */
-    fun isColor(range: ColorProfile): Boolean {
-        return range.contains(cachedHsv)
-    }
+    /** True if the cached HSV reading falls inside [profile]. */
+    fun isColor(profile: ColorProfile): Boolean = profile.matches(cachedColor)
+
 
     /** Single-line telemetry string showing current HSV and distance. Useful for calibrating [ColorProfile]s. */
     fun debug(): String {
-        val rgba = cachedColors
 
-        val r = "%.2f".format(rgba?.red ?: 0f)
-        val g = "%.2f".format(rgba?.green ?: 0f)
-        val b = "%.2f".format(rgba?.blue ?: 0f)
+        val r = "%.0f".format(cachedColor.red)
+        val g = "%.0f".format(cachedColor.green)
+        val b = "%.0f".format(cachedColor.blue)
 
         val h = "%.1f".format(hue)
         val s = "%.2f".format(saturation)
