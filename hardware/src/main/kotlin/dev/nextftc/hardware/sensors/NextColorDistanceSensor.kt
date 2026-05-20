@@ -60,10 +60,6 @@ class NextColorDistanceSensor(
     private val cachedHsv: FloatArray = FloatArray(3)
 
 
-    /** Last cached distance in centimeters, or [Double.NaN] if no distance sensor is attached or [update] has not been called. */
-    val distance: Double
-        get() = cachedDistanceCm
-
     /** Last cached normalized RGBA reading, or null if [update] has not been called. */
     val rgba: NormalizedRGBA?
         get() = cachedColors
@@ -98,8 +94,19 @@ class NextColorDistanceSensor(
         cachedDistanceCm = distanceSensor?.getDistance(DistanceUnit.CM) ?: Double.NaN
     }
 
+    /** Returns the last cached distance converted to the requested [unit]. */
+    fun distance(unit: DistanceUnit = DistanceUnit.CM): Double {
+        return when (unit) {
+            DistanceUnit.CM -> cachedDistanceCm
+            DistanceUnit.MM -> cachedDistanceCm * 10
+            DistanceUnit.INCH -> cachedDistanceCm / 2.54
+            DistanceUnit.METER -> cachedDistanceCm / 100
+        }
+    }
+
     /** True if a distance sensor is attached and an object is within [threshold] centimeters. */
-    fun isWithinDistance(threshold: Double): Boolean {
+    fun isWithinDistance(threshold: Double, unit: DistanceUnit = DistanceUnit.CM): Boolean {
+        val distance = distance(unit)
         return !distance.isNaN() && distance <= threshold
     }
 
@@ -110,7 +117,22 @@ class NextColorDistanceSensor(
 
     /** Single-line telemetry string showing current HSV and distance. Useful for calibrating [ColorProfile]s. */
     fun debug(): String {
-        val d = if (cachedDistanceCm.isNaN()) "n/a" else cachedDistanceCm
-        return "H=$hue S=$saturation V=$value dist=$d"
+        val rgba = cachedColors
+
+        val r = "%.2f".format(rgba?.red ?: 0f)
+        val g = "%.2f".format(rgba?.green ?: 0f)
+        val b = "%.2f".format(rgba?.blue ?: 0f)
+
+        val h = "%.1f".format(hue)
+        val s = "%.2f".format(saturation)
+        val v = "%.2f".format(value)
+
+        val d = if (cachedDistanceCm.isNaN()) {
+            "n/a"
+        } else {
+            "%.2f".format(cachedDistanceCm)
+        }
+
+        return "RGB=($r,$g,$b) HSV=($h,$s,$v) Dist=$d"
     }
 }
