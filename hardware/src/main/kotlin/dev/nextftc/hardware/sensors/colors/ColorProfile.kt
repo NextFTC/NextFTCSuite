@@ -60,20 +60,20 @@ data class ColorProfile (
     private fun matchesRgb(input: NextColor): Boolean {
         val c = colorRgb
         val t = toleranceRgb
-        val o = input.rgb
+        val i = input.rgb
 
-        return abs(o[0] - c[0]) <= t[0] &&
-                abs(o[1] - c[1]) <= t[1] &&
-                abs(o[2] - c[2]) <= t[2]
+        return abs(i[0] - c[0]) <= t[0] &&
+                abs(i[1] - c[1]) <= t[1] &&
+                abs(i[2] - c[2]) <= t[2]
     }
 
     private fun matchesHsv(input: NextColor): Boolean {
         val c = colorHsv
         val t = toleranceHsv
-        val o = input.hsv
-        return wraparoundCheck(o[0], c[0]) <= t[0] &&
-                abs(o[1] - c[1]) <= t[1] &&
-                abs(o[2] - c[2]) <= t[2]
+        val i = input.hsv
+        return wraparoundCheck(i[0], c[0]) <= t[0] &&
+                abs(i[1] - c[1]) <= t[1] &&
+                abs(i[2] - c[2]) <= t[2]
     }
 
     private fun wraparoundCheck(a: Float, b: Float): Float {
