@@ -33,28 +33,28 @@ import dev.nextftc.hardware.RobotController
  *
  * @author 28shettr
  */
-class NextDigitalSensor(
-    initializer: () -> DigitalChannel,
-    private val triggeredOnLow: Boolean = true,
-) {
-    @JvmOverloads
-    constructor(name: String, activeLow: Boolean = true) : this(
-        {
-            RobotController.hardwareMap[name] as DigitalChannel
-        },
-        activeLow,
-    )
+class NextDigitalSensor(initializer: () -> DigitalChannel, private val triggeredOnLow: Boolean = true) {
+  @JvmOverloads
+  constructor(name: String, activeLow: Boolean = true) : this(
+    {
+      RobotController.hardwareMap[name] as DigitalChannel
+    },
+    activeLow,
+  )
 
-    private val sensor by LazyHardware(initializer).also {
-        it.applyAfterInit { channel -> channel.mode = DigitalChannel.Mode.INPUT }
+  private val sensor by LazyHardware(initializer).also {
+    it.applyAfterInit { channel -> channel.mode = DigitalChannel.Mode.INPUT }
+  }
+
+  /** Raw state of the digital channel*/
+  val rawState: Boolean
+    get() = sensor.state
+
+  /** True if the sensor is currently triggered (accounting for [triggeredOnLow]). */
+  val isTriggered: Boolean
+    get() = if (triggeredOnLow) {
+      !sensor.state
+    } else {
+      sensor.state
     }
-
-    /** Raw state of the digital channel*/
-    val rawState: Boolean
-        get() = sensor.state
-
-    /** True if the sensor is currently triggered (accounting for [triggeredOnLow]). */
-    val isTriggered: Boolean
-        get() = if (triggeredOnLow) !sensor.state
-        else sensor.state
 }
