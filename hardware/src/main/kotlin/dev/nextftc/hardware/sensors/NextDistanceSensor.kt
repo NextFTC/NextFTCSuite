@@ -31,30 +31,27 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
  *
  * @author 28shettr
  */
-class NextDistanceSensor(
-    initializer: () -> DistanceSensor
-) {
-    constructor(name: String) : this(
-        { RobotController.hardwareMap[name] as DistanceSensor }
-    )
+class NextDistanceSensor(initializer: () -> DistanceSensor) {
+  constructor(name: String) : this(
+    { RobotController.hardwareMap[name] as DistanceSensor },
+  )
 
-    private val distanceSensor by LazyHardware(initializer)
+  private val distanceSensor by LazyHardware(initializer)
 
-    private var cachedDistanceCm: Double = Double.NaN
+  private var cachedDistanceCm: Double = Double.NaN
 
-    /** Reads the distance sensor and refreshes the cache. Call this once per loop, before reading any properties. */
-    fun update() {
-        cachedDistanceCm = distanceSensor.getDistance(DistanceUnit.CM)
-    }
+  /** Reads the distance sensor and refreshes the cache. Call this once per loop, before reading any properties. */
+  fun update() {
+    cachedDistanceCm = distanceSensor.getDistance(DistanceUnit.CM)
+  }
 
-    /** Returns the last cached distance converted to the requested [unit]. Defaults to centimeters. */
-    fun distance(unit: DistanceUnit = DistanceUnit.CM): Double =
-        unit.fromUnit(DistanceUnit.CM, cachedDistanceCm)
+  /** Returns the last cached distance converted to the requested [unit]. Defaults to centimeters. */
+  fun distance(unit: DistanceUnit = DistanceUnit.CM): Double =
+    unit.fromUnit(DistanceUnit.CM, cachedDistanceCm)
 
-    /** True if an object is within [threshold] of the sensor. Defaults to centimeters. */
-    fun isWithinDistance(threshold: Double, unit: DistanceUnit = DistanceUnit.CM): Boolean {
-        val distance = distance(unit)
-        return !distance.isNaN() && distance <= threshold
-    }
-
+  /** True if an object is within [threshold] of the sensor. Defaults to centimeters. */
+  fun isWithinDistance(threshold: Double, unit: DistanceUnit = DistanceUnit.CM): Boolean {
+    val distance = distance(unit)
+    return !distance.isNaN() && distance <= threshold
+  }
 }

@@ -8,8 +8,8 @@
 
 package dev.nextftc.hardware.sensors.colors
 
-import kotlin.math.abs
 import dev.nextftc.hardware.sensors.NextColorDistanceSensor
+import kotlin.math.abs
 
 enum class ColorSpace { RGB, HSV }
 
@@ -41,43 +41,39 @@ enum class ColorSpace { RGB, HSV }
  *
  * @author 28shettr
  */
-data class ColorProfile (
-    val space: ColorSpace,
-    val color: NextColor,
-    val tolerance: NextColor
-) {
+data class ColorProfile(val space: ColorSpace, val color: NextColor, val tolerance: NextColor) {
 
-    private val colorHsv = color.hsv
-    private val toleranceHsv = tolerance.hsv
-    private val colorRgb = color.rgb
-    private val toleranceRgb = tolerance.rgb
+  private val colorHsv = color.hsv
+  private val toleranceHsv = tolerance.hsv
+  private val colorRgb = color.rgb
+  private val toleranceRgb = tolerance.rgb
 
-    /** Returns `true` if [reading] falls within [tolerance] of [color] in [space]. */
-    fun matches(reading: NextColor): Boolean = when (space) {
-        ColorSpace.RGB -> matchesRgb(reading)
-        ColorSpace.HSV -> matchesHsv(reading)
-    }
-    private fun matchesRgb(input: NextColor): Boolean {
-        val c = colorRgb
-        val t = toleranceRgb
-        val i = input.rgb
+  /** Returns `true` if [reading] falls within [tolerance] of [color] in [space]. */
+  fun matches(reading: NextColor): Boolean = when (space) {
+    ColorSpace.RGB -> matchesRgb(reading)
+    ColorSpace.HSV -> matchesHsv(reading)
+  }
+  private fun matchesRgb(input: NextColor): Boolean {
+    val c = colorRgb
+    val t = toleranceRgb
+    val i = input.rgb
 
-        return abs(i[0] - c[0]) <= t[0] &&
-                abs(i[1] - c[1]) <= t[1] &&
-                abs(i[2] - c[2]) <= t[2]
-    }
+    return abs(i[0] - c[0]) <= t[0] &&
+      abs(i[1] - c[1]) <= t[1] &&
+      abs(i[2] - c[2]) <= t[2]
+  }
 
-    private fun matchesHsv(input: NextColor): Boolean {
-        val c = colorHsv
-        val t = toleranceHsv
-        val i = input.hsv
-        return wraparoundCheck(i[0], c[0]) <= t[0] &&
-                abs(i[1] - c[1]) <= t[1] &&
-                abs(i[2] - c[2]) <= t[2]
-    }
+  private fun matchesHsv(input: NextColor): Boolean {
+    val c = colorHsv
+    val t = toleranceHsv
+    val i = input.hsv
+    return wraparoundCheck(i[0], c[0]) <= t[0] &&
+      abs(i[1] - c[1]) <= t[1] &&
+      abs(i[2] - c[2]) <= t[2]
+  }
 
-    private fun wraparoundCheck(a: Float, b: Float): Float {
-        val diff = abs(a - b) % 360f
-        return if (diff > 180f) 360f - diff else diff
-    }
+  private fun wraparoundCheck(a: Float, b: Float): Float {
+    val diff = abs(a - b) % 360f
+    return if (diff > 180f) 360f - diff else diff
+  }
 }
