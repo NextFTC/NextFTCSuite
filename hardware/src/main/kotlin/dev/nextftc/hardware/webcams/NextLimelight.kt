@@ -9,13 +9,16 @@
 package dev.nextftc.hardware.webcams
 
 import com.qualcomm.hardware.limelightvision.LLResult
+import com.qualcomm.hardware.limelightvision.LLResultTypes
 import com.qualcomm.hardware.limelightvision.Limelight3A
+import dev.nextftc.control.geometry.Pose2d
 import dev.nextftc.hardware.LazyHardware
 import dev.nextftc.hardware.RobotController
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D
-
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 
 /**
@@ -50,7 +53,6 @@ class NextLimelight(initializer: () -> Limelight3A) {
 
   val tY: Double get() = latestResult.ty
 
-
   /** Starts the polling loop. */
   fun start() = limelight.start()
 
@@ -63,19 +65,40 @@ class NextLimelight(initializer: () -> Limelight3A) {
   /** Sets the poll rate in Hz; must be called before [start]. */
   fun setPollRate(hz: Int) = limelight.setPollRateHz(hz)
 
-    fun recalibrate(){
-        val botpose: Pose3D = latestResult.botpose ?: return
+  /** Returns the robot's field position from the latest Limelight result in Pedro coordinates, or `null` if no valid pose is available. */
+  fun getPedroPoseFromLimelight(): Pose2d? {
+    val result = limelight.getLatestResult()
+    if (result == null || !result.isValid()) return null
 
-        val rawX = botpose.getPosition().x
-        val rawY = botpose.getPosition().y
-        val inchX: Double = rawY / DistanceUnit.mPerInch
-        val inchY: Double = -(rawX) / DistanceUnit.mPerInch
-        val heading = botpose.getOrientation().getYaw(AngleUnit.DEGREES) - 90
+    val botpose = result.botpose ?: return null
 
+    val rawX = botpose.getPosition().x
+    val rawY = botpose.getPosition().y
+    val inchX = rawY / DistanceUnit.mPerInch
+    val inchY = -(rawX) / DistanceUnit.mPerInch
+    val heading = botpose.getOrientation().getYaw(AngleUnit.DEGREES) - 90
 
-        val pedroX = inchX + 72
-        val pedroY = inchY + 72
-//        val pedroPose: Pose3D = Pose3D(pedroX, pedroY, Math.toRadians(heading))
+    val pedroX = inchX + 72
+    val pedroY = inchY + 72
+    val pedroPose = Pose2d(pedroX, pedroY, Math.toRadians(heading))
+
+    return pedroPose
+  }
+
+    fun getDistance(): Double{
+        val tags: List<LLResultTypes.FiducialResult> = latestResult.fiducialResults
+        var distance: Double
+        for (tag in tags) {
+            val pose: Pose3D = tag.robotPoseTargetSpace
+             distance = sqrt(
+                pose.getPosition().x.pow(2.0) +
+                        pose.getPosition().y.pow(2.0) +
+                        pose.getPosition().z.pow(2.0)
+            )
+        }
+
+        return distance
+
     }
 
   /** Sets the poll rate and pipeline, then starts polling in one call. */
