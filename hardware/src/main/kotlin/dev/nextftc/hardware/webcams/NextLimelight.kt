@@ -20,7 +20,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose3D
 import kotlin.math.pow
 import kotlin.math.sqrt
 
-
 /**
  * A NextFTC wrapper around the [Limelight3A] vision sensor that resolves the device
  * lazily from the hardware map, so you never have to fetch it yourself.
@@ -65,6 +64,24 @@ class NextLimelight(initializer: () -> Limelight3A) {
   /** Sets the poll rate in Hz; must be called before [start]. */
   fun setPollRate(hz: Int) = limelight.setPollRateHz(hz)
 
+  var distance: Double = 0.0
+
+  /** Returns the straight-line distance from the robot to the AprilTag matching [id] (or any visible tag if [id] is null) in the given [unit]. */
+  fun getDistance(unit: DistanceUnit, id: Int? = null): Double {
+    val tags: List<LLResultTypes.FiducialResult> = latestResult.fiducialResults
+    for (tag in tags) {
+      if (id == null || tag.fiducialId == id) {
+        val pose: Pose3D = tag.robotPoseTargetSpace
+        distance = sqrt(
+          pose.position.x.pow(2.0) +
+            pose.position.y.pow(2.0) +
+            pose.position.z.pow(2.0),
+        )
+      }
+    }
+    return unit.fromUnit(DistanceUnit.METER, distance)
+  }
+
   /** Returns the robot's field position from the latest Limelight result in Pedro coordinates, or `null` if no valid pose is available. */
   fun getPedroPoseFromLimelight(): Pose2d? {
     val result = limelight.getLatestResult()
@@ -84,22 +101,6 @@ class NextLimelight(initializer: () -> Limelight3A) {
 
     return pedroPose
   }
-
-    fun getDistance(): Double{
-        val tags: List<LLResultTypes.FiducialResult> = latestResult.fiducialResults
-        var distance: Double
-        for (tag in tags) {
-            val pose: Pose3D = tag.robotPoseTargetSpace
-             distance = sqrt(
-                pose.getPosition().x.pow(2.0) +
-                        pose.getPosition().y.pow(2.0) +
-                        pose.getPosition().z.pow(2.0)
-            )
-        }
-
-        return distance
-
-    }
 
   /** Sets the poll rate and pipeline, then starts polling in one call. */
   @JvmOverloads
