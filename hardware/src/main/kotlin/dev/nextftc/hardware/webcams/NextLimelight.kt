@@ -48,8 +48,10 @@ class NextLimelight(initializer: () -> Limelight3A) {
   /** True if the sensor has reported data within the last ~250ms. */
   val isConnected: Boolean get() = limelight.isConnected
 
+  /** The horizontal offset angle, in degrees, from the camera's crosshair to the target. */
   val tX: Double get() = latestResult.tx
 
+  /** The vertical offset angle, in degrees, from the camera's crosshair to the target. */
   val tY: Double get() = latestResult.ty
 
   /** Starts the polling loop. */
@@ -66,7 +68,7 @@ class NextLimelight(initializer: () -> Limelight3A) {
 
   var distance: Double = 0.0
 
-  /** Returns the straight-line distance from the robot to the AprilTag matching [id] (or any visible tag if [id] is null) in the given [unit]. */
+  /** Returns the straight-line distance (hypotenuse) from the robot to the AprilTag matching [id] (or any visible tag if [id] is null) in the given [unit]. */
   fun getDistance(unit: DistanceUnit, id: Int? = null): Double {
     val tags: List<LLResultTypes.FiducialResult> = latestResult.fiducialResults
     for (tag in tags) {
