@@ -18,29 +18,36 @@ import dev.nextftc.hardware.RobotController
  *
  * Most digital sensors are "active low" — they read `false` when triggered
  * (switch pressed, magnet present, beam broken) and `true` when idle. This
- * wrapper handles that inversion via [triggeredOnLow] so [isTriggered] always
+ * wrapper handles that inversion via [inverted] so [isTriggered] always
  * means what you'd expect.
  *
  * Example:
  * ```
  * val beamBreak = NextDigitalSensor("beamBreak")
  * if (beamBreak.isTriggered) { stopMotor() }
- *```
+ * ```
  *
  * @param initializer Lazily resolves the backing [DigitalChannel].
- * @param triggeredOnLow If true, [isTriggered] returns the inverse of the raw
- * sensor state. Defaults to true (matches most FTC digital sensors).
+ * @param inverted If true, [isTriggered] returns the opposite of the raw
+ * sensor state — i.e. triggered when the channel reads low. For example, a
+ * touch sensor reads `false` while it's being pressed, so inverting makes
+ * [isTriggered] read `true` when pressed, which is what you'd expect.
+ * Defaults to true, matching most FTC digital sensors, which are active-low.
  *
  * @author 28shettr
  */
-class NextDigitalSensor(initializer: () -> DigitalChannel, private val triggeredOnLow: Boolean = true) {
-  /** @param name Hardware map name of the digital channel. @param activeLow See [triggeredOnLow]. */
+
+class NextDigitalSensor(initializer: () -> DigitalChannel, private val inverted: Boolean = true) {
+  /**
+   * @param name Hardware map name to resolve the [DigitalChannel] from.
+   * @param inverted If true, [isTriggered] is the opposite of the raw state. Defaults to true.
+   */
   @JvmOverloads
-  constructor(name: String, activeLow: Boolean = true) : this(
+  constructor(name: String, inverted: Boolean = true) : this(
     {
       RobotController.hardwareMap[name] as DigitalChannel
     },
-    activeLow,
+    inverted,
   )
 
   private val sensor by LazyHardware(initializer).also {
@@ -51,15 +58,14 @@ class NextDigitalSensor(initializer: () -> DigitalChannel, private val triggered
   val rawState: Boolean
     get() = sensor.state
 
-  /** True if the sensor is currently triggered (accounting for [triggeredOnLow]). */
+  /** True if the sensor is currently triggered (accounting for [inverted]). */
   val isTriggered: Boolean
-    get() = if (triggeredOnLow) {
+    get() = if (inverted) {
       !sensor.state
     } else {
       sensor.state
     }
 
   /** Returns a string of the sensor's current state for telemetry or logging. */
-  fun debug(): String =
-    "Sensor State: $isTriggered, Raw State: $rawState, Triggered On Low: $triggeredOnLow"
+  fun debug(): String = "Sensor State: $isTriggered, Raw State: $rawState, Inverted: $inverted"
 }
