@@ -12,6 +12,11 @@ import com.qualcomm.hardware.limelightvision.LLResult
 import com.qualcomm.hardware.limelightvision.Limelight3A
 import dev.nextftc.hardware.LazyHardware
 import dev.nextftc.hardware.RobotController
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
+import org.firstinspires.ftc.robotcore.external.navigation.Pose3D
+
+
 
 /**
  * A NextFTC wrapper around the [Limelight3A] vision sensor that resolves the device
@@ -41,6 +46,11 @@ class NextLimelight(initializer: () -> Limelight3A) {
   /** True if the sensor has reported data within the last ~250ms. */
   val isConnected: Boolean get() = limelight.isConnected
 
+  val tX: Double get() = latestResult.tx
+
+  val tY: Double get() = latestResult.ty
+
+
   /** Starts the polling loop. */
   fun start() = limelight.start()
 
@@ -52,6 +62,21 @@ class NextLimelight(initializer: () -> Limelight3A) {
 
   /** Sets the poll rate in Hz; must be called before [start]. */
   fun setPollRate(hz: Int) = limelight.setPollRateHz(hz)
+
+    fun recalibrate(){
+        val botpose: Pose3D = latestResult.botpose ?: return
+
+        val rawX = botpose.getPosition().x
+        val rawY = botpose.getPosition().y
+        val inchX: Double = rawY / DistanceUnit.mPerInch
+        val inchY: Double = -(rawX) / DistanceUnit.mPerInch
+        val heading = botpose.getOrientation().getYaw(AngleUnit.DEGREES) - 90
+
+
+        val pedroX = inchX + 72
+        val pedroY = inchY + 72
+//        val pedroPose: Pose3D = Pose3D(pedroX, pedroY, Math.toRadians(heading))
+    }
 
   /** Sets the poll rate and pipeline, then starts polling in one call. */
   @JvmOverloads
