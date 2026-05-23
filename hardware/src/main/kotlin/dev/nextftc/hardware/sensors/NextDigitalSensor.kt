@@ -34,6 +34,7 @@ import dev.nextftc.hardware.RobotController
  * @author 28shettr
  */
 class NextDigitalSensor(initializer: () -> DigitalChannel, private val triggeredOnLow: Boolean = true) {
+  /** @param name Hardware map name of the digital channel. @param activeLow See [triggeredOnLow]. */
   @JvmOverloads
   constructor(name: String, activeLow: Boolean = true) : this(
     {
@@ -46,7 +47,7 @@ class NextDigitalSensor(initializer: () -> DigitalChannel, private val triggered
     it.applyAfterInit { channel -> channel.mode = DigitalChannel.Mode.INPUT }
   }
 
-  /** Raw state of the digital channel*/
+  /** Raw state of the digital channel */
   val rawState: Boolean
     get() = sensor.state
 
@@ -57,4 +58,8 @@ class NextDigitalSensor(initializer: () -> DigitalChannel, private val triggered
     } else {
       sensor.state
     }
+
+  /** Returns a string of the sensor's current state for telemetry or logging. */
+  fun debug(): String =
+    "Sensor State: $isTriggered, Raw State: $rawState, Triggered On Low: $triggeredOnLow"
 }
