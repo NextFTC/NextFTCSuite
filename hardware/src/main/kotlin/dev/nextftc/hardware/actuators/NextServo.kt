@@ -33,7 +33,7 @@ import dev.nextftc.hardware.servoController
  * @param cacheTolerance Tolerance used by the [Caching] delegate for
  * position updates; defaults to 0.01.
  */
-class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double = 0.01) {
+open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double = 0.01) {
   /**
    * Constructor to create a NextServo using a LynxModule and port number.
    *
@@ -59,7 +59,13 @@ class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double = 0.0
 
   private val servo by LazyHardware(initializer)
 
-  val position: Double by Caching(cacheTolerance) {
+  /**
+   * The commanded servo position in the range `[0.0, 1.0]`.
+   *
+   * Assigning a value writes through to the backing [ServoImplEx], while reads
+   * are handled by the [Caching] delegate.
+   */
+  var position: Double by Caching(cacheTolerance) {
     if (it != null) {
       servo.position = it
     }
@@ -93,10 +99,16 @@ class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double = 0.0
     pwmRange = PwmControl.PwmRange(lower, upper)
   }
 
+  /**
+   * Enables PWM output for the underlying servo.
+   */
   fun enable() {
     servo.setPwmEnable()
   }
 
+  /**
+   * Disables PWM output for the underlying servo.
+   */
   fun disable() {
     servo.setPwmDisable()
   }
