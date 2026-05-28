@@ -28,6 +28,9 @@ import kotlin.math.sqrt
  * sensor is reachable through [camera].
  *
  * @param initializer supplies the underlying [Limelight3A] when first accessed.
+ *
+ *  * @author 28shettr
+ *
  */
 class NextLimelight(initializer: () -> Limelight3A) {
   constructor(name: String) : this(

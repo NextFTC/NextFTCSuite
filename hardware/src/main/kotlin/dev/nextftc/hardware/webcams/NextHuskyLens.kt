@@ -20,7 +20,12 @@ import dev.nextftc.hardware.RobotController
  * sensor is reachable through [camera].
  *
  * @param initializer supplies the underlying [HuskyLens] when first accessed.
+ *
+ *  * @author 28shettr
+ *
  */
+
+//May be updated if, there are cooler things to add
 class NextHuskyLens(initializer: () -> HuskyLens) {
   constructor(name: String) : this(
     { RobotController.hardwareMap[name] as HuskyLens },
