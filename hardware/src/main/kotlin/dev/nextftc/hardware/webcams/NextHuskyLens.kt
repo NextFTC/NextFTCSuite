@@ -25,7 +25,7 @@ import dev.nextftc.hardware.RobotController
  *
  */
 
-//May be updated if, there are cooler things to add
+// May be updated if, there are cooler things to add
 class NextHuskyLens(initializer: () -> HuskyLens) {
   constructor(name: String) : this(
     { RobotController.hardwareMap[name] as HuskyLens },

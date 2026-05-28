@@ -71,7 +71,13 @@ class NextFeedbackCRServo(
     feedbackName: String,
     cacheTolerance: Double = 0.01,
   ) : this(
-    { CRServoImplEx(LynxServoController(RobotController.appContext, module), port, ServoConfigurationType.getStandardServoType()) },
+    {
+      CRServoImplEx(
+        LynxServoController(RobotController.appContext, module),
+        port,
+        ServoConfigurationType.getStandardServoType(),
+      )
+    },
     feedbackName,
     cacheTolerance,
   )
