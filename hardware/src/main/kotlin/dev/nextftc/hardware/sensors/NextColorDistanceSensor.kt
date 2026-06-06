@@ -101,17 +101,27 @@ class NextColorDistanceSensor(
   }
 
   /** Returns the last cached distance converted to the requested [unit]. */
-  fun distance(unit: DistanceUnit = DistanceUnit.CM): Double =
+  @JvmOverloads
+  fun getDistance(unit: DistanceUnit = DistanceUnit.CM): Double =
     unit.fromUnit(DistanceUnit.CM, cachedDistanceCm)
 
-  /** True if a distance sensor is attached and an object is within [threshold] centimeters. */
+  /** True if a distance sensor senses an object within [threshold] in the given [unit]. */
+  @JvmOverloads
   fun isWithinDistance(threshold: Double, unit: DistanceUnit = DistanceUnit.CM): Boolean {
-    val distance = distance(unit)
+    val distance = getDistance(unit)
     return !distance.isNaN() && distance <= threshold
   }
 
-  /** True if the cached HSV reading falls inside [profile]. */
+  /** True if the cached color reading matches [profile]. */
   fun isColor(profile: ColorProfile): Boolean = profile.matches(cachedColor)
+
+  /** True if the cached color reading matches [profile] and an object is within [threshold] in the given [unit]. */
+  @JvmOverloads
+  fun isColorWithinDistance(
+    profile: ColorProfile,
+    threshold: Double,
+    unit: DistanceUnit = DistanceUnit.CM,
+  ): Boolean = isWithinDistance(threshold, unit) && isColor(profile)
 
   /** Single-line telemetry string showing current HSV and distance. Useful for calibrating [ColorProfile]s. */
   fun debug(): String {

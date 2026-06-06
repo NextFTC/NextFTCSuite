@@ -45,13 +45,15 @@ class NextDistanceSensor(initializer: () -> DistanceSensor) {
     cachedDistanceCm = distanceSensor.getDistance(DistanceUnit.CM)
   }
 
-  /** Returns the last cached distance converted to the requested [unit]. Defaults to centimeters. */
-  fun distance(unit: DistanceUnit = DistanceUnit.CM): Double =
+  /** Returns the last cached distance converted to the requested [unit]. */
+  @JvmOverloads
+  fun getDistance(unit: DistanceUnit = DistanceUnit.CM): Double =
     unit.fromUnit(DistanceUnit.CM, cachedDistanceCm)
 
-  /** True if an object is within [threshold] of the sensor. Defaults to centimeters. */
+  /** True if a distance sensor senses an object within [threshold] in the given [unit]. */
+  @JvmOverloads
   fun isWithinDistance(threshold: Double, unit: DistanceUnit = DistanceUnit.CM): Boolean {
-    val distance = distance(unit)
+    val distance = getDistance(unit)
     return !distance.isNaN() && distance <= threshold
   }
 }
