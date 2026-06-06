@@ -69,6 +69,7 @@ class NextLimelight(initializer: () -> Limelight3A) {
   /** Sets the poll rate in Hz; must be called before [start]. */
   fun setPollRate(hz: Int) = limelight.setPollRateHz(hz)
   private var distanceMeters: Double = 0.0
+
   /** Returns the straight-line distance (hypotenuse) from the robot to the AprilTag matching [id] (or any visible tag if [id] is null) in the given [unit]. */
   @JvmOverloads
   fun getDistance(unit: DistanceUnit = DistanceUnit.INCH, id: Int? = null): Double {
@@ -76,7 +77,7 @@ class NextLimelight(initializer: () -> Limelight3A) {
     for (tag in tags) {
       if (id == null || tag.fiducialId == id) {
         val pose: Pose3D = tag.robotPoseTargetSpace
-          distanceMeters = sqrt(
+        distanceMeters = sqrt(
           pose.position.x.pow(2.0) +
             pose.position.y.pow(2.0) +
             pose.position.z.pow(2.0),
