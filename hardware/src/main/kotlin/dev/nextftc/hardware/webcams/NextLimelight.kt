@@ -73,7 +73,7 @@ class NextLimelight(initializer: () -> Limelight3A) {
 
   /** Returns the straight-line distance (hypotenuse) from the robot to the AprilTag matching [id] (or any visible tag if [id] is null) in the given [unit]. */
   @JvmOverloads
-  fun getDistance(unit: DistanceUnit, id: Int? = null): Double {
+  fun getDistance(unit: DistanceUnit = DistanceUnit.INCH, id: Int? = null): Double {
     val tags: List<LLResultTypes.FiducialResult> = latestResult.fiducialResults
     for (tag in tags) {
       if (id == null || tag.fiducialId == id) {
