@@ -32,60 +32,60 @@ import kotlin.math.round
  */
 class RGBHeadlight(name: String, cacheTolerance: Double = 0.01) : NextServo(name, cacheTolerance) {
 
-    /**
-     * Available colors/patterns for the headlights
-     *
-     * Values are servo positions.
-     */
-    enum class Color(val position: Double) {
-        OFF(0.0),
+  /**
+   * Available colors/patterns for the headlights
+   *
+   * Values are servo positions.
+   */
+  enum class Color(val position: Double) {
+    OFF(0.0),
 
-        RED(0.279),
-        ORANGE(0.333),
-        YELLOW(0.388),
-        SAGE(0.444),
-        GREEN(0.500),
-        AZURE(0.555),
-        BLUE(0.611),
-        INDIGO(0.666),
-        VIOLET(0.722),
-        WHITE(1.0),
-    }
+    RED(0.279),
+    ORANGE(0.333),
+    YELLOW(0.388),
+    SAGE(0.444),
+    GREEN(0.500),
+    AZURE(0.555),
+    BLUE(0.611),
+    INDIGO(0.666),
+    VIOLET(0.722),
+    WHITE(1.0),
+  }
 
-    /**
-     * Sets the headlight color/pattern.
-     */
-    fun setColor(color: Color) {
-        position = round(color.position * 100) / 100.0
-    }
+  /**
+   * Sets the headlight color/pattern.
+   */
+  fun setColor(color: Color) {
+    position = round(color.position * 100) / 100.0
+  }
 
-    /**
-     * Sets the headlight color/pattern using a raw PWM position.
-     */
-    fun setColor(pwm: Double) {
-        position = round(pwm * 100) / 100.0
-    }
+  /**
+   * Sets the headlight color/pattern using a raw PWM position.
+   */
+  fun setColor(pwm: Double) {
+    position = round(pwm * 100) / 100.0
+  }
 
-    /**
-     * Turns headlights off.
-     */
-    fun off() {
-        setColor(Color.OFF)
-    }
+  /**
+   * Turns headlights off.
+   */
+  fun off() {
+    setColor(Color.OFF)
+  }
 
-    /**
-     * Sets brightness by scaling the PWM range.
-     *
-     * brightness:
-     * 0.0 = dimmest
-     * 1.0 = brightest
-     */
-    fun setBrightness(brightness: Double) {
-        val clipped = brightness.coerceIn(0.0, 1.0)
+  /**
+   * Sets brightness by scaling the PWM range.
+   *
+   * brightness:
+   * 0.0 = dimmest
+   * 1.0 = brightest
+   */
+  fun setBrightness(brightness: Double) {
+    val clipped = brightness.coerceIn(0.0, 1.0)
 
-        val lower = 500.0
-        val upper = 2500.0 * clipped
+    val lower = 500.0
+    val upper = 2500.0 * clipped
 
-        setPwmRange(lower, upper)
-    }
+    setPwmRange(lower, upper)
+  }
 }
