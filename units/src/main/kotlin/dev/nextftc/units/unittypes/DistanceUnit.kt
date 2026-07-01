@@ -66,8 +66,7 @@ class DistanceUnit(
    * @param baseUnitMagnitude the magnitude in terms of the base unit
    * @return the measurement object
    */
-  override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<DistanceUnit> =
-    of(this.fromBaseUnits(baseUnitMagnitude))
+  override fun ofBaseUnits(baseUnitMagnitude: Double): Double = of(this.fromBaseUnits(baseUnitMagnitude))
 
   /**
    * Combines this unit with a unit of time to create a velocity unit.

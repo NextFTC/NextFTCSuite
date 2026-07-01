@@ -14,8 +14,10 @@ import com.qualcomm.hardware.limelightvision.Limelight3A
 import dev.nextftc.control.geometry.Pose2d
 import dev.nextftc.hardware.LazyHardware
 import dev.nextftc.hardware.RobotController
+import dev.nextftc.units.Inches
+import dev.nextftc.units.measuretypes.Distance
+import dev.nextftc.units.unittypes.DistanceUnit
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D
 import kotlin.math.pow
 import kotlin.math.sqrt
@@ -29,7 +31,7 @@ import kotlin.math.sqrt
  *
  * @param initializer supplies the underlying [Limelight3A] when first accessed.
  *
- *  * @author 28shettr
+ * @author 28shettr
  *
  */
 class NextLimelight(initializer: () -> Limelight3A) {
@@ -72,19 +74,20 @@ class NextLimelight(initializer: () -> Limelight3A) {
 
   /** Returns the straight-line distance (hypotenuse) from the robot to the AprilTag matching [id] (or any visible tag if [id] is null) in the given [unit]. */
   @JvmOverloads
-  fun getDistance(unit: DistanceUnit = DistanceUnit.INCH, id: Int? = null): Double {
+  fun getDistance(unit: DistanceUnit = Inches, id: Int? = null): Distance? {
     val tags: List<LLResultTypes.FiducialResult> = latestResult.fiducialResults
     for (tag in tags) {
       if (id == null || tag.fiducialId == id) {
         val pose: Pose3D = tag.robotPoseTargetSpace
-        distanceMeters = sqrt(
+        val meters = sqrt(
           pose.position.x.pow(2.0) +
             pose.position.y.pow(2.0) +
             pose.position.z.pow(2.0),
         )
+        return unit.of(unit.fromBaseUnits(meters))
       }
     }
-    return unit.fromUnit(DistanceUnit.METER, distanceMeters)
+    return null
   }
 
   /** Returns the robot's field position from the latest Limelight result in Pedro coordinates, or `null` if no valid pose is available. */
@@ -94,10 +97,11 @@ class NextLimelight(initializer: () -> Limelight3A) {
 
     val botpose = result.botpose ?: return null
 
-    val rawX = botpose.getPosition().x
-    val rawY = botpose.getPosition().y
-    val inchX = rawY / DistanceUnit.mPerInch
-    val inchY = -(rawX) / DistanceUnit.mPerInch
+    val rawXMeters = botpose.getPosition().x
+    val rawYMeters = botpose.getPosition().y
+
+    val inchX = Inches.fromBaseUnits(rawYMeters)
+    val inchY = -Inches.fromBaseUnits(rawXMeters)
     val heading = botpose.getOrientation().getYaw(AngleUnit.DEGREES) - 90
 
     val pedroX = inchX + 72
@@ -105,6 +109,25 @@ class NextLimelight(initializer: () -> Limelight3A) {
     val pedroPose = Pose2d(pedroX, pedroY, Math.toRadians(heading))
 
     return pedroPose
+  }
+
+  /** Returns the robot's field position from the latest Limelight result in FTC coordinates, or `null` if no valid pose is available. */
+  fun getPoseFromLimelight(): Pose2d? {
+    val result = limelight.getLatestResult()
+    if (result == null || !result.isValid()) return null
+
+    val botpose = result.botpose ?: return null
+
+    val rawXMeters = botpose.getPosition().x
+    val rawYMeters = botpose.getPosition().y
+
+    val inchX = Inches.fromBaseUnits(rawXMeters)
+    val inchY = Inches.fromBaseUnits(rawYMeters)
+    val heading = botpose.getOrientation().getYaw(AngleUnit.RADIANS)
+
+    val ftcPose = Pose2d(inchX, inchY, heading)
+
+    return ftcPose
   }
 
   /** Sets the poll rate and pipeline, then starts polling in one call. */

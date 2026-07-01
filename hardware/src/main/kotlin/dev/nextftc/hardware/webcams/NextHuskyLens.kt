@@ -21,7 +21,7 @@ import dev.nextftc.hardware.RobotController
  *
  * @param initializer supplies the underlying [HuskyLens] when first accessed.
  *
- *  * @author 28shettr
+ * @author 28shettr
  *
  */
 
