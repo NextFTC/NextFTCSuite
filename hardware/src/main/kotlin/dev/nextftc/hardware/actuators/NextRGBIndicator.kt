@@ -9,28 +9,27 @@
 package dev.nextftc.hardware.actuators
 
 import dev.nextftc.hardware.Caching
-import kotlin.math.round
 
 /**
- * Wrapper for the goBILDA PWM RGB Headlight Module.
+ * Wrapper for the goBILDA PWM RGB Indicator Light.
  *
  * The module behaves like a servo,
  * different PWM positions correspond to different colors/patterns.
  *
  * Example:
  * ```
- * val headlight = RGBHeadlight("headlights")
+ * val indicator = NextRGBIndicator("LED")
  *
- * headlight.setColor(RGBHeadlight.Color.RED)
+ * indicator.setColor(RGBHeadlight.Color.RED)
  *
- * headlight.setBrightness(0.8)
+ * indicator.setBrightness(0.8)
  * ```
  *
  * @param name The name of the servo in the hardware map.
  * @param cacheTolerance Tolerance used by the [Caching] delegate for
  * position updates; defaults to 0.01.
  */
-class RGBHeadlight(name: String, cacheTolerance: Double = 0.01) : NextServo(name, cacheTolerance) {
+class NextRGBIndicator(name: String, cacheTolerance: Double = 0.01) : NextServo(name, cacheTolerance) {
 
   /**
    * Available colors/patterns for the headlights
