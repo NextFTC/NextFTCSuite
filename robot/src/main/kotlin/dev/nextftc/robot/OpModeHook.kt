@@ -41,7 +41,7 @@ interface OpModeHook {
 }
 
 /**
- * (Optional) Hook to enable automatic bulk-reading of hubs
+ * (Optional) Hook responsible for bulk-reading the hubs
  */
 class BulkReadHook() : OpModeHook {
   private val lynxHubs: List<LynxModule> by lazy { 
