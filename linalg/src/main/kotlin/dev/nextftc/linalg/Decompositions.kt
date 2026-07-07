@@ -19,72 +19,72 @@ import org.ejml.simple.SimpleMatrix
 
 /** Data class for LLT (Cholesky) decomposition, with rank-1 update/downdate. */
 data class LLTDecomposition internal constructor(
-    private val chol: CholeskyDecomposition<DMatrixRMaj>,
-    private var mat: DMatrixRMaj,
+  private val chol: CholeskyDecomposition<DMatrixRMaj>,
+  private var mat: DMatrixRMaj,
 ) {
-    /** Lower-triangular matrix L such that mat = L*L^T */
-    @get:JvmName("L")
-    val L: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(chol.getT(null)))
+  /** Lower-triangular matrix L such that mat = L*L^T */
+  @get:JvmName("L")
+  val L: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(chol.getT(null)))
 
-    /** In-place rank-1 update: mat := mat + x*x^T */
-    fun update(x: DoubleArray) {
-        // x must be column vector of correct size
-        // Use EJML's rank-1 update if available, else manual
-        // Here, we re-decompose for simplicity
-        for (i in 0..mat.numRows) {
-            for (j in 0..mat.numCols) {
-                mat[i, j] += x[i] * x[j]
-            }
-        }
-        require(chol.decompose(mat))
+  /** In-place rank-1 update: mat := mat + x*x^T */
+  fun update(x: DoubleArray) {
+    // x must be column vector of correct size
+    // Use EJML's rank-1 update if available, else manual
+    // Here, we re-decompose for simplicity
+    for (i in 0..mat.numRows) {
+      for (j in 0..mat.numCols) {
+        mat[i, j] += x[i] * x[j]
+      }
     }
+    require(chol.decompose(mat))
+  }
 
-    /** In-place rank-1 downdate: mat := mat - x*x^T */
-    fun downdate(x: DoubleArray) {
-        for (i in 0..mat.numRows) {
-            for (j in 0..mat.numCols) {
-                mat[i, j] -= x[i] * x[j]
-            }
-        }
-        require(chol.decompose(mat))
+  /** In-place rank-1 downdate: mat := mat - x*x^T */
+  fun downdate(x: DoubleArray) {
+    for (i in 0..mat.numRows) {
+      for (j in 0..mat.numCols) {
+        mat[i, j] -= x[i] * x[j]
+      }
     }
+    require(chol.decompose(mat))
+  }
 }
 
 /** Data class for LDLT decomposition. */
 data class LDLTDecomposition internal constructor(
-    private val ldlt: CholeskyDecompositionLDL_DDRM,
-    private val mat: DMatrixRMaj,
+  private val ldlt: CholeskyDecompositionLDL_DDRM,
+  private val mat: DMatrixRMaj,
 ) {
-    @get:JvmName("L")
-    val L: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(ldlt.getL(null)))
+  @get:JvmName("L")
+  val L: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(ldlt.getL(null)))
 
-    @get:JvmName("D")
-    val D: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(ldlt.getD(null)))
+  @get:JvmName("D")
+  val D: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(ldlt.getD(null)))
 }
 
 /** Data class for LU decomposition. */
 data class LUDecomposition internal constructor(
-    private val lu: LUDecompositionAlt_DDRM,
-    private val mat: DMatrixRMaj,
+  private val lu: LUDecompositionAlt_DDRM,
+  private val mat: DMatrixRMaj,
 ) {
-    @get:JvmName("L")
-    val L: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(lu.getLower(null)))
+  @get:JvmName("L")
+  val L: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(lu.getLower(null)))
 
-    @get:JvmName("U")
-    val U: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(lu.getUpper(null)))
+  @get:JvmName("U")
+  val U: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(lu.getUpper(null)))
 
-    @get:JvmName("P")
-    val P: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(lu.getRowPivot(null)))
+  @get:JvmName("P")
+  val P: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(lu.getRowPivot(null)))
 }
 
 /** Data class for QR decomposition. */
 data class QRDecomposition internal constructor(
-    private val qr: QRDecompositionHouseholder_DDRM,
-    private val mat: DMatrixRMaj,
+  private val qr: QRDecompositionHouseholder_DDRM,
+  private val mat: DMatrixRMaj,
 ) {
-    @get:JvmName("Q")
-    val Q: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(qr.getQ(null, false)))
+  @get:JvmName("Q")
+  val Q: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(qr.getQ(null, false)))
 
-    @get:JvmName("R")
-    val R: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(qr.getR(null, false)))
+  @get:JvmName("R")
+  val R: DynamicMatrix get() = DynamicMatrix(SimpleMatrix(qr.getR(null, false)))
 }

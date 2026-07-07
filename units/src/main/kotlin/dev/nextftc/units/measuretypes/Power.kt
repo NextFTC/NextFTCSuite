@@ -20,40 +20,40 @@ import dev.nextftc.units.unittypes.PowerUnit
  */
 class Power
 internal constructor(override val magnitude: Double, override val unit: PowerUnit) :
-    Measure<PowerUnit> {
-    override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
+  Measure<PowerUnit> {
+  override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
-    override fun unaryMinus(): Power = Power(-magnitude, unit)
+  override fun unaryMinus(): Power = Power(-magnitude, unit)
 
-    override fun plus(other: Measure<out PowerUnit>): Power {
-        val otherInBaseUnits = other.baseUnitMagnitude
-        val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
-        return Power(unit.fromBaseUnits(sumInBaseUnits), unit)
-    }
+  override fun plus(other: Measure<out PowerUnit>): Power {
+    val otherInBaseUnits = other.baseUnitMagnitude
+    val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
+    return Power(unit.fromBaseUnits(sumInBaseUnits), unit)
+  }
 
-    override fun minus(other: Measure<out PowerUnit>): Power {
-        val otherInBaseUnits = other.baseUnitMagnitude
-        val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
-        return Power(unit.fromBaseUnits(diffInBaseUnits), unit)
-    }
+  override fun minus(other: Measure<out PowerUnit>): Power {
+    val otherInBaseUnits = other.baseUnitMagnitude
+    val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
+    return Power(unit.fromBaseUnits(diffInBaseUnits), unit)
+  }
 
-    override fun times(multiplier: Double): Power = Power(magnitude * multiplier, unit)
+  override fun times(multiplier: Double): Power = Power(magnitude * multiplier, unit)
 
-    override fun div(divisor: Double): Power = Power(magnitude / divisor, unit)
+  override fun div(divisor: Double): Power = Power(magnitude / divisor, unit)
 
-    /**
-     * Multiplies this power by a time to get energy.
-     *
-     * Energy = Power × Time
-     *
-     * @param time the duration of power application
-     * @return the energy in joules
-     */
-    operator fun times(time: Time): Energy {
-        val powerInWatts = this.baseUnitMagnitude
-        val timeInSeconds = time.baseUnitMagnitude
-        return Energy(powerInWatts * timeInSeconds, Joules)
-    }
+  /**
+   * Multiplies this power by a time to get energy.
+   *
+   * Energy = Power × Time
+   *
+   * @param time the duration of power application
+   * @return the energy in joules
+   */
+  operator fun times(time: Time): Energy {
+    val powerInWatts = this.baseUnitMagnitude
+    val timeInSeconds = time.baseUnitMagnitude
+    return Energy(powerInWatts * timeInSeconds, Joules)
+  }
 
-    override fun toString() = toShortString()
+  override fun toString() = toShortString()
 }

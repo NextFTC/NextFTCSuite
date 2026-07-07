@@ -1,24 +1,31 @@
 pluginManagement {
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-        mavenLocal()
-    }
+  repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+    mavenLocal()
+  }
+}
+
+plugins {
+  id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
-    repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
-    repositories {
-        google()
-        mavenCentral()
-    }
+  repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
+  repositories {
+    mavenCentral()
+    google()
+    maven("https://repo.dairy.foundation/releases")
+    maven("https://repo.dairy.foundation/snapshots")
+    mavenLocal()
+  }
 }
 
-rootProject.name = "NextControl"
+rootProject.name = "NextFTC Suite"
 include(":units")
 include(":linalg")
 include(":control")
-
-project(":control").name = "control2"
+include(":hardware")
+include(":robot")

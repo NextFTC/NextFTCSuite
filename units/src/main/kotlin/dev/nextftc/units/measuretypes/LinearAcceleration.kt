@@ -23,56 +23,56 @@ import dev.nextftc.units.unittypes.TimeUnit
  * operations return LinearAcceleration for type safety.
  */
 class LinearAcceleration(magnitude: Double, unit: LinearAccelerationUnit) :
-    Per<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>(magnitude, unit) {
-    override fun unaryMinus(): LinearAcceleration =
-        LinearAcceleration(-magnitude, unit as LinearAccelerationUnit)
+  Per<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>(magnitude, unit) {
+  override fun unaryMinus(): LinearAcceleration =
+    LinearAcceleration(-magnitude, unit as LinearAccelerationUnit)
 
-    override fun plus(
-        other: Measure<out PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>>,
-    ): LinearAcceleration {
-        val sum = baseUnitMagnitude + other.baseUnitMagnitude
-        return LinearAcceleration(unit.fromBaseUnits(sum), unit as LinearAccelerationUnit)
-    }
+  override fun plus(
+    other: Measure<out PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>>,
+  ): LinearAcceleration {
+    val sum = baseUnitMagnitude + other.baseUnitMagnitude
+    return LinearAcceleration(unit.fromBaseUnits(sum), unit as LinearAccelerationUnit)
+  }
 
-    override fun minus(
-        other: Measure<out PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>>,
-    ): LinearAcceleration = this + -other
+  override fun minus(
+    other: Measure<out PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>>,
+  ): LinearAcceleration = this + -other
 
-    override fun times(multiplier: Double): LinearAcceleration =
-        LinearAcceleration(magnitude * multiplier, unit as LinearAccelerationUnit)
+  override fun times(multiplier: Double): LinearAcceleration =
+    LinearAcceleration(magnitude * multiplier, unit as LinearAccelerationUnit)
 
-    override fun div(divisor: Double): LinearAcceleration =
-        LinearAcceleration(magnitude / divisor, unit as LinearAccelerationUnit)
+  override fun div(divisor: Double): LinearAcceleration =
+    LinearAcceleration(magnitude / divisor, unit as LinearAccelerationUnit)
 
-    /**
-     * Multiplies this acceleration by a time to get velocity.
-     *
-     * @param time the time to multiply by
-     * @return the velocity achieved
-     */
-    operator fun times(time: Time): LinearVelocity {
-        val velocityUnit: LinearVelocityUnit =
-            when (unit.numerator) {
-                is LinearVelocityUnit -> unit.numerator
-                else -> LinearVelocityUnit(unit.numerator.numerator, unit.numerator.denominator)
-            }
-        val timeInCorrectUnit = time.into((unit as LinearAccelerationUnit).denominator)
-        return LinearVelocity(magnitude * timeInCorrectUnit, velocityUnit)
-    }
+  /**
+   * Multiplies this acceleration by a time to get velocity.
+   *
+   * @param time the time to multiply by
+   * @return the velocity achieved
+   */
+  operator fun times(time: Time): LinearVelocity {
+    val velocityUnit: LinearVelocityUnit =
+      when (unit.numerator) {
+        is LinearVelocityUnit -> unit.numerator
+        else -> LinearVelocityUnit(unit.numerator.numerator, unit.numerator.denominator)
+      }
+    val timeInCorrectUnit = time.into((unit as LinearAccelerationUnit).denominator)
+    return LinearVelocity(magnitude * timeInCorrectUnit, velocityUnit)
+  }
 
-    /**
-     * Multiplies this acceleration by a mass to get force.
-     *
-     * Force = Acceleration × Mass (F = a × m)
-     *
-     * @param mass the mass being accelerated
-     * @return the force in newtons
-     */
-    operator fun times(mass: Mass): Force {
-        val accelerationInMps2 = this.baseUnitMagnitude
-        val massInKg = mass.baseUnitMagnitude
-        return Force(accelerationInMps2 * massInKg, Newtons)
-    }
+  /**
+   * Multiplies this acceleration by a mass to get force.
+   *
+   * Force = Acceleration × Mass (F = a × m)
+   *
+   * @param mass the mass being accelerated
+   * @return the force in newtons
+   */
+  operator fun times(mass: Mass): Force {
+    val accelerationInMps2 = this.baseUnitMagnitude
+    val massInKg = mass.baseUnitMagnitude
+    return Force(accelerationInMps2 * massInKg, Newtons)
+  }
 
-    override fun toString() = toShortString()
+  override fun toString() = toShortString()
 }

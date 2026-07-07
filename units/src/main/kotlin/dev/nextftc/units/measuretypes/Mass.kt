@@ -20,40 +20,40 @@ import dev.nextftc.units.unittypes.MassUnit
  */
 class Mass
 internal constructor(override val magnitude: Double, override val unit: MassUnit) :
-    Measure<MassUnit> {
-    override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
+  Measure<MassUnit> {
+  override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
-    override fun unaryMinus(): Mass = Mass(-magnitude, unit)
+  override fun unaryMinus(): Mass = Mass(-magnitude, unit)
 
-    override fun plus(other: Measure<out MassUnit>): Mass {
-        val otherInBaseUnits = other.baseUnitMagnitude
-        val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
-        return Mass(unit.fromBaseUnits(sumInBaseUnits), unit)
-    }
+  override fun plus(other: Measure<out MassUnit>): Mass {
+    val otherInBaseUnits = other.baseUnitMagnitude
+    val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
+    return Mass(unit.fromBaseUnits(sumInBaseUnits), unit)
+  }
 
-    override fun minus(other: Measure<out MassUnit>): Mass {
-        val otherInBaseUnits = other.baseUnitMagnitude
-        val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
-        return Mass(unit.fromBaseUnits(diffInBaseUnits), unit)
-    }
+  override fun minus(other: Measure<out MassUnit>): Mass {
+    val otherInBaseUnits = other.baseUnitMagnitude
+    val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
+    return Mass(unit.fromBaseUnits(diffInBaseUnits), unit)
+  }
 
-    override fun times(multiplier: Double): Mass = Mass(magnitude * multiplier, unit)
+  override fun times(multiplier: Double): Mass = Mass(magnitude * multiplier, unit)
 
-    override fun div(divisor: Double): Mass = Mass(magnitude / divisor, unit)
+  override fun div(divisor: Double): Mass = Mass(magnitude / divisor, unit)
 
-    /**
-     * Multiplies this mass by a linear acceleration to get force.
-     *
-     * Force = Mass × Acceleration (F = ma)
-     *
-     * @param acceleration the acceleration
-     * @return the force in newtons
-     */
-    operator fun times(acceleration: LinearAcceleration): Force {
-        val massInKg = this.baseUnitMagnitude
-        val accelerationInMps2 = acceleration.baseUnitMagnitude
-        return Force(massInKg * accelerationInMps2, Newtons)
-    }
+  /**
+   * Multiplies this mass by a linear acceleration to get force.
+   *
+   * Force = Mass × Acceleration (F = ma)
+   *
+   * @param acceleration the acceleration
+   * @return the force in newtons
+   */
+  operator fun times(acceleration: LinearAcceleration): Force {
+    val massInKg = this.baseUnitMagnitude
+    val accelerationInMps2 = acceleration.baseUnitMagnitude
+    return Force(massInKg * accelerationInMps2, Newtons)
+  }
 
-    override fun toString() = toShortString()
+  override fun toString() = toShortString()
 }

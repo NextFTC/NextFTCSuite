@@ -19,43 +19,41 @@ import dev.nextftc.units.unittypes.CurrentUnit
  * operations and conversions between different current units.
  */
 class Current
-internal constructor(
-    override val magnitude: Double,
-    override val unit: CurrentUnit,
-) : Measure<CurrentUnit> {
-    override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
+internal constructor(override val magnitude: Double, override val unit: CurrentUnit) :
+  Measure<CurrentUnit> {
+  override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
-    override fun unaryMinus(): Current = Current(-magnitude, unit)
+  override fun unaryMinus(): Current = Current(-magnitude, unit)
 
-    override fun plus(other: Measure<out CurrentUnit>): Current {
-        val otherInBaseUnits = other.baseUnitMagnitude
-        val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
-        return Current(unit.fromBaseUnits(sumInBaseUnits), unit)
-    }
+  override fun plus(other: Measure<out CurrentUnit>): Current {
+    val otherInBaseUnits = other.baseUnitMagnitude
+    val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
+    return Current(unit.fromBaseUnits(sumInBaseUnits), unit)
+  }
 
-    override fun minus(other: Measure<out CurrentUnit>): Current {
-        val otherInBaseUnits = other.baseUnitMagnitude
-        val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
-        return Current(unit.fromBaseUnits(diffInBaseUnits), unit)
-    }
+  override fun minus(other: Measure<out CurrentUnit>): Current {
+    val otherInBaseUnits = other.baseUnitMagnitude
+    val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
+    return Current(unit.fromBaseUnits(diffInBaseUnits), unit)
+  }
 
-    override fun times(multiplier: Double): Current = Current(magnitude * multiplier, unit)
+  override fun times(multiplier: Double): Current = Current(magnitude * multiplier, unit)
 
-    override fun div(divisor: Double): Current = Current(magnitude / divisor, unit)
+  override fun div(divisor: Double): Current = Current(magnitude / divisor, unit)
 
-    /**
-     * Multiplies this current by a voltage to get power.
-     *
-     * Power = Current × Voltage (P = I × V)
-     *
-     * @param voltage the voltage across the circuit
-     * @return the power in watts
-     */
-    operator fun times(voltage: Voltage): Power {
-        val currentInAmperes = this.baseUnitMagnitude
-        val voltageInVolts = voltage.baseUnitMagnitude
-        return Power(currentInAmperes * voltageInVolts, Watts)
-    }
+  /**
+   * Multiplies this current by a voltage to get power.
+   *
+   * Power = Current × Voltage (P = I × V)
+   *
+   * @param voltage the voltage across the circuit
+   * @return the power in watts
+   */
+  operator fun times(voltage: Voltage): Power {
+    val currentInAmperes = this.baseUnitMagnitude
+    val voltageInVolts = voltage.baseUnitMagnitude
+    return Power(currentInAmperes * voltageInVolts, Watts)
+  }
 
-    override fun toString() = toShortString()
+  override fun toString() = toShortString()
 }

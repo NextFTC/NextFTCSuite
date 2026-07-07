@@ -30,14 +30,14 @@ import org.ejml.simple.SimpleMatrix
  * @param N The dimension type
  */
 class Vector<N : Nat> internal constructor(simple: SimpleMatrix, internal val dimNat: N) :
-    Matrix<N, N1>(simple, dimNat, N1) {
-    init {
-        require(simple.numCols() == 1) { "Vector must have exactly one column" }
-    }
+  Matrix<N, N1>(simple, dimNat, N1) {
+  init {
+    require(simple.numCols() == 1) { "Vector must have exactly one column" }
+  }
 
-    constructor(matrix: Matrix<N, N1>) : this(matrix.simple, matrix.rowNat)
+  constructor(matrix: Matrix<N, N1>) : this(matrix.simple, matrix.rowNat)
 
-    @Suppress("ktlint")
+  @Suppress("ktlint")
     companion object {
         /**
          * Creates a zero vector with dimension specified by the [Nat] type parameter.
@@ -62,58 +62,58 @@ class Vector<N : Nat> internal constructor(simple: SimpleMatrix, internal val di
             of(dim, *data.toDoubleArray())
     }
 
-    /** The dimension (length) of this vector. */
-    @JvmField
-    val dimension: Int = numRows
+  /** The dimension (length) of this vector. */
+  @JvmField
+  val dimension: Int = numRows
 
-    /** Returns the element at the given index. */
-    operator fun get(i: Int): Double = simple[i, 0]
+  /** Returns the element at the given index. */
+  operator fun get(i: Int): Double = simple[i, 0]
 
-    /** Sets the element at the given index. */
-    operator fun set(i: Int, value: Double) {
-        simple[i, 0] = value
+  /** Sets the element at the given index. */
+  operator fun set(i: Int, value: Double) {
+    simple[i, 0] = value
+  }
+
+  /** Returns a copy of this vector. */
+  override fun copy(): Vector<N> = Vector(simple.copy(), dimNat)
+
+  /** Negates all elements of this vector. */
+  override operator fun unaryMinus(): Vector<N> = Vector(simple.negative(), dimNat)
+
+  /** Adds another vector with the same dimension. */
+  operator fun plus(other: Vector<N>): Vector<N> = Vector(simple + other.simple, dimNat)
+
+  /** Subtracts another vector with the same dimension. */
+  operator fun minus(other: Vector<N>): Vector<N> = Vector(simple - other.simple, dimNat)
+
+  /** Multiplies this vector by a scalar. */
+  override operator fun times(scalar: Double): Vector<N> = Vector(simple.scale(scalar), dimNat)
+
+  /** Multiplies this vector by a scalar. */
+  override operator fun times(scalar: Number): Vector<N> = times(scalar.toDouble())
+
+  /** Computes the dot product of this vector with another vector of the same dimension. */
+  infix fun dot(other: Vector<N>): Double = simple.transpose().mult(other.simple)[0, 0]
+
+  /** Returns the Euclidean norm (magnitude) of this vector. */
+  @get:JvmName("magnitude")
+  val magnitude: Double
+    get() = simple.normF()
+
+  /** Returns a normalized (unit) vector in the same direction. */
+  fun normalized(): Vector<N> = this * (1.0 / magnitude)
+
+  /** Converts to a [DynamicVector]. */
+  fun toDynamicVector(): DynamicVector = DynamicVector(simple)
+
+  override fun toString(): String = buildString {
+    append("SizedVector<$dimension>: [")
+    for (i in 0 until dimension) {
+      append("%10.4f".format(simple[i, 0]))
+      if (i < dimension - 1) append(", ")
     }
-
-    /** Returns a copy of this vector. */
-    override fun copy(): Vector<N> = Vector(simple.copy(), dimNat)
-
-    /** Negates all elements of this vector. */
-    override operator fun unaryMinus(): Vector<N> = Vector(simple.negative(), dimNat)
-
-    /** Adds another vector with the same dimension. */
-    operator fun plus(other: Vector<N>): Vector<N> = Vector(simple + other.simple, dimNat)
-
-    /** Subtracts another vector with the same dimension. */
-    operator fun minus(other: Vector<N>): Vector<N> = Vector(simple - other.simple, dimNat)
-
-    /** Multiplies this vector by a scalar. */
-    override operator fun times(scalar: Double): Vector<N> = Vector(simple.scale(scalar), dimNat)
-
-    /** Multiplies this vector by a scalar. */
-    override operator fun times(scalar: Number): Vector<N> = times(scalar.toDouble())
-
-    /** Computes the dot product of this vector with another vector of the same dimension. */
-    infix fun dot(other: Vector<N>): Double = simple.transpose().mult(other.simple)[0, 0]
-
-    /** Returns the Euclidean norm (magnitude) of this vector. */
-    @get:JvmName("magnitude")
-    val magnitude: Double
-        get() = simple.normF()
-
-    /** Returns a normalized (unit) vector in the same direction. */
-    fun normalized(): Vector<N> = this * (1.0 / magnitude)
-
-    /** Converts to a [DynamicVector]. */
-    fun toDynamicVector(): DynamicVector = DynamicVector(simple)
-
-    override fun toString(): String = buildString {
-        append("SizedVector<$dimension>: [")
-        for (i in 0 until dimension) {
-            append("%10.4f".format(simple[i, 0]))
-            if (i < dimension - 1) append(", ")
-        }
-        append("]")
-    }
+    append("]")
+  }
 }
 
 /** Scalar multiplication from the left. */

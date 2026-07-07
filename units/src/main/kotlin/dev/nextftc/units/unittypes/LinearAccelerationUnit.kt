@@ -24,11 +24,11 @@ import dev.nextftc.units.measuretypes.LinearAcceleration
  * @param time the time unit (denominator)
  */
 class LinearAccelerationUnit(velocity: LinearVelocityUnit, time: TimeUnit) :
-    PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>(velocity, time) {
-    override fun of(magnitude: Double): LinearAcceleration = LinearAcceleration(magnitude, this)
+  PerUnit<PerUnit<DistanceUnit, TimeUnit>, TimeUnit>(velocity, time) {
+  override fun of(magnitude: Double): LinearAcceleration = LinearAcceleration(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): LinearAcceleration =
-        of(this.fromBaseUnits(baseUnitMagnitude))
+  override fun ofBaseUnits(baseUnitMagnitude: Double): LinearAcceleration =
+    of(this.fromBaseUnits(baseUnitMagnitude))
 }
 
 // Standard gravity constant (approximately 9.80665 m/s²)

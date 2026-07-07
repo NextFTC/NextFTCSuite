@@ -21,181 +21,181 @@ import io.kotest.matchers.shouldBe
 private const val EPSILON = 1e-9
 
 class MassTest :
-    FunSpec({
-        context("Mass creation") {
-            test("should create Mass with correct magnitude") {
-                val mass = Kilograms.of(10.0)
-                mass.magnitude shouldBe (10.0 plusOrMinus EPSILON)
-            }
+  FunSpec({
+    context("Mass creation") {
+      test("should create Mass with correct magnitude") {
+        val mass = Kilograms.of(10.0)
+        mass.magnitude shouldBe (10.0 plusOrMinus EPSILON)
+      }
 
-            test("should create Mass with correct unit") {
-                val mass = Grams.of(500.0)
-                mass.unit shouldBe Grams
-            }
+      test("should create Mass with correct unit") {
+        val mass = Grams.of(500.0)
+        mass.unit shouldBe Grams
+      }
 
-            test("should create Mass with correct base unit magnitude") {
-                val mass = Grams.of(2000.0)
-                mass.baseUnitMagnitude shouldBe (2.0 plusOrMinus EPSILON)
-            }
-        }
+      test("should create Mass with correct base unit magnitude") {
+        val mass = Grams.of(2000.0)
+        mass.baseUnitMagnitude shouldBe (2.0 plusOrMinus EPSILON)
+      }
+    }
 
-        context("Mass.into() conversions") {
-            test("should convert kilograms to grams") {
-                val mass = Kilograms.of(2.0)
-                mass.into(Grams) shouldBe (2000.0 plusOrMinus EPSILON)
-            }
+    context("Mass.into() conversions") {
+      test("should convert kilograms to grams") {
+        val mass = Kilograms.of(2.0)
+        mass.into(Grams) shouldBe (2000.0 plusOrMinus EPSILON)
+      }
 
-            test("should convert grams to kilograms") {
-                val mass = Grams.of(5000.0)
-                mass.into(Kilograms) shouldBe (5.0 plusOrMinus EPSILON)
-            }
+      test("should convert grams to kilograms") {
+        val mass = Grams.of(5000.0)
+        mass.into(Kilograms) shouldBe (5.0 plusOrMinus EPSILON)
+      }
 
-            test("should convert kilograms to milligrams") {
-                val mass = Kilograms.of(0.5)
-                mass.into(Milligrams) shouldBe (500000.0 plusOrMinus EPSILON)
-            }
+      test("should convert kilograms to milligrams") {
+        val mass = Kilograms.of(0.5)
+        mass.into(Milligrams) shouldBe (500000.0 plusOrMinus EPSILON)
+      }
 
-            test("should convert metric tons to kilograms") {
-                val mass = MetricTons.of(2.5)
-                mass.into(Kilograms) shouldBe (2500.0 plusOrMinus EPSILON)
-            }
+      test("should convert metric tons to kilograms") {
+        val mass = MetricTons.of(2.5)
+        mass.into(Kilograms) shouldBe (2500.0 plusOrMinus EPSILON)
+      }
 
-            test("should convert pounds to kilograms") {
-                val mass = Pounds.of(1.0)
-                mass.into(Kilograms) shouldBe (0.45359237 plusOrMinus EPSILON)
-            }
+      test("should convert pounds to kilograms") {
+        val mass = Pounds.of(1.0)
+        mass.into(Kilograms) shouldBe (0.45359237 plusOrMinus EPSILON)
+      }
 
-            test("should convert ounces to pounds") {
-                val mass = Ounces.of(32.0)
-                mass.into(Pounds) shouldBe (2.0 plusOrMinus EPSILON)
-            }
-        }
+      test("should convert ounces to pounds") {
+        val mass = Ounces.of(32.0)
+        mass.into(Pounds) shouldBe (2.0 plusOrMinus EPSILON)
+      }
+    }
 
-        context("Mass.plus() addition") {
-            test("should add masses with same unit") {
-                val m1 = Kilograms.of(10.0)
-                val m2 = Kilograms.of(5.0)
-                val result = m1 + m2
+    context("Mass.plus() addition") {
+      test("should add masses with same unit") {
+        val m1 = Kilograms.of(10.0)
+        val m2 = Kilograms.of(5.0)
+        val result = m1 + m2
 
-                result.magnitude shouldBe (15.0 plusOrMinus EPSILON)
-                result.unit shouldBe Kilograms
-            }
+        result.magnitude shouldBe (15.0 plusOrMinus EPSILON)
+        result.unit shouldBe Kilograms
+      }
 
-            test("should add masses with different units") {
-                val m1 = Kilograms.of(1.0)
-                val m2 = Grams.of(500.0)
-                val result = m1 + m2
+      test("should add masses with different units") {
+        val m1 = Kilograms.of(1.0)
+        val m2 = Grams.of(500.0)
+        val result = m1 + m2
 
-                result.magnitude shouldBe (1.5 plusOrMinus EPSILON)
-                result.unit shouldBe Kilograms
-            }
+        result.magnitude shouldBe (1.5 plusOrMinus EPSILON)
+        result.unit shouldBe Kilograms
+      }
 
-            test("should add grams to milligrams") {
-                val m1 = Grams.of(1.0)
-                val m2 = Milligrams.of(500.0)
-                val result = m1 + m2
+      test("should add grams to milligrams") {
+        val m1 = Grams.of(1.0)
+        val m2 = Milligrams.of(500.0)
+        val result = m1 + m2
 
-                result.magnitude shouldBe (1.5 plusOrMinus EPSILON)
-                result.unit shouldBe Grams
-            }
-        }
+        result.magnitude shouldBe (1.5 plusOrMinus EPSILON)
+        result.unit shouldBe Grams
+      }
+    }
 
-        context("Mass.minus() subtraction") {
-            test("should subtract masses with same unit") {
-                val m1 = Kilograms.of(10.0)
-                val m2 = Kilograms.of(3.0)
-                val result = m1 - m2
+    context("Mass.minus() subtraction") {
+      test("should subtract masses with same unit") {
+        val m1 = Kilograms.of(10.0)
+        val m2 = Kilograms.of(3.0)
+        val result = m1 - m2
 
-                result.magnitude shouldBe (7.0 plusOrMinus EPSILON)
-                result.unit shouldBe Kilograms
-            }
+        result.magnitude shouldBe (7.0 plusOrMinus EPSILON)
+        result.unit shouldBe Kilograms
+      }
 
-            test("should subtract masses with different units") {
-                val m1 = Kilograms.of(2.0)
-                val m2 = Grams.of(500.0)
-                val result = m1 - m2
+      test("should subtract masses with different units") {
+        val m1 = Kilograms.of(2.0)
+        val m2 = Grams.of(500.0)
+        val result = m1 - m2
 
-                result.magnitude shouldBe (1.5 plusOrMinus EPSILON)
-                result.unit shouldBe Kilograms
-            }
+        result.magnitude shouldBe (1.5 plusOrMinus EPSILON)
+        result.unit shouldBe Kilograms
+      }
 
-            test("should handle negative results") {
-                val m1 = Grams.of(100.0)
-                val m2 = Grams.of(200.0)
-                val result = m1 - m2
+      test("should handle negative results") {
+        val m1 = Grams.of(100.0)
+        val m2 = Grams.of(200.0)
+        val result = m1 - m2
 
-                result.magnitude shouldBe (-100.0 plusOrMinus EPSILON)
-            }
-        }
+        result.magnitude shouldBe (-100.0 plusOrMinus EPSILON)
+      }
+    }
 
-        context("Mass.times() scalar multiplication") {
-            test("should multiply mass by positive scalar") {
-                val mass = Kilograms.of(10.0)
-                val result = mass * 3.0
+    context("Mass.times() scalar multiplication") {
+      test("should multiply mass by positive scalar") {
+        val mass = Kilograms.of(10.0)
+        val result = mass * 3.0
 
-                result.magnitude shouldBe (30.0 plusOrMinus EPSILON)
-                result.unit shouldBe Kilograms
-            }
+        result.magnitude shouldBe (30.0 plusOrMinus EPSILON)
+        result.unit shouldBe Kilograms
+      }
 
-            test("should multiply mass by fractional scalar") {
-                val mass = Grams.of(100.0)
-                val result = mass * 0.5
+      test("should multiply mass by fractional scalar") {
+        val mass = Grams.of(100.0)
+        val result = mass * 0.5
 
-                result.magnitude shouldBe (50.0 plusOrMinus EPSILON)
-            }
-        }
+        result.magnitude shouldBe (50.0 plusOrMinus EPSILON)
+      }
+    }
 
-        context("Mass.div() scalar division") {
-            test("should divide mass by positive scalar") {
-                val mass = Kilograms.of(20.0)
-                val result = mass / 4.0
+    context("Mass.div() scalar division") {
+      test("should divide mass by positive scalar") {
+        val mass = Kilograms.of(20.0)
+        val result = mass / 4.0
 
-                result.magnitude shouldBe (5.0 plusOrMinus EPSILON)
-                result.unit shouldBe Kilograms
-            }
+        result.magnitude shouldBe (5.0 plusOrMinus EPSILON)
+        result.unit shouldBe Kilograms
+      }
 
-            test("should divide mass by fractional scalar") {
-                val mass = Grams.of(10.0)
-                val result = mass / 0.5
+      test("should divide mass by fractional scalar") {
+        val mass = Grams.of(10.0)
+        val result = mass / 0.5
 
-                result.magnitude shouldBe (20.0 plusOrMinus EPSILON)
-            }
-        }
+        result.magnitude shouldBe (20.0 plusOrMinus EPSILON)
+      }
+    }
 
-        context("Mass.unaryMinus() negation") {
-            test("should negate positive mass") {
-                val mass = Kilograms.of(10.0)
-                val result = -mass
+    context("Mass.unaryMinus() negation") {
+      test("should negate positive mass") {
+        val mass = Kilograms.of(10.0)
+        val result = -mass
 
-                result.magnitude shouldBe (-10.0 plusOrMinus EPSILON)
-                result.unit shouldBe Kilograms
-            }
+        result.magnitude shouldBe (-10.0 plusOrMinus EPSILON)
+        result.unit shouldBe Kilograms
+      }
 
-            test("should negate negative mass") {
-                val mass = Grams.of(-500.0)
-                val result = -mass
+      test("should negate negative mass") {
+        val mass = Grams.of(-500.0)
+        val result = -mass
 
-                result.magnitude shouldBe (500.0 plusOrMinus EPSILON)
-            }
-        }
+        result.magnitude shouldBe (500.0 plusOrMinus EPSILON)
+      }
+    }
 
-        context("Mass edge cases") {
-            test("should handle very small masses") {
-                val mass = Milligrams.of(0.001)
-                mass.magnitude shouldBe (0.001 plusOrMinus EPSILON)
-            }
+    context("Mass edge cases") {
+      test("should handle very small masses") {
+        val mass = Milligrams.of(0.001)
+        mass.magnitude shouldBe (0.001 plusOrMinus EPSILON)
+      }
 
-            test("should handle very large masses") {
-                val mass = MetricTons.of(1000000.0)
-                mass.magnitude shouldBe (1000000.0 plusOrMinus EPSILON)
-            }
+      test("should handle very large masses") {
+        val mass = MetricTons.of(1000000.0)
+        mass.magnitude shouldBe (1000000.0 plusOrMinus EPSILON)
+      }
 
-            test("should maintain precision through conversions") {
-                val mass = Kilograms.of(123.456)
-                val inGrams = mass.into(Grams)
-                val backToKg = Grams.of(inGrams).into(Kilograms)
+      test("should maintain precision through conversions") {
+        val mass = Kilograms.of(123.456)
+        val inGrams = mass.into(Grams)
+        val backToKg = Grams.of(inGrams).into(Kilograms)
 
-                backToKg shouldBe (123.456 plusOrMinus EPSILON)
-            }
-        }
-    })
+        backToKg shouldBe (123.456 plusOrMinus EPSILON)
+      }
+    }
+  })

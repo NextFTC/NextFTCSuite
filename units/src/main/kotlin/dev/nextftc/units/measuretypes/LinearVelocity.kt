@@ -21,50 +21,48 @@ import dev.nextftc.units.unittypes.TimeUnit
  * operations return LinearVelocity for type safety.
  */
 class LinearVelocity(magnitude: Double, unit: LinearVelocityUnit) :
-    Per<DistanceUnit, TimeUnit>(magnitude, unit) {
-    override fun unaryMinus(): LinearVelocity =
-        LinearVelocity(-magnitude, unit as LinearVelocityUnit)
+  Per<DistanceUnit, TimeUnit>(magnitude, unit) {
+  override fun unaryMinus(): LinearVelocity = LinearVelocity(-magnitude, unit as LinearVelocityUnit)
 
-    override fun plus(other: Measure<out PerUnit<DistanceUnit, TimeUnit>>): LinearVelocity {
-        val sum = baseUnitMagnitude + other.baseUnitMagnitude
-        return LinearVelocity(unit.fromBaseUnits(sum), unit as LinearVelocityUnit)
-    }
+  override fun plus(other: Measure<out PerUnit<DistanceUnit, TimeUnit>>): LinearVelocity {
+    val sum = baseUnitMagnitude + other.baseUnitMagnitude
+    return LinearVelocity(unit.fromBaseUnits(sum), unit as LinearVelocityUnit)
+  }
 
-    override fun minus(other: Measure<out PerUnit<DistanceUnit, TimeUnit>>): LinearVelocity =
-        this + -other
+  override fun minus(other: Measure<out PerUnit<DistanceUnit, TimeUnit>>): LinearVelocity = this + -other
 
-    override fun times(multiplier: Double): LinearVelocity =
-        LinearVelocity(magnitude * multiplier, unit as LinearVelocityUnit)
+  override fun times(multiplier: Double): LinearVelocity =
+    LinearVelocity(magnitude * multiplier, unit as LinearVelocityUnit)
 
-    override fun div(divisor: Double): LinearVelocity =
-        LinearVelocity(magnitude / divisor, unit as LinearVelocityUnit)
+  override fun div(divisor: Double): LinearVelocity =
+    LinearVelocity(magnitude / divisor, unit as LinearVelocityUnit)
 
-    /**
-     * Multiplies this velocity by a time to get distance.
-     *
-     * @param time the time to multiply by
-     * @return the distance traveled
-     */
-    operator fun times(time: Time): Distance {
-        val distanceUnit = (unit as LinearVelocityUnit).numerator
-        val timeInCorrectUnit = time.into((unit as LinearVelocityUnit).denominator)
-        return Distance(magnitude * timeInCorrectUnit, distanceUnit)
-    }
+  /**
+   * Multiplies this velocity by a time to get distance.
+   *
+   * @param time the time to multiply by
+   * @return the distance traveled
+   */
+  operator fun times(time: Time): Distance {
+    val distanceUnit = (unit as LinearVelocityUnit).numerator
+    val timeInCorrectUnit = time.into(unit.denominator)
+    return Distance(magnitude * timeInCorrectUnit, distanceUnit)
+  }
 
-    /**
-     * Divides this velocity by a time to get acceleration.
-     *
-     * @param time the time to divide by
-     * @return the acceleration (velocity/time)
-     */
-    operator fun div(time: Time): LinearAcceleration {
-        val accelerationUnit =
-            dev.nextftc.units.unittypes.LinearAccelerationUnit(
-                unit as LinearVelocityUnit,
-                time.unit,
-            )
-        return LinearAcceleration(magnitude / time.magnitude, accelerationUnit)
-    }
+  /**
+   * Divides this velocity by a time to get acceleration.
+   *
+   * @param time the time to divide by
+   * @return the acceleration (velocity/time)
+   */
+  operator fun div(time: Time): LinearAcceleration {
+    val accelerationUnit =
+      dev.nextftc.units.unittypes.LinearAccelerationUnit(
+        unit as LinearVelocityUnit,
+        time.unit,
+      )
+    return LinearAcceleration(magnitude / time.magnitude, accelerationUnit)
+  }
 
-    override fun toString() = toShortString()
+  override fun toString() = toShortString()
 }

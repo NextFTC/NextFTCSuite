@@ -19,72 +19,70 @@ import dev.nextftc.units.unittypes.VoltageUnit
  * arithmetic operations and conversions between different voltage units.
  */
 class Voltage
-internal constructor(
-    override val magnitude: Double,
-    override val unit: VoltageUnit,
-) : Measure<VoltageUnit> {
-    override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
+internal constructor(override val magnitude: Double, override val unit: VoltageUnit) :
+  Measure<VoltageUnit> {
+  override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
-    /**
-     * Returns a measure equivalent to this one equal to zero minus its current value.
-     *
-     * @return a measure equal to zero minus this measure
-     */
-    override fun unaryMinus(): Voltage = Voltage(-magnitude, unit)
+  /**
+   * Returns a measure equivalent to this one equal to zero minus its current value.
+   *
+   * @return a measure equal to zero minus this measure
+   */
+  override fun unaryMinus(): Voltage = Voltage(-magnitude, unit)
 
-    /**
-     * Adds another voltage measurement to this one.
-     *
-     * @param other the measurement to add
-     * @return a measure of the sum of both measures
-     */
-    override fun plus(other: Measure<out VoltageUnit>): Voltage {
-        val otherInBaseUnits = other.baseUnitMagnitude
-        val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
-        return Voltage(unit.fromBaseUnits(sumInBaseUnits), unit)
-    }
+  /**
+   * Adds another voltage measurement to this one.
+   *
+   * @param other the measurement to add
+   * @return a measure of the sum of both measures
+   */
+  override fun plus(other: Measure<out VoltageUnit>): Voltage {
+    val otherInBaseUnits = other.baseUnitMagnitude
+    val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
+    return Voltage(unit.fromBaseUnits(sumInBaseUnits), unit)
+  }
 
-    /**
-     * Subtracts another voltage measurement from this one.
-     *
-     * @param other the measurement to subtract
-     * @return a measure of the difference between the measures
-     */
-    override fun minus(other: Measure<out VoltageUnit>): Voltage {
-        val otherInBaseUnits = other.baseUnitMagnitude
-        val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
-        return Voltage(unit.fromBaseUnits(diffInBaseUnits), unit)
-    }
+  /**
+   * Subtracts another voltage measurement from this one.
+   *
+   * @param other the measurement to subtract
+   * @return a measure of the difference between the measures
+   */
+  override fun minus(other: Measure<out VoltageUnit>): Voltage {
+    val otherInBaseUnits = other.baseUnitMagnitude
+    val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
+    return Voltage(unit.fromBaseUnits(diffInBaseUnits), unit)
+  }
 
-    /**
-     * Multiplies this voltage by a scalar unitless multiplier.
-     *
-     * @param multiplier the scalar multiplication factor
-     * @return the scaled result
-     */
-    override fun times(multiplier: Double): Voltage = Voltage(magnitude * multiplier, unit)
+  /**
+   * Multiplies this voltage by a scalar unitless multiplier.
+   *
+   * @param multiplier the scalar multiplication factor
+   * @return the scaled result
+   */
+  override fun times(multiplier: Double): Voltage = Voltage(magnitude * multiplier, unit)
 
-    /**
-     * Divides this voltage by a scalar and returns the result.
-     *
-     * @param divisor the value to divide by
-     * @return the division result
-     */
-    override fun div(divisor: Double): Voltage = Voltage(magnitude / divisor, unit)
+  /**
+   * Divides this voltage by a scalar and returns the result.
+   *
+   * @param divisor the value to divide by
+   * @return the division result
+   */
+  override fun div(divisor: Double): Voltage = Voltage(magnitude / divisor, unit)
 
-    /**
-     * Multiplies this voltage by a current to get power.
-     *
-     * Power = Voltage × Current (P = V × I)
-     *
-     * @param current the current flowing
-     * @return the power in watts
-     */
-    operator fun times(current: Current): Power {
-        val voltageInVolts = this.baseUnitMagnitude
-        val currentInAmperes = current.baseUnitMagnitude
-        return Power(voltageInVolts * currentInAmperes, Watts)
-    }
+  /**
+   * Multiplies this voltage by a current to get power.
+   *
+   * Power = Voltage × Current (P = V × I)
+   *
+   * @param current the current flowing
+   * @return the power in watts
+   */
+  operator fun times(current: Current): Power {
+    val voltageInVolts = this.baseUnitMagnitude
+    val currentInAmperes = current.baseUnitMagnitude
+    return Power(voltageInVolts * currentInAmperes, Watts)
+  }
 
-    override fun toString() = toShortString()
+  override fun toString() = toShortString()
 }

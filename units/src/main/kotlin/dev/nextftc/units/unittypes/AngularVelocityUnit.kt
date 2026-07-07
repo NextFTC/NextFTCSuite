@@ -24,13 +24,11 @@ import dev.nextftc.units.measuretypes.AngularVelocity
  * @param angle the angle unit (numerator)
  * @param time the time unit (denominator)
  */
-class AngularVelocityUnit(angle: AngleUnit, time: TimeUnit) :
-    PerUnit<AngleUnit, TimeUnit>(angle, time) {
-    override fun of(magnitude: Double): AngularVelocity = AngularVelocity(magnitude, this)
+class AngularVelocityUnit(angle: AngleUnit, time: TimeUnit) : PerUnit<AngleUnit, TimeUnit>(angle, time) {
+  override fun of(magnitude: Double): AngularVelocity = AngularVelocity(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): AngularVelocity =
-        of(this.fromBaseUnits(baseUnitMagnitude))
+  override fun ofBaseUnits(baseUnitMagnitude: Double): AngularVelocity =
+    of(this.fromBaseUnits(baseUnitMagnitude))
 
-    override fun per(time: TimeUnit): AngularAccelerationUnit =
-        of(this, time) as AngularAccelerationUnit
+  override fun per(time: TimeUnit): AngularAccelerationUnit = of(this, time) as AngularAccelerationUnit
 }

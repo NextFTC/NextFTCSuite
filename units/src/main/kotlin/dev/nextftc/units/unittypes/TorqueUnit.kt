@@ -21,44 +21,44 @@ import dev.nextftc.units.measuretypes.Torque
  * dimensionally equivalent to force × distance = mass × distance² / time².
  */
 class TorqueUnit(
-    baseUnit: TorqueUnit?,
-    toBaseConverter: (Double) -> Double,
-    fromBaseConverter: (Double) -> Double,
-    unitName: String,
-    unitSymbol: String,
+  baseUnit: TorqueUnit?,
+  toBaseConverter: (Double) -> Double,
+  fromBaseConverter: (Double) -> Double,
+  unitName: String,
+  unitSymbol: String,
 ) : Unit<TorqueUnit>(
-    baseUnit,
-    toBaseConverter,
-    fromBaseConverter,
-    unitName,
-    unitSymbol,
+  baseUnit,
+  toBaseConverter,
+  fromBaseConverter,
+  unitName,
+  unitSymbol,
 ) {
-    /**
-     * Convenience constructor for defining a derived torque unit from a base unit.
-     *
-     * This constructor creates a unit whose magnitude is a fixed multiple of the provided
-     * base unit. For example, `NewtonMeters` derivatives can be defined using appropriate multipliers.
-     *
-     * @param baseUnit the unit to derive from (typically the base torque unit)
-     * @param baseUnitEquivalent how many base unit units are equal to one of this unit
-     * @param name the human-readable name of the unit
-     * @param symbol the short symbol used for the unit
-     */
-    constructor(
-        baseUnit: TorqueUnit,
-        baseUnitEquivalent: Double,
-        name: String,
-        symbol: String,
-    ) : this(
-        baseUnit,
-        { x -> x * baseUnitEquivalent },
-        { x -> x / baseUnitEquivalent },
-        name,
-        symbol,
-    )
+  /**
+   * Convenience constructor for defining a derived torque unit from a base unit.
+   *
+   * This constructor creates a unit whose magnitude is a fixed multiple of the provided
+   * base unit. For example, `NewtonMeters` derivatives can be defined using appropriate multipliers.
+   *
+   * @param baseUnit the unit to derive from (typically the base torque unit)
+   * @param baseUnitEquivalent how many base unit units are equal to one of this unit
+   * @param name the human-readable name of the unit
+   * @param symbol the short symbol used for the unit
+   */
+  constructor(
+    baseUnit: TorqueUnit,
+    baseUnitEquivalent: Double,
+    name: String,
+    symbol: String,
+  ) : this(
+    baseUnit,
+    { x -> x * baseUnitEquivalent },
+    { x -> x / baseUnitEquivalent },
+    name,
+    symbol,
+  )
 
-    override fun of(magnitude: Double): Torque = Torque(magnitude, this)
+  override fun of(magnitude: Double): Torque = Torque(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<TorqueUnit> =
-        of(this.fromBaseUnits(baseUnitMagnitude))
+  override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<TorqueUnit> =
+    of(this.fromBaseUnits(baseUnitMagnitude))
 }

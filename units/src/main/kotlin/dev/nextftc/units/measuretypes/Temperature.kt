@@ -19,28 +19,28 @@ import dev.nextftc.units.unittypes.TemperatureUnit
  */
 class Temperature
 internal constructor(
-    override val magnitude: Double,
-    override val unit: TemperatureUnit,
+  override val magnitude: Double,
+  override val unit: TemperatureUnit,
 ) : Measure<TemperatureUnit> {
-    override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
+  override val baseUnitMagnitude: Double = unit.toBaseUnits(magnitude)
 
-    override fun unaryMinus(): Temperature = Temperature(-magnitude, unit)
+  override fun unaryMinus(): Temperature = Temperature(-magnitude, unit)
 
-    override fun plus(other: Measure<out TemperatureUnit>): Temperature {
-        val otherInBaseUnits = other.baseUnitMagnitude
-        val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
-        return Temperature(unit.fromBaseUnits(sumInBaseUnits), unit)
-    }
+  override fun plus(other: Measure<out TemperatureUnit>): Temperature {
+    val otherInBaseUnits = other.baseUnitMagnitude
+    val sumInBaseUnits = this.baseUnitMagnitude + otherInBaseUnits
+    return Temperature(unit.fromBaseUnits(sumInBaseUnits), unit)
+  }
 
-    override fun minus(other: Measure<out TemperatureUnit>): Temperature {
-        val otherInBaseUnits = other.baseUnitMagnitude
-        val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
-        return Temperature(unit.fromBaseUnits(diffInBaseUnits), unit)
-    }
+  override fun minus(other: Measure<out TemperatureUnit>): Temperature {
+    val otherInBaseUnits = other.baseUnitMagnitude
+    val diffInBaseUnits = this.baseUnitMagnitude - otherInBaseUnits
+    return Temperature(unit.fromBaseUnits(diffInBaseUnits), unit)
+  }
 
-    override fun times(multiplier: Double): Temperature = Temperature(magnitude * multiplier, unit)
+  override fun times(multiplier: Double): Temperature = Temperature(magnitude * multiplier, unit)
 
-    override fun div(divisor: Double): Temperature = Temperature(magnitude / divisor, unit)
+  override fun div(divisor: Double): Temperature = Temperature(magnitude / divisor, unit)
 
-    override fun toString() = toShortString()
+  override fun toString() = toShortString()
 }

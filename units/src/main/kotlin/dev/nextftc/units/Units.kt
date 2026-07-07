@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2026 NextFTC Team
+ *
+ *  Use of this source code is governed by an BSD-3-clause
+ *  license that can be found in the LICENSE.md file at the root of this repository or at
+ *  https://opensource.org/license/bsd-3-clause.
+ */
+
 @file:JvmName("Units")
 
 package dev.nextftc.units
@@ -206,11 +214,11 @@ val PoundFeet = TorqueUnit(NewtonMeters, POUND_FEET_PER_NEWTON_METER, "pound-foo
 
 @JvmField
 val NewtonCentimeters =
-    TorqueUnit(NewtonMeters, NEWTON_CENTIMETERS_PER_NEWTON_METER, "newton-centimeter", "N·cm")
+  TorqueUnit(NewtonMeters, NEWTON_CENTIMETERS_PER_NEWTON_METER, "newton-centimeter", "N·cm")
 
 @JvmField
 val NewtonMillimeters =
-    TorqueUnit(NewtonMeters, NEWTON_MILLIMETERS_PER_NEWTON_METER, "newton-millimeter", "N·mm")
+  TorqueUnit(NewtonMeters, NEWTON_MILLIMETERS_PER_NEWTON_METER, "newton-millimeter", "N·mm")
 
 // Energy units
 @JvmField
@@ -247,23 +255,23 @@ val Celsius = TemperatureUnit(null, { it }, { it }, "celsius", "°C")
 
 @JvmField
 val Fahrenheit =
-    TemperatureUnit(
-        Celsius,
-        { fahrenheit -> (fahrenheit - 32.0) * 5.0 / 9.0 },
-        { celsius -> celsius * 9.0 / 5.0 + 32.0 },
-        "fahrenheit",
-        "°F",
-    )
+  TemperatureUnit(
+    Celsius,
+    { fahrenheit -> (fahrenheit - 32.0) * 5.0 / 9.0 },
+    { celsius -> celsius * 9.0 / 5.0 + 32.0 },
+    "fahrenheit",
+    "°F",
+  )
 
 @JvmField
 val Kelvin =
-    TemperatureUnit(
-        Celsius,
-        { kelvin -> kelvin - 273.15 },
-        { celsius -> celsius + 273.15 },
-        "kelvin",
-        "K",
-    )
+  TemperatureUnit(
+    Celsius,
+    { kelvin -> kelvin - 273.15 },
+    { celsius -> celsius + 273.15 },
+    "kelvin",
+    "K",
+  )
 
 // Linear velocity units
 @JvmField
@@ -400,26 +408,26 @@ inline val Double.degreesPerSecondSquared get() = DegreesPerSecondSquared.of(thi
 inline val Double.rotationsPerSecondSquared get() = RotationsPerSecondSquared.of(this)
 
 val DurationUnit.timeUnit
-    get() =
-        when (this) {
-            DurationUnit.NANOSECONDS -> Nanoseconds
-            DurationUnit.MICROSECONDS -> Microseconds
-            DurationUnit.MILLISECONDS -> Milliseconds
-            DurationUnit.SECONDS -> Seconds
-            DurationUnit.MINUTES -> Minutes
-            DurationUnit.HOURS -> Hours
-            DurationUnit.DAYS -> Days
-        }
+  get() =
+    when (this) {
+      DurationUnit.NANOSECONDS -> Nanoseconds
+      DurationUnit.MICROSECONDS -> Microseconds
+      DurationUnit.MILLISECONDS -> Milliseconds
+      DurationUnit.SECONDS -> Seconds
+      DurationUnit.MINUTES -> Minutes
+      DurationUnit.HOURS -> Hours
+      DurationUnit.DAYS -> Days
+    }
 
 val TimeUnit.durationUnit
-    get() =
-        when (this) {
-            Seconds -> DurationUnit.SECONDS
-            Milliseconds -> DurationUnit.MILLISECONDS
-            Microseconds -> DurationUnit.MICROSECONDS
-            Nanoseconds -> DurationUnit.NANOSECONDS
-            Minutes -> DurationUnit.MINUTES
-            Hours -> DurationUnit.HOURS
-            Days -> DurationUnit.DAYS
-            else -> null
-        }
+  get() =
+    when (this) {
+      Seconds -> DurationUnit.SECONDS
+      Milliseconds -> DurationUnit.MILLISECONDS
+      Microseconds -> DurationUnit.MICROSECONDS
+      Nanoseconds -> DurationUnit.NANOSECONDS
+      Minutes -> DurationUnit.MINUTES
+      Hours -> DurationUnit.HOURS
+      Days -> DurationUnit.DAYS
+      else -> null
+    }

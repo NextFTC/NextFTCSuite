@@ -21,45 +21,45 @@ import dev.nextftc.units.measuretypes.Force
  * Force is dimensionally equivalent to mass × acceleration = mass × distance / time².
  */
 class ForceUnit(
-    baseUnit: ForceUnit?,
-    toBaseConverter: (Double) -> Double,
-    fromBaseConverter: (Double) -> Double,
-    unitName: String,
-    unitSymbol: String,
+  baseUnit: ForceUnit?,
+  toBaseConverter: (Double) -> Double,
+  fromBaseConverter: (Double) -> Double,
+  unitName: String,
+  unitSymbol: String,
 ) : Unit<ForceUnit>(
-    baseUnit,
-    toBaseConverter,
-    fromBaseConverter,
-    unitName,
-    unitSymbol,
+  baseUnit,
+  toBaseConverter,
+  fromBaseConverter,
+  unitName,
+  unitSymbol,
 ) {
-    /**
-     * Convenience constructor for defining a derived force unit from a base unit.
-     *
-     * This constructor creates a unit whose magnitude is a fixed multiple of the provided
-     * base unit. For example, `Kilonewtons` is defined relative to `Newtons` using a
-     * multiplier of 1e3.
-     *
-     * @param baseUnit the unit to derive from (typically the base force unit)
-     * @param baseUnitEquivalent how many base unit units are equal to one of this unit
-     * @param name the human-readable name of the unit
-     * @param symbol the short symbol used for the unit
-     */
-    constructor(
-        baseUnit: ForceUnit,
-        baseUnitEquivalent: Double,
-        name: String,
-        symbol: String,
-    ) : this(
-        baseUnit,
-        { x -> x * baseUnitEquivalent },
-        { x -> x / baseUnitEquivalent },
-        name,
-        symbol,
-    )
+  /**
+   * Convenience constructor for defining a derived force unit from a base unit.
+   *
+   * This constructor creates a unit whose magnitude is a fixed multiple of the provided
+   * base unit. For example, `Kilonewtons` is defined relative to `Newtons` using a
+   * multiplier of 1e3.
+   *
+   * @param baseUnit the unit to derive from (typically the base force unit)
+   * @param baseUnitEquivalent how many base unit units are equal to one of this unit
+   * @param name the human-readable name of the unit
+   * @param symbol the short symbol used for the unit
+   */
+  constructor(
+    baseUnit: ForceUnit,
+    baseUnitEquivalent: Double,
+    name: String,
+    symbol: String,
+  ) : this(
+    baseUnit,
+    { x -> x * baseUnitEquivalent },
+    { x -> x / baseUnitEquivalent },
+    name,
+    symbol,
+  )
 
-    override fun of(magnitude: Double): Force = Force(magnitude, this)
+  override fun of(magnitude: Double): Force = Force(magnitude, this)
 
-    override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<ForceUnit> =
-        of(this.fromBaseUnits(baseUnitMagnitude))
+  override fun ofBaseUnits(baseUnitMagnitude: Double): Measure<ForceUnit> =
+    of(this.fromBaseUnits(baseUnitMagnitude))
 }

@@ -15,57 +15,57 @@ package dev.nextftc.linalg
  * Use these as generic bounds on [Matrix] to ensure dimensional correctness at compile time.
  */
 sealed interface Nat {
-    val num: Int
+  val num: Int
 }
 
 /** Type-level representation of 1 */
 data object N1 : Nat {
-    override val num = 1
+  override val num = 1
 }
 
 /** Type-level representation of 2 */
 data object N2 : Nat {
-    override val num = 2
+  override val num = 2
 }
 
 /** Type-level representation of 3 */
 data object N3 : Nat {
-    override val num = 3
+  override val num = 3
 }
 
 /** Type-level representation of 4 */
 data object N4 : Nat {
-    override val num = 4
+  override val num = 4
 }
 
 /** Type-level representation of 5 */
 data object N5 : Nat {
-    override val num = 5
+  override val num = 5
 }
 
 /** Type-level representation of 6 */
 data object N6 : Nat {
-    override val num = 6
+  override val num = 6
 }
 
 /** Type-level representation of 7 */
 data object N7 : Nat {
-    override val num = 7
+  override val num = 7
 }
 
 /** Type-level representation of 8 */
 data object N8 : Nat {
-    override val num = 8
+  override val num = 8
 }
 
 /** Type-level representation of 9 */
 data object N9 : Nat {
-    override val num = 9
+  override val num = 9
 }
 
 /** Type-level representation of 10 */
 data object N10 : Nat {
-    override val num = 10
+  override val num = 10
 }
 
 /** Type-level representation of an unknown/dynamic dimension */
@@ -75,15 +75,15 @@ data class NDynamic(override val num: Int) : Nat
  * Creates a [Nat] from a number.
  */
 fun natOf(num: Int) = when (num) {
-    1 -> N1
-    2 -> N2
-    3 -> N3
-    4 -> N4
-    5 -> N5
-    6 -> N6
-    7 -> N7
-    8 -> N8
-    9 -> N9
-    10 -> N10
-    else -> NDynamic(num)
+  1 -> N1
+  2 -> N2
+  3 -> N3
+  4 -> N4
+  5 -> N5
+  6 -> N6
+  7 -> N7
+  8 -> N8
+  9 -> N9
+  10 -> N10
+  else -> NDynamic(num)
 }
