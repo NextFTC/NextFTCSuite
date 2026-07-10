@@ -143,11 +143,4 @@ open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double 
   fun disable() {
     servo.setPwmDisable()
   }
-
-  /**
-   * Reverses the servo's direction.
-   */
-  fun reverse() = apply {
-    direction = Servo.Direction.REVERSE
-  }
 }
