@@ -10,6 +10,7 @@ package dev.nextftc.hardware.actuators
 
 import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.hardware.PwmControl
+import com.qualcomm.robotcore.hardware.Servo
 import com.qualcomm.robotcore.hardware.ServoImplEx
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.ServoConfigurationType
 import dev.nextftc.hardware.RobotController
@@ -45,15 +46,39 @@ open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double 
    * @param module The Lynx Module, see [RobotController.controlHub], [RobotController.expansionHub],
    * and [RobotController.servoHubs]
    * @param port The servo port (in the range [0, 5])
+   * @param direction Sets the direction of your servo if you want to reverse
    * @param cacheTolerance Tolerance used by the [Caching] delegate for position updates; defaults to 0.01.
    */
-  @JvmOverloads constructor(module: LynxModule, port: Int, cacheTolerance: Double = 0.01) : this(
-    { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
+  @JvmOverloads
+  constructor(
+    module: LynxModule,
+    port: Int,
+    cacheTolerance: Double = 0.01,
+    direction: Servo.Direction = Servo.Direction.FORWARD,
+  ) : this(
+    {
+      ServoImplEx(
+        module.servoController,
+        port,
+        ServoConfigurationType.getStandardServoType(),
+      ).apply {
+        this.direction = direction
+      }
+    },
     cacheTolerance,
   )
 
-  @JvmOverloads constructor(name: String, cacheTolerance: Double = 0.01) : this(
-    { RobotController.hardwareMap[name] as ServoImplEx },
+  @JvmOverloads
+  constructor(
+    name: String,
+    cacheTolerance: Double = 0.01,
+    direction: Servo.Direction = Servo.Direction.FORWARD,
+  ) : this(
+    {
+      (RobotController.hardwareMap[name] as ServoImplEx).apply {
+        this.direction = direction
+      }
+    },
     cacheTolerance,
   )
 
@@ -87,6 +112,12 @@ open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double 
       servo.pwmRange = value
     }
 
+  var direction: Servo.Direction
+    get() = servo.direction
+    set(value) {
+      servo.direction = value
+    }
+
   /**
    * Sets the PWM range of the associated servo.
    *
@@ -111,5 +142,12 @@ open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double 
    */
   fun disable() {
     servo.setPwmDisable()
+  }
+
+  /**
+   * Reverses the servo's direction.
+   */
+  fun reverse() = apply {
+    direction = Servo.Direction.REVERSE
   }
 }
