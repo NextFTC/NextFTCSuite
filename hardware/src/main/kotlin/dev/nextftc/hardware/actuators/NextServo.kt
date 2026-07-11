@@ -57,7 +57,8 @@ open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double 
     cacheTolerance,
   )
 
-  private val servo by LazyHardware(initializer)
+  private val lazyServo = LazyHardware(initializer)
+  private val servo by lazyServo
 
   /**
    * The commanded servo position in the range `[0.0, 1.0]`.
@@ -84,7 +85,7 @@ open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double 
   var pwmRange: PwmControl.PwmRange
     get() = servo.pwmRange
     set(value) {
-      servo.pwmRange = value
+      lazyServo.applyAfterInit { it.pwmRange = value }
     }
 
   /**
