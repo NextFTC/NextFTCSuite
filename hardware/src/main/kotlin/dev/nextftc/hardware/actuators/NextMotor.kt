@@ -98,7 +98,8 @@ class NextMotor(
     motorEventLoop.bind(this::update)
   }
 
-  private val motor by LazyHardware(initializer)
+  private val lazyMotor = LazyHardware(initializer)
+  private val motor by lazyMotor
 
   /**
    * Position control constants (PID and feedforward gains).
@@ -159,7 +160,7 @@ class NextMotor(
   var direction = Direction.FORWARD
     set(value) {
       field = value
-      motor.direction = value.sdkDirection
+      lazyMotor.applyAfterInit { it.direction = value.sdkDirection }
     }
 
   /**
