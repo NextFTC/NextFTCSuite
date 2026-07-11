@@ -8,8 +8,10 @@
 
 package dev.nextftc.hardware.actuators
 
+import android.R.attr.value
 import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.hardware.PwmControl
+import com.qualcomm.robotcore.hardware.Servo
 import com.qualcomm.robotcore.hardware.ServoImplEx
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.ServoConfigurationType
 import dev.nextftc.hardware.RobotController
@@ -61,6 +63,22 @@ open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double 
   private val servo by lazyServo
 
   /**
+   * Allows user to change servo's direction configuration
+   *
+   * It updates the internal direction of the servo
+   *
+   * Getter returns the current direction of the servo
+   * Setter lazily updates the servo after initialization
+   *
+   * This property allows indirect access to the direction property of the [Servo] class
+   */
+  var direction: Servo.Direction
+    get() = servo.direction
+    set(direction) {
+      lazyServo.applyAfterInit { it.direction = direction }
+    }
+
+  /**
    * The commanded servo position in the range `[0.0, 1.0]`.
    *
    * Assigning a value writes through to the backing [ServoImplEx], while reads
@@ -84,8 +102,8 @@ open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double 
    */
   var pwmRange: PwmControl.PwmRange
     get() = servo.pwmRange
-    set(value) {
-      lazyServo.applyAfterInit { it.pwmRange = value }
+    set(range) {
+      lazyServo.applyAfterInit { it.pwmRange = range }
     }
 
   /**
