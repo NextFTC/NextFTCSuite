@@ -53,7 +53,8 @@ open class NextCRServo(initializer: () -> CRServoImplEx, val cacheTolerance: Dou
     cacheTolerance,
   )
 
-  private val servo by LazyHardware(initializer)
+  private val lazyServo = LazyHardware(initializer)
+  private val servo by lazyServo
 
   /**
    * Power applied to the servo, in the range [-1.0, 1.0].
@@ -72,7 +73,7 @@ open class NextCRServo(initializer: () -> CRServoImplEx, val cacheTolerance: Dou
   var direction: DcMotorSimple.Direction
     get() = servo.direction
     set(value) {
-      servo.direction = value
+      lazyServo.applyAfterInit { it.direction = value }
     }
 
   /**
