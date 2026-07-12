@@ -100,4 +100,12 @@ class CommandGamepad(private val eventLoop: EventLoop, private val gamepad: Game
   /** A trigger that evaluates to true when the triangle button (Y on Xbox) is pressed. */
   @get:JvmName("triangle")
   val triangle = Trigger(eventLoop) { gamepad.triangle }
+
+  /** An analog control for the right trigger. */
+  @get:JvmName("rightTrigger")
+  val rightTrigger = TriggerControl(eventLoop) { gamepad.right_trigger.toDouble() }
+
+  /** An analog control for the left trigger. */
+  @get:JvmName("leftTrigger")
+  val leftTrigger = TriggerControl(eventLoop) { gamepad.left_trigger.toDouble() }
 }
