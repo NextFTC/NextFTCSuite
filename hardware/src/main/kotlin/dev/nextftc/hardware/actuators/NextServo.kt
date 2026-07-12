@@ -39,7 +39,7 @@ import dev.nextftc.hardware.util.LazyHardware
 open class NextServo(
   initializer: () -> ServoImplEx,
   val cacheTolerance: Double = 0.01,
-  direction: Servo.Direction = Servo.Direction.FORWARD
+  direction: Servo.Direction = Servo.Direction.FORWARD,
 ) {
   /**
    * Constructor to create a NextServo using a LynxModule and port number.
@@ -60,7 +60,7 @@ open class NextServo(
     module: LynxModule,
     port: Int,
     cacheTolerance: Double = 0.01,
-    direction: Servo.Direction = Servo.Direction.FORWARD
+    direction: Servo.Direction = Servo.Direction.FORWARD,
   ) : this(
     { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
     cacheTolerance,
@@ -84,7 +84,7 @@ open class NextServo(
   @JvmOverloads constructor(
     name: String,
     cacheTolerance: Double = 0.01,
-    direction: Servo.Direction = Servo.Direction.FORWARD
+    direction: Servo.Direction = Servo.Direction.FORWARD,
   ) : this(
     { RobotController.hardwareMap[name] as ServoImplEx },
     cacheTolerance,
