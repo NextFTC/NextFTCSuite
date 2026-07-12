@@ -33,6 +33,8 @@ import dev.nextftc.hardware.util.LazyHardware
  * invoked lazily the first time the servo is accessed.
  * @param cacheTolerance Tolerance used by the [Caching] delegate for
  * position updates; defaults to 0.01.
+ * @param direction The initial direction of the servo defined by the user
+ * as a [Servo.Direction] which defaults to [Servo.Direction.FORWARD]
  */
 open class NextServo(
   initializer: () -> ServoImplEx,
@@ -51,6 +53,8 @@ open class NextServo(
    * and [RobotController.servoHubs]
    * @param port The servo port (in the range [0, 5])
    * @param cacheTolerance Tolerance used by the [Caching] delegate for position updates; defaults to 0.01.
+   * @param direction The initial direction of the servo defined by the user
+   * as a [Servo.Direction] which defaults to [Servo.Direction.FORWARD]
    */
   @JvmOverloads constructor(
     module: LynxModule,
@@ -63,6 +67,19 @@ open class NextServo(
     direction
   )
 
+  /**
+   * Constructor to create a NextServo using configuration name
+   *
+   * Example:
+   * ```
+   * val servo = NextServo("myServo") // Creates a NextServo with the config name "myServo"
+   * ```
+   *
+   * @param name The configuration name for the servo, usually found on the Driver Station
+   * @param cacheTolerance Tolerance used by the [Caching] delegate for position updates; defaults to 0.01.
+   * @param direction The initial direction of the servo defined by the user
+   * as a [Servo.Direction] which defaults to [Servo.Direction.FORWARD]
+   */
   @JvmOverloads constructor(
     name: String,
     cacheTolerance: Double = 0.01,
