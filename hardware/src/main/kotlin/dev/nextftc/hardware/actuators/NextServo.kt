@@ -64,7 +64,7 @@ open class NextServo(
   ) : this(
     { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
     cacheTolerance,
-    direction
+    direction,
   )
 
   /**
@@ -88,7 +88,7 @@ open class NextServo(
   ) : this(
     { RobotController.hardwareMap[name] as ServoImplEx },
     cacheTolerance,
-    direction
+    direction,
   )
 
   private val lazyServo = LazyHardware(initializer).apply {
