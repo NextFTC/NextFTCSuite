@@ -43,7 +43,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
  *
  * @author 28shettr
  */
-class NextColorDistanceSensor(
+class NextColorDistanceSensor @JvmOverloads constructor(
   colorInitializer: () -> NormalizedColorSensor,
   distanceInitializer: (() -> DistanceSensor)? = null,
 ) {

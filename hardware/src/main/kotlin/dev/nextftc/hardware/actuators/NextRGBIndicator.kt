@@ -29,7 +29,8 @@ import dev.nextftc.hardware.util.Caching
  * @param cacheTolerance Tolerance used by the [Caching] delegate for
  * position updates; defaults to 0.01.
  */
-class NextRGBIndicator(name: String, cacheTolerance: Double = 0.01) : NextServo(name, cacheTolerance) {
+class NextRGBIndicator @JvmOverloads constructor(name: String, cacheTolerance: Double = 0.01) :
+  NextServo(name, cacheTolerance) {
 
   /**
    * Available colors/patterns for the headlights

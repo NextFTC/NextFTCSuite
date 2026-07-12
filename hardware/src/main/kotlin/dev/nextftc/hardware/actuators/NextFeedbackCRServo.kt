@@ -33,7 +33,7 @@ import dev.nextftc.units.radians
  * @param feedbackName Hardware map name of the analog input.
  * @param cacheTolerance Tolerance for the [NextCRServo] power caching delegate.
  */
-class NextFeedbackCRServo(
+class NextFeedbackCRServo @JvmOverloads constructor(
   initializer: () -> CRServoImplEx,
   feedbackName: String,
   cacheTolerance: Double = 0.01,

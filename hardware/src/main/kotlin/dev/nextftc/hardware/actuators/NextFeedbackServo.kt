@@ -8,6 +8,7 @@
 
 package dev.nextftc.hardware.actuators
 
+import android.R.attr.port
 import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.hardware.AnalogInput
 import com.qualcomm.robotcore.hardware.ServoImplEx
@@ -40,7 +41,7 @@ import dev.nextftc.units.radians
  * @param feedbackName Hardware map name of the analog input.
  * @param cacheTolerance Tolerance for the [NextServo] position caching delegate.
  */
-class NextFeedbackServo(
+class NextFeedbackServo @JvmOverloads constructor(
   initializer: () -> ServoImplEx,
   feedbackName: String,
   cacheTolerance: Double = 0.01,

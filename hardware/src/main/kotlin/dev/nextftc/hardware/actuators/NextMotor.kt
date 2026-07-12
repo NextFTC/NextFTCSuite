@@ -53,7 +53,7 @@ import dev.nextftc.units.measuretypes.Voltage as VoltageMeasure
  * @param anglePerCount Conversion factor from encoder counts to angle. Defaults to 1.0 radian.
  * @param cacheTolerance Power caching tolerance to reduce redundant hardware writes. Defaults to 0.01.
  */
-class NextMotor(
+class NextMotor @JvmOverloads constructor(
   initializer: () -> DcMotorImplEx,
   var anglePerCount: Angle = 1.0.radians,
   cacheTolerance: Double = 0.01,

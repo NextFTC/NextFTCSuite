@@ -36,7 +36,7 @@ import dev.nextftc.hardware.util.LazyHardware
  * @param direction The initial direction of the servo defined by the user
  * as a [Servo.Direction] which defaults to [Servo.Direction.FORWARD]
  */
-open class NextServo(
+open class NextServo @JvmOverloads constructor(
   initializer: () -> ServoImplEx,
   val cacheTolerance: Double = 0.01,
   direction: Servo.Direction = Servo.Direction.FORWARD,

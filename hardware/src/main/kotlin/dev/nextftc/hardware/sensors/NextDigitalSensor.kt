@@ -37,7 +37,10 @@ import dev.nextftc.hardware.util.LazyHardware
  * @author 28shettr
  */
 
-class NextDigitalSensor(initializer: () -> DigitalChannel, private val inverted: Boolean = true) {
+class NextDigitalSensor @JvmOverloads constructor(
+  initializer: () -> DigitalChannel,
+  private val inverted: Boolean = true,
+) {
   /**
    * @param name Hardware map name to resolve the [DigitalChannel] from.
    * @param inverted If true, [isTriggered] is the opposite of the raw state. Defaults to true.
