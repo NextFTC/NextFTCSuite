@@ -8,7 +8,6 @@
 
 package dev.nextftc.hardware.actuators
 
-import android.R.attr.value
 import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.hardware.PwmControl
 import com.qualcomm.robotcore.hardware.Servo
