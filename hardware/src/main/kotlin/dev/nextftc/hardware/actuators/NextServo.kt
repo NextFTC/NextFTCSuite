@@ -72,7 +72,8 @@ open class NextServo(
    *
    * Example:
    * ```
-   * val servo = NextServo("myServo") // Creates a NextServo with the config name "myServo"
+   * // Creates a NextServo with the config name: "armServo"
+   * val servo = NextServo("armServo")
    * ```
    *
    * @param name The configuration name for the servo, usually found on the Driver Station
