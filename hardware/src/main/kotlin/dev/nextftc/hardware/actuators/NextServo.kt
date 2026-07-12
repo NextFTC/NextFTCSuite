@@ -35,7 +35,11 @@ import dev.nextftc.hardware.util.LazyHardware
  * @param cacheTolerance Tolerance used by the [Caching] delegate for
  * position updates; defaults to 0.01.
  */
-open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double = 0.01) {
+open class NextServo(
+  initializer: () -> ServoImplEx,
+  val cacheTolerance: Double = 0.01,
+  direction: Servo.Direction = Servo.Direction.FORWARD
+) {
   /**
    * Constructor to create a NextServo using a LynxModule and port number.
    *
@@ -49,17 +53,30 @@ open class NextServo(initializer: () -> ServoImplEx, val cacheTolerance: Double 
    * @param port The servo port (in the range [0, 5])
    * @param cacheTolerance Tolerance used by the [Caching] delegate for position updates; defaults to 0.01.
    */
-  @JvmOverloads constructor(module: LynxModule, port: Int, cacheTolerance: Double = 0.01) : this(
+  @JvmOverloads constructor(
+    module: LynxModule,
+    port: Int,
+    cacheTolerance: Double = 0.01,
+    direction: Servo.Direction = Servo.Direction.FORWARD
+  ) : this(
     { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
     cacheTolerance,
+    direction
   )
 
-  @JvmOverloads constructor(name: String, cacheTolerance: Double = 0.01) : this(
+  @JvmOverloads constructor(
+    name: String,
+    cacheTolerance: Double = 0.01,
+    direction: Servo.Direction = Servo.Direction.FORWARD
+  ) : this(
     { RobotController.hardwareMap[name] as ServoImplEx },
     cacheTolerance,
+    direction
   )
 
-  private val lazyServo = LazyHardware(initializer)
+  private val lazyServo = LazyHardware(initializer).apply {
+    applyAfterInit { it.direction = direction }
+  }
   private val servo by lazyServo
 
   /**
