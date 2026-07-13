@@ -83,7 +83,11 @@ class NextColorDistanceSensor @JvmOverloads constructor(
   var gain: Float
     get() = colorSensor.gain
     set(gain) {
-      lazySensor.applyAfterInit { it.gain = gain }
+      if (lazySensor.isInitialized) {
+        colorSensor.gain = gain
+      } else {
+        lazySensor.applyAfterInit { it.gain = gain }
+      }
     }
 
   /** Reads the color sensor (and distance sensor, if present) and refreshes the cache. Call this once per loop, before reading any properties. */

@@ -109,7 +109,11 @@ open class NextServo @JvmOverloads constructor(
   var direction: Servo.Direction
     get() = servo.direction
     set(direction) {
-      lazyServo.applyAfterInit { it.direction = direction }
+      if (lazyServo.isInitialized) {
+        servo.direction = direction
+      } else {
+        lazyServo.applyAfterInit { it.direction = direction }
+      }
     }
 
   /**
@@ -137,7 +141,11 @@ open class NextServo @JvmOverloads constructor(
   var pwmRange: PwmControl.PwmRange
     get() = servo.pwmRange
     set(range) {
-      lazyServo.applyAfterInit { it.pwmRange = range }
+      if (lazyServo.isInitialized) {
+        servo.pwmRange = range
+      } else {
+        lazyServo.applyAfterInit { it.pwmRange = range }
+      }
     }
 
   /**
