@@ -13,19 +13,18 @@ import dev.nextftc.hardware.util.EventLoop
  * @param gamepad The underlying FTC gamepad instance to read data from.
  */
 class CommandGamepad(private val eventLoop: EventLoop, private val gamepad: Gamepad) {
-  /** A trigger control that evaluates to how far the x value of the left stick is moved. */
+  /** A range trigger that evaluates to how far the x value of the left stick is moved. */
   @get:JvmName("leftStickX")
   val leftStickX = RangeTrigger(eventLoop) { gamepad.left_stick_x.toDouble() }
 
-  /** A trigger control that evaluates to how far the y value of the left stick is moved. */
-  @get:JvmName("leftStickY")
+  /** A range trigger that evaluates to how far the y value of the right stick is moved. */  @get:JvmName("leftStickY")
   val leftStickY = RangeTrigger(eventLoop) { gamepad.left_stick_y.toDouble() }
 
-  /** A trigger control that evaluates to how far the x value of the right stick is moved. */
+  /** A range trigger that evaluates to how far the x value of the right stick is moved. */
   @get:JvmName("rightStickX")
   val rightStickX = RangeTrigger(eventLoop) { gamepad.right_stick_x.toDouble() }
 
-  /** A trigger control that evaluates to how far the y value of the right stick is moved. */
+  /** A range trigger that evaluates to how far the y value of the right stick is moved. */
   @get:JvmName("rightStickY")
   val rightStickY = RangeTrigger(eventLoop) { gamepad.right_stick_y.toDouble() }
 
@@ -101,11 +100,9 @@ class CommandGamepad(private val eventLoop: EventLoop, private val gamepad: Game
   @get:JvmName("triangle")
   val triangle = Trigger(eventLoop) { gamepad.triangle }
 
-  /** A trigger control that evaluates to how far the right trigger is pressed. */
-  @get:JvmName("rightTrigger")
+  /** A range trigger that evaluates to how far the right trigger is pressed. */  @get:JvmName("rightTrigger")
   val rightTrigger = RangeTrigger(eventLoop) { gamepad.right_trigger.toDouble() }
 
-  /** A trigger control that evaluates to how far the left trigger is pressed. */
-  @get:JvmName("leftTrigger")
+  /** A range trigger that evaluates to how far the left trigger is pressed. */  @get:JvmName("leftTrigger")
   val leftTrigger = RangeTrigger(eventLoop) { gamepad.left_trigger.toDouble() }
 }
