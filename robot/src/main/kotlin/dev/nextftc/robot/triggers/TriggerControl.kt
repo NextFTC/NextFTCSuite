@@ -22,12 +22,12 @@ class TriggerControl(private val loop: EventLoop, private val supplier: () -> Do
   /**
    * Creates a trigger that is active while this input's value is greater than [threshold].
    */
-  fun isOver(threshold: Double): Trigger = isBetween(threshold,1.0)
+  fun isOver(threshold: Double): Trigger = isBetween(threshold, 1.0)
 
   /**
    * Creates a trigger that is active while this input's value is  less than [threshold].
    */
-  fun isUnder(threshold: Double): Trigger = isBetween(0.0,threshold)
+  fun isUnder(threshold: Double): Trigger = isBetween(0.0, threshold)
 
   /**
    * Creates a trigger that is active while this input's value is within [lower, upper] (inclusive).
