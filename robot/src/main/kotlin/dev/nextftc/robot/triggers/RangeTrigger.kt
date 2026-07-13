@@ -3,7 +3,7 @@ package dev.nextftc.robot.triggers
 import dev.nextftc.hardware.util.EventLoop
 
 /**
- * A wrapper around an analog gamepad input (e.g. a trigger  or joystick ) that exposes
+ * A wrapper around an analog gamepad input (e.g. a trigger  or joystick) that exposes
  * range-based [Trigger]s in addition to the raw value.
  *
  * <p>This allows you to bind analog inputs to command-based [Trigger]s based on their value,
