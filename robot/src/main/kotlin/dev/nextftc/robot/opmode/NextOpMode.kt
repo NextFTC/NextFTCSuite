@@ -1,7 +1,10 @@
 package dev.nextftc.robot.opmode
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
+import com.qualcomm.robotcore.hardware.Gamepad
+import com.qualcomm.robotcore.hardware.HardwareMap
 import dev.nextftc.robot.NextRobot
+import org.firstinspires.ftc.robotcore.external.Telemetry as SdkTelemetry
 
 /**
  * Base class for all NextFTC OpModes.
@@ -11,8 +14,7 @@ import dev.nextftc.robot.NextRobot
  *
  * @param hooks Internal hooks used to manage robot mechanisms and the scheduler loop.
  */
-abstract class NextOpMode internal constructor(private val hooks: MutableList<OpModeHook>) :
-  LinearOpMode() {
+abstract class NextOpMode internal constructor(internal val hooks: MutableList<OpModeHook>) {
   /**
    * Secondary constructor invoked by the [NextFTCOpModeScanner] during automatic registration.
    *
@@ -26,41 +28,74 @@ abstract class NextOpMode internal constructor(private val hooks: MutableList<Op
     this.hooks += TelemetryHook
   }
 
-  final override fun runOpMode() {
-    hooks.forEach(OpModeHook::beforeInit)
-    onInit()
-    hooks.forEach(OpModeHook::afterInit)
-    while (opModeInInit()) {
-      hooks.forEach(OpModeHook::beforeDisabled)
-      disabledPeriodic()
-      hooks.forEach(OpModeHook::afterDisabled)
-    }
-    waitForStart()
-    hooks.forEach(OpModeHook::beforeStart)
-    onStart()
-    hooks.forEach(OpModeHook::afterStart)
-    while (opModeIsActive()) {
-      hooks.forEach(OpModeHook::beforePeriodic)
-      periodic()
-      hooks.forEach(OpModeHook::afterPeriodic)
-    }
-    hooks.forEach(OpModeHook::beforeEnd)
-    onEnd()
-    hooks.forEach(OpModeHook::afterEnd)
-  }
+  /** The primary gamepad provided by the Driver Station. */
+  @JvmField val gamepad1: Gamepad = activeGamepad1!!
 
-  /** Called exactly once after the INIT button is pressed. */
-  open fun onInit() {}
+  /** The secondary gamepad provided by the Driver Station. */
+  @JvmField val gamepad2: Gamepad = activeGamepad2!!
+
+  /** The standard SDK telemetry provided by the Driver Station. */
+  @JvmField val telemetry: SdkTelemetry = activeTelemetry!!
+
+  /** The hardware map provided by the FTC SDK. */
+  @JvmField val hardwareMap: HardwareMap = activeHardwareMap!!
 
   /** Called repeatedly while the OpMode is in the INIT phase. */
   open fun disabledPeriodic() {}
 
   /** Called exactly once after the PLAY button is pressed. */
-  open fun onStart() {}
+  open fun start() {}
 
   /** Called repeatedly while the OpMode is actively running. */
   open fun periodic() {}
 
   /** Called exactly once when the OpMode finishes execution. */
-  open fun onEnd() {}
+  open fun end() {}
+
+  companion object {
+    @JvmSynthetic internal var activeGamepad1: Gamepad? = null
+
+    @JvmSynthetic internal var activeGamepad2: Gamepad? = null
+
+    @JvmSynthetic internal var activeTelemetry: SdkTelemetry? = null
+
+    @JvmSynthetic internal var activeHardwareMap: HardwareMap? = null
+  }
+}
+
+internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode) : LinearOpMode() {
+  override fun runOpMode() {
+    NextOpMode.activeGamepad1 = this.gamepad1
+    NextOpMode.activeGamepad2 = this.gamepad2
+    NextOpMode.activeTelemetry = this.telemetry
+    NextOpMode.activeHardwareMap = this.hardwareMap
+
+    try {
+      val opMode = opModeConstructor()
+
+      opMode.hooks.forEach(OpModeHook::afterConstruction)
+      while (opModeInInit()) {
+        opMode.hooks.forEach(OpModeHook::beforeDisabled)
+        opMode.disabledPeriodic()
+        opMode.hooks.forEach(OpModeHook::afterDisabled)
+      }
+      waitForStart()
+      opMode.hooks.forEach(OpModeHook::beforeStart)
+      opMode.start()
+      opMode.hooks.forEach(OpModeHook::afterStart)
+      while (opModeIsActive()) {
+        opMode.hooks.forEach(OpModeHook::beforePeriodic)
+        opMode.periodic()
+        opMode.hooks.forEach(OpModeHook::afterPeriodic)
+      }
+      opMode.hooks.forEach(OpModeHook::beforeEnd)
+      opMode.end()
+      opMode.hooks.forEach(OpModeHook::afterEnd)
+    } finally {
+      NextOpMode.activeGamepad1 = null
+      NextOpMode.activeGamepad2 = null
+      NextOpMode.activeTelemetry = null
+      NextOpMode.activeHardwareMap = null
+    }
+  }
 }

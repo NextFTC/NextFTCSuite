@@ -5,8 +5,6 @@ import com.qualcomm.ftccommon.FtcEventLoop
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerNotifier
 import dev.frozenmilk.sinister.sdk.apphooks.OnCreateEventLoop
-import dev.frozenmilk.sinister.sdk.apphooks.SinisterOpModeRegistrar
-import dev.frozenmilk.sinister.sdk.opmodes.SinisterRegisteredOpModes
 
 object RobotState : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
   lateinit var activeOpMode: OpMode

@@ -23,11 +23,9 @@ import dev.nextftc.robot.triggers.Trigger
  * automatically without requiring the user to clutter their OpMode code.
  */
 interface OpModeHook {
-  /** Called immediately before the OpMode's onInit phase. */
-  fun beforeInit() {}
 
   /** Called immediately after the OpMode's onInit phase. */
-  fun afterInit() {}
+  fun afterConstruction() {}
 
   /** Called immediately before the OpMode's disabledPeriodic (init_loop) phase. */
   fun beforeDisabled() {}

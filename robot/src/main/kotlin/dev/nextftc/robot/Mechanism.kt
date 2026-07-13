@@ -9,6 +9,7 @@
 package dev.nextftc.robot
 
 import com.pedropathing.ivy.Command
+import com.pedropathing.ivy.commands.Commands
 
 /**
  * Represents a subsystem or mechanism on the robot (e.g., an arm, drivetrain, or intake).
@@ -21,13 +22,15 @@ interface Mechanism {
    * Called periodically during the OpMode loop.
    * This is where you can update hardware reads, calculate state, or push telemetry.
    */
-  fun periodic() {
-  }
+  fun periodic() {}
 
   /**
-   * The default command to run when no other commands are actively requiring this mechanism.
-   * Returns null if there is no default command.
+   * Creates a command that runs once and requires this mechanism.
    */
-  val defaultCommand: Command?
-    get() = null
+  fun instant(action: Runnable): Command = Commands.instant(action).requiring(this)
+
+  /**
+   * Creates a command that runs indefinitely and requires this mechanism.
+   */
+  fun infinite(action: Runnable): Command = Commands.infinite(action).requiring(this)
 }
