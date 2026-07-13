@@ -160,7 +160,11 @@ class NextMotor @JvmOverloads constructor(
   var direction = Direction.FORWARD
     set(value) {
       field = value
-      lazyMotor.applyAfterInit { it.direction = value.sdkDirection }
+      if (lazyMotor.isInitialized) {
+        motor.direction = value.sdkDirection
+      } else {
+        lazyMotor.applyAfterInit { it.direction = value.sdkDirection }
+      }
     }
 
   /**

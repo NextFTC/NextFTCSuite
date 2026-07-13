@@ -76,7 +76,11 @@ open class NextCRServo @JvmOverloads constructor(
   var direction: DcMotorSimple.Direction
     get() = servo.direction
     set(value) {
-      lazyServo.applyAfterInit { it.direction = value }
+      if (lazyServo.isInitialized) {
+        servo.direction = value
+      } else {
+        lazyServo.applyAfterInit { it.direction = value }
+      }
     }
 
   /**
