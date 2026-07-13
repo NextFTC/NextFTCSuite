@@ -8,6 +8,8 @@ import kotlin.reflect.KProperty
 class LazyHardware<T>(private val initializer: () -> T) : ReadOnlyProperty<Any?, T> {
 
   private var value: T? = null
+  internal val isInitialized: Boolean
+    get() = value != null
 
   override fun getValue(thisRef: Any?, property: KProperty<*>): T {
     if (value != null) return value!!
