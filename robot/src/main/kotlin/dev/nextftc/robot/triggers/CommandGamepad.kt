@@ -15,19 +15,19 @@ import dev.nextftc.hardware.util.EventLoop
 class CommandGamepad(private val eventLoop: EventLoop, private val gamepad: Gamepad) {
   /** A trigger control that evaluates to how far the x value of the left stick is moved. */
   @get:JvmName("leftStickX")
-  val leftStickX = TriggerControl(eventLoop) { gamepad.left_stick_x.toDouble() }
+  val leftStickX = RangeTrigger(eventLoop) { gamepad.left_stick_x.toDouble() }
 
   /** A trigger control that evaluates to how far the y value of the left stick is moved. */
   @get:JvmName("leftStickY")
-  val leftStickY = TriggerControl(eventLoop) { gamepad.left_stick_y.toDouble() }
+  val leftStickY = RangeTrigger(eventLoop) { gamepad.left_stick_y.toDouble() }
 
   /** A trigger control that evaluates to how far the x value of the right stick is moved. */
   @get:JvmName("rightStickX")
-  val rightStickX = TriggerControl(eventLoop) { gamepad.right_stick_x.toDouble() }
+  val rightStickX = RangeTrigger(eventLoop) { gamepad.right_stick_x.toDouble() }
 
   /** A trigger control that evaluates to how far the y value of the right stick is moved. */
   @get:JvmName("rightStickY")
-  val rightStickY = TriggerControl(eventLoop) { gamepad.right_stick_y.toDouble() }
+  val rightStickY = RangeTrigger(eventLoop) { gamepad.right_stick_y.toDouble() }
 
   /** A trigger that evaluates to true when the A button (cross on PlayStation) is pressed. */
   @get:JvmName("a")
@@ -103,9 +103,9 @@ class CommandGamepad(private val eventLoop: EventLoop, private val gamepad: Game
 
   /** A trigger control that evaluates to how far the right trigger is pressed. */
   @get:JvmName("rightTrigger")
-  val rightTrigger = TriggerControl(eventLoop) { gamepad.right_trigger.toDouble() }
+  val rightTrigger = RangeTrigger(eventLoop) { gamepad.right_trigger.toDouble() }
 
   /** A trigger control that evaluates to how far the left trigger is pressed. */
   @get:JvmName("leftTrigger")
-  val leftTrigger = TriggerControl(eventLoop) { gamepad.left_trigger.toDouble() }
+  val leftTrigger = RangeTrigger(eventLoop) { gamepad.left_trigger.toDouble() }
 }
