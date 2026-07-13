@@ -2,7 +2,6 @@ package dev.nextftc.robot.triggers
 
 import dev.nextftc.hardware.util.EventLoop
 
-
 /**
  * A easy way to use triggers for gamepad
  */
