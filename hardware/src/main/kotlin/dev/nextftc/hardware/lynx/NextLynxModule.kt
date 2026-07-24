@@ -1,6 +1,7 @@
 package dev.nextftc.hardware.lynx
 
 import com.qualcomm.hardware.lynx.LynxDcMotorController
+import com.qualcomm.hardware.lynx.LynxDigitalChannelController
 import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.hardware.lynx.LynxServoController
 import dev.nextftc.hardware.RobotController
@@ -46,5 +47,10 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
   /** Creates or gets a [LynxServoController] bound to this module. */
   val servoController: LynxServoController by LazyHardware {
     LynxServoController(RobotController.appContext, module)
+  }
+
+  /** Creates or gets a [LynxDigitalController] bound to this module. */
+  val digitalController: LynxDigitalChannelController by LazyHardware {
+    LynxDigitalChannelController(RobotController.appContext, module)
   }
 }

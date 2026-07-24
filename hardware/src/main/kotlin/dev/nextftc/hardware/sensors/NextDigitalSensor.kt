@@ -8,8 +8,11 @@
 
 package dev.nextftc.hardware.sensors
 
+import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.hardware.DigitalChannel
+import com.qualcomm.robotcore.hardware.DigitalChannelImpl
 import dev.nextftc.hardware.RobotController
+import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.hardware.util.LazyHardware
 
 /**
@@ -42,9 +45,22 @@ class NextDigitalSensor @JvmOverloads constructor(
   private val inverted: Boolean = true,
 ) {
   /**
+   * @param module The Lynx Module, see [RobotController.controlHub], [RobotController.expansionHub],
+   * @param port The digital sensor port (in the range [0, 7])
    * @param name Hardware map name to resolve the [DigitalChannel] from.
    * @param inverted If true, [isTriggered] is the opposite of the raw state. Defaults to true.
    */
+  @JvmOverloads
+  constructor(module: NextLynxModule, port: Int, inverted: Boolean = true) : this(
+    {
+      DigitalChannelImpl(
+        module.digitalController,
+        port,
+      )
+    },
+    inverted,
+  )
+
   @JvmOverloads
   constructor(name: String, inverted: Boolean = true) : this(
     {
