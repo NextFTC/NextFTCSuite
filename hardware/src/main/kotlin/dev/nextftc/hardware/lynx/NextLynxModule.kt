@@ -1,7 +1,10 @@
 package dev.nextftc.hardware.lynx
 
+import android.R
 import com.qualcomm.hardware.lynx.LynxDcMotorController
 import com.qualcomm.hardware.lynx.LynxDigitalChannelController
+import com.qualcomm.hardware.lynx.LynxI2cDeviceSynch
+import com.qualcomm.hardware.lynx.LynxI2cDeviceSynchV2
 import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.hardware.lynx.LynxServoController
 import dev.nextftc.hardware.RobotController
@@ -27,6 +30,10 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
 
   private val module by LazyHardware(initializer)
 
+  private val i2cControllers = Array(4) { bus ->
+    LazyHardware { LynxI2cDeviceSynchV2(RobotController.appContext, module, bus) }
+  }
+
   /** Current module temperature. */
   val temperature: Temperature
     get() = module.getTemperature(TempUnit.CELSIUS).celsius
@@ -47,6 +54,12 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
   /** Creates or gets a [LynxServoController] bound to this module. */
   val servoController: LynxServoController by LazyHardware {
     LynxServoController(RobotController.appContext, module)
+  }
+
+  /** Creates or gets a [LynxDigitalController] bound to this module. */
+  fun i2cController(bus: Int): LynxI2cDeviceSynchV2 {
+    require(bus in 0..3) { "I2C bus must be in range of 0 - 3, got $bus" }
+    return i2cControllers[bus].get()
   }
 
   /** Creates or gets a [LynxDigitalController] bound to this module. */

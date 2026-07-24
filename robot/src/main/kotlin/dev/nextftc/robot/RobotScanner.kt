@@ -124,7 +124,7 @@ internal object RobotScanner : Scanner {
 object RobotState : OnCreateEventLoop {
   /** The singleton or freshly constructed instance of the user's robot. */
   internal lateinit var robot: NextRobot
-  
+
   override fun onCreateEventLoop(context: Context, ftcEventLoop: FtcEventLoop) {
     robot = RobotScanner.robotConstructor()
     ftcEventLoop.opModeManager.registerListener(DriverStationTelemetry)
