@@ -8,6 +8,8 @@
 
 package dev.nextftc.hardware.actuators
 
+import dev.nextftc.hardware.RobotController
+import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.hardware.util.Caching
 
 /**
@@ -25,12 +27,33 @@ import dev.nextftc.hardware.util.Caching
  * indicator.setBrightness(0.8)
  * ```
  *
- * @param name The name of the servo in the hardware map.
- * @param cacheTolerance Tolerance used by the [Caching] delegate for
- * position updates; defaults to 0.01.
  */
-class NextRGBIndicator @JvmOverloads constructor(name: String, cacheTolerance: Double = 0.01) :
-  NextServo(name, cacheTolerance) {
+class NextRGBIndicator : NextServo {
+
+  /**
+   * @param module The Lynx Module, see [RobotController.controlHub], [RobotController.expansionHub],
+   * and [RobotController.servoHubs]
+   * @param port The servo port (in the range [0, 5])
+   * @param cacheTolerance Tolerance used by the [Caching] delegate for position updates; defaults to 0.01.
+   */
+
+  @JvmOverloads
+  constructor(
+    module: NextLynxModule,
+    port: Int,
+    cacheTolerance: Double = 0.01,
+  ) : super(module, port, cacheTolerance)
+
+  /**
+   * @param name The name of the servo in the hardware map.
+   * @param cacheTolerance Tolerance used by the [Caching] delegate for
+   * position updates; defaults to 0.01.
+   */
+  @JvmOverloads
+  constructor(
+    name: String,
+    cacheTolerance: Double = 0.01,
+  ) : super(name, cacheTolerance)
 
   /**
    * Available colors/patterns for the headlights
