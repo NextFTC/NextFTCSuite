@@ -57,7 +57,10 @@ class NextColorDistanceSensor @JvmOverloads constructor(
    */
 
   @JvmOverloads
-  constructor(sensorName: String, hasDistance: Boolean = false) : this(
+  constructor(
+    sensorName: String,
+    hasDistance: Boolean = false
+  ) : this(
     { RobotController.hardwareMap[sensorName] as NormalizedColorSensor },
     if (hasDistance) {
       { RobotController.hardwareMap[sensorName] as DistanceSensor }
@@ -75,16 +78,19 @@ class NextColorDistanceSensor @JvmOverloads constructor(
    * @param hasDistance Whether to also resolve a [DistanceSensor] from the same device. Defaults to false.
    */
   @JvmOverloads
-  constructor(module: NextLynxModule, bus: Int, hasDistance: Boolean = false) : this(
-    {
-      LynxI2cColorRangeSensor(module.i2cController(bus), true)
-    },
+  constructor(
+    module: NextLynxModule,
+    bus: Int,
+    hasDistance: Boolean = false) : this(
+    { LynxI2cColorRangeSensor(module.i2cController(bus), true) },
     if (hasDistance) {
       { LynxI2cColorRangeSensor(module.i2cController(bus), true) as DistanceSensor }
     } else {
       null
     },
-  )
+  ) {
+    require(bus in 0..3) { "Expected bus in range [0, 3], got $bus" }
+  }
 
   private val lazySensor = LazyHardware(colorInitializer)
   private val colorSensor by lazySensor

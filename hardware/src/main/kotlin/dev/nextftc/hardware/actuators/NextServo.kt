@@ -63,7 +63,9 @@ open class NextServo @JvmOverloads constructor(
     { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
     cacheTolerance,
     direction,
-  )
+  ) {
+    require(port in 0..3) { "Expected bus in range [0, 3], got $port" }
+  }
 
   /**
    * Constructor to create a NextServo using configuration name

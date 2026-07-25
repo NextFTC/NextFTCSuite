@@ -44,12 +44,21 @@ open class NextCRServo @JvmOverloads constructor(
    * @param port The servo port (in the range [0, 5]).
    * @param cacheTolerance Tolerance used by the [Caching] delegate for power updates; defaults to 0.01.
    */
-  @JvmOverloads constructor(module: NextLynxModule, port: Int, cacheTolerance: Double = 0.01) : this(
+  @JvmOverloads constructor(
+    module: NextLynxModule,
+    port: Int,
+    cacheTolerance: Double = 0.01
+  ) : this(
     { CRServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
     cacheTolerance,
-  )
+  ) {
+    require(port in 0..3) { "Expected port in range [0, 3], got $port" }
+  }
 
-  @JvmOverloads constructor(name: String, cacheTolerance: Double = 0.01) : this(
+  @JvmOverloads constructor(
+    name: String,
+    cacheTolerance: Double = 0.01
+  ) : this(
     { RobotController.hardwareMap[name] as CRServoImplEx },
     cacheTolerance,
   )

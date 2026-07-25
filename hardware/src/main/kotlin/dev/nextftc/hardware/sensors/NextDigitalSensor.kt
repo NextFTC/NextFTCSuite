@@ -51,21 +51,22 @@ class NextDigitalSensor @JvmOverloads constructor(
    * @param inverted If true, [isTriggered] is the opposite of the raw state. Defaults to true.
    */
   @JvmOverloads
-  constructor(module: NextLynxModule, port: Int, inverted: Boolean = true) : this(
-    {
-      DigitalChannelImpl(
-        module.digitalController,
-        port,
-      )
-    },
+  constructor(
+    module: NextLynxModule,
+    port: Int,
+    inverted: Boolean = true
+  ) : this(
+    { DigitalChannelImpl(module.digitalController, port) },
     inverted,
-  )
+  ) {
+    require(port in 0..3) { "Expected port in range [0, 7], got $port" }
+  }
 
   @JvmOverloads
-  constructor(name: String, inverted: Boolean = true) : this(
-    {
-      RobotController.hardwareMap[name] as DigitalChannel
-    },
+  constructor(
+    name: String,
+    inverted: Boolean = true) : this(
+    { RobotController.hardwareMap[name] as DigitalChannel },
     inverted,
   )
 

@@ -80,7 +80,9 @@ class NextFeedbackCRServo @JvmOverloads constructor(
     },
     { RobotController.hardwareMap[feedbackName] as AnalogInput },
     cacheTolerance,
-  )
+  ) {
+    require(port in 0..5) { "Expected port in range [0, 5], got $port" }
+  }
 
   /**
    * Constructor to create a NextFeedbackCRServo using a LynxModule/port for both
@@ -107,7 +109,10 @@ class NextFeedbackCRServo @JvmOverloads constructor(
     },
     { AnalogInput(module.analogController, feedbackPort) },
     cacheTolerance,
-  )
+  ) {
+    require(port in 0..5) { "Expected port in range [0, 5], got $port" }
+    require(feedbackPort in 0..3) { "Expected feedbackPort in range [0, 3], got $feedbackPort" }
+  }
 
   private val analogInput by LazyHardware(feedbackInitializer)
   private val rawAngleRadians: Double by AnalogFeedback { analogInput.voltage }

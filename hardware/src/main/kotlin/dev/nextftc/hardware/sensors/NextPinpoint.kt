@@ -27,11 +27,17 @@ import org.firstinspires.ftc.robotcore.external.navigation.UnnormalizedAngleUnit
 class NextPinpoint(initializer: () -> GoBildaPinpointDriver) {
   constructor(name: String) : this({ RobotController.hardwareMap[name] as GoBildaPinpointDriver })
 
-  constructor(module: NextLynxModule, bus: Int) : this(
+  constructor(
+    module: NextLynxModule,
+    bus: Int
+  ) : this(
     {
       GoBildaPinpointDriver(module.i2cController(bus), true)
     },
-  )
+  ) {
+    require(bus in 0..3) { "Expected bus in range [0, 3], got $bus" }
+  }
+
   private val driver by LazyHardware(initializer)
 
   val device: GoBildaPinpointDriver get() = driver

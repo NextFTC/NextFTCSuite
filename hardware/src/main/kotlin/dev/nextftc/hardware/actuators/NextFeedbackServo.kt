@@ -81,7 +81,9 @@ class NextFeedbackServo @JvmOverloads constructor(
     { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
     { RobotController.hardwareMap[feedbackName] as AnalogInput },
     cacheTolerance,
-  )
+  ) {
+    require(port in 0..5) { "Expected port in range [0, 5], got $port" }
+  }
 
   /**
    * Constructor to create a NextFeedbackServo using a LynxModule/port for both
