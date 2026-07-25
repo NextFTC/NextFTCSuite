@@ -57,7 +57,7 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
   }
 
   /** Creates or gets a [LynxDigitalController] bound to this module. */
-  fun i2cController(bus: Int): LynxI2cDeviceSynchV2 {
+  fun i2cController(bus: Int): LynxI2cDeviceSynch {
     require(bus in 0..3) { "I2C bus must be in range of 0 - 3, got $bus" }
     return i2cControllers[bus].get()
   }

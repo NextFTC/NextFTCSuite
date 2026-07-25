@@ -9,9 +9,11 @@
 package dev.nextftc.hardware.sensors
 
 import android.graphics.Color
+import com.qualcomm.hardware.lynx.LynxI2cColorRangeSensor
 import com.qualcomm.robotcore.hardware.DistanceSensor
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor
 import dev.nextftc.hardware.RobotController
+import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.hardware.sensors.colors.ColorProfile
 import dev.nextftc.hardware.sensors.colors.NextColor
 import dev.nextftc.hardware.util.LazyHardware
@@ -47,11 +49,38 @@ class NextColorDistanceSensor @JvmOverloads constructor(
   colorInitializer: () -> NormalizedColorSensor,
   distanceInitializer: (() -> DistanceSensor)? = null,
 ) {
+  /**
+   * Constructor to create a NextColorDistanceSensor using a configuration name.
+   *
+   * @param sensorName The configuration name for the sensor, usually found on the Driver Station.
+   * @param hasDistance Whether to also resolve a [DistanceSensor] from the same device. Defaults to false.
+   */
+
   @JvmOverloads
   constructor(sensorName: String, hasDistance: Boolean = false) : this(
     { RobotController.hardwareMap[sensorName] as NormalizedColorSensor },
     if (hasDistance) {
       { RobotController.hardwareMap[sensorName] as DistanceSensor }
+    } else {
+      null
+    },
+  )
+
+  /**
+   * Constructor to create a NextColorDistanceSensor using a LynxModule and I2C bus number.
+   *
+   * @param module The Lynx Module, see [RobotController.controlHub], [RobotController.expansionHub],
+   * and [RobotController.servoHubs]
+   * @param bus The I2C bus number (in the range [0, 3])
+   * @param hasDistance Whether to also resolve a [DistanceSensor] from the same device. Defaults to false.
+   */
+  @JvmOverloads
+  constructor(module: NextLynxModule, bus: Int, hasDistance: Boolean = false) : this(
+    {
+      LynxI2cColorRangeSensor(module.i2cController(bus), true)
+    },
+    if (hasDistance) {
+      { LynxI2cColorRangeSensor(module.i2cController(bus), true) as DistanceSensor }
     } else {
       null
     },

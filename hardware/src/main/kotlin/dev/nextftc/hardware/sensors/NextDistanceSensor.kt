@@ -8,10 +8,13 @@
 
 package dev.nextftc.hardware.sensors
 
+import com.qualcomm.hardware.lynx.LynxI2cColorRangeSensor
 import com.qualcomm.robotcore.hardware.DistanceSensor
 import dev.nextftc.hardware.RobotController
+import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.hardware.util.LazyHardware
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
+
 /**
  * Lightweight wrapper for a distance sensor that caches the last reading.
  * Call [update] in periodic to read the hardware.
@@ -32,10 +35,26 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
  * @author 28shettr
  */
 class NextDistanceSensor(initializer: () -> DistanceSensor) {
+  /**
+   * Constructor to create a NextDistanceSensor using a configuration name.
+   *
+   * @param name The configuration name for the sensor, usually found on the Driver Station.
+   */
+
   constructor(name: String) : this(
     { RobotController.hardwareMap[name] as DistanceSensor },
   )
 
+  /**
+   * Constructor to create a NextDistanceSensor using a LynxModule and I2C bus number.
+   *
+   * @param module The Lynx Module, see [RobotController.controlHub], [RobotController.expansionHub],
+   * and [RobotController.servoHubs]
+   * @param bus The I2C bus number (in the range [0, 3])
+   */
+  constructor(module: NextLynxModule, bus: Int) : this(
+    { LynxI2cColorRangeSensor(module.i2cController(bus), true) },
+  )
   private val distanceSensor by LazyHardware(initializer)
 
   private var cachedDistanceCm: Double = Double.NaN
