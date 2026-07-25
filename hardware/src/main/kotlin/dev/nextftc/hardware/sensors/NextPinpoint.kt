@@ -13,6 +13,7 @@ import dev.nextftc.control.geometry.Pose2d
 import dev.nextftc.control.geometry.PoseVelocity2d
 import dev.nextftc.control.geometry.Vector2d
 import dev.nextftc.hardware.RobotController
+import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.inchesPerSecond
 import dev.nextftc.units.radiansPerSecond
@@ -26,6 +27,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.UnnormalizedAngleUnit
 class NextPinpoint(initializer: () -> GoBildaPinpointDriver) {
   constructor(name: String) : this({ RobotController.hardwareMap[name] as GoBildaPinpointDriver })
 
+  constructor(module: NextLynxModule, bus: Int) : this(
+    {
+      GoBildaPinpointDriver(module.i2cController(bus), true)
+    }
+  )
   private val driver by LazyHardware(initializer)
 
   val device: GoBildaPinpointDriver get() = driver
