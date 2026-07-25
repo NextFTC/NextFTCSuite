@@ -30,7 +30,7 @@ class NextPinpoint(initializer: () -> GoBildaPinpointDriver) {
   constructor(module: NextLynxModule, bus: Int) : this(
     {
       GoBildaPinpointDriver(module.i2cController(bus), true)
-    }
+    },
   )
   private val driver by LazyHardware(initializer)
 

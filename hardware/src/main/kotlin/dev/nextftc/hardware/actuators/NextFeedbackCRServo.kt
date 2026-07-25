@@ -29,17 +29,17 @@ import dev.nextftc.units.radians
  *
  * @param initializer A function returning the backing [CRServoImplEx]. It will
  * be invoked lazily the first time the servo is accessed.
- * @param feedbackName Hardware map name of the analog input.
+ * @param feedbackInitializer A function returning the backing [AnalogInput].
  * @param cacheTolerance Tolerance for the [NextCRServo] power caching delegate.
  */
 class NextFeedbackCRServo @JvmOverloads constructor(
   initializer: () -> CRServoImplEx,
-  feedbackName: String,
+  feedbackInitializer: () -> AnalogInput,
   cacheTolerance: Double = 0.01,
 ) : NextCRServo(initializer, cacheTolerance) {
 
   /**
-   * Constructor to create a NextFeedbackCRServo using a servo name.
+   * Constructor to create a NextFeedbackCRServo using a servo name and feedback name.
    *
    * @param servoName Hardware map name of the servo.
    * @param feedbackName Hardware map name of the analog input.
@@ -51,12 +51,13 @@ class NextFeedbackCRServo @JvmOverloads constructor(
     cacheTolerance: Double = 0.01,
   ) : this(
     { RobotController.hardwareMap[servoName] as CRServoImplEx },
-    feedbackName,
+    { RobotController.hardwareMap[feedbackName] as AnalogInput },
     cacheTolerance,
   )
 
   /**
-   * Constructor to create a NextFeedbackCRServo using a LynxModule and port number.
+   * Constructor to create a NextFeedbackCRServo using a LynxModule/port for the servo,
+   * and a hardware map name for the feedback input.
    *
    * @param module The Lynx module, see [RobotController.controlHub], [RobotController.expansionHub],
    * and [RobotController.servoHubs].
@@ -77,13 +78,38 @@ class NextFeedbackCRServo @JvmOverloads constructor(
         ServoConfigurationType.getStandardServoType(),
       )
     },
-    feedbackName,
+    { RobotController.hardwareMap[feedbackName] as AnalogInput },
     cacheTolerance,
   )
 
-  private val analogInput by LazyHardware {
-    RobotController.hardwareMap[feedbackName] as AnalogInput
-  }
+  /**
+   * Constructor to create a NextFeedbackCRServo using a LynxModule/port for both
+   * the servo and the analog feedback input.
+   *
+   * @param module The Lynx module, see [RobotController.controlHub], [RobotController.expansionHub],
+   * and [RobotController.servoHubs].
+   * @param port The servo port (in the range [0, 5]).
+   * @param feedbackPort The analog input port for the feedback signal.
+   * @param cacheTolerance Tolerance for the [NextCRServo] power caching delegate.
+   */
+  @JvmOverloads constructor(
+    module: NextLynxModule,
+    port: Int,
+    feedbackPort: Int,
+    cacheTolerance: Double = 0.01,
+  ) : this(
+    {
+      CRServoImplEx(
+        module.servoController,
+        port,
+        ServoConfigurationType.getStandardServoType(),
+      )
+    },
+    { AnalogInput(module.analogController, feedbackPort) },
+    cacheTolerance,
+  )
+
+  private val analogInput by LazyHardware(feedbackInitializer)
   private val rawAngleRadians: Double by AnalogFeedback { analogInput.voltage }
 
   /**
