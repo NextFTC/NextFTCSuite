@@ -1,5 +1,5 @@
 [versions]
-android = "8.7.3"
+android = "8.7.0"
 dokka = "2.2.0"
 ftc = "11.1.0"
 kotlin = "2.3.0"
