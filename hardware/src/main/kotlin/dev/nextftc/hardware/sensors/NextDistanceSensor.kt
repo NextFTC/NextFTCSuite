@@ -54,7 +54,7 @@ class NextDistanceSensor(initializer: () -> DistanceSensor) {
    */
   constructor(
     module: NextLynxModule,
-    bus: Int
+    bus: Int,
   ) : this(
     { LynxI2cColorRangeSensor(module.i2cController(bus), true) },
   ) {

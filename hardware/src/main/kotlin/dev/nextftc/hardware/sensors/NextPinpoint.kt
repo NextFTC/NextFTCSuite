@@ -29,7 +29,7 @@ class NextPinpoint(initializer: () -> GoBildaPinpointDriver) {
 
   constructor(
     module: NextLynxModule,
-    bus: Int
+    bus: Int,
   ) : this(
     {
       GoBildaPinpointDriver(module.i2cController(bus), true)

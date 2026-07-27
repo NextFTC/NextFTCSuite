@@ -59,7 +59,7 @@ class NextColorDistanceSensor @JvmOverloads constructor(
   @JvmOverloads
   constructor(
     sensorName: String,
-    hasDistance: Boolean = false
+    hasDistance: Boolean = false,
   ) : this(
     { RobotController.hardwareMap[sensorName] as NormalizedColorSensor },
     if (hasDistance) {
@@ -81,7 +81,8 @@ class NextColorDistanceSensor @JvmOverloads constructor(
   constructor(
     module: NextLynxModule,
     bus: Int,
-    hasDistance: Boolean = false) : this(
+    hasDistance: Boolean = false,
+  ) : this(
     { LynxI2cColorRangeSensor(module.i2cController(bus), true) },
     if (hasDistance) {
       { LynxI2cColorRangeSensor(module.i2cController(bus), true) as DistanceSensor }

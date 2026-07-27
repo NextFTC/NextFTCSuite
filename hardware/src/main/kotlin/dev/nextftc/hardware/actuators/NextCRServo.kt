@@ -47,7 +47,7 @@ open class NextCRServo @JvmOverloads constructor(
   @JvmOverloads constructor(
     module: NextLynxModule,
     port: Int,
-    cacheTolerance: Double = 0.01
+    cacheTolerance: Double = 0.01,
   ) : this(
     { CRServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
     cacheTolerance,
@@ -57,7 +57,7 @@ open class NextCRServo @JvmOverloads constructor(
 
   @JvmOverloads constructor(
     name: String,
-    cacheTolerance: Double = 0.01
+    cacheTolerance: Double = 0.01,
   ) : this(
     { RobotController.hardwareMap[name] as CRServoImplEx },
     cacheTolerance,

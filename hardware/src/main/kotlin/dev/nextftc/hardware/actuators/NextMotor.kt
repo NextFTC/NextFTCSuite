@@ -97,7 +97,7 @@ class NextMotor @JvmOverloads constructor(
   ) : this(
     { RobotController.hardwareMap[name] as DcMotorImplEx },
     anglePerCount,
-    cacheTolerance
+    cacheTolerance,
   )
 
   init {

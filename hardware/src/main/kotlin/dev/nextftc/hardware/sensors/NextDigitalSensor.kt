@@ -54,7 +54,7 @@ class NextDigitalSensor @JvmOverloads constructor(
   constructor(
     module: NextLynxModule,
     port: Int,
-    inverted: Boolean = true
+    inverted: Boolean = true,
   ) : this(
     { DigitalChannelImpl(module.digitalController, port) },
     inverted,
@@ -65,7 +65,8 @@ class NextDigitalSensor @JvmOverloads constructor(
   @JvmOverloads
   constructor(
     name: String,
-    inverted: Boolean = true) : this(
+    inverted: Boolean = true,
+  ) : this(
     { RobotController.hardwareMap[name] as DigitalChannel },
     inverted,
   )
