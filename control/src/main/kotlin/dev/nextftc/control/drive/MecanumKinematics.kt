@@ -19,21 +19,21 @@ import kotlin.math.max
  */
 class MecanumKinematics : DriveKinematics {
 
-    private val strafeCompensation = 1.1
+  private val strafeCompensation = 1.1
 
-    override fun calculate(input: DriveInput): WheelPowers {
-        val compensatedX = input.x * strafeCompensation
+  override fun calculate(input: DriveInput): WheelPowers {
+    val compensatedX = input.x * strafeCompensation
 
-        val denominator = max(
-            compensatedX.absoluteValue + input.y.absoluteValue + input.rx.absoluteValue,
-            1.0
-        )
+    val denominator = max(
+      compensatedX.absoluteValue + input.y.absoluteValue + input.rx.absoluteValue,
+      1.0,
+    )
 
-        return WheelPowers(
-            frontLeft = (input.y + compensatedX + input.rx) / denominator,
-            frontRight = (input.y - compensatedX - input.rx) / denominator,
-            backLeft = (input.y - compensatedX + input.rx) / denominator,
-            backRight = (input.y + compensatedX - input.rx) / denominator,
-        )
-    }
+    return WheelPowers(
+      frontLeft = (input.y + compensatedX + input.rx) / denominator,
+      frontRight = (input.y - compensatedX - input.rx) / denominator,
+      backLeft = (input.y - compensatedX + input.rx) / denominator,
+      backRight = (input.y + compensatedX - input.rx) / denominator,
+    )
+  }
 }

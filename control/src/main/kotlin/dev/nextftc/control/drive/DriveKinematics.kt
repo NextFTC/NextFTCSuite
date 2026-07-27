@@ -12,13 +12,13 @@ data class DriveInput(val x: Double, val y: Double, val rx: Double)
 
 /** Computed power for each wheel of a 4-wheel drivetrain. */
 data class WheelPowers(
-    val frontLeft: Double,
-    val frontRight: Double,
-    val backLeft: Double,
-    val backRight: Double,
+  val frontLeft: Double,
+  val frontRight: Double,
+  val backLeft: Double,
+  val backRight: Double,
 )
 
 /** Converts raw drive input into wheel powers for a specific drivetrain type. */
 interface DriveKinematics {
-    fun calculate(input: DriveInput): WheelPowers
+  fun calculate(input: DriveInput): WheelPowers
 }
