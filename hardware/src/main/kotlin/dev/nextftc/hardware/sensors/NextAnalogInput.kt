@@ -3,18 +3,23 @@ package dev.nextftc.hardware.sensors
 import com.qualcomm.robotcore.hardware.AnalogInput
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.lynx.NextLynxModule
+import dev.nextftc.hardware.util.AnalogFeedback
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.Volts
 import dev.nextftc.units.measuretypes.Voltage
 import dev.nextftc.units.volts
+import java.util.function.Supplier
 
 /**
  * A wrapper around an [AnalogInput] that provides convenient access to raw voltage
  * readings as well as a normalized, optionally transformed value.
  *
- * The hardware device is resolved lazily on first access via [LazyHardware], so
- * constructing an instance of this class does not require the hardware map to be
- * ready yet.
+ * The hardware device is resolved lazily, so constructing an instance of this class
+ * does not require the hardware map to be ready yet.
+ *
+ * Inherits from [AnalogFeedback] so that any `NextAnalogInput` can also be used
+ * directly as a `by`-delegate returning an angle in radians (e.g. for feedback
+ * CR servos).
  *
  * @param initializer A lambda that resolves and returns the underlying [AnalogInput].
  * @param customTransformation An optional transformation applied to the normalized
@@ -23,11 +28,19 @@ import dev.nextftc.units.volts
  * @param maxVoltage The voltage that corresponds to a normalized value of `1.0`.
  * Defaults to `3.3` volts.
  */
-class NextAnalogInput @JvmOverloads constructor(
+open class NextAnalogInput @JvmOverloads constructor(
   initializer: () -> AnalogInput,
   val customTransformation: (Double) -> Double = { n: Double -> n },
-  val maxVoltage: Voltage = 3.3.volts,
-) {
+  maxVoltage: Voltage = 3.3.volts,
+) : AnalogFeedback(maxVoltage, voltageSupplier(initializer)) {
+
+  companion object {
+    private fun voltageSupplier(initializer: () -> AnalogInput): Supplier<Double> {
+      val input by LazyHardware(initializer)
+      return Supplier { input.voltage }
+    }
+  }
+
   /**
    * Creates a [NextAnalogInput] by looking up the [AnalogInput] in the hardware map
    * by its configured name.
@@ -73,12 +86,11 @@ class NextAnalogInput @JvmOverloads constructor(
     require(channel in 0..3) { "Expected channel in range [0, 3], got $channel" }
   }
 
-  /** The lazily-initialized underlying [AnalogInput] hardware device. */
-  private val input by LazyHardware(initializer)
+  private val rawVoltageSupplier = voltageSupplier(initializer)
 
   /** The raw, untransformed voltage currently read from the analog input. */
   val rawVoltage: Voltage
-    get() = input.voltage.volts
+    get() = rawVoltageSupplier.get().volts
 
   /**
    * The normalized reading from the analog input, computed as [rawVoltage] divided

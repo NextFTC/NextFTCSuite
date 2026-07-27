@@ -8,12 +8,11 @@
 
 package dev.nextftc.hardware.actuators
 
-import com.qualcomm.robotcore.hardware.AnalogInput
 import com.qualcomm.robotcore.hardware.CRServoImplEx
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.ServoConfigurationType
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.lynx.NextLynxModule
-import dev.nextftc.hardware.util.AnalogFeedback
+import dev.nextftc.hardware.sensors.NextAnalogInput
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.measuretypes.Angle
 import dev.nextftc.units.radians
@@ -29,12 +28,13 @@ import dev.nextftc.units.radians
  *
  * @param initializer A function returning the backing [CRServoImplEx]. It will
  * be invoked lazily the first time the servo is accessed.
- * @param feedbackInitializer A function returning the backing [AnalogInput].
+ * @param feedbackInitializer A function returning the backing [NextAnalogInput]
+ * used to read the feedback angle.
  * @param cacheTolerance Tolerance for the [NextCRServo] power caching delegate.
  */
 class NextFeedbackCRServo @JvmOverloads constructor(
   initializer: () -> CRServoImplEx,
-  feedbackInitializer: () -> AnalogInput,
+  feedbackInitializer: () -> NextAnalogInput,
   cacheTolerance: Double = 0.01,
 ) : NextCRServo(initializer, cacheTolerance) {
 
@@ -51,7 +51,7 @@ class NextFeedbackCRServo @JvmOverloads constructor(
     cacheTolerance: Double = 0.01,
   ) : this(
     { RobotController.hardwareMap[servoName] as CRServoImplEx },
-    { RobotController.hardwareMap[feedbackName] as AnalogInput },
+    { NextAnalogInput(feedbackName) },
     cacheTolerance,
   )
 
@@ -78,7 +78,7 @@ class NextFeedbackCRServo @JvmOverloads constructor(
         ServoConfigurationType.getStandardServoType(),
       )
     },
-    { RobotController.hardwareMap[feedbackName] as AnalogInput },
+    { NextAnalogInput(feedbackName) },
     cacheTolerance,
   ) {
     require(port in 0..5) { "Expected port in range [0, 5], got $port" }
@@ -107,7 +107,7 @@ class NextFeedbackCRServo @JvmOverloads constructor(
         ServoConfigurationType.getStandardServoType(),
       )
     },
-    { AnalogInput(module.analogController, feedbackPort) },
+    { NextAnalogInput(module, feedbackPort) },
     cacheTolerance,
   ) {
     require(port in 0..5) { "Expected port in range [0, 5], got $port" }
@@ -115,7 +115,7 @@ class NextFeedbackCRServo @JvmOverloads constructor(
   }
 
   private val analogInput by LazyHardware(feedbackInitializer)
-  private val rawAngleRadians: Double by AnalogFeedback { analogInput.voltage }
+  private val rawAngleRadians: Double by analogInput
 
   /**
    * Actual angle of the servo, reported from the analog feedback input.

@@ -28,15 +28,6 @@ class LazyHardware<T>(private val initializer: () -> T) : ReadOnlyProperty<Any?,
     }
   }
 
-  fun get(): T {
-    value?.let { return it }
-    return initializer.invoke().also { hardwareObject ->
-      value = hardwareObject
-      onInit.forEach { block -> block.configure(hardwareObject) }
-      Log.d("NextFTC", "Initialized lazy $hardwareObject")
-    }
-  }
-
   private val onInit = mutableListOf<Configurator<T>>()
 
   fun applyAfterInit(block: Configurator<T>) {

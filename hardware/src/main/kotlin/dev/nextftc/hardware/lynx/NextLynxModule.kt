@@ -1,6 +1,5 @@
 package dev.nextftc.hardware.lynx
 
-import android.R
 import com.qualcomm.hardware.lynx.LynxAnalogInputController
 import com.qualcomm.hardware.lynx.LynxDcMotorController
 import com.qualcomm.hardware.lynx.LynxDigitalChannelController
@@ -60,10 +59,10 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
   /** Creates or gets a [LynxI2cDeviceSynch] bound to this module. */
   fun i2cController(bus: Int): LynxI2cDeviceSynch {
     require(bus in 0..3) { "I2C bus must be in range of 0 - 3, got $bus" }
-    return i2cControllers[bus].get()
+    return i2cControllers[bus].getValue(this, ::i2cControllers)
   }
 
-  /** Creates or gets a [LynxDigitalChannelControllerController] bound to this module. */
+  /** Creates or gets a [LynxDigitalChannelController] bound to this module. */
   val digitalController: LynxDigitalChannelController by LazyHardware {
     LynxDigitalChannelController(RobotController.appContext, module)
   }
