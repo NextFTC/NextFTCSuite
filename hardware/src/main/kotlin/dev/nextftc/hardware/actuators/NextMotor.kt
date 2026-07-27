@@ -168,6 +168,11 @@ class NextMotor @JvmOverloads constructor(
       }
     }
 
+  /**
+   * Motor zero power behavior (BRAKE or FLOAT).
+   *
+   * When set, automatically updates the underlying motor's zero power behavior.
+   */
   var zeroPowerBehavior = ZeroPowerBehavior.FLOAT
     set(value) {
       field = value
@@ -408,8 +413,19 @@ class NextMotor @JvmOverloads constructor(
     REVERSE(DcMotorSimple.Direction.REVERSE, Servo.Direction.REVERSE),
   }
 
+  /**
+   * Motor zero power behavior.
+   */
+
   enum class ZeroPowerBehavior(val sdkZeroPowerBehavior: DcMotor.ZeroPowerBehavior){
+    /**
+     * Motor brakes when power is applied.
+     */
     BRAKE(DcMotor.ZeroPowerBehavior.BRAKE),
+
+    /**
+     * Motor keeps coasts when power is applied.
+     */
     FLOAT(DcMotor.ZeroPowerBehavior.FLOAT)
   }
 
