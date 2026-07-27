@@ -8,6 +8,7 @@
 
 package dev.nextftc.hardware.actuators
 
+import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorImplEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Servo
@@ -164,6 +165,16 @@ class NextMotor @JvmOverloads constructor(
         motor.direction = value.sdkDirection
       } else {
         lazyMotor.applyAfterInit { it.direction = value.sdkDirection }
+      }
+    }
+
+  var zeroPowerBehavior = ZeroPowerBehavior.FLOAT
+    set(value) {
+      field = value
+      if (lazyMotor.isInitialized) {
+        motor.zeroPowerBehavior = value.sdkZeroPowerBehavior
+      } else {
+        lazyMotor.applyAfterInit { it.zeroPowerBehavior = value.sdkZeroPowerBehavior }
       }
     }
 
@@ -395,6 +406,11 @@ class NextMotor @JvmOverloads constructor(
      * Motor spins in reverse (negated).
      */
     REVERSE(DcMotorSimple.Direction.REVERSE, Servo.Direction.REVERSE),
+  }
+
+  enum class ZeroPowerBehavior(val sdkZeroPowerBehavior: DcMotor.ZeroPowerBehavior){
+    BRAKE(DcMotor.ZeroPowerBehavior.BRAKE),
+    FLOAT(DcMotor.ZeroPowerBehavior.FLOAT)
   }
 
   companion object {
