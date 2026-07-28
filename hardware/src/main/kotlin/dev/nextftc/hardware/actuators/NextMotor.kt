@@ -77,7 +77,9 @@ class NextMotor @JvmOverloads constructor(
     { DcMotorImplEx(module.motorController, port) },
     anglePerCount,
     cacheTolerance,
-  )
+  ) {
+    require(port in 0..3) { "Expected bus in range [0, 3], got $port" }
+  }
 
   /**
    * Constructs a motor by name from the current hardware map.
@@ -92,7 +94,11 @@ class NextMotor @JvmOverloads constructor(
     name: String,
     anglePerCount: Angle = 1.0.radians,
     cacheTolerance: Double = 0.01,
-  ) : this({ RobotController.hardwareMap[name] as DcMotorImplEx }, anglePerCount, cacheTolerance)
+  ) : this(
+    { RobotController.hardwareMap[name] as DcMotorImplEx },
+    anglePerCount,
+    cacheTolerance,
+  )
 
   init {
     motorEventLoop.bind(this::update)

@@ -8,7 +8,7 @@ import kotlin.math.PI
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-class AnalogFeedback @JvmOverloads constructor(
+open class AnalogFeedback @JvmOverloads constructor(
   val maxVoltage: Voltage = 3.3.volts,
   private val voltageSupplier: Supplier<Double>,
 ) : ReadOnlyProperty<Any?, Double> {
