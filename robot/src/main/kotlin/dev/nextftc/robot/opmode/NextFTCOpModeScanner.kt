@@ -112,7 +112,9 @@ internal fun opModeConstructorFromClass(cls: KClass<out NextOpMode>): OpModeCons
     if (constructor != null) {
       val paramType = constructor.parameters[0].type.classifier as KClass<*>
       if (paramType.isSuperclassOf(RobotScanner.robotClass)) {
-        return OpModeConstructorCheckResult.FoundConstructor { constructor.call(RobotScanner.robotConstructor()) }
+        return OpModeConstructorCheckResult.FoundConstructor {
+          constructor.call(RobotScanner.robotConstructor())
+        }
       }
     }
   }

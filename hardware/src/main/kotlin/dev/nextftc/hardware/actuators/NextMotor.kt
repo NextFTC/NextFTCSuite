@@ -26,6 +26,7 @@ import dev.nextftc.units.measuretypes.Angle
 import dev.nextftc.units.measuretypes.AngularVelocity
 import dev.nextftc.units.radians
 import dev.nextftc.units.seconds
+import dev.nextftc.units.volts
 import kotlin.math.sign
 import dev.nextftc.units.measuretypes.Voltage as VoltageMeasure
 
@@ -54,7 +55,6 @@ import dev.nextftc.units.measuretypes.Voltage as VoltageMeasure
  * @param anglePerCount Conversion factor from encoder counts to angle. Defaults to 1.0 radian.
  * @param cacheTolerance Power caching tolerance to reduce redundant hardware writes. Defaults to 0.01.
  */
-
 class NextMotor @JvmOverloads constructor(
   initializer: () -> DcMotorImplEx,
   var anglePerCount: Angle = 1.0.radians,
@@ -170,7 +170,7 @@ class NextMotor @JvmOverloads constructor(
     }
 
   /**
-   * Motor zero power behavior (BRAKE or FLOAT).
+   * Motor zero power behavior (FLOAT or BRAKE).
    *
    * When set, automatically updates the underlying motor's zero power behavior.
    */
@@ -240,9 +240,10 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = encoderPosition.into(setpoint.unit),
           ) +
-                  positionConstants.kS * positionPID.error.sign +
-                  positionConstants.kG +
-                  positionConstants.kCos * kotlin.math.cos(encoderPosition.magnitude * positionConstants.kCosRatio)
+          positionConstants.kS * positionPID.error.sign +
+          positionConstants.kG +
+          positionConstants.kCos *
+          kotlin.math.cos(encoderPosition.magnitude * positionConstants.kCosRatio)
       }
       is ControlType.AbsolutePosition -> {
         val setpoint = mode.setpoint
@@ -256,10 +257,10 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = measuredPos,
           ) +
-                  positionConstants.kS * positionPID.error.sign +
-                  positionConstants.kG +
-                  positionConstants.kCos *
-                  kotlin.math.cos(absoluteEncoderPosition.magnitude * positionConstants.kCosRatio)
+          positionConstants.kS * positionPID.error.sign +
+          positionConstants.kG +
+          positionConstants.kCos *
+          kotlin.math.cos(absoluteEncoderPosition.magnitude * positionConstants.kCosRatio)
       }
       is ControlType.Velocity -> {
         val setpoint = mode.setpoint
@@ -268,7 +269,7 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = encoderVelocity.into(setpoint.unit),
           ) +
-                  velocityFF.calculate(setpoint.magnitude)
+          velocityFF.calculate(setpoint.magnitude)
       }
       is ControlType.Follow -> {
         power = if (mode.direction == Direction.FORWARD) {
@@ -284,12 +285,24 @@ class NextMotor @JvmOverloads constructor(
    * Set throttle control mode and power.
    *
    * This is the simplest control mode: power is applied directly.
-   *
-   * @param throttle Power in the range [-1.0, 1.0]. Positive is forward.
    */
-  fun setThrottle(throttle: Double) {
-    controlType = ControlType.Throttle(throttle)
-  }
+  var throttle: Double
+    get() = when (val mode = controlType) {
+      is ControlType.Throttle -> mode.throttle
+      else -> 0.0
+    }
+    set(value) {
+      controlType = ControlType.Throttle(value)
+    }
+
+  /**
+   * Returns the approximate motor voltage command.
+   *
+   * Calculated from the current motor power output and battery voltage.
+   * This is not a measured voltage.
+   */
+  val voltage: VoltageMeasure
+    get() = (power * RobotController.inputVoltage.magnitude).volts
 
   /**
    * Set voltage control mode and voltage setpoint.
@@ -297,9 +310,9 @@ class NextMotor @JvmOverloads constructor(
    * Adjusts power to maintain the specified voltage, accounting for the
    * current input rail voltage (to remain relatively hardware-independent).
    *
-   * @param voltage Target voltage setpoint.
+   * @param voltage Target voltage.
    */
-  fun setVoltage(voltage: VoltageMeasure) {
+  fun setVoltageSetpoint(voltage: VoltageMeasure) {
     controlType = ControlType.Voltage(voltage)
   }
 
@@ -417,17 +430,16 @@ class NextMotor @JvmOverloads constructor(
   /**
    * Motor zero power behavior.
    */
-
-  enum class ZeroPowerBehavior(val sdkZeroPowerBehavior: DcMotor.ZeroPowerBehavior){
+  enum class ZeroPowerBehavior(val sdkZeroPowerBehavior: DcMotor.ZeroPowerBehavior) {
     /**
-     * Motor brakes when power is applied.
+     * Motor stops and floats (no resistance after stopping).
+     */
+    FLOAT(DcMotor.ZeroPowerBehavior.FLOAT),
+
+    /**
+     * Motor stops and brakes (resists movement after stopping).
      */
     BRAKE(DcMotor.ZeroPowerBehavior.BRAKE),
-
-    /**
-     * Motor keeps coasts when power is applied.
-     */
-    FLOAT(DcMotor.ZeroPowerBehavior.FLOAT)
   }
 
   companion object {
