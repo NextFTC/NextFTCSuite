@@ -16,6 +16,7 @@ class CommandGamepad @JvmOverloads constructor(
   private val eventLoop: EventLoop = Trigger.defaultEventLoop,
   private val gamepad: Gamepad,
 ) {
+
   /** A range trigger that evaluates to how far the x value of the left stick is moved. */
   @get:JvmName("leftStickX")
   val leftStickX = RangeTrigger(eventLoop) { gamepad.left_stick_x.toDouble() }
