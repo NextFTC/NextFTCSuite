@@ -13,8 +13,8 @@ import dev.nextftc.hardware.util.EventLoop
  * @param gamepad The underlying FTC gamepad instance to read data from.
  */
 class CommandGamepad @JvmOverloads constructor(
-  private val eventLoop: EventLoop = Trigger.defaultEventLoop,
   private val gamepad: Gamepad,
+  private val eventLoop: EventLoop = Trigger.defaultEventLoop
 ) {
   /** A range trigger that evaluates to how far the x value of the left stick is moved. */
   @get:JvmName("leftStickX")
