@@ -79,7 +79,9 @@ class NextMotor @JvmOverloads constructor(
     { DcMotorImplEx(module.motorController, port) },
     anglePerCount,
     cacheTolerance,
-  )
+  ) {
+    require(port in 0..3) { "Expected bus in range [0, 3], got $port" }
+  }
 
   /**
    * Constructs a motor by name from the current hardware map.
@@ -94,7 +96,11 @@ class NextMotor @JvmOverloads constructor(
     name: String,
     anglePerCount: Angle = 1.0.radians,
     cacheTolerance: Double = 0.01,
-  ) : this({ RobotController.hardwareMap[name] as DcMotorImplEx }, anglePerCount, cacheTolerance)
+  ) : this(
+    { RobotController.hardwareMap[name] as DcMotorImplEx },
+    anglePerCount,
+    cacheTolerance,
+  )
 
   init {
     motorEventLoop.bind(this::update)
@@ -240,10 +246,10 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = encoderPosition.into(setpoint.unit),
           ) +
-          positionConstants.kS * positionPID.error.sign +
-          positionConstants.kG +
-          positionConstants.kCos *
-          kotlin.math.cos(encoderPosition.magnitude * positionConstants.kCosRatio)
+                  positionConstants.kS * positionPID.error.sign +
+                  positionConstants.kG +
+                  positionConstants.kCos *
+                  kotlin.math.cos(encoderPosition.magnitude * positionConstants.kCosRatio)
       }
       is ControlType.AbsolutePosition -> {
         val setpoint = mode.setpoint
@@ -257,10 +263,10 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = measuredPos,
           ) +
-          positionConstants.kS * positionPID.error.sign +
-          positionConstants.kG +
-          positionConstants.kCos *
-          kotlin.math.cos(absoluteEncoderPosition.magnitude * positionConstants.kCosRatio)
+                  positionConstants.kS * positionPID.error.sign +
+                  positionConstants.kG +
+                  positionConstants.kCos *
+                  kotlin.math.cos(absoluteEncoderPosition.magnitude * positionConstants.kCosRatio)
       }
       is ControlType.Velocity -> {
         val setpoint = mode.setpoint
@@ -269,7 +275,7 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = encoderVelocity.into(setpoint.unit),
           ) +
-          velocityFF.calculate(setpoint.magnitude)
+                  velocityFF.calculate(setpoint.magnitude)
       }
       is ControlType.Follow -> {
         power = if (mode.direction == Direction.FORWARD) {
