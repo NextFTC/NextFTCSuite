@@ -27,18 +27,18 @@ data class MecanumWheelPowers(
 class MecanumKinematics @JvmOverloads constructor(private val strafeCompensation: Double = 1.1) :
   DriveKinematics<MecanumWheelPowers> {
   override fun calculate(input: DriveInput): MecanumWheelPowers {
-    val compensatedX = input.x * strafeCompensation
+    val compensatedY = input.y * strafeCompensation
 
     val denominator = max(
-      compensatedX.absoluteValue + input.y.absoluteValue + input.rx.absoluteValue,
+      compensatedY.absoluteValue + input.x.absoluteValue + input.rx.absoluteValue,
       1.0,
     )
 
     return MecanumWheelPowers(
-      frontLeft = (input.y + compensatedX + input.rx) / denominator,
-      frontRight = (input.y - compensatedX - input.rx) / denominator,
-      backLeft = (input.y - compensatedX + input.rx) / denominator,
-      backRight = (input.y + compensatedX - input.rx) / denominator,
+      frontLeft = (input.x + compensatedY + input.rx) / denominator,
+      frontRight = (input.x - compensatedY - input.rx) / denominator,
+      backLeft = (input.x - compensatedY + input.rx) / denominator,
+      backRight = (input.x + compensatedY - input.rx) / denominator,
     )
   }
 }

@@ -19,20 +19,26 @@ import java.util.function.Supplier
 import kotlin.math.cos
 import kotlin.math.sin
 
+/** Multiplier applied to all drive input; re-read live each loop so it can be adjusted mid-match (e.g. slow-mode). */
+var scalar: Double = 1.0
+  set(value) {
+    field = value
+  }
+
 /** Command that drives a mecanum drivetrain from [gamepad]'s sticks. */
 fun mecanumDrive(
   frontLeft: NextMotor,
   frontRight: NextMotor,
   backLeft: NextMotor,
   backRight: NextMotor,
-  kinematics: MecanumKinematics,
   gamepad: Gamepad,
+  kinematics: MecanumKinematics = MecanumKinematics(),
 ): Command = Commands.infinite {
   val powers = kinematics.calculate(
     DriveInput(
-      x = gamepad.left_stick_x.toDouble(),
-      y = -gamepad.left_stick_y.toDouble(),
-      rx = gamepad.right_stick_x.toDouble(),
+      y = gamepad.left_stick_x.toDouble() * scalar,
+      x = -gamepad.left_stick_y.toDouble() * scalar,
+      rx = gamepad.right_stick_x.toDouble() * scalar,
     ),
   )
   frontLeft.setThrottle(powers.frontLeft)
@@ -46,28 +52,31 @@ fun mecanumDrive(
  *
  * Rotates stick input by [heading] (radians, field-relative) so "forward" on the
  * stick always moves the robot away from the driver, regardless of robot orientation.
- * @param heading Supplies the robot's current field-relative heading in radians
+ *
+ * @param heading Supplies the robot's current field-relative heading in radians —
+ *   e.g. `{ follower.pose.heading }` from Pedro Pathing, or an IMU reading zeroed
+ *   to match the robot's starting orientation on the field.
  */
 fun mecanumDriveFieldCentric(
   frontLeft: NextMotor,
   frontRight: NextMotor,
   backLeft: NextMotor,
   backRight: NextMotor,
-  kinematics: MecanumKinematics,
   gamepad: Gamepad,
   heading: Supplier<Double>,
+  kinematics: MecanumKinematics = MecanumKinematics(),
 ): Command = Commands.infinite {
-  val rawX = gamepad.left_stick_x.toDouble()
-  val rawY = -gamepad.left_stick_y.toDouble()
+  val rawY = gamepad.left_stick_x.toDouble()
+  val rawX = -gamepad.left_stick_y.toDouble()
   val h = heading.get()
   val c = cos(-h)
-  val s = sin(-h)
+  val sinH = sin(-h)
 
   val powers = kinematics.calculate(
     DriveInput(
-      x = rawX * c - rawY * s,
-      y = rawX * s + rawY * c,
-      rx = gamepad.right_stick_x.toDouble(),
+      y = (rawX * c - rawY * sinH) * scalar,
+      x = (rawX * sinH + rawY * c) * scalar,
+      rx = gamepad.right_stick_x.toDouble() * scalar,
     ),
   )
   frontLeft.setThrottle(powers.frontLeft)
@@ -82,14 +91,14 @@ fun tankDrive(
   frontRight: NextMotor,
   backLeft: NextMotor,
   backRight: NextMotor,
-  kinematics: TankKinematics,
   gamepad: Gamepad,
+  kinematics: TankKinematics = TankKinematics(),
 ): Command = Commands.infinite {
   val powers = kinematics.calculate(
     DriveInput(
-      x = 0.0,
-      y = -gamepad.left_stick_y.toDouble(),
-      rx = gamepad.right_stick_x.toDouble(),
+      y = 0.0,
+      x = -gamepad.left_stick_y.toDouble() * scalar,
+      rx = gamepad.right_stick_x.toDouble() * scalar,
     ),
   )
   frontLeft.setThrottle(powers.left)

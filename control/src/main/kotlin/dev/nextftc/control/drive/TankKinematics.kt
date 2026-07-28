@@ -19,10 +19,10 @@ data class TankWheelPowers(val left: Double, val right: Double)
 
 class TankKinematics : DriveKinematics<TankWheelPowers> {
   override fun calculate(input: DriveInput): TankWheelPowers {
-    val denominator = max(input.y.absoluteValue + input.rx.absoluteValue, 1.0)
+    val denominator = max(input.x.absoluteValue + input.rx.absoluteValue, 1.0)
     return TankWheelPowers(
-      left = (input.y + input.rx) / denominator,
-      right = (input.y - input.rx) / denominator,
+      left = (input.x + input.rx) / denominator,
+      right = (input.x - input.rx) / denominator,
     )
   }
 }
