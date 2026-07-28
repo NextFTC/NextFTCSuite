@@ -41,10 +41,10 @@ fun mecanumDrive(
       rx = gamepad.right_stick_x.toDouble() * scalar,
     ),
   )
-  frontLeft.setThrottle(powers.frontLeft)
-  frontRight.setThrottle(powers.frontRight)
-  backLeft.setThrottle(powers.backLeft)
-  backRight.setThrottle(powers.backRight)
+  frontLeft.throttle = powers.frontLeft
+  frontRight.throttle = powers.frontRight
+  backLeft.throttle = powers.backLeft
+  backRight.throttle = powers.backRight
 }
 
 /**
@@ -79,10 +79,10 @@ fun mecanumDriveFieldCentric(
       rx = gamepad.right_stick_x.toDouble() * scalar,
     ),
   )
-  frontLeft.setThrottle(powers.frontLeft)
-  frontRight.setThrottle(powers.frontRight)
-  backLeft.setThrottle(powers.backLeft)
-  backRight.setThrottle(powers.backRight)
+  frontLeft.throttle = powers.frontLeft
+  frontRight.throttle = powers.frontRight
+  backLeft.throttle = powers.backLeft
+  backRight.throttle = powers.backRight
 }
 
 /** Command that drives a tank drivetrain from [gamepad]'s sticks. */
@@ -101,8 +101,8 @@ fun tankDrive(
       rx = gamepad.right_stick_x.toDouble() * scalar,
     ),
   )
-  frontLeft.setThrottle(powers.left)
-  backLeft.setThrottle(powers.left)
-  frontRight.setThrottle(powers.right)
-  backRight.setThrottle(powers.right)
+  frontLeft.throttle = powers.left
+  backLeft.throttle = powers.left
+  frontRight.throttle = powers.right
+  backRight.throttle = powers.right
 }
