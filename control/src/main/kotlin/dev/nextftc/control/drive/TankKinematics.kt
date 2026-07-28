@@ -15,6 +15,10 @@ data class TankWheelPowers(val left: Double, val right: Double)
 
 /**
  * Converts raw drive inputs into tank/differential wheel powers.
+ *
+ * Tank/differential drivetrains are not holonomic, so they cannot strafe.
+ * Any [DriveInput.y] value is therefore ignored; only [DriveInput.x]
+ * (forward/backward) and [DriveInput.rx] (rotation) are used.
  */
 
 class TankKinematics : DriveKinematics<TankWheelPowers> {
