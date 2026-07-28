@@ -240,9 +240,10 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = encoderPosition.into(setpoint.unit),
           ) +
-                  positionConstants.kS * positionPID.error.sign +
-                  positionConstants.kG +
-                  positionConstants.kCos * kotlin.math.cos(encoderPosition.magnitude * positionConstants.kCosRatio)
+          positionConstants.kS * positionPID.error.sign +
+          positionConstants.kG +
+          positionConstants.kCos *
+          kotlin.math.cos(encoderPosition.magnitude * positionConstants.kCosRatio)
       }
       is ControlType.AbsolutePosition -> {
         val setpoint = mode.setpoint
@@ -256,10 +257,10 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = measuredPos,
           ) +
-                  positionConstants.kS * positionPID.error.sign +
-                  positionConstants.kG +
-                  positionConstants.kCos *
-                  kotlin.math.cos(absoluteEncoderPosition.magnitude * positionConstants.kCosRatio)
+          positionConstants.kS * positionPID.error.sign +
+          positionConstants.kG +
+          positionConstants.kCos *
+          kotlin.math.cos(absoluteEncoderPosition.magnitude * positionConstants.kCosRatio)
       }
       is ControlType.Velocity -> {
         val setpoint = mode.setpoint
@@ -268,7 +269,7 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = encoderVelocity.into(setpoint.unit),
           ) +
-                  velocityFF.calculate(setpoint.magnitude)
+          velocityFF.calculate(setpoint.magnitude)
       }
       is ControlType.Follow -> {
         power = if (mode.direction == Direction.FORWARD) {
@@ -286,10 +287,7 @@ class NextMotor @JvmOverloads constructor(
    * This is the simplest control mode: power is applied directly.
    */
   var throttle: Double
-    get() = when (val mode = controlType) {
-      is ControlType.Throttle -> mode.throttle
-      else -> 0.0
-    }
+    get() = power
     set(value) {
       controlType = ControlType.Throttle(value)
     }
@@ -300,20 +298,11 @@ class NextMotor @JvmOverloads constructor(
    * Calculated from the current motor power output and battery voltage.
    * This is not a measured voltage.
    */
-  val voltage: VoltageMeasure
+  var voltage: VoltageMeasure
     get() = (power * RobotController.inputVoltage.magnitude).volts
-
-  /**
-   * Set voltage control mode and voltage setpoint.
-   *
-   * Adjusts power to maintain the specified voltage, accounting for the
-   * current input rail voltage (to remain relatively hardware-independent).
-   *
-   * @param voltage Target voltage.
-   */
-  fun setVoltageSetpoint(voltage: VoltageMeasure) {
-    controlType = ControlType.Voltage(voltage)
-  }
+    set(value) {
+      controlType = ControlType.Voltage(value)
+    }
 
   /**
    * Set position control mode and position setpoint.
