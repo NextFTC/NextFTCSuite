@@ -246,10 +246,10 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = encoderPosition.into(setpoint.unit),
           ) +
-                  positionConstants.kS * positionPID.error.sign +
-                  positionConstants.kG +
-                  positionConstants.kCos *
-                  kotlin.math.cos(encoderPosition.magnitude * positionConstants.kCosRatio)
+          positionConstants.kS * positionPID.error.sign +
+          positionConstants.kG +
+          positionConstants.kCos *
+          kotlin.math.cos(encoderPosition.magnitude * positionConstants.kCosRatio)
       }
       is ControlType.AbsolutePosition -> {
         val setpoint = mode.setpoint
@@ -263,10 +263,10 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = measuredPos,
           ) +
-                  positionConstants.kS * positionPID.error.sign +
-                  positionConstants.kG +
-                  positionConstants.kCos *
-                  kotlin.math.cos(absoluteEncoderPosition.magnitude * positionConstants.kCosRatio)
+          positionConstants.kS * positionPID.error.sign +
+          positionConstants.kG +
+          positionConstants.kCos *
+          kotlin.math.cos(absoluteEncoderPosition.magnitude * positionConstants.kCosRatio)
       }
       is ControlType.Velocity -> {
         val setpoint = mode.setpoint
@@ -275,7 +275,7 @@ class NextMotor @JvmOverloads constructor(
             reference = setpoint.magnitude,
             measured = encoderVelocity.into(setpoint.unit),
           ) +
-                  velocityFF.calculate(setpoint.magnitude)
+          velocityFF.calculate(setpoint.magnitude)
       }
       is ControlType.Follow -> {
         power = if (mode.direction == Direction.FORWARD) {
