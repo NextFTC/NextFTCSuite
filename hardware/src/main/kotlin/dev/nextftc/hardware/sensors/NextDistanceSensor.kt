@@ -18,6 +18,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 /**
  * Lightweight wrapper for a distance sensor that caches the last reading.
  * Call [update] in periodic to read the hardware.
+ *
  * Use [isWithinDistance] to check
  * if an object is close enough.
  *
