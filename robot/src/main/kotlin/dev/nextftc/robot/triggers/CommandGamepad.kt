@@ -16,21 +16,28 @@ class CommandGamepad @JvmOverloads constructor(
   private val eventLoop: EventLoop = Trigger.defaultEventLoop,
   private val gamepad: Gamepad,
 ) {
+
+  /** Multiplier applied to all stick trigger values. */
+  var scalar: Double = 1.0
+    set(value) {
+      field = value.coerceIn(0.0, 1.0)
+    }
+
   /** A range trigger that evaluates to how far the x value of the left stick is moved. */
   @get:JvmName("leftStickX")
-  val leftStickX = RangeTrigger(eventLoop) { gamepad.left_stick_x.toDouble() }
+  val leftStickX = RangeTrigger(eventLoop) { gamepad.left_stick_x.toDouble() * scalar }
 
   /** A range trigger that evaluates to how far the y value of the left stick is moved. */
   @get:JvmName("leftStickY")
-  val leftStickY = RangeTrigger(eventLoop) { gamepad.left_stick_y.toDouble() }
+  val leftStickY = RangeTrigger(eventLoop) { gamepad.left_stick_y.toDouble() * scalar }
 
   /** A range trigger that evaluates to how far the x value of the right stick is moved. */
   @get:JvmName("rightStickX")
-  val rightStickX = RangeTrigger(eventLoop) { gamepad.right_stick_x.toDouble() }
+  val rightStickX = RangeTrigger(eventLoop) { gamepad.right_stick_x.toDouble() * scalar }
 
   /** A range trigger that evaluates to how far the y value of the right stick is moved. */
   @get:JvmName("rightStickY")
-  val rightStickY = RangeTrigger(eventLoop) { gamepad.right_stick_y.toDouble() }
+  val rightStickY = RangeTrigger(eventLoop) { gamepad.right_stick_y.toDouble() * scalar }
 
   /** A trigger that evaluates to true when the A button (cross on PlayStation) is pressed. */
   @get:JvmName("a")

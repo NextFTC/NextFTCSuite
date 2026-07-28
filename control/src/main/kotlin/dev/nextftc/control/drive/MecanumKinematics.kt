@@ -11,17 +11,22 @@ package dev.nextftc.control.drive
 import kotlin.math.absoluteValue
 import kotlin.math.max
 
+data class MecanumWheelPowers(
+  val frontLeft: Double,
+  val frontRight: Double,
+  val backLeft: Double,
+  val backRight: Double,
+)
+
 /**
  * Converts raw drive inputs into mecanum wheel powers.
  *
  * Applies a strafe compensation factor to account for mecanum wheels being
  * physically less efficient strafing than driving forward/backward.
  */
-class MecanumKinematics : DriveKinematics {
-
-  private val strafeCompensation = 1.1
-
-  override fun calculate(input: DriveInput): WheelPowers {
+class MecanumKinematics @JvmOverloads constructor(private val strafeCompensation: Double = 1.1) :
+  DriveKinematics<MecanumWheelPowers> {
+  override fun calculate(input: DriveInput): MecanumWheelPowers {
     val compensatedX = input.x * strafeCompensation
 
     val denominator = max(
@@ -29,7 +34,7 @@ class MecanumKinematics : DriveKinematics {
       1.0,
     )
 
-    return WheelPowers(
+    return MecanumWheelPowers(
       frontLeft = (input.y + compensatedX + input.rx) / denominator,
       frontRight = (input.y - compensatedX - input.rx) / denominator,
       backLeft = (input.y - compensatedX + input.rx) / denominator,

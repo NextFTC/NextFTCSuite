@@ -11,17 +11,18 @@ package dev.nextftc.control.drive
 import kotlin.math.absoluteValue
 import kotlin.math.max
 
+data class TankWheelPowers(val left: Double, val right: Double)
+
 /**
  * Converts raw drive inputs into tank/differential wheel powers.
  */
-class TankKinematics : DriveKinematics {
 
-  override fun calculate(input: DriveInput): WheelPowers {
+class TankKinematics : DriveKinematics<TankWheelPowers> {
+  override fun calculate(input: DriveInput): TankWheelPowers {
     val denominator = max(input.y.absoluteValue + input.rx.absoluteValue, 1.0)
-
-    val left = (input.y + input.rx) / denominator
-    val right = (input.y - input.rx) / denominator
-
-    return WheelPowers(frontLeft = left, frontRight = right, backLeft = left, backRight = right)
+    return TankWheelPowers(
+      left = (input.y + input.rx) / denominator,
+      right = (input.y - input.rx) / denominator,
+    )
   }
 }
