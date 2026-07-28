@@ -26,7 +26,6 @@ import dev.nextftc.units.measuretypes.Angle
 import dev.nextftc.units.measuretypes.AngularVelocity
 import dev.nextftc.units.radians
 import dev.nextftc.units.seconds
-import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit
 import kotlin.math.sign
 import dev.nextftc.units.measuretypes.Voltage as VoltageMeasure
 
@@ -217,9 +216,6 @@ class NextMotor @JvmOverloads constructor(
    */
   val encoderVelocity: AngularVelocity
     get() = anglePerCount * motor.velocity / 1.0.seconds
-
-  val currentsAmps: Double
-    get() = motor.getCurrent(CurrentUnit.AMPS)
 
   /**
    * Updates the motor power based on the current active control mode.
