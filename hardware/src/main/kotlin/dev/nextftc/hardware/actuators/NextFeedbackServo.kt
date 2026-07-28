@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.ServoImplEx
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.ServoConfigurationType
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.lynx.NextLynxModule
-import dev.nextftc.hardware.sensors.NextAnalogInput
+import dev.nextftc.hardware.util.AnalogFeedback
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.measuretypes.Angle
 import dev.nextftc.units.radians
@@ -28,81 +28,59 @@ import dev.nextftc.units.radians
  * Example:
  *
  *  ```
- * val arm = NextFeedbackServo("armServo", "armEncoder")
+ * val arm = NextFeedbackServo("armServo", myAnalogFeedback)
  * arm.position = 0.5
  * val angle = arm.angle
  * ```
  *
  * @param initializer A function returning the backing [ServoImplEx]. It will be
  * invoked lazily the first time the servo is accessed.
- * @param feedbackInitializer A function returning the backing [NextAnalogInput]
- * used to read the feedback angle.
+ * @param feedbackInitializer A function returning the backing [AnalogFeedback]
+ * used to read the feedback angle. Accepts any [AnalogFeedback] implementation.
  * @param cacheTolerance Tolerance for the [NextServo] position caching delegate.
  */
 class NextFeedbackServo @JvmOverloads constructor(
   initializer: () -> ServoImplEx,
-  feedbackInitializer: () -> NextAnalogInput,
+  feedbackInitializer: () -> AnalogFeedback,
   cacheTolerance: Double = 0.01,
 ) : NextServo(initializer, cacheTolerance) {
 
   /**
-   * Constructor to create a NextFeedbackServo using a servo name and feedback name.
+   * Constructor to create a NextFeedbackServo using a servo name and an
+   * already-constructed [AnalogFeedback] instance for the feedback input.
    *
    * @param servoName Hardware map name of the servo.
-   * @param feedbackName Hardware map name of the analog input.
+   * @param feedback An already-constructed [AnalogFeedback] instance to read the angle from.
    * @param cacheTolerance Tolerance for the [NextServo] position caching delegate.
    */
   @JvmOverloads constructor(
     servoName: String,
-    feedbackName: String,
+    feedback: AnalogFeedback,
     cacheTolerance: Double = 0.01,
   ) : this(
     { RobotController.hardwareMap[servoName] as ServoImplEx },
-    { NextAnalogInput(feedbackName) },
+    { feedback },
     cacheTolerance,
   )
 
   /**
-   * Constructor to create a NextFeedbackServo using a LynxModule/port for the servo,
-   * and a hardware map name for the feedback input.
+   * Constructor to create a NextFeedbackServo using a LynxModule and port number for
+   * the servo, and an already-constructed [AnalogFeedback] instance for the feedback input.
    *
    * @param module The Lynx module, see [RobotController.controlHub], [RobotController.expansionHub],
    * and [RobotController.servoHubs].
    * @param port The servo port (in the range [0, 5]).
-   * @param feedbackName Hardware map name of the analog input.
+   * @param feedback An already-constructed [AnalogFeedback] instance to read the angle from.
    * @param cacheTolerance Tolerance for the [NextServo] position caching delegate.
    */
   @JvmOverloads constructor(
     module: NextLynxModule,
     port: Int,
-    feedbackName: String,
+    feedback: AnalogFeedback,
     cacheTolerance: Double = 0.01,
   ) : this(
     { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
-    { NextAnalogInput(feedbackName) },
-    cacheTolerance,
-  ) {
-    require(port in 0..5) { "Expected port in range [0, 5], got $port" }
-  }
-
-  /**
-   * Constructor to create a NextFeedbackServo using a LynxModule/port for both
-   * the servo and the analog feedback input.
-   *
-   * @param module The Lynx module, see [RobotController.controlHub], [RobotController.expansionHub],
-   * and [RobotController.servoHubs].
-   * @param port The servo port (in the range [0, 5]).
-   * @param feedbackPort The analog input port for the feedback signal.
-   * @param cacheTolerance Tolerance for the [NextServo] position caching delegate.
-   */
-  @JvmOverloads constructor(
-    module: NextLynxModule,
-    port: Int,
-    feedbackPort: Int,
-    cacheTolerance: Double = 0.01,
-  ) : this(
-    { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
-    { NextAnalogInput(module, feedbackPort) },
+    { feedback },
     cacheTolerance,
   )
 
