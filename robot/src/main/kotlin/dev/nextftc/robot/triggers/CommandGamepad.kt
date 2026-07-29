@@ -14,7 +14,7 @@ import dev.nextftc.hardware.util.EventLoop
  */
 class CommandGamepad @JvmOverloads constructor(
   private val gamepad: Gamepad,
-  private val eventLoop: EventLoop = Trigger.defaultEventLoop
+  private val eventLoop: EventLoop = Trigger.defaultEventLoop,
 ) {
 
   /** A range trigger that evaluates to how far the x value of the left stick is moved. */
