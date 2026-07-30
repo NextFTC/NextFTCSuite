@@ -53,6 +53,9 @@ class PIDController @JvmOverloads constructor(
   private var minimumInput: Double = 0.0
   private var maximumInput: Double = 0.0
 
+  private var minimumIntegral: Double = Double.NEGATIVE_INFINITY
+  private var maximumIntegral: Double = Double.POSITIVE_INFINITY
+
   /**
    * Creates a PIDController with the given coefficients.
    *
@@ -81,6 +84,9 @@ class PIDController @JvmOverloads constructor(
    * @param maximumInput The maximum value expected from the input.
    */
   fun enableContinuousInput(minimumInput: Double, maximumInput: Double) {
+    require(maximumInput > minimumInput) {
+      "maximumInput ($maximumInput) must be greater than minimumInput ($minimumInput)"
+    }
     this.isContinuousInputEnabled = true
     this.minimumInput = minimumInput
     this.maximumInput = maximumInput
@@ -91,6 +97,23 @@ class PIDController @JvmOverloads constructor(
    */
   fun disableContinuousInput() {
     this.isContinuousInputEnabled = false
+  }
+
+  /**
+   * Sets the range the accumulated error (integral term) is clamped to, to prevent unbounded
+   * windup while the error stays the same sign (e.g. an arm held against a mechanical stop, or
+   * fighting a constant load). Defaults to unbounded.
+   *
+   * @param minimumIntegral the minimum value of the accumulated error
+   * @param maximumIntegral the maximum value of the accumulated error
+   */
+  fun setIntegratorRange(minimumIntegral: Double, maximumIntegral: Double) {
+    require(maximumIntegral > minimumIntegral) {
+      "maximumIntegral ($maximumIntegral) must be greater than minimumIntegral ($minimumIntegral)"
+    }
+    this.minimumIntegral = minimumIntegral
+    this.maximumIntegral = maximumIntegral
+    errorSum = errorSum.coerceIn(minimumIntegral, maximumIntegral)
   }
 
   private fun inputModulus(input: Double, minimumInput: Double, maximumInput: Double): Double {
@@ -145,7 +168,7 @@ class PIDController @JvmOverloads constructor(
     }
 
     val deltaT = (timestamp - lastTimestamp!!).toDouble(DurationUnit.SECONDS)
-    errorSum += wrappedError * deltaT
+    errorSum = (errorSum + wrappedError * deltaT).coerceIn(minimumIntegral, maximumIntegral)
 
     val derivative = errorDerivative ?: if (deltaT > 1e-6) ((wrappedError - lastError) / deltaT) else 0.0
 

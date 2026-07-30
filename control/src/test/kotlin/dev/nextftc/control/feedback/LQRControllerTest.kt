@@ -22,6 +22,22 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
 
+// Expected gains below were computed independently of this module, using scipy as a reference
+// implementation of exact (matrix-exponential) discretization + discrete-time Riccati solving:
+//
+//   import numpy as np
+//   from scipy.linalg import expm, solve_discrete_are
+//
+//   def lqr_gain(A, B, Q, R, dt):
+//       n, m = A.shape[0], B.shape[1]
+//       M = np.zeros((n + m, n + m))
+//       M[:n, :n], M[:n, n:] = A, B
+//       Md = expm(M * dt)
+//       Ad, Bd = Md[:n, :n], Md[:n, n:]
+//       P = solve_discrete_are(Ad, Bd, Q, R)
+//       return np.linalg.inv(R + Bd.T @ P @ Bd) @ (Bd.T @ P @ Ad)
+//
+// u = -K @ x for x = [1, 0] and x = [0, 1] gives the expected values used below.
 class LQRControllerTest :
   FunSpec({
     context("LinearQuadraticRegulator") {
@@ -38,6 +54,7 @@ class LQRControllerTest :
         val u1 = lqr.update(Vector.of(N2, 1.0, 0.0))
         val u2 = lqr.update(Vector.of(N2, 0.0, 1.0))
 
+        // scipy reference K = [[0.98282891, 1.71219464]]
         (-u1[0, 0]) shouldBe (0.9828289133409422 plusOrMinus 1e-10)
         (-u2[0, 0]) shouldBe (1.7121946441864666 plusOrMinus 1e-10)
       }
@@ -57,8 +74,9 @@ class LQRControllerTest :
         val u1 = lqr.update(Vector.of(N2, 1.0, 0.0))
         val u2 = lqr.update(Vector.of(N2, 0.0, 1.0))
 
-        (-u1[0, 0]) shouldBe (1.984097715901652 plusOrMinus 1e-10)
-        (-u2[0, 0]) shouldBe (0.5041176615634868 plusOrMinus 1e-10)
+        // scipy reference K = [[1.98405852, 0.50561174]]
+        (-u1[0, 0]) shouldBe (1.9840585226158727 plusOrMinus 1e-10)
+        (-u2[0, 0]) shouldBe (0.5056117435381267 plusOrMinus 1e-10)
       }
     }
   })

@@ -66,16 +66,17 @@ class InterpolatingMap<T> private constructor(
   private val getter: NavigableMap<Double, T>.(Double) -> T,
 ) : NavigableMap<Double, T> by tree {
   constructor(tree: TreeMap<Double, T>, interpolate: (T, T, Double) -> T) : this(tree, { key ->
-    val low = floorEntry(key)
-    val high = ceilingEntry(key)
+    val exact = tree[key]
+    if (exact != null) {
+      exact
+    } else {
+      val low = floorEntry(key) ?: throw NoSuchElementException("No entry with key <= $key")
+      val high = ceilingEntry(key) ?: throw NoSuchElementException("No entry with key >= $key")
 
-    if (low.key == high.key) {
-      tree[key]!!
+      val t = lerp(key, inputMin = low.key, inputMax = high.key, outputMin = 0.0, outputMax = 1.0)
+
+      interpolate(low.value, high.value, t)
     }
-
-    val t = lerp(key, inputMin = low.key, inputMax = high.key, outputMin = 0.0, outputMax = 1.0)
-
-    interpolate(low.value, high.value, t)
   })
 
   constructor(getter: NavigableMap<Double, T>.(Double) -> T) : this(TreeMap(), getter)

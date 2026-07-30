@@ -170,8 +170,8 @@ data class Rotation2d(@JvmField val real: Double, @JvmField val imag: Double) {
   fun lerp(other: Rotation2d, t: Double): Rotation2d {
     require(t in 0.0..1.0) { "Interpolation parameter t must be in range [0, 1], got $t" }
 
-    // Compute the angle between the two rotations
-    val angleDiff = other.log() - this.log()
+    // Compute the wrapped angle between the two rotations (shortest path on the unit circle)
+    val angleDiff = other - this
 
     // Interpolate the angle
     val interpolatedAngle = this.log() + angleDiff * t

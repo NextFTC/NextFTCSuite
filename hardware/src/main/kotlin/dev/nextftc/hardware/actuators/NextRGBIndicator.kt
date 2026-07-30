@@ -22,7 +22,7 @@ import dev.nextftc.hardware.util.Caching
  * ```
  * val indicator = NextRGBIndicator("LED")
  *
- * indicator.setColor(RGBHeadlight.Color.RED)
+ * indicator.setColor(NextRGBIndicator.Color.RED)
  *
  * indicator.setBrightness(0.8)
  * ```

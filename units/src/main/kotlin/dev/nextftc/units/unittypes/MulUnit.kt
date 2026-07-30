@@ -42,8 +42,8 @@ open class MulUnit<N : Unit<N>, D : Unit<D>>(val first: N, val second: D) :
       val secondRatio = second.toBaseUnits(1.0)
       firstFromBase / secondRatio
     },
-    "$first⋅$second",
-    "$first⋅$second",
+    "${first.name()}⋅${second.name()}",
+    "${first.symbol()}⋅${second.symbol()}",
   ) {
   /**
    * The base MulUnit using the base units of both first and second. For example, Kilometers⋅Hours

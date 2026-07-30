@@ -273,6 +273,18 @@ class MulUnitTest :
       }
     }
 
+    context("MulUnit name and symbol") {
+      test("name() should combine the long names of both units") {
+        val meterSeconds = MulUnit(Meters, Seconds)
+        meterSeconds.name() shouldBe "meter⋅second"
+      }
+
+      test("symbol() should combine the short symbols of both units, not the long names") {
+        val meterSeconds = MulUnit(Meters, Seconds)
+        meterSeconds.symbol() shouldBe "m⋅s"
+      }
+    }
+
     context("MulUnit zero and one") {
       test("zero() should return a measure with zero magnitude") {
         val meterSeconds = MulUnit(Meters, Seconds)

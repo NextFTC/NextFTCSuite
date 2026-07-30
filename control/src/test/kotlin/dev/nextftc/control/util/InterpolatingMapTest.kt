@@ -8,6 +8,7 @@
 
 package dev.nextftc.control.util
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
@@ -57,5 +58,27 @@ class InterpolatingMapTest :
     test("spline interpolation with lists") {
       val map = InterpolatingMap.spline(listOf(0.0, 1.0, 2.0, 3.0), listOf(0.0, 1.0, 0.5, 2.0))
       map[1.5] shouldBe splerp(map, 1.5).plusOrMinus(1e-6)
+    }
+
+    test("querying below the lowest key throws NoSuchElementException") {
+      val map = InterpolatingMap.linear()
+      map[1.0] = 1.0
+      map[2.0] = 2.0
+
+      shouldThrow<NoSuchElementException> { map[0.0] }
+    }
+
+    test("querying above the highest key throws NoSuchElementException") {
+      val map = InterpolatingMap.linear()
+      map[1.0] = 1.0
+      map[2.0] = 2.0
+
+      shouldThrow<NoSuchElementException> { map[3.0] }
+    }
+
+    test("querying an empty map throws NoSuchElementException") {
+      val map = InterpolatingMap.linear()
+
+      shouldThrow<NoSuchElementException> { map[0.0] }
     }
   })

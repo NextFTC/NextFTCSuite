@@ -8,7 +8,7 @@ By implementing `NextRobot` and `Mechanism`, you can structure your robot codeba
 
 The core robot architecture and command-based wrappers.
 * **Robot Structure**: `NextRobot` represents the root of your robot, containing multiple `Mechanism` instances. `NextOpMode` is the base class for your OpModes that seamlessly injects your `NextRobot` instance.
-* **Scanning & Registration**: `RobotScanner` and `RobotOpModeScanner` work alongside Sinister to automatically discover your robot implementations and register your custom OpModes to the FTC dashboard without manual `@TeleOp` or `@Autonomous` configuration clutter.
+* **Scanning & Registration**: `RobotScanner` and `NextFTCOpModeScanner` work alongside Sinister to automatically discover your robot implementations and register your custom OpModes to the FTC dashboard without manual `@TeleOp` or `@Autonomous` configuration clutter.
 * **Event System**: `Trigger` and `EventLoop` provide a WPILib-style API for binding commands to conditional states, allowing commands to run based on arbitrary boolean conditions.
 
 # Package dev.nextftc.robot.triggers

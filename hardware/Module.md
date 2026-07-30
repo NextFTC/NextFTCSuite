@@ -22,7 +22,8 @@ control/expansion hubs; `LazyHardware`, a delegate that initializes a device on 
 
 Output device wrappers: `NextMotor` (throttle, voltage, PID position, and PID+feedforward
 velocity control modes), `NextServo`/`NextCRServo` and their feedback-enabled variants
-(`NextFeedbackServo`/`NextFeedbackCRServo`), and `RGBHeadlight` for the goBILDA PWM RGB headlight.
+(`NextFeedbackServo`/`NextFeedbackCRServo`), and `NextRGBIndicator` for the goBILDA PWM RGB
+indicator light.
 
 # Package dev.nextftc.hardware.sensors
 

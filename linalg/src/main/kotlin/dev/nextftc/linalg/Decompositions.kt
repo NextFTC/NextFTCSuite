@@ -31,8 +31,8 @@ data class LLTDecomposition internal constructor(
     // x must be column vector of correct size
     // Use EJML's rank-1 update if available, else manual
     // Here, we re-decompose for simplicity
-    for (i in 0..mat.numRows) {
-      for (j in 0..mat.numCols) {
+    for (i in 0 until mat.numRows) {
+      for (j in 0 until mat.numCols) {
         mat[i, j] += x[i] * x[j]
       }
     }
@@ -41,8 +41,8 @@ data class LLTDecomposition internal constructor(
 
   /** In-place rank-1 downdate: mat := mat - x*x^T */
   fun downdate(x: DoubleArray) {
-    for (i in 0..mat.numRows) {
-      for (j in 0..mat.numCols) {
+    for (i in 0 until mat.numRows) {
+      for (j in 0 until mat.numCols) {
         mat[i, j] -= x[i] * x[j]
       }
     }

@@ -8,10 +8,12 @@
 
 package dev.nextftc.control.feedback
 
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.TestTimeSource
 
 class PIDControllerTest :
@@ -258,6 +260,42 @@ class PIDControllerTest :
           measuredDerivative = 0.0,
         )
         output shouldBe (100.0 plusOrMinus 0.001)
+      }
+
+      test("rejects a maximumInput not greater than minimumInput") {
+        val controller = PIDController(1.0)
+        shouldThrow<IllegalArgumentException> {
+          controller.enableContinuousInput(180.0, -180.0)
+        }
+      }
+    }
+
+    context("PIDController integrator anti-windup") {
+      test("errorSum is clamped to the configured integrator range") {
+        val timeSource = TestTimeSource()
+        val controller = PIDController(0.0, 1.0, 0.0, resetIntegralOnZeroCrossover = false)
+        controller.setIntegratorRange(-1.0, 1.0)
+
+        // First call just seeds lastTimestamp/lastError, no time has passed yet.
+        controller.calculate(timeSource.markNow(), error = 10.0, errorDerivative = 0.0)
+
+        // Accumulate a constant positive error over many ticks; without clamping this would
+        // grow unbounded (10 * 1 = 10 per tick).
+        var output = 0.0
+        repeat(5) {
+          timeSource += 1.seconds
+          output = controller.calculate(timeSource.markNow(), error = 10.0, errorDerivative = 0.0)
+        }
+
+        // Output is kI * errorSum, so it should be clamped to kI * maximumIntegral = 1.0.
+        output shouldBe (1.0 plusOrMinus 0.001)
+      }
+
+      test("rejects a maximumIntegral not greater than minimumIntegral") {
+        val controller = PIDController(1.0)
+        shouldThrow<IllegalArgumentException> {
+          controller.setIntegratorRange(1.0, -1.0)
+        }
       }
     }
   })
