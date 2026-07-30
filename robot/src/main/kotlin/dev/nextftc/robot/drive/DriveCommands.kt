@@ -107,7 +107,7 @@ fun arcadeDrive(
   backRight.throttle = powers.right
 }
 
-/** Command that drives a differential drivetrain tank-style (one stick controls left wheels, one stick controls right wheels )from [gamepad]'s sticks */
+/** Command that drives a differential drivetrain tank-style (one stick controls left wheels, one stick controls right wheels) from [gamepad]'s sticks. */
 fun tankDrive(
   frontLeft: NextMotor,
   frontRight: NextMotor,
