@@ -85,7 +85,7 @@ fun mecanumDriveFieldCentric(
   backRight.throttle = powers.backRight
 }
 
-/** Command that drives an arcade drivetrain from [gamepad]'s sticks. */
+/** Command that drives a differential drivetrain arcade-style (one stick controls drive, one stick controls turn) from [gamepad]'s sticks. */
 fun arcadeDrive(
   frontLeft: NextMotor,
   frontRight: NextMotor,
@@ -107,7 +107,7 @@ fun arcadeDrive(
   backRight.throttle = powers.right
 }
 
-/** Command that drive a tank drivetrain from [gamepad]'s sticks */
+/** Command that drives a differential drivetrain tank-style (one stick controls left wheels, one stick controls right wheels )from [gamepad]'s sticks */
 fun tankDrive(
   frontLeft: NextMotor,
   frontRight: NextMotor,
