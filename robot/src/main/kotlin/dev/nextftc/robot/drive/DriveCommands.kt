@@ -26,7 +26,6 @@ var scalar: Double = 1.0
     field = value
   }
 
-
 /** Command that drives a mecanum drivetrain from [gamepad]'s sticks. */
 @JvmOverloads
 fun mecanumDrive(
