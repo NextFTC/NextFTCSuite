@@ -137,8 +137,8 @@ class KalmanFilter<States : Nat, Inputs : Nat, Outputs : Nat> @JvmOverloads cons
 
     // (I−Kₖ₊₁C)Pₖ₊₁⁻(I−Kₖ₊₁C)ᵀ + Kₖ₊₁RKₖ₊₁ᵀ
     P = (Matrix.identity(K.natRows) - K * plant.C) * P *
-      (Matrix.identity(K.natRows) - K * plant.C).transpose +
-      K * R * K.transpose
+            (Matrix.identity(K.natRows) - K * plant.C).transpose +
+            K * R * K.transpose
 
     return Xhat
   }
