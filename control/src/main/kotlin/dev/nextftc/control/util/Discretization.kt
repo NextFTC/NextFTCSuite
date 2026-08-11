@@ -35,18 +35,18 @@ internal fun <States : Nat, Inputs : Nat> discretizeAB(
   var Bd_integral = Matrix.Companion.identity(B.natRows).times(dt) // Start with I*dt
 
   var APowerDt = A.times(dt)
-  var dtPower = dt
   var factorial = 1.0
 
   // Taylor series for e^(A*dt) and its integral
   for (i in 1..taylorTerms) {
-    // Ad term: (A*dt)^i / i!
-    Ad = Ad.plus(APowerDt.times(1.0 / factorial))
+    // (A*dt)^i / i!
+    val term = APowerDt.times(1.0 / factorial)
 
-    // Bd integral term: A^(i-1) * dt^(i+1) / (i+1)!
-    dtPower *= dt
-    factorial *= (i + 1)
-    Bd_integral = Bd_integral.plus(APowerDt.times(dt / (i + 1)))
+    // Ad term: (A*dt)^i / i!
+    Ad = Ad.plus(term)
+
+    // Bd integral term: A^i * dt^(i+1) / (i+1)! = [(A*dt)^i / i!] * [dt / (i+1)]
+    Bd_integral = Bd_integral.plus(term.times(dt / (i + 1)))
 
     // Prepare for next iteration
     APowerDt = APowerDt.times(A.times(dt))

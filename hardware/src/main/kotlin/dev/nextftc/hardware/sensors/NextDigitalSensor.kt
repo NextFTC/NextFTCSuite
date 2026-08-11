@@ -59,7 +59,7 @@ class NextDigitalSensor @JvmOverloads constructor(
     { DigitalChannelImpl(module.digitalController, port) },
     inverted,
   ) {
-    require(port in 0..3) { "Expected port in range [0, 7], got $port" }
+    require(port in 0..7) { "Expected port in range [0, 7], got $port" }
   }
 
   @JvmOverloads

@@ -102,6 +102,45 @@ class DiscretizationTest :
 
         x1Discrete shouldBe x1Truth
       }
+
+      test("discretizes a non-nilpotent system correctly") {
+        // A non-nilpotent A ensures every Taylor term beyond the linear one is exercised,
+        // unlike the double-integrator case above where A^2 = 0.
+        val contA = Matrix.from(
+          N2,
+          N2,
+          arrayOf(
+            doubleArrayOf(0.0, 1.0),
+            doubleArrayOf(0.0, -4.71),
+          ),
+        )
+        val contB = Matrix.from(
+          N2,
+          dev.nextftc.linalg.N1,
+          arrayOf(
+            doubleArrayOf(0.0),
+            doubleArrayOf(1.557),
+          ),
+        )
+
+        val dt = 0.02
+
+        val (discA, discB) = discretizeAB(contA, contB, dt)
+
+        // Independently compute Ad via RK4-integrated matrix exponential and Bd via
+        // Bd = (integral of e^(A*tau) dtau from 0 to dt) * B, integrated the same way.
+        val discATruth = matrixExp(contA * dt)
+        val bdIntegralTruth = rk4Matrix(
+          { t, _ -> matrixExp(contA * t) },
+          0.0,
+          Matrix.zero(N2, N2),
+          dt,
+        )
+        val discBTruth = bdIntegralTruth * contB
+
+        (discA - discATruth).norm shouldBeLessThan 1e-9
+        (discB - discBTruth).norm shouldBeLessThan 1e-9
+      }
     }
 
     //                                               T

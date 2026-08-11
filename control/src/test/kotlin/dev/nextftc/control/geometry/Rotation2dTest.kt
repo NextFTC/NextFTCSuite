@@ -74,6 +74,15 @@ class Rotation2dTest :
       mid.log() shouldBe (PI / 2 plusOrMinus epsilon)
     }
 
+    test("lerp takes the shortest path across the +/-pi wrap") {
+      // 170 degrees and -170 degrees are only 20 degrees apart going through +/-180,
+      // so the shortest-path midpoint should be at +/-180, not at 0.
+      val r1 = Rotation2d.exp(Math.toRadians(170.0))
+      val r2 = Rotation2d.exp(Math.toRadians(-170.0))
+      val mid = r1.lerp(r2, 0.5)
+      kotlin.math.abs(mid.log()) shouldBe (PI plusOrMinus epsilon)
+    }
+
     test("factory methods") {
       val r = Rotation2d.fromAngle(90.0.degrees)
       r.log() shouldBe (PI / 2 plusOrMinus epsilon)

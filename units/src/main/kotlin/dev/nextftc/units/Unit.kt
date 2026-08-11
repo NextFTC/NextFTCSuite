@@ -227,8 +227,11 @@ protected constructor(
   }
 
   override fun hashCode(): Int {
-    var result = toBaseConverter.hashCode()
-    result = 31 * result + fromBaseConverter.hashCode()
+    // Must only depend on properties also used by equals() (this::class, unitName, unitSymbol).
+    // The converter lambdas are excluded: two units that are equals()-equivalent (same class,
+    // name, symbol, and equivalent() conversion behavior) are not guaranteed to share the same
+    // converter lambda instances, which would violate the equals/hashCode contract.
+    var result = this::class.hashCode()
     result = 31 * result + unitName.hashCode()
     result = 31 * result + unitSymbol.hashCode()
     return result

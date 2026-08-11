@@ -32,8 +32,10 @@ data class TrapezoidProfileConstraints<U : Unit<U>>(
   val maxAcceleration: Per<PerUnit<U, TimeUnit>, TimeUnit>,
 ) {
   init {
-    require(maxVelocity.magnitude >= 0.0) { "Constraints must be non-negative" }
-    require(maxAcceleration.magnitude >= 0.0) { "Constraints must be non-negative" }
+    // calculate() divides by both of these; zero would silently produce NaN/Infinity outputs
+    // instead of a clear error.
+    require(maxVelocity.magnitude > 0.0) { "Constraints must be positive" }
+    require(maxAcceleration.magnitude > 0.0) { "Constraints must be positive" }
   }
 
   companion object {

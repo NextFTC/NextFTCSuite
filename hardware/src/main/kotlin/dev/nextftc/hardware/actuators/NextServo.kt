@@ -64,7 +64,7 @@ open class NextServo @JvmOverloads constructor(
     cacheTolerance,
     direction,
   ) {
-    require(port in 0..3) { "Expected bus in range [0, 3], got $port" }
+    require(port in 0..5) { "Expected port in range [0, 5], got $port" }
   }
 
   /**

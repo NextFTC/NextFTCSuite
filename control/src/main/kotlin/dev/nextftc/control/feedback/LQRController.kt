@@ -112,7 +112,7 @@ internal fun <States : Nat, Inputs : Nat> computeLQRGain(
   Bd: Matrix<States, Inputs>,
   Q: Matrix<States, States>,
   R: Matrix<Inputs, Inputs>,
-  maxIter: Int = -1,
+  maxIter: Int = 1000,
   epsilon: Double = 1e-6,
 ): Pair<Matrix<States, States>, Matrix<Inputs, States>> {
   val X = solveDARE(Ad, Bd, Q, R, maxIter, epsilon)

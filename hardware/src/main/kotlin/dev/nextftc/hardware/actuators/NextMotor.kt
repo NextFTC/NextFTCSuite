@@ -8,6 +8,7 @@
 
 package dev.nextftc.hardware.actuators
 
+import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorImplEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Servo
@@ -25,6 +26,7 @@ import dev.nextftc.units.measuretypes.Angle
 import dev.nextftc.units.measuretypes.AngularVelocity
 import dev.nextftc.units.radians
 import dev.nextftc.units.seconds
+import dev.nextftc.units.volts
 import kotlin.math.sign
 import dev.nextftc.units.measuretypes.Voltage as VoltageMeasure
 
@@ -78,7 +80,7 @@ class NextMotor @JvmOverloads constructor(
     anglePerCount,
     cacheTolerance,
   ) {
-    require(port in 0..3) { "Expected bus in range [0, 3], got $port" }
+    require(port in 0..3) { "Expected port in range [0, 3], got $port" }
   }
 
   /**
@@ -174,6 +176,21 @@ class NextMotor @JvmOverloads constructor(
     }
 
   /**
+   * Motor zero power behavior (FLOAT or BRAKE).
+   *
+   * When set, automatically updates the underlying motor's zero power behavior.
+   */
+  var zeroPowerBehavior = ZeroPowerBehavior.FLOAT
+    set(value) {
+      field = value
+      if (lazyMotor.isInitialized) {
+        motor.zeroPowerBehavior = value.sdkZeroPowerBehavior
+      } else {
+        lazyMotor.applyAfterInit { it.zeroPowerBehavior = value.sdkZeroPowerBehavior }
+      }
+    }
+
+  /**
    * Current encoder position in physical angle units.
    *
    * Computed from the raw encoder count scaled by [anglePerCount].
@@ -231,7 +248,8 @@ class NextMotor @JvmOverloads constructor(
           ) +
           positionConstants.kS * positionPID.error.sign +
           positionConstants.kG +
-          positionConstants.kCos * kotlin.math.cos(encoderPosition.magnitude * positionConstants.kCosRatio)
+          positionConstants.kCos *
+          kotlin.math.cos(encoderPosition.magnitude * positionConstants.kCosRatio)
       }
       is ControlType.AbsolutePosition -> {
         val setpoint = mode.setpoint
@@ -273,24 +291,24 @@ class NextMotor @JvmOverloads constructor(
    * Set throttle control mode and power.
    *
    * This is the simplest control mode: power is applied directly.
-   *
-   * @param throttle Power in the range [-1.0, 1.0]. Positive is forward.
    */
-  fun setThrottle(throttle: Double) {
-    controlType = ControlType.Throttle(throttle)
-  }
+  var throttle: Double
+    get() = power
+    set(value) {
+      controlType = ControlType.Throttle(value)
+    }
 
   /**
-   * Set voltage control mode and voltage setpoint.
+   * Returns the approximate motor voltage command.
    *
-   * Adjusts power to maintain the specified voltage, accounting for the
-   * current input rail voltage (to remain relatively hardware-independent).
-   *
-   * @param voltage Target voltage setpoint.
+   * Calculated from the current motor power output and battery voltage.
+   * This is not a measured voltage.
    */
-  fun setVoltage(voltage: VoltageMeasure) {
-    controlType = ControlType.Voltage(voltage)
-  }
+  var voltage: VoltageMeasure
+    get() = (power * RobotController.inputVoltage.magnitude).volts
+    set(value) {
+      controlType = ControlType.Voltage(value)
+    }
 
   /**
    * Set position control mode and position setpoint.
@@ -401,6 +419,21 @@ class NextMotor @JvmOverloads constructor(
      * Motor spins in reverse (negated).
      */
     REVERSE(DcMotorSimple.Direction.REVERSE, Servo.Direction.REVERSE),
+  }
+
+  /**
+   * Motor zero power behavior.
+   */
+  enum class ZeroPowerBehavior(val sdkZeroPowerBehavior: DcMotor.ZeroPowerBehavior) {
+    /**
+     * Motor stops and floats (no resistance after stopping).
+     */
+    FLOAT(DcMotor.ZeroPowerBehavior.FLOAT),
+
+    /**
+     * Motor stops and brakes (resists movement after stopping).
+     */
+    BRAKE(DcMotor.ZeroPowerBehavior.BRAKE),
   }
 
   companion object {

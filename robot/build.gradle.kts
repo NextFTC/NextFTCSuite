@@ -43,7 +43,7 @@ kotlin {
 
 dependencies {
   api(project(":hardware"))
-  compileOnly(libs.ivy)
+  api(libs.ivy)
   implementation(libs.functional.interfaces)
   compileOnly(libs.bundles.ftc)
   implementation(libs.sloth)

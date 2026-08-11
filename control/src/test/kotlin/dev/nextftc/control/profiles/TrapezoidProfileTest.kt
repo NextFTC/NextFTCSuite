@@ -37,13 +37,16 @@ class TrapezoidProfileTest :
         constraints.maxAcceleration.magnitude shouldBe 2.0
       }
 
-      test("should accept zero values") {
-        val constraints = TrapezoidProfileConstraints.linear(
-          maxVelocity = 0.0,
-          maxAcceleration = 0.0,
-        )
-        constraints.maxVelocity.magnitude shouldBe 0.0
-        constraints.maxAcceleration.magnitude shouldBe 0.0
+      test("should throw exception for zero maxVelocity") {
+        shouldThrow<IllegalArgumentException> {
+          TrapezoidProfileConstraints.linear(maxVelocity = 0.0, maxAcceleration = 2.0)
+        }
+      }
+
+      test("should throw exception for zero maxAcceleration") {
+        shouldThrow<IllegalArgumentException> {
+          TrapezoidProfileConstraints.linear(maxVelocity = 5.0, maxAcceleration = 0.0)
+        }
       }
 
       test("should throw exception for negative maxVelocity") {

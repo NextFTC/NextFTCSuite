@@ -19,6 +19,7 @@ import dev.nextftc.linalg.N1
 import dev.nextftc.linalg.N2
 import dev.nextftc.linalg.N3
 import dev.nextftc.linalg.Vector
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.doubles.plusOrMinus
 import io.kotest.matchers.shouldBe
@@ -75,5 +76,27 @@ class StateSpaceUtilTest :
 
       val P = solveDARE(Ad, Bd, Q, R)
       P[0, 0] shouldBe ((1.0 + sqrt(5.0)) / 2.0).plusOrMinus(1e-6)
+    }
+
+    test("solveDARE throws instead of looping forever when it can't converge in time") {
+      val Ad = Matrix.from(N1, N1, arrayOf(doubleArrayOf(1.0)))
+      val Bd = Matrix.from(N1, N1, arrayOf(doubleArrayOf(1.0)))
+      val Q = Matrix.from(N1, N1, arrayOf(doubleArrayOf(1.0)))
+      val R = Matrix.from(N1, N1, arrayOf(doubleArrayOf(1.0)))
+
+      shouldThrow<IllegalStateException> {
+        solveDARE(Ad, Bd, Q, R, maxIter = 1)
+      }
+    }
+
+    test("solveDARE rejects a non-positive maxIter") {
+      val Ad = Matrix.from(N1, N1, arrayOf(doubleArrayOf(1.0)))
+      val Bd = Matrix.from(N1, N1, arrayOf(doubleArrayOf(1.0)))
+      val Q = Matrix.from(N1, N1, arrayOf(doubleArrayOf(1.0)))
+      val R = Matrix.from(N1, N1, arrayOf(doubleArrayOf(1.0)))
+
+      shouldThrow<IllegalArgumentException> {
+        solveDARE(Ad, Bd, Q, R, maxIter = 0)
+      }
     }
   })

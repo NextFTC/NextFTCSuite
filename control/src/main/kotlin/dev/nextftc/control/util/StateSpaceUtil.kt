@@ -47,6 +47,11 @@ internal fun <N : Nat> makeCovarianceMatrix(tolerances: Vector<N>): Matrix<N, N>
  * Solves the Discrete-Time Algebraic Riccati Equation (DARE) using iterative method.
  * P = A'PA - (A'PB)(R + B'PB)⁻¹(B'PA) + Q
  *
+ * @param maxIter the maximum number of iterations to attempt before giving up. Must be positive;
+ *   a system that hasn't converged within this many iterations is treated as non-convergent
+ *   rather than iterated on indefinitely.
+ * @throws IllegalStateException if the iteration doesn't converge within [maxIter] iterations
+ *
  * @author Tyler Veness (C++ implementation)
  * @author Zach Harel (Kotlin implementation)
  */
@@ -55,9 +60,11 @@ internal fun <States : Nat, Inputs : Nat> solveDARE(
   Bd: Matrix<States, Inputs>,
   Q: Matrix<States, States>,
   R: Matrix<Inputs, Inputs>,
-  maxIter: Int = -1,
+  maxIter: Int = 1000,
   epsilon: Double = 1e-6,
 ): Matrix<States, States> {
+  require(maxIter > 0) { "maxIter must be positive, got $maxIter" }
+
   // Initialize matrices
   var A_K = Ad.copy()
 
@@ -69,6 +76,7 @@ internal fun <States : Nat, Inputs : Nat> solveDARE(
   var H_K: Matrix<States, States>
 
   var i = 0
+  var converged: Boolean
 
   do {
     H_K = H_K1.copy()
@@ -83,7 +91,12 @@ internal fun <States : Nat, Inputs : Nat> solveDARE(
     H_K1 += v1.transpose * H_K * A_K
 
     A_K *= v1
-  } while ((H_K1 - H_K).norm > epsilon * H_K1.norm && (maxIter < 0 || i++ < maxIter))
+
+    converged = (H_K1 - H_K).norm <= epsilon * H_K1.norm
+    i++
+  } while (!converged && i < maxIter)
+
+  check(converged) { "DARE solver did not converge within $maxIter iterations" }
 
   return H_K1
 }
