@@ -64,7 +64,7 @@ open class NextCRServo @JvmOverloads constructor(
   )
 
   private val lazyServo = LazyHardware(initializer)
-  private val servo by lazyServo
+  val servo by lazyServo
 
   /**
    * Power applied to the servo, in the range [-1.0, 1.0].

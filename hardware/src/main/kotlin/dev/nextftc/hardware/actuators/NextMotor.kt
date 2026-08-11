@@ -105,7 +105,7 @@ class NextMotor @JvmOverloads constructor(
   }
 
   private val lazyMotor = LazyHardware(initializer)
-  private val motor by lazyMotor
+  val motor by lazyMotor
 
   /**
    * Position control constants (PID and feedforward gains).

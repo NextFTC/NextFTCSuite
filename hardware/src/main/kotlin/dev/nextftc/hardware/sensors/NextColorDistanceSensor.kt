@@ -94,8 +94,8 @@ class NextColorDistanceSensor @JvmOverloads constructor(
   }
 
   private val lazySensor = LazyHardware(colorInitializer)
-  private val colorSensor by lazySensor
-  private val distanceSensor: DistanceSensor? by lazy { distanceInitializer?.invoke() }
+  val colorSensor by lazySensor
+  val distanceSensor: DistanceSensor? by lazy { distanceInitializer?.invoke() }
 
   private var cachedDistanceCm: Double = Double.NaN
 

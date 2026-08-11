@@ -31,7 +31,7 @@ class NextHuskyLens(initializer: () -> HuskyLens) {
     { RobotController.hardwareMap[name] as HuskyLens },
   )
 
-  private val huskyLens by LazyHardware(initializer)
+  val huskyLens by LazyHardware(initializer)
 
   /** The underlying [HuskyLens], for anything not wrapped here. */
   val camera: HuskyLens get() = huskyLens

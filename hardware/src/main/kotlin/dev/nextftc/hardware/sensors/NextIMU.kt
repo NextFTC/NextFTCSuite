@@ -22,7 +22,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles
 class NextIMU(initializer: () -> IMU) {
   @JvmOverloads constructor(name: String = "imu") : this({ RobotController.hardwareMap[name] as IMU })
 
-  private val imu by LazyHardware(initializer)
+  val imu by LazyHardware(initializer)
 
   val device: IMU get() = imu
 

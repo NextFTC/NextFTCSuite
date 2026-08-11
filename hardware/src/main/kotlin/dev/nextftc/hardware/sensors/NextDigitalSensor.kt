@@ -71,7 +71,7 @@ class NextDigitalSensor @JvmOverloads constructor(
     inverted,
   )
 
-  private val sensor by LazyHardware(initializer).also {
+  val sensor by LazyHardware(initializer).also {
     it.applyAfterInit { channel -> channel.mode = DigitalChannel.Mode.INPUT }
   }
 

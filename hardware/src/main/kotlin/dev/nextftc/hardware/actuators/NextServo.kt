@@ -94,7 +94,7 @@ open class NextServo @JvmOverloads constructor(
   private val lazyServo = LazyHardware(initializer).apply {
     applyAfterInit { it.direction = direction.servoDirection }
   }
-  private val servo by lazyServo
+  val servo by lazyServo
 
   /**
    * Allows user to change servo's direction configuration

@@ -61,7 +61,7 @@ class NextDistanceSensor(initializer: () -> DistanceSensor) {
     require(bus in 0..3) { "Expected bus in range [0, 3], got $bus" }
   }
 
-  private val distanceSensor by LazyHardware(initializer)
+  val distanceSensor by LazyHardware(initializer)
 
   private var cachedDistanceCm: Double = Double.NaN
 

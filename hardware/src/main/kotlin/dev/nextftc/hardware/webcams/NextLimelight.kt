@@ -41,7 +41,7 @@ class NextLimelight(initializer: () -> Limelight3A) {
     { RobotController.hardwareMap[name] as Limelight3A },
   )
 
-  private val limelight by LazyHardware(initializer)
+  val limelight by LazyHardware(initializer)
 
   /** The underlying [Limelight3A], for anything not wrapped. */
   val camera: Limelight3A get() = limelight
