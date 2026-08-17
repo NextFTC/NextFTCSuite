@@ -74,6 +74,7 @@ internal object SchedulerHook : OpModeHook {
 
   override fun afterEnd() {
     Trigger.defaultEventLoop.clear()
+    Scheduler.reset()
   }
 }
 
