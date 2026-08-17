@@ -5,6 +5,7 @@
  *  license that can be found in the LICENSE.md file at the root of this repository or at
  *  https://opensource.org/license/bsd-3-clause.
  */
+@file:JvmName("DriveCommands")
 
 package dev.nextftc.robot.drive
 
@@ -26,6 +27,7 @@ var scalar: Double = 1.0
   }
 
 /** Command that drives a mecanum drivetrain from [gamepad]'s sticks. */
+@JvmOverloads
 fun mecanumDrive(
   frontLeft: NextMotor,
   frontRight: NextMotor,
@@ -57,6 +59,7 @@ fun mecanumDrive(
  *   e.g. `{ follower.pose.heading }` from Pedro Pathing, or an IMU reading zeroed
  *   to match the robot's starting orientation on the field.
  */
+@JvmOverloads
 fun mecanumDriveFieldCentric(
   frontLeft: NextMotor,
   frontRight: NextMotor,
@@ -86,6 +89,7 @@ fun mecanumDriveFieldCentric(
 }
 
 /** Command that drives a differential drivetrain arcade-style (one stick controls drive, one stick controls turn) from [gamepad]'s sticks. */
+@JvmOverloads
 fun arcadeDrive(
   frontLeft: NextMotor,
   frontRight: NextMotor,
