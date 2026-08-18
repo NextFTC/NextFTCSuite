@@ -218,6 +218,12 @@ class NextMotor @JvmOverloads constructor(
     }
 
   /**
+   * Whether the motor has exceeded its configured current alert threshold.
+   */
+  val isOverCurrent: Boolean
+    get() = motor.isOverCurrent
+
+  /**
    * Current encoder position in physical angle units.
    *
    * Computed from the raw encoder count scaled by [anglePerCount].
