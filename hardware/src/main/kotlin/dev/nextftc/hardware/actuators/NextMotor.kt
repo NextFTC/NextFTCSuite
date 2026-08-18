@@ -22,11 +22,14 @@ import dev.nextftc.hardware.util.AnalogFeedback
 import dev.nextftc.hardware.util.Caching
 import dev.nextftc.hardware.util.EventLoop
 import dev.nextftc.hardware.util.LazyHardware
+import dev.nextftc.units.amperes
 import dev.nextftc.units.measuretypes.Angle
 import dev.nextftc.units.measuretypes.AngularVelocity
+import dev.nextftc.units.measuretypes.Current
 import dev.nextftc.units.radians
 import dev.nextftc.units.seconds
 import dev.nextftc.units.volts
+import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit
 import kotlin.math.sign
 import dev.nextftc.units.measuretypes.Voltage as VoltageMeasure
 
@@ -187,6 +190,30 @@ class NextMotor @JvmOverloads constructor(
         motor.zeroPowerBehavior = value.sdkZeroPowerBehavior
       } else {
         lazyMotor.applyAfterInit { it.zeroPowerBehavior = value.sdkZeroPowerBehavior }
+      }
+    }
+
+  /**
+   * Current drawn by the motor.
+   *
+   * Measured from the motor controller in amperes.
+   */
+  val current: Current
+    get() = motor.getCurrent(CurrentUnit.AMPS).amperes
+
+  /**
+   * Configured current alert threshold for the motor.
+   *
+   * When the motor current exceeds this threshold, the motor controller
+   * reports a current alert.
+   */
+  var currentAlert: Current
+    get() = motor.getCurrentAlert(CurrentUnit.AMPS).amperes
+    set(value) {
+      if (lazyMotor.isInitialized) {
+        motor.setCurrentAlert(value.magnitude, CurrentUnit.AMPS)
+      } else {
+        lazyMotor.applyAfterInit { it.setCurrentAlert(value.magnitude, CurrentUnit.AMPS) }
       }
     }
 
