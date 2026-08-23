@@ -1,6 +1,5 @@
 plugins {
-  alias(libs.plugins.kotlin)
-  alias(libs.plugins.spotless)
+  id("dev.nextftc.suite.kotlin-jvm")
 }
 
 description = "A custom linear algebra library for NextControl."
@@ -23,16 +22,7 @@ dokka {
 }
 
 kotlin {
-  jvmToolchain(8)
   compilerOptions {
-    freeCompilerArgs.addAll("-jvm-default=no-compatibility", "-Xconsistent-data-class-copy-visibility")
+    freeCompilerArgs.add("-jvm-default=no-compatibility")
   }
 }
-
-java {
-  toolchain {
-    languageVersion.set(JavaLanguageVersion.of(8))
-  }
-}
-
-tasks.withType<Test>().configureEach { useJUnitPlatform() }

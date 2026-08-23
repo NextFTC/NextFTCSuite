@@ -7,38 +7,11 @@
  */
 
 plugins {
-  alias(libs.plugins.kotlin.android)
-  alias(libs.plugins.android.library)
-  alias(libs.plugins.spotless)
+  id("dev.nextftc.suite.android-library")
 }
 
 android {
   namespace = "dev.nextftc.v2.robot"
-  compileSdk = 30
-
-  defaultConfig {
-    minSdk = 24
-  }
-
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-  }
-
-  publishing {
-    singleVariant("release")
-  }
-
-  testOptions {
-    targetSdk = 28
-  }
-}
-
-kotlin {
-  jvmToolchain(8)
-  compilerOptions {
-    freeCompilerArgs.addAll("-Xconsistent-data-class-copy-visibility")
-  }
 }
 
 dependencies {
@@ -64,9 +37,4 @@ dokka {
   dokkaSourceSets.configureEach {
     includes.from("Module.md")
   }
-}
-
-tasks.withType<Test>().configureEach {
-  javaLauncher.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(11)) })
-  useJUnitPlatform()
 }

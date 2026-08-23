@@ -8,7 +8,7 @@
 
 package dev.nextftc.robot
 
-import com.pedropathing.ivy.Command
+import com.pedropathing.ivy.CommandBuilder
 import com.pedropathing.ivy.commands.Commands
 
 /**
@@ -27,10 +27,10 @@ interface Mechanism {
   /**
    * Creates a command that runs once and requires this mechanism.
    */
-  fun instant(action: Runnable): Command = Commands.instant(action).requiring(this)
+  fun instant(action: Runnable): CommandBuilder = Commands.instant(action).requiring(this)
 
   /**
    * Creates a command that runs indefinitely and requires this mechanism.
    */
-  fun infinite(action: Runnable): Command = Commands.infinite(action).requiring(this)
+  fun infinite(action: Runnable): CommandBuilder = Commands.infinite(action).requiring(this)
 }

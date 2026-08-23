@@ -264,21 +264,16 @@ class NextMotor @JvmOverloads constructor(
    * to recalculate closed-loop controllers.
    */
   fun update() {
-    when (val mode = controlType) {
-      is ControlType.Throttle -> {
-        power = mode.throttle
-      }
-      is ControlType.Voltage -> {
-        power = (mode.voltage / RobotController.inputVoltage).magnitude
-      }
+    power = when (val mode = controlType) {
+      is ControlType.Throttle -> mode.throttle
+      is ControlType.Voltage -> (mode.voltage / RobotController.inputVoltage).magnitude
       is ControlType.Position -> {
         positionPID.disableContinuousInput()
         val setpoint = mode.setpoint
-        power =
-          positionPID.calculate(
-            reference = setpoint.magnitude,
-            measured = encoderPosition.into(setpoint.unit),
-          ) +
+        positionPID.calculate(
+          reference = setpoint.magnitude,
+          measured = encoderPosition.into(setpoint.unit),
+        ) +
           positionConstants.kS * positionPID.error.sign +
           positionConstants.kG +
           positionConstants.kCos *
@@ -291,11 +286,10 @@ class NextMotor @JvmOverloads constructor(
           maximumInput = setpoint.unit.fromBaseUnits(Math.PI),
         )
         val measuredPos = absoluteEncoderPosition.into(setpoint.unit)
-        power =
-          positionPID.calculate(
-            reference = setpoint.magnitude,
-            measured = measuredPos,
-          ) +
+        positionPID.calculate(
+          reference = setpoint.magnitude,
+          measured = measuredPos,
+        ) +
           positionConstants.kS * positionPID.error.sign +
           positionConstants.kG +
           positionConstants.kCos *
@@ -303,20 +297,13 @@ class NextMotor @JvmOverloads constructor(
       }
       is ControlType.Velocity -> {
         val setpoint = mode.setpoint
-        power =
-          velocityPID.calculate(
-            reference = setpoint.magnitude,
-            measured = encoderVelocity.into(setpoint.unit),
-          ) +
+        velocityPID.calculate(
+          reference = setpoint.magnitude,
+          measured = encoderVelocity.into(setpoint.unit),
+        ) +
           velocityFF.calculate(setpoint.magnitude)
       }
-      is ControlType.Follow -> {
-        power = if (mode.direction == Direction.FORWARD) {
-          mode.motor.power
-        } else {
-          -mode.motor.power
-        }
-      }
+      is ControlType.Follow -> mode.motor.power * mode.direction.multiplier
     }
   }
 
@@ -442,7 +429,11 @@ class NextMotor @JvmOverloads constructor(
   /**
    * Motor rotation direction.
    */
-  enum class Direction(val sdkDirection: DcMotorSimple.Direction, val servoDirection: Servo.Direction) {
+  enum class Direction(
+    val sdkDirection: DcMotorSimple.Direction,
+    val servoDirection: Servo.Direction,
+    val multiplier: Double = 1.0,
+  ) {
     /**
      * Motor spins forward (in its default/positive direction).
      */
@@ -451,7 +442,7 @@ class NextMotor @JvmOverloads constructor(
     /**
      * Motor spins in reverse (negated).
      */
-    REVERSE(DcMotorSimple.Direction.REVERSE, Servo.Direction.REVERSE),
+    REVERSE(DcMotorSimple.Direction.REVERSE, Servo.Direction.REVERSE, -1.0),
   }
 
   /**
