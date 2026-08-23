@@ -1,6 +1,5 @@
 plugins {
-  alias(libs.plugins.kotlin)
-  alias(libs.plugins.spotless)
+  id("dev.nextftc.suite.kotlin-jvm")
 }
 
 description = "A WPIMath inspired library for controls and other math classes and functions."
@@ -22,18 +21,3 @@ dokka {
     includes.from("Module.md")
   }
 }
-
-kotlin {
-  jvmToolchain(8)
-  compilerOptions {
-    freeCompilerArgs.addAll("-Xconsistent-data-class-copy-visibility")
-  }
-}
-
-java {
-  toolchain {
-    languageVersion.set(JavaLanguageVersion.of(8))
-  }
-}
-
-tasks.withType<Test>().configureEach { useJUnitPlatform() }
