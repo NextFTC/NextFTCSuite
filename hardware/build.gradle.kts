@@ -7,38 +7,14 @@
  */
 
 plugins {
-  alias(libs.plugins.android.library)
-  alias(libs.plugins.kotlin.android)
-  alias(libs.plugins.spotless)
+  id("dev.nextftc.suite.android-library")
 }
 
 android {
   namespace = "dev.nextftc.v2.hardware"
-  compileSdk = 30
-
-  defaultConfig {
-    minSdk = 24
-  }
-
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-  }
-
-  publishing {
-    singleVariant("release")
-  }
 
   testOptions {
-    targetSdk = 28
     unitTests.isReturnDefaultValues = true
-  }
-}
-
-kotlin {
-  jvmToolchain(8)
-  compilerOptions {
-    freeCompilerArgs.addAll("-Xconsistent-data-class-copy-visibility")
   }
 }
 
@@ -77,9 +53,4 @@ dokka {
       )
     }
   }
-}
-
-tasks.withType<Test>().configureEach {
-  javaLauncher.set(javaToolchains.launcherFor { languageVersion.set(JavaLanguageVersion.of(11)) })
-  useJUnitPlatform()
 }
