@@ -63,12 +63,18 @@ internal class RobotHook(val robot: NextRobot) : OpModeHook {
 }
 
 /**
- * Internal hook responsible for ticking the Trigger event loop and the Ivy Scheduler.
+ * Internal hook responsible for ticking the Trigger event loop and the Ivy Scheduler,
+ * clearing the loop once the OpMode ends.
  */
 internal object SchedulerHook : OpModeHook {
   override fun afterPeriodic() {
     Trigger.defaultEventLoop.poll()
     Scheduler.execute()
+  }
+
+  override fun afterEnd() {
+    Trigger.defaultEventLoop.clear()
+    Scheduler.reset()
   }
 }
 
