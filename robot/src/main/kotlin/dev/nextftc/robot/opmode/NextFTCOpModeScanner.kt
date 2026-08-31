@@ -21,7 +21,7 @@ import kotlin.reflect.full.isSuperclassOf
  * Scans the user's project for OpModes that take a [dev.nextftc.robot.NextRobot] instance in their constructor.
  *
  * Automatically handles registering these OpModes with the FTC dashboard while intercepting
- * their instantiation to inject the [dev.nextftc.robot.RobotScanner.robot] instance.
+ * their instantiation to inject the [dev.nextftc.robot.RobotState.robot] instance.
  */
 object NextFTCOpModeScanner : OpModeScanner() {
   override val loadAdjacencyRule = super.loadAdjacencyRule and dependsOn(
@@ -98,6 +98,17 @@ internal fun opModeMetaFromClass(cls: KClass<*>): OpModeMetaCheckResult {
       OpModeMeta.Builder().setFlavor(OpModeMeta.Flavor.TELEOP)
         .setName(teleop.name.ifEmpty { cls.simpleName!! })
         .setGroup(teleop.group.ifEmpty { "NextFTC Teleop" })
+        .setSource(OpModeMeta.Source.ANDROID_STUDIO)
+        .build(),
+    )
+  }
+
+  val utility = cls.findAnnotation<NextUtility>()
+  if (utility != null) {
+    return OpModeMetaCheckResult.FoundAnnotation(
+      OpModeMeta.Builder().setFlavor(OpModeMeta.Flavor.UTILITY)
+        .setName(utility.name.ifEmpty { cls.simpleName!! })
+        .setDescription(utility.description.ifEmpty { null })
         .setSource(OpModeMeta.Source.ANDROID_STUDIO)
         .build(),
     )
