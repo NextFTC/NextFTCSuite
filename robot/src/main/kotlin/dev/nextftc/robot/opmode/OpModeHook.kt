@@ -15,6 +15,7 @@ import dev.nextftc.hardware.actuators.NextMotor
 import dev.nextftc.robot.Mechanism
 import dev.nextftc.robot.NextRobot
 import dev.nextftc.robot.Telemetry
+import dev.nextftc.robot.forceDefaultCommand
 import dev.nextftc.robot.triggers.Trigger
 
 /**
@@ -56,6 +57,10 @@ interface OpModeHook {
  * Internal hook responsible for ticking the robot and its mechanisms.
  */
 internal class RobotHook(val robot: NextRobot) : OpModeHook {
+  override fun beforeStart() {
+    robot.mechanisms.forEach { forceDefaultCommand(it.defaultCommand).schedule() }
+  }
+
   override fun afterPeriodic() {
     robot.periodic()
     robot.mechanisms.forEach(Mechanism::periodic)
