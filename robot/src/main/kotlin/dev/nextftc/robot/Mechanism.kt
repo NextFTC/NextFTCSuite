@@ -10,6 +10,8 @@ package dev.nextftc.robot
 
 import com.pedropathing.ivy.Command
 import com.pedropathing.ivy.CommandBuilder
+import com.pedropathing.ivy.behaviors.BlockedBehavior
+import com.pedropathing.ivy.behaviors.ConflictBehavior
 import com.pedropathing.ivy.behaviors.InterruptedBehavior
 import com.pedropathing.ivy.commands.Commands
 
@@ -47,6 +49,8 @@ internal fun Mechanism.forceDefaultCommand(command: Command) = CommandBuilder()
   .requiring(command.requirements() union setOf(this))
   .setPriority(Int.MIN_VALUE)
   .setInterruptedBehavior(InterruptedBehavior.SUSPEND)
+  .setConflictBehavior(ConflictBehavior.QUEUE)
+  .setBlockedBehavior(BlockedBehavior.QUEUE)
   .setStart(command::start)
   .setExecute(command::execute)
   .setEnd(command::end)
