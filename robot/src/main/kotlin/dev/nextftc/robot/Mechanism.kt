@@ -44,7 +44,7 @@ interface Mechanism {
 }
 
 internal fun Mechanism.forceDefaultCommand(command: Command) = CommandBuilder()
-  .requiring(setOf(this))
+  .requiring(command.requirements() union setOf(this))
   .setPriority(Int.MIN_VALUE)
   .setInterruptedBehavior(InterruptedBehavior.SUSPEND)
   .setStart(command::start)
