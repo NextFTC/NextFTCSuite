@@ -8,7 +8,11 @@
 
 package dev.nextftc.robot
 
+import com.pedropathing.ivy.Command
 import com.pedropathing.ivy.CommandBuilder
+import com.pedropathing.ivy.behaviors.BlockedBehavior
+import com.pedropathing.ivy.behaviors.ConflictBehavior
+import com.pedropathing.ivy.behaviors.InterruptedBehavior
 import com.pedropathing.ivy.commands.Commands
 
 /**
@@ -25,6 +29,12 @@ interface Mechanism {
   fun periodic() {}
 
   /**
+   * The default command that runs when this mechanism is not being controlled by a command.
+   */
+  val defaultCommand: Command
+    get() = infinite {}
+
+  /**
    * Creates a command that runs once and requires this mechanism.
    */
   fun instant(action: Runnable): CommandBuilder = Commands.instant(action).requiring(this)
@@ -34,3 +44,14 @@ interface Mechanism {
    */
   fun infinite(action: Runnable): CommandBuilder = Commands.infinite(action).requiring(this)
 }
+
+internal fun Mechanism.forceDefaultCommand(command: Command) = CommandBuilder()
+  .requiring(command.requirements() union setOf(this))
+  .setPriority(Int.MIN_VALUE)
+  .setInterruptedBehavior(InterruptedBehavior.SUSPEND)
+  .setConflictBehavior(ConflictBehavior.QUEUE)
+  .setBlockedBehavior(BlockedBehavior.QUEUE)
+  .setStart(command::start)
+  .setExecute(command::execute)
+  .setEnd(command::end)
+  .setDone(command::done)
