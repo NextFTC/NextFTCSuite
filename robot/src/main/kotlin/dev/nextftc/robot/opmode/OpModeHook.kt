@@ -58,7 +58,7 @@ interface OpModeHook {
  */
 internal class RobotHook(val robot: NextRobot) : OpModeHook {
   override fun beforeStart() {
-    robot.mechanisms.forEach { forceDefaultCommand(it.defaultCommand).schedule() }
+    robot.mechanisms.forEach { it.forceDefaultCommand(it.defaultCommand).schedule() }
   }
 
   override fun afterPeriodic() {

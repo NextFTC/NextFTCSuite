@@ -43,8 +43,8 @@ interface Mechanism {
   fun infinite(action: Runnable): CommandBuilder = Commands.infinite(action).requiring(this)
 }
 
-internal fun forceDefaultCommand(command: Command) = CommandBuilder()
-  .requiring(command.requirements())
+internal fun Mechanism.forceDefaultCommand(command: Command) = CommandBuilder()
+  .requiring(setOf(this))
   .setPriority(Int.MIN_VALUE)
   .setInterruptedBehavior(InterruptedBehavior.SUSPEND)
   .setStart(command::start)
