@@ -13,3 +13,8 @@ annotation class NextAutonomous(
 @Retention(AnnotationRetention.RUNTIME)
 @MustBeDocumented
 annotation class NextTeleop(val name: String = "", val group: String = "")
+
+@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+@MustBeDocumented
+annotation class NextUtility(val name: String = "", val description: String = "")

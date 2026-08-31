@@ -1,7 +1,7 @@
 [versions]
 android = "8.7.3"
 dokka = "2.2.0"
-ftc = "11.1.0"
+ftc = "11.2.1"
 kotlin = "2.3.0"
 kotest = "5.9.1"
 sloth = "0.2.4"
