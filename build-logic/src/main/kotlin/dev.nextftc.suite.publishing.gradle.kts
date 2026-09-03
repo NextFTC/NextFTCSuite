@@ -2,6 +2,8 @@ import com.android.build.api.dsl.LibraryExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import dev.nextftc.suite.build.NextFtcPublishingExtension
 import dev.nextftc.suite.build.nextFtcKtlintEditorConfig
+import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
+import org.gradle.api.publish.maven.tasks.GenerateMavenPom
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.dokka.gradle.DokkaExtension
 import org.jetbrains.dokka.gradle.engine.plugins.DokkaHtmlPluginParameters
@@ -52,6 +54,16 @@ val dokkaJar by tasks.registering(Jar::class) {
   dependsOn(tasks.named("dokkaGenerate"))
   from(dokkaExtension.basePublicationsDirectory.dir("html"))
   archiveClassifier.set("html-docs")
+}
+
+val configurationCacheOptOut = "the deployer plugin is not configuration cache compatible"
+
+tasks.withType<GenerateMavenPom>().configureEach {
+  notCompatibleWithConfigurationCache(configurationCacheOptOut)
+}
+
+tasks.withType<AbstractPublishToMaven>().configureEach {
+  notCompatibleWithConfigurationCache(configurationCacheOptOut)
 }
 
 deployer {
