@@ -14,6 +14,8 @@ import com.pedropathing.ivy.behaviors.BlockedBehavior
 import com.pedropathing.ivy.behaviors.ConflictBehavior
 import com.pedropathing.ivy.behaviors.InterruptedBehavior
 import com.pedropathing.ivy.commands.Commands
+import dev.nextftc.robot.coroutine.CommandScope
+import dev.nextftc.robot.coroutine.CoroutineCommandBuilder
 
 /**
  * Represents a subsystem or mechanism on the robot (e.g., an arm, drivetrain, or intake).
@@ -43,6 +45,13 @@ interface Mechanism {
    * Creates a command that runs indefinitely and requires this mechanism.
    */
   fun infinite(action: Runnable): CommandBuilder = Commands.infinite(action).requiring(this)
+
+  /**
+   * Creates a coroutine-based command that requires this mechanism.
+   */
+  fun coroutine(body: suspend CommandScope.() -> Unit): CoroutineCommandBuilder = CoroutineCommandBuilder()
+    .requiring(this)
+    .setBody(body)
 }
 
 internal fun Mechanism.forceDefaultCommand(command: Command) = CommandBuilder()
