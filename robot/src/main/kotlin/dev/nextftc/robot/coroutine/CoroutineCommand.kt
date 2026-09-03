@@ -18,11 +18,11 @@ import kotlin.coroutines.Continuation
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.coroutines.RestrictsSuspension
 import kotlin.coroutines.cancellation.CancellationException
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.intrinsics.COROUTINE_SUSPENDED
 import kotlin.coroutines.intrinsics.createCoroutineUnintercepted
 import kotlin.coroutines.intrinsics.suspendCoroutineUninterceptedOrReturn
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 
 /**
  * A [Command] whose behavior is written as a sequential coroutine instead of as a
@@ -59,19 +59,23 @@ class CoroutineCommand(
     finished = false
     cancelling = false
     forked.clear()
-    next = body.createCoroutineUnintercepted(Scope(), object : Continuation<Unit> {
-      override val context = EmptyCoroutineContext
-      override fun resumeWith(result: Result<Unit>) {
-        finished = true; next = null
-        result.exceptionOrNull()?.let { if (it !is CancellationException) throw it }
-      }
-    })
+    next = body.createCoroutineUnintercepted(
+      Scope(),
+      object : Continuation<Unit> {
+        override val context = EmptyCoroutineContext
+        override fun resumeWith(result: Result<Unit>) {
+          finished = true
+          next = null
+          result.exceptionOrNull()?.let { if (it !is CancellationException) throw it }
+        }
+      },
+    )
   }
 
   override fun execute() {
     next?.let { c ->
       next = null
-      c.resume(Unit)        // runs one slice
+      c.resume(Unit) // runs one slice
     }
     tickForked()
   }
@@ -133,21 +137,29 @@ class CoroutineCommand(
       command.start()
       try {
         while (!command.done()) {
-          yield(); command.execute()
+          yield()
+          command.execute()
         }
         command.end(EndCondition.NATURALLY)
       } catch (e: Throwable) {
-        command.end(EndCondition.INTERRUPTED); throw e
+        command.end(EndCondition.INTERRUPTED)
+        throw e
       }
     }
 
     override suspend fun awaitAll(vararg commands: Command) {
       val running = commands.toMutableList()
-      running.removeAll { it.start(); it.endIfDone() }
+      running.removeAll {
+        it.start()
+        it.endIfDone()
+      }
       try {
         while (running.isNotEmpty()) {
           yield()
-          running.removeAll { it.execute(); it.endIfDone() }
+          running.removeAll {
+            it.execute()
+            it.endIfDone()
+          }
         }
       } catch (e: Throwable) {
         running.forEach { it.end(EndCondition.INTERRUPTED) }
@@ -166,7 +178,7 @@ class CoroutineCommand(
             command.execute()
             if (command.done()) {
               winner = command
-              break   // the rest are about to lose, so don't tick them again
+              break // the rest are about to lose, so don't tick them again
             }
           }
         }
@@ -199,4 +211,3 @@ class CoroutineCommand(
     }
   }
 }
-

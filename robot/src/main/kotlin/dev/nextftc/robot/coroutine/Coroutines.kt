@@ -8,7 +8,6 @@ import com.pedropathing.ivy.behaviors.EndCondition.INTERRUPTED
 import com.pedropathing.ivy.behaviors.EndCondition.NATURALLY
 import kotlin.coroutines.RestrictsSuspension
 
-
 /**
  * The receiver of a [CoroutineCommand] body.
  *
