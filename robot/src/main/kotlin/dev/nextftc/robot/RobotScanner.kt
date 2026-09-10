@@ -31,12 +31,10 @@ import kotlin.reflect.full.hasAnnotation
  * [dev.nextftc.robot.opmode.NextFTCOpModeScanner] can properly inject the robot instance into OpModes.
  */
 internal object RobotScanner : Scanner {
-  private var _robotClass: KClass<*>? = null
+  internal var robotClass: KClass<out NextRobot>? = null
   private var robotConstructor: (() -> NextRobot)? = null
   private var robotLoader: ClassLoader? = null
-
-  val robotClass: KClass<*>
-    get() = checkNotNull(_robotClass)
+  internal var robotInstance: NextRobot? = null
 
   var foundRobot = false
   var foundMultiple = false
@@ -68,7 +66,7 @@ internal object RobotScanner : Scanner {
 
     if (objectInstance != null) {
       robotConstructor = { objectInstance as NextRobot }
-      _robotClass = kcls
+      robotClass = cls.asSubclass(NextRobot::class.java).kotlin
       robotLoader = loader
 
       if (foundRobot) {
@@ -81,7 +79,7 @@ internal object RobotScanner : Scanner {
     val constructor = kcls.constructors.find { it.parameters.isEmpty() }
     if (constructor != null) {
       robotConstructor = { constructor.call() as NextRobot }
-      _robotClass = kcls
+      robotClass = cls.asSubclass(NextRobot::class.java).kotlin
       robotLoader = loader
 
       if (foundRobot) {
@@ -116,17 +114,18 @@ internal object RobotScanner : Scanner {
     Logger.i("NextFTC", "Found NextFTC robot class: $robotClass")
     RobotLog.setGlobalErrorMsg("Found NextFTC robot class: $robotClass")
 
-    RobotState.robotOrNull = robotConstructor!!()
+    check(robotConstructor != null) { "Robot constructor is null after scan" }
+    robotInstance = robotConstructor?.invoke()
   }
 
   override fun beforeUnload(loader: ClassLoader) {
     if (loader == robotLoader) {
       foundRobot = false
       foundMultiple = false
-      _robotClass = null
+      robotClass = null
       robotConstructor = null
       robotLoader = null
-      RobotState.robotOrNull = null
+      robotInstance = null
     }
   }
 
@@ -138,10 +137,8 @@ internal object RobotScanner : Scanner {
  * The robot instance is created using the constructor found by [RobotScanner].
  */
 object RobotState : OnCreateEventLoop {
-  internal var robotOrNull: NextRobot? = null
-
-  val robot: NextRobot
-    get() = checkNotNull(robotOrNull) { "Cannot access Robot object before it is created" }
+  val robot get() = RobotScanner.robotInstance ?: error("Robot instance not initialized")
+  internal val robotClass get() = RobotScanner.robotClass ?: error("Robot class not initialized")
 
   override fun onCreateEventLoop(context: Context, ftcEventLoop: FtcEventLoop) {
     ftcEventLoop.opModeManager.registerListener(DriverStationTelemetry)

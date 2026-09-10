@@ -4,7 +4,7 @@ dokka = "2.2.0"
 ftc = "11.2.1"
 kotlin = "2.3.0"
 kotest = "5.9.1"
-sloth = "0.2.4"
+sloth = "0.3.0"
 ejml = "0.41"
 ivy = "1.0.1"
 

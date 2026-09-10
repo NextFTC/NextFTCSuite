@@ -1,9 +1,8 @@
 package dev.nextftc.robot.opmode
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
-import com.qualcomm.robotcore.eventloop.opmode.OpMode
+import dev.frozenmilk.sinister.sdk.opmodes.AnnotatedOpModeScanner
 import dev.frozenmilk.sinister.sdk.opmodes.OpModeScanner
-import dev.frozenmilk.sinister.sdk.opmodes.TeleopAutonomousOpModeScanner
 import dev.frozenmilk.sinister.targeting.SearchTarget
 import dev.frozenmilk.sinister.targeting.WideSearch
 import dev.frozenmilk.sinister.util.log.Logger
@@ -26,7 +25,7 @@ import kotlin.reflect.full.isSuperclassOf
 object NextFTCOpModeScanner : OpModeScanner() {
   override val loadAdjacencyRule = super.loadAdjacencyRule and dependsOn(
     RobotScanner,
-  ) and dependsOn(TeleopAutonomousOpModeScanner)
+  ) and dependsOn(AnnotatedOpModeScanner)
   override val unloadAdjacencyRule = super.unloadAdjacencyRule and dependsOn(RobotScanner)
 
   override val targets: SearchTarget = WideSearch()
@@ -122,7 +121,7 @@ internal fun opModeConstructorFromClass(cls: KClass<out NextOpMode>): OpModeCons
     val constructor = cls.constructors.find { it.parameters.size == 1 }
     if (constructor != null) {
       val paramType = constructor.parameters[0].type.classifier as KClass<*>
-      if (paramType.isSuperclassOf(RobotScanner.robotClass)) {
+      if (paramType.isSuperclassOf(RobotState.robotClass)) {
         return OpModeConstructorCheckResult.FoundConstructor { constructor.call(RobotState.robot) }
       }
     }
