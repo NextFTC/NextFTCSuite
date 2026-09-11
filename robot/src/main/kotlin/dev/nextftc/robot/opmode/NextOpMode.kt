@@ -3,7 +3,9 @@ package dev.nextftc.robot.opmode
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
+import dev.nextftc.robot.NextFTCException
 import dev.nextftc.robot.NextRobot
+import dev.nextftc.robot.RobotLog
 import org.firstinspires.ftc.robotcore.external.Telemetry as SdkTelemetry
 
 /**
@@ -29,16 +31,16 @@ abstract class NextOpMode internal constructor(internal val hooks: MutableList<O
   }
 
   /** The primary gamepad provided by the Driver Station. */
-  @JvmField val gamepad1: Gamepad = activeGamepad1!!
+  @JvmField val gamepad1: Gamepad = requireActive(activeGamepad1, "gamepad1")
 
   /** The secondary gamepad provided by the Driver Station. */
-  @JvmField val gamepad2: Gamepad = activeGamepad2!!
+  @JvmField val gamepad2: Gamepad = requireActive(activeGamepad2, "gamepad2")
 
   /** The standard SDK telemetry provided by the Driver Station. */
-  @JvmField val telemetry: SdkTelemetry = activeTelemetry!!
+  @JvmField val telemetry: SdkTelemetry = requireActive(activeTelemetry, "telemetry")
 
   /** The hardware map provided by the FTC SDK. */
-  @JvmField val hardwareMap: HardwareMap = activeHardwareMap!!
+  @JvmField val hardwareMap: HardwareMap = requireActive(activeHardwareMap, "hardwareMap")
 
   /** Called repeatedly while the OpMode is in the INIT phase. */
   open fun disabledPeriodic() {}
@@ -60,6 +62,11 @@ abstract class NextOpMode internal constructor(internal val hooks: MutableList<O
     @JvmSynthetic internal var activeTelemetry: SdkTelemetry? = null
 
     @JvmSynthetic internal var activeHardwareMap: HardwareMap? = null
+
+    private fun <T : Any> requireActive(value: T?, name: String): T = value ?: throw NextFTCException(
+      "Cannot access $name because this OpMode was not started by NextFTC. NextFTC OpModes are " +
+        "constructed automatically when the OpMode is run; they cannot be instantiated directly.",
+    )
   }
 }
 
@@ -70,8 +77,10 @@ internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode) : Linear
     NextOpMode.activeTelemetry = this.telemetry
     NextOpMode.activeHardwareMap = this.hardwareMap
 
+    var opMode: NextOpMode? = null
+
     try {
-      val opMode = opModeConstructor()
+      opMode = opModeConstructor()
 
       opMode.hooks.forEach(OpModeHook::afterConstruction)
       while (opModeInInit()) {
@@ -90,8 +99,17 @@ internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode) : Linear
       }
       opMode.hooks.forEach(OpModeHook::beforeEnd)
       opMode.end()
-      opMode.hooks.forEach(OpModeHook::afterEnd)
     } finally {
+      // even if the OpMode didn't finish execution we still want to clean up the hooks
+      // and clear the static references to the SDK objects
+      opMode?.hooks?.forEach { hook ->
+        try {
+          hook.afterEnd()
+        } catch (throwable: Throwable) {
+          RobotLog.warn("${hook::class.displayName} threw while cleaning up after the OpMode.", throwable)
+        }
+      }
+
       NextOpMode.activeGamepad1 = null
       NextOpMode.activeGamepad2 = null
       NextOpMode.activeTelemetry = null

@@ -115,17 +115,22 @@ internal object MotorHook : OpModeHook {
  * ensure fresh hardware data per loop while minimizing I/O overhead.
  */
 object BulkReadHook : OpModeHook {
-  private val lynxHubs: List<LynxModule> by lazy {
-    RobotController.hardwareMap.getAll(LynxModule::class.java)
-  }
+  // Resolved per OpMode rather than lazily once: holding LynxModule instances past the end of an
+  // OpMode leaves them stale across reconfigurations and Sloth reloads.
+  private var lynxHubs: List<LynxModule> = emptyList()
 
   override fun beforeStart() {
+    lynxHubs = RobotController.hardwareMap.getAll(LynxModule::class.java)
     lynxHubs.forEach { it.bulkCachingMode = LynxModule.BulkCachingMode.MANUAL }
   }
 
   override fun afterStart() = clearBulkReadCache()
 
   override fun afterPeriodic() = clearBulkReadCache()
+
+  override fun afterEnd() {
+    lynxHubs = emptyList()
+  }
 
   private fun clearBulkReadCache() {
     lynxHubs.forEach { it.clearBulkCache() }
