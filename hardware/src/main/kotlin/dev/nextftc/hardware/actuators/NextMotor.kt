@@ -12,6 +12,7 @@ import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorImplEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Servo
+import dev.anygeneric.blazeftc.BlazeFTC
 import dev.nextftc.control.feedback.PIDCoefficients
 import dev.nextftc.control.feedback.PIDController
 import dev.nextftc.control.feedforward.SimpleFFCoefficients
@@ -151,6 +152,17 @@ class NextMotor @JvmOverloads constructor(
   var controlType: ControlType = ControlType.Throttle(0.0)
     private set
 
+  private var hubId = -1
+  /** I apologize for how awful this is, this is how I was doing it in Blaze. TODO replace */
+  private fun getHubId() : Int {
+    if (hubId == -1) {
+      val match1 = "(?<=module )[0-9]*".toRegex()
+      val hub1 = motor.controller.connectionInfo
+      hubId = match1.find(hub1)!!.value.toInt()
+    }
+    return hubId
+  }
+
   /**
    * Raw motor power (throttle) in the range [-1.0, 1.0].
    *
@@ -159,7 +171,12 @@ class NextMotor @JvmOverloads constructor(
    */
   private var power by Caching(cacheTolerance) {
     if (it != null) {
-      motor.power = it
+      if (RobotController.blazeEnabled) {
+        val port = this.motor.portNumber
+        BlazeFTC.setMotorPower(getHubId(), port, it)
+      } else {
+        motor.power = it
+      }
     }
   }
 

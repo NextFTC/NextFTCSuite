@@ -3,6 +3,10 @@ package dev.nextftc.robot.opmode
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
+import dev.anygeneric.blazeftc.BlazeDummyPlug
+import dev.anygeneric.blazeftc.BlazeFTC
+import dev.anygeneric.blazeftc.DummyPlugOpMode
+import dev.nextftc.hardware.RobotController
 import dev.nextftc.robot.NextFTCException
 import dev.nextftc.robot.NextRobot
 import dev.nextftc.robot.RobotLog
@@ -54,6 +58,15 @@ abstract class NextOpMode internal constructor(internal val hooks: MutableList<O
   /** Called exactly once when the OpMode finishes execution. */
   open fun end() {}
 
+  /** Return true from this function to enable Blaze */
+  open fun enableBlaze() : Boolean = false
+
+  /** Run when Blaze provides new Control Hub Bulk Data */
+  open fun onControlHubBulkData() {}
+
+  /** Run when Blaze provides new Control Hub Bulk Data */
+  open fun onExpansionHubBulkData() {}
+
   companion object {
     @JvmSynthetic internal var activeGamepad1: Gamepad? = null
 
@@ -82,6 +95,11 @@ internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode) : Linear
     try {
       opMode = opModeConstructor()
 
+      RobotController.blazeEnabled = RobotController.blazeEnabled || opMode.enableBlaze()
+      if (RobotController.blazeEnabled)
+        BlazeDummyPlug.initializeBlazeFTC(hardwareMap)
+
+      opMode.hooks.forEach { it.withNextOpMode(opMode) }
       opMode.hooks.forEach(OpModeHook::afterConstruction)
       while (opModeInInit()) {
         opMode.hooks.forEach(OpModeHook::beforeDisabled)
@@ -89,6 +107,8 @@ internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode) : Linear
         opMode.hooks.forEach(OpModeHook::afterDisabled)
       }
       waitForStart()
+      if (RobotController.blazeEnabled)
+        BlazeFTC.run(0)
       opMode.hooks.forEach(OpModeHook::beforeStart)
       opMode.start()
       opMode.hooks.forEach(OpModeHook::afterStart)
@@ -114,6 +134,9 @@ internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode) : Linear
       NextOpMode.activeGamepad2 = null
       NextOpMode.activeTelemetry = null
       NextOpMode.activeHardwareMap = null
+
+      if (RobotController.blazeEnabled)
+        BlazeDummyPlug.closeBlazeFTC()
     }
   }
 }

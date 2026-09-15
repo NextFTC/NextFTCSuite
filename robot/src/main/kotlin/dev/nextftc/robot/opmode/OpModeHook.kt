@@ -10,8 +10,11 @@ package dev.nextftc.robot.opmode
 
 import com.pedropathing.ivy.Scheduler
 import com.qualcomm.hardware.lynx.LynxModule
+import dev.anygeneric.blazeftc.BlazeDummyPlug
+import dev.anygeneric.blazeftc.Hub
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.actuators.NextMotor
+import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.robot.Mechanism
 import dev.nextftc.robot.NextRobot
 import dev.nextftc.robot.Telemetry
@@ -24,6 +27,12 @@ import dev.nextftc.robot.triggers.Trigger
  * automatically without requiring the user to clutter their OpMode code.
  */
 interface OpModeHook {
+
+  /**
+   * Called immediately after the OpMode's onInit phase.
+   * Hands a reference to the NextOpMode to the Hook in case it needs to call methods.
+   */
+  fun withNextOpMode(opMode: NextOpMode) {}
 
   /** Called immediately after the OpMode's onInit phase. */
   fun afterConstruction() {}
@@ -134,5 +143,24 @@ object BulkReadHook : OpModeHook {
 
   private fun clearBulkReadCache() {
     lynxHubs.forEach { it.clearBulkCache() }
+  }
+}
+
+class BlazeBulkReadHook(val hub: NextLynxModule.Type, val fastMode: Boolean) : OpModeHook {
+  override fun withNextOpMode(opMode: NextOpMode) {
+    if (RobotController.blazeEnabled) {
+      val hw = RobotController.hardwareMap
+      val hub = if (hub == NextLynxModule.Type.CONTROL_HUB) {
+          Hub.CtrlHub
+      } else { Hub.ExHub }
+      val packets = if (fastMode) 2 else 1
+      BlazeDummyPlug.engageBulkReadAcceleration(hw, hub, packets) {
+        if (hub == Hub.CtrlHub) {
+          opMode.onControlHubBulkData()
+        } else {
+          opMode.onExpansionHubBulkData()
+        }
+      }
+    }
   }
 }

@@ -23,6 +23,7 @@ ftc-common = { group = "org.firstinspires.ftc", name = "FtcCommon", version.ref 
 sloth = { module = "dev.frozenmilk.sinister:Sloth", version.ref = "sloth" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 ivy = { module = "com.pedropathing.ivy:core", version.ref = "ivy" }
+blaze = { module = "dev.anygeneric:blazeftc", version = "0.1.61"}
 
 [bundles]
 kotest = ["kotest-runner", "kotest-assertations", "kotest-property", "kotest-data-driven"]
