@@ -98,7 +98,7 @@ internal object RobotScanner : Scanner {
     if (candidates.size > 1) {
       RobotLog.Global.addWarning(
         "Multiple NextFTC robot classes found: ${candidates.map { it.kClass }}. " +
-            "Ensure you have only one class that implements NextRobot.",
+          "Ensure you have only one class that implements NextRobot.",
       )
       return
     }
@@ -108,7 +108,7 @@ internal object RobotScanner : Scanner {
     if (constructor == null) {
       reportError(
         "No usable constructor was found for $kClass, so it could not be created. " +
-            "Ensure it is either a singleton object or has a public no-argument constructor.",
+          "Ensure it is either a singleton object or has a public no-argument constructor.",
       )
       return
     }
@@ -118,7 +118,7 @@ internal object RobotScanner : Scanner {
     } catch (throwable: Throwable) {
       reportError(
         "Failed to create an instance of $kClass. " +
-            "Check its constructor and property initializers for code that throws.",
+          "Check its constructor and property initializers for code that throws.",
         throwable,
       )
       return
@@ -153,10 +153,7 @@ internal object RobotScanner : Scanner {
     RobotLog.Global.clearError()
   }
 
-  private data class RobotCandidate(
-    val kClass: KClass<out NextRobot>,
-    val constructor: (() -> NextRobot)?,
-  )
+  private data class RobotCandidate(val kClass: KClass<out NextRobot>, val constructor: (() -> NextRobot)?)
 }
 
 /**
