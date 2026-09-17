@@ -32,6 +32,7 @@ class NextPinpoint(initializer: () -> GoBildaPinpointDriver) {
     bus: Int,
   ) : this(
     {
+      module.claimPort("i2c", bus)
       GoBildaPinpointDriver(module.i2cController(bus), true)
     },
   ) {

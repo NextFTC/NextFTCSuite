@@ -79,7 +79,10 @@ class NextFeedbackServo @JvmOverloads constructor(
     feedback: AnalogFeedback,
     cacheTolerance: Double = 0.01,
   ) : this(
-    { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
+    {
+      module.claimPort("servo", port)
+      ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType())
+    },
     { feedback },
     cacheTolerance,
   )

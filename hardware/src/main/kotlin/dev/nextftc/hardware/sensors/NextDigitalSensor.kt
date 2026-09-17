@@ -56,7 +56,10 @@ class NextDigitalSensor @JvmOverloads constructor(
     port: Int,
     inverted: Boolean = true,
   ) : this(
-    { DigitalChannelImpl(module.digitalController, port) },
+    {
+      module.claimPort("digital", port)
+      DigitalChannelImpl(module.digitalController, port)
+    },
     inverted,
   ) {
     require(port in 0..7) { "Expected port in range [0, 7], got $port" }
@@ -67,7 +70,9 @@ class NextDigitalSensor @JvmOverloads constructor(
     name: String,
     inverted: Boolean = true,
   ) : this(
-    { RobotController.hardwareMap[name] as DigitalChannel },
+    {
+      RobotController.hardwareMap[name] as DigitalChannel
+    },
     inverted,
   )
 

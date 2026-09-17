@@ -49,7 +49,10 @@ open class NextCRServo @JvmOverloads constructor(
     port: Int,
     cacheTolerance: Double = 0.01,
   ) : this(
-    { CRServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
+    {
+      module.claimPort("servo", port)
+      CRServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType())
+    },
     cacheTolerance,
   ) {
     require(port in 0..5) { "Expected port in range [0, 5], got $port" }

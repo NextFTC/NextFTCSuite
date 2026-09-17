@@ -34,6 +34,16 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
     LazyHardware { LynxI2cDeviceSynchV2(RobotController.appContext, module, bus) }
   }
 
+  /** Tracks used ports. Resets each OpMode. */
+  private val usedPorts by LazyHardware { HashSet<String>() }
+
+  /** Throws if this port is already used on this hub. */
+  internal fun claimPort(kind: String, port: Int) {
+    check(usedPorts.add("$kind:$port")) {
+      "$type: $kind port $port is being used by two or more devices, only one is allowed"
+    }
+  }
+
   /** Current module temperature. */
   val temperature: Temperature
     get() = module.getTemperature(TempUnit.CELSIUS).celsius

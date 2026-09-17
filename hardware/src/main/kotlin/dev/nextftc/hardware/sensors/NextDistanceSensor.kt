@@ -56,7 +56,10 @@ class NextDistanceSensor(initializer: () -> DistanceSensor) {
     module: NextLynxModule,
     bus: Int,
   ) : this(
-    { LynxI2cColorRangeSensor(module.i2cController(bus), true) },
+    {
+      module.claimPort("i2c", bus)
+      LynxI2cColorRangeSensor(module.i2cController(bus), true)
+    },
   ) {
     require(bus in 0..3) { "Expected bus in range [0, 3], got $bus" }
   }
