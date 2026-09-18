@@ -115,6 +115,13 @@ object RobotController : OnCreateEventLoop {
     get() = controlHub.auxiliaryVoltage
 
   /**
+   * Blaze has been enabled
+   */
+  @JvmStatic
+  var blazeEnabled: Boolean = false
+    set(value) {field = field || value}
+
+  /**
    * Lifecycle callback used to initialize runtime context for hardware access.
    *
    * @param context Android context provided by the FTC runtime.

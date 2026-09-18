@@ -21,6 +21,7 @@ dependencies {
   compileOnly(libs.bundles.ftc)
   implementation(libs.sloth)
   implementation(libs.kotlin.reflect)
+  compileOnly(libs.blaze)
 
   testImplementation(libs.bundles.kotest)
   testImplementation(kotlin("test"))

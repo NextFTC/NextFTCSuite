@@ -10,8 +10,12 @@ package dev.nextftc.robot.opmode
 
 import com.pedropathing.ivy.Scheduler
 import com.qualcomm.hardware.lynx.LynxModule
+import dev.anygeneric.blazeftc.BlazeDummyPlug
+import dev.anygeneric.blazeftc.BlazeFTC
+import dev.anygeneric.blazeftc.Hub
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.actuators.NextMotor
+import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.robot.Mechanism
 import dev.nextftc.robot.NextRobot
 import dev.nextftc.robot.Telemetry
@@ -24,6 +28,12 @@ import dev.nextftc.robot.triggers.Trigger
  * automatically without requiring the user to clutter their OpMode code.
  */
 interface OpModeHook {
+
+  /**
+   * Called immediately after the OpMode's onInit phase.
+   * Hands a reference to the NextOpMode to the Hook in case it needs to call methods.
+   */
+  fun withNextOpMode(opMode: NextOpMode) {}
 
   /** Called immediately after the OpMode's onInit phase. */
   fun afterConstruction() {}
@@ -134,5 +144,50 @@ object BulkReadHook : OpModeHook {
 
   private fun clearBulkReadCache() {
     lynxHubs.forEach { it.clearBulkCache() }
+  }
+}
+
+/**
+ * Hook to enable Blaze control of Bulk Reads on a single hub. Do not run this with BulkReadHook.
+ * fastMode controls the level of concurrency. false will run at ~500 hz and is very stable.
+ * true is stable but if you enable it and then do too many writes, it could become unstable.
+ * Do not put two hooks on the same hub. This hook does nothing if Blaze wasn't enabled.
+ */
+class BlazeBulkReadHook(val hub: NextLynxModule.Type, val fastMode: Boolean) : OpModeHook {
+  override fun withNextOpMode(opMode: NextOpMode) {
+    if (!RobotController.blazeEnabled) {
+      return
+    }
+    BlazeFTC.load()
+    val hw = RobotController.hardwareMap
+    val hub = if (hub == NextLynxModule.Type.CONTROL_HUB) {
+      Hub.CtrlHub
+    } else { Hub.ExHub }
+    val packets = if (fastMode) 2 else 1
+    BlazeDummyPlug.engageBulkReadAcceleration(hw, hub, packets) {
+      if (hub == Hub.CtrlHub) {
+        opMode.onControlHubBulkData()
+      } else {
+        opMode.onExpansionHubBulkData()
+      }
+    }
+  }
+}
+
+object BlazeStartHook : OpModeHook {
+  override fun afterConstruction() {
+    if (RobotController.blazeEnabled)
+      BlazeDummyPlug.initializeBlazeFTC(RobotController.hardwareMap)
+  }
+
+  override fun beforeStart() {
+      if (RobotController.blazeEnabled)
+        BlazeFTC.run(0)
+  }
+}
+object BlazeEndHook : OpModeHook {
+  override fun afterEnd() {
+    if (RobotController.blazeEnabled)
+      BlazeDummyPlug.closeBlazeFTC()
   }
 }
