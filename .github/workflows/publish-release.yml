@@ -1,0 +1,69 @@
+name: Publish Release
+
+on:
+  release:
+    types: [ published ]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (without the leading v)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "publish-release"
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Resolve version
+        id: version
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+          INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          VERSION="${INPUT_VERSION:-${TAG#v}}"
+          if [ -z "$VERSION" ]; then
+            echo "::error::Could not determine a version to publish."
+            exit 1
+          fi
+          case "$VERSION" in
+            *-SNAPSHOT)
+              echo "::error::Refusing to publish snapshot version $VERSION to Maven Central."
+              exit 1
+              ;;
+          esac
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Publishing version $VERSION"
+
+      - name: Publish to Maven Central
+        env:
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          MVN_GPG_KEY: ${{ secrets.MVN_GPG_KEY }}
+          MVN_GPG_PASSWORD: ${{ secrets.MVN_GPG_PASSWORD }}
+        run: >-
+          ./gradlew deployCentralPortal
+          -Pversion=${{ steps.version.outputs.version }}
+          --no-configuration-cache
