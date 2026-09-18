@@ -11,6 +11,7 @@ package dev.nextftc.robot.opmode
 import com.pedropathing.ivy.Scheduler
 import com.qualcomm.hardware.lynx.LynxModule
 import dev.anygeneric.blazeftc.BlazeDummyPlug
+import dev.anygeneric.blazeftc.BlazeFTC
 import dev.anygeneric.blazeftc.Hub
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.actuators.NextMotor
@@ -157,6 +158,7 @@ class BlazeBulkReadHook(val hub: NextLynxModule.Type, val fastMode: Boolean) : O
     if (!RobotController.blazeEnabled) {
       return
     }
+    BlazeFTC.load()
     val hw = RobotController.hardwareMap
     val hub = if (hub == NextLynxModule.Type.CONTROL_HUB) {
       Hub.CtrlHub
@@ -169,5 +171,23 @@ class BlazeBulkReadHook(val hub: NextLynxModule.Type, val fastMode: Boolean) : O
         opMode.onExpansionHubBulkData()
       }
     }
+  }
+}
+
+object BlazeStartHook : OpModeHook {
+  override fun afterConstruction() {
+    if (RobotController.blazeEnabled)
+      BlazeDummyPlug.initializeBlazeFTC(RobotController.hardwareMap)
+  }
+
+  override fun beforeStart() {
+      if (RobotController.blazeEnabled)
+        BlazeFTC.run(0)
+  }
+}
+object BlazeEndHook : OpModeHook {
+  override fun afterEnd() {
+    if (RobotController.blazeEnabled)
+      BlazeDummyPlug.closeBlazeFTC()
   }
 }
