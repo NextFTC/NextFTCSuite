@@ -8,6 +8,8 @@
 
 package dev.nextftc.hardware.actuators
 
+import com.qualcomm.hardware.lynx.LynxController
+import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorImplEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
@@ -152,16 +154,16 @@ class NextMotor @JvmOverloads constructor(
   var controlType: ControlType = ControlType.Throttle(0.0)
     private set
 
-  private var hubId = -1
-  /** I apologize for how awful this is, this is how I was doing it in Blaze. TODO replace */
-  private fun getHubId() : Int {
-    if (hubId == -1) {
-      val match1 = "(?<=module )[0-9]*".toRegex()
-      val hub1 = motor.controller.connectionInfo
-      hubId = match1.find(hub1)!!.value.toInt()
+  private var hubId: Int = -1
+    get() = if (field == -1) {
+      val lcField = LynxController::class.java.getField("module")
+      lcField.isAccessible = true
+      val module = lcField.get(motor.controller) as LynxModule
+      hubId = module.moduleAddress
+      field
+    } else {
+      field
     }
-    return hubId
-  }
 
   /**
    * Raw motor power (throttle) in the range [-1.0, 1.0].
@@ -173,7 +175,7 @@ class NextMotor @JvmOverloads constructor(
     if (it != null) {
       if (RobotController.blazeEnabled) {
         val port = this.motor.portNumber
-        BlazeFTC.setMotorPower(getHubId(), port, it)
+        BlazeFTC.setMotorPower(hubId, port, it)
       } else {
         motor.power = it
       }

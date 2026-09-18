@@ -5,7 +5,6 @@ import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
 import dev.anygeneric.blazeftc.BlazeDummyPlug
 import dev.anygeneric.blazeftc.BlazeFTC
-import dev.anygeneric.blazeftc.DummyPlugOpMode
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.robot.NextFTCException
 import dev.nextftc.robot.NextRobot
@@ -67,6 +66,9 @@ abstract class NextOpMode internal constructor(internal val hooks: MutableList<O
   /** Run when Blaze provides new Control Hub Bulk Data */
   open fun onExpansionHubBulkData() {}
 
+  /** Run when Blaze provides new localization data */
+  open fun onLocalizationData() {}
+
   companion object {
     @JvmSynthetic internal var activeGamepad1: Gamepad? = null
 
@@ -95,7 +97,7 @@ internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode) : Linear
     try {
       opMode = opModeConstructor()
 
-      RobotController.blazeEnabled = RobotController.blazeEnabled || opMode.enableBlaze()
+      RobotController.blazeEnabled = opMode.enableBlaze()
       if (RobotController.blazeEnabled)
         BlazeDummyPlug.initializeBlazeFTC(hardwareMap)
 

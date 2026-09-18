@@ -146,20 +146,27 @@ object BulkReadHook : OpModeHook {
   }
 }
 
+/**
+ * Hook to enable Blaze control of Bulk Reads on a single hub. Do not run this with BulkReadHook.
+ * fastMode controls the level of concurrency. false will run at ~500 hz and is very stable.
+ * true is stable but if you enable it and then do too many writes, it could become unstable.
+ * Do not put two hooks on the same hub. This hook does nothing if Blaze wasn't enabled.
+ */
 class BlazeBulkReadHook(val hub: NextLynxModule.Type, val fastMode: Boolean) : OpModeHook {
   override fun withNextOpMode(opMode: NextOpMode) {
-    if (RobotController.blazeEnabled) {
-      val hw = RobotController.hardwareMap
-      val hub = if (hub == NextLynxModule.Type.CONTROL_HUB) {
-          Hub.CtrlHub
-      } else { Hub.ExHub }
-      val packets = if (fastMode) 2 else 1
-      BlazeDummyPlug.engageBulkReadAcceleration(hw, hub, packets) {
-        if (hub == Hub.CtrlHub) {
-          opMode.onControlHubBulkData()
-        } else {
-          opMode.onExpansionHubBulkData()
-        }
+    if (!RobotController.blazeEnabled) {
+      return
+    }
+    val hw = RobotController.hardwareMap
+    val hub = if (hub == NextLynxModule.Type.CONTROL_HUB) {
+      Hub.CtrlHub
+    } else { Hub.ExHub }
+    val packets = if (fastMode) 2 else 1
+    BlazeDummyPlug.engageBulkReadAcceleration(hw, hub, packets) {
+      if (hub == Hub.CtrlHub) {
+        opMode.onControlHubBulkData()
+      } else {
+        opMode.onExpansionHubBulkData()
       }
     }
   }
