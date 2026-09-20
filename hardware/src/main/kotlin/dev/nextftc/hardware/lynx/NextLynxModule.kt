@@ -43,13 +43,14 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
     LazyHardware { LynxI2cDeviceSynchV2(RobotController.appContext, module, bus) }
   }
 
-  enum class PortKind{
+  enum class PortKind {
     MOTOR,
     SERVO,
     I2C,
     DIGITAL,
-    ANALOG
+    ANALOG,
   }
+
   /** Tracks used ports. Resets each OpMode. */
   private val usedPorts by LazyHardware { HashSet<Pair<PortKind, Int>>() }
 
@@ -117,13 +118,13 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
   }
 
   /** Creates a [LynxI2cColorRangeSensor] on [bus], claiming the bus. */
-  internal fun colorRangeSensor(bus: Int): LynxI2cColorRangeSensor  {
+  internal fun colorRangeSensor(bus: Int): LynxI2cColorRangeSensor {
     claim(PortKind.I2C, bus)
     return LynxI2cColorRangeSensor(i2cController(bus), true)
   }
 
   /** Creates a [GoBildaPinpointDriver] on [bus], claiming the bus. */
-  internal fun pinpoint(bus: Int): GoBildaPinpointDriver  {
+  internal fun pinpoint(bus: Int): GoBildaPinpointDriver {
     claim(PortKind.I2C, bus)
     return GoBildaPinpointDriver(i2cController(bus), true)
   }
@@ -135,7 +136,7 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
   }
 
   /** Analog controller for [port], claiming the port. */
-  internal fun analogChannel(port: Int) : AnalogInput {
+  internal fun analogChannel(port: Int): AnalogInput {
     claim(PortKind.ANALOG, port)
     return AnalogInput(analogController, port)
   }
