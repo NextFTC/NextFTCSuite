@@ -73,11 +73,7 @@ class NextFeedbackCRServo @JvmOverloads constructor(
     cacheTolerance: Double = 0.01,
   ) : this(
     {
-      CRServoImplEx(
-        module.servoController,
-        port,
-        ServoConfigurationType.getStandardServoType(),
-      )
+      module.crServo(port)
     },
     { feedback },
     cacheTolerance,
