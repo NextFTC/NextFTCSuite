@@ -12,6 +12,8 @@ class Caching(private val cacheTolerance: Double, private val whenSet: (Double?)
   override fun getValue(thisRef: Any?, property: KProperty<*>): Double =
     if (cachedValue.isNaN()) 0.0 else cachedValue
 
+  fun invalidate() { cachedValue = Double.NaN }
+
   override fun setValue(thisRef: Any?, property: KProperty<*>, value: Double) {
     if (cachedValue.isNaN() || abs(cachedValue - value) > cacheTolerance) {
       cachedValue = value
