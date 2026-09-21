@@ -25,7 +25,7 @@ object Pedro {
   private var factory: Function<HardwareMap, Follower>? = null
   internal var follower: Follower? = null
 
-  /** Registers the function used to build the [Follower]. Typically `Constants::create`. */
+  /** Registers the function used to build the [Follower] */
   @JvmStatic
   fun configure(followerFactory: Function<HardwareMap, Follower>) {
     factory = followerFactory
@@ -37,7 +37,7 @@ object Pedro {
     follower?.let { return it }
     val f = factory
       ?: error(
-        "Call Pedro.configure(Constants::create) once, e.g. in your robot class's constructor.",
+        "Call Pedro.configure()",
       )
     return f.apply(RobotController.hardwareMap).also { follower = it }
   }
