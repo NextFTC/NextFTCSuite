@@ -7,6 +7,7 @@ kotest = "5.9.1"
 sloth = "0.3.2"
 ejml = "0.41"
 ivy = "1.1.1"
+pedro = "3.0.1"
 
 [libraries]
 dokka-mathjax-plugin = { module = "org.jetbrains.dokka:mathjax-plugin" }
@@ -23,6 +24,7 @@ ftc-common = { group = "org.firstinspires.ftc", name = "FtcCommon", version.ref 
 sloth = { module = "dev.frozenmilk.sinister:Sloth", version.ref = "sloth" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 ivy = { module = "com.pedropathing.ivy:core", version.ref = "ivy" }
+pedro = { module = "com.pedropathing:revhub", version.ref = "pedro" }
 
 [bundles]
 kotest = ["kotest-runner", "kotest-assertations", "kotest-property", "kotest-data-driven"]
