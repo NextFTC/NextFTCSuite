@@ -17,6 +17,7 @@ android {
 dependencies {
   api(project(":hardware"))
   api(libs.ivy)
+  api(libs.pedro)
   implementation(libs.functional.interfaces)
   compileOnly(libs.bundles.ftc)
   implementation(libs.sloth)
