@@ -10,7 +10,7 @@ package dev.nextftc.robot.pedro
 
 import dev.nextftc.robot.opmode.OpModeHook
 object PedroHook : OpModeHook {
-  override fun afterPeriodic() {
+  override fun beforePeriodic() {
     Pedro.follower?.update()
   }
 
