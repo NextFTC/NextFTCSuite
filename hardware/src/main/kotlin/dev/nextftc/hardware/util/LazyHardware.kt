@@ -35,5 +35,7 @@ class LazyHardware<T>(private val initializer: () -> T) : ReadOnlyProperty<Any?,
     if (value != null) block.configure(value)
   }
 
-  fun invalidate() { value = null }
+  fun invalidate() {
+    value = null
+  }
 }
