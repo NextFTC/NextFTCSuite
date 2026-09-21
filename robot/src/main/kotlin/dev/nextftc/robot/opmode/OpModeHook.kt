@@ -103,8 +103,14 @@ internal object TelemetryHook : OpModeHook {
  * Continuously evaluates and updates all NextMotor control states.
  */
 internal object MotorHook : OpModeHook {
+  override fun afterConstruction() {
+    NextMotor.resetAll()
+  }
   override fun afterPeriodic() {
-    NextMotor.motorEventLoop.poll()
+    NextMotor.pollAll()
+  }
+  override fun afterEnd() {
+    NextMotor.resetAll()
   }
 }
 

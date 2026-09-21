@@ -30,6 +30,7 @@ import dev.nextftc.units.radians
 import dev.nextftc.units.seconds
 import dev.nextftc.units.volts
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit
+import java.lang.ref.WeakReference
 import kotlin.math.sign
 import dev.nextftc.units.measuretypes.Voltage as VoltageMeasure
 
@@ -106,7 +107,7 @@ class NextMotor @JvmOverloads constructor(
   )
 
   init {
-    motorEventLoop.bind(this::update)
+    register(this)
   }
 
   private val lazyMotor = LazyHardware(initializer)
@@ -152,16 +153,23 @@ class NextMotor @JvmOverloads constructor(
     private set
 
   /**
+   * Caching delegate backing [power].
+   *
+   * Held directly so that it can be invalidated between OpMode runs.
+   */
+  private val powerCache = Caching(cacheTolerance) {
+    if (it != null) {
+      motor.power = it
+    }
+  }
+
+  /**
    * Raw motor power (throttle) in the range [-1.0, 1.0].
    *
    * This backing field is managed by the caching delegate to reduce
    * redundant hardware writes.
    */
-  private var power by Caching(cacheTolerance) {
-    if (it != null) {
-      motor.power = it
-    }
-  }
+  private var power by powerCache
 
   /**
    * Motor rotation direction (FORWARD or REVERSE).
@@ -171,11 +179,7 @@ class NextMotor @JvmOverloads constructor(
   var direction = Direction.FORWARD
     set(value) {
       field = value
-      if (lazyMotor.isInitialized) {
-        motor.direction = value.sdkDirection
-      } else {
-        lazyMotor.applyAfterInit { it.direction = value.sdkDirection }
-      }
+      lazyMotor.applyAfterInit { it.direction = value.sdkDirection }
     }
 
   /**
@@ -186,11 +190,7 @@ class NextMotor @JvmOverloads constructor(
   var zeroPowerBehavior = ZeroPowerBehavior.FLOAT
     set(value) {
       field = value
-      if (lazyMotor.isInitialized) {
-        motor.zeroPowerBehavior = value.sdkZeroPowerBehavior
-      } else {
-        lazyMotor.applyAfterInit { it.zeroPowerBehavior = value.sdkZeroPowerBehavior }
-      }
+      lazyMotor.applyAfterInit { it.zeroPowerBehavior = value.sdkZeroPowerBehavior }
     }
 
   /**
@@ -210,11 +210,7 @@ class NextMotor @JvmOverloads constructor(
   var currentAlert: Current
     get() = motor.getCurrentAlert(CurrentUnit.AMPS).amperes
     set(value) {
-      if (lazyMotor.isInitialized) {
-        motor.setCurrentAlert(value.magnitude, CurrentUnit.AMPS)
-      } else {
-        lazyMotor.applyAfterInit { it.setCurrentAlert(value.magnitude, CurrentUnit.AMPS) }
-      }
+      lazyMotor.applyAfterInit { it.setCurrentAlert(value.magnitude, CurrentUnit.AMPS) }
     }
 
   /**
@@ -305,6 +301,21 @@ class NextMotor @JvmOverloads constructor(
       }
       is ControlType.Follow -> mode.motor.power * mode.direction.multiplier
     }
+  }
+
+  /**
+   * Clears all state that must not survive the end of an OpMode.
+   *
+   * Drops the cached hardware reference (the hardware map is rebuilt per run),
+   * invalidates the power cache so the next command always reaches hardware,
+   * and returns the motor to a stopped throttle state.
+   */
+  internal fun reset() {
+    lazyMotor.invalidate()
+    powerCache.invalidate()
+    positionPID.reset()
+    velocityPID.reset()
+    controlType = ControlType.Throttle(0.0)
   }
 
   /**
@@ -461,7 +472,44 @@ class NextMotor @JvmOverloads constructor(
   }
 
   companion object {
+    /**
+     * Every motor constructed so far, held weakly so that instances belonging to
+     * finished OpModes can be collected instead of accumulating across runs.
+     */
+    private val motors = mutableListOf<WeakReference<NextMotor>>()
+
+    /**
+     * Event loop retained for external consumers that bind their own actions.
+     */
+    @JvmStatic
     val motorEventLoop: EventLoop = EventLoop()
+
+    /**
+     * Records a newly constructed motor in the registry.
+     */
+    @JvmStatic
+    fun register(motor: NextMotor) {
+      motors += WeakReference(motor)
+    }
+
+    /**
+     * Updates every live motor, then polls any externally bound actions.
+     */
+    @JvmStatic
+    fun pollAll() {
+      motors.removeAll { it.get() == null }
+      motors.forEach { it.get()?.update() }
+      motorEventLoop.poll()
+    }
+
+    /**
+     * Resets every live motor. Called at the start and end of each OpMode.
+     */
+    @JvmStatic
+    fun resetAll() {
+      motors.removeAll { it.get() == null }
+      motors.forEach { it.get()?.reset() }
+    }
   }
 }
 

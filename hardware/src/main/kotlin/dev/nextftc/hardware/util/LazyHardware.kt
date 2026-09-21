@@ -31,10 +31,11 @@ class LazyHardware<T>(private val initializer: () -> T) : ReadOnlyProperty<Any?,
   private val onInit = mutableListOf<Configurator<T>>()
 
   fun applyAfterInit(block: Configurator<T>) {
-    if (value != null) {
-      block.configure(value)
-    } else {
-      onInit += block
-    }
+    onInit += block
+    if (value != null) block.configure(value)
+  }
+
+  fun invalidate() {
+    value = null
   }
 }
