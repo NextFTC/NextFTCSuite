@@ -44,7 +44,7 @@ object NextFTCOpModeScanner : OpModeScanner() {
       RobotLog.info("Skipping disabled NextFTC OpMode class: $kcls")
       return
     }
-    val enableBlaze = kcls.hasAnnotation<BlazeEnabled>()
+    val enableBlaze = BlazeOpMode::class.java.isAssignableFrom(cls)
 
     when (val metaResult = opModeMetaFromClass(kcls)) {
       is OpModeMetaCheckResult.FoundAnnotation -> {

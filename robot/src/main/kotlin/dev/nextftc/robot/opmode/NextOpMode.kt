@@ -55,15 +55,6 @@ abstract class NextOpMode internal constructor(internal val hooks: MutableList<O
   /** Called exactly once when the OpMode finishes execution. */
   open fun end() {}
 
-  /** Run when Blaze provides new Control Hub Bulk Data */
-  open fun onControlHubBulkData() {}
-
-  /** Run when Blaze provides new Control Hub Bulk Data */
-  open fun onExpansionHubBulkData() {}
-
-  /** Run when Blaze provides new localization data */
-  open fun onLocalizationData() {}
-
   companion object {
     @JvmSynthetic internal var activeGamepad1: Gamepad? = null
 
@@ -78,6 +69,26 @@ abstract class NextOpMode internal constructor(internal val hooks: MutableList<O
         "constructed automatically when the OpMode is run; they cannot be instantiated directly.",
     )
   }
+}
+
+/**
+ * Base class for NextFTC OpModes that run with Blaze enabled.
+ *
+ * Extending this class instead of [NextOpMode] routes motor writes through Blaze for the whole
+ * OpMode and exposes callbacks for data Blaze provides.
+ *
+ * @param robot The automatically resolved [dev.nextftc.robot.NextRobot] instance.
+ * @param hooks Additional custom hooks to execute during the OpMode lifecycle.
+ */
+abstract class BlazeOpMode(robot: NextRobot, vararg hooks: OpModeHook) : NextOpMode(robot, *hooks) {
+  /** Run when Blaze provides new Control Hub Bulk Data. Requires a [BlazeBulkReadHook]. */
+  open fun onControlHubBulkData() {}
+
+  /** Run when Blaze provides new Expansion Hub Bulk Data. Requires a [BlazeBulkReadHook]. */
+  open fun onExpansionHubBulkData() {}
+
+  /** Run when Blaze provides new localization data */
+  open fun onLocalizationData() {}
 }
 
 internal class BoundNextOpMode(

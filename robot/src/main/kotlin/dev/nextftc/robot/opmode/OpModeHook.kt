@@ -143,7 +143,7 @@ object BulkReadHook : OpModeHook {
 
 /**
  * Internal hook responsible for the Blaze lifecycle. Added to the front of the hook list by
- * [BoundNextOpMode] for OpModes annotated with [BlazeEnabled], so it is set up before and torn
+ * [BoundNextOpMode] for [BlazeOpMode]s, so it is set up before and torn
  * down after every other hook.
  */
 internal object BlazeHook : OpModeHook {
@@ -165,11 +165,11 @@ internal object BlazeHook : OpModeHook {
  * Hook to enable Blaze control of Bulk Reads on a single hub. Do not run this with BulkReadHook.
  * fastMode controls the level of concurrency. false will run at ~500 hz and is very stable.
  * true is stable but if you enable it and then do too many writes, it could become unstable.
- * Do not put two hooks on the same hub. This hook does nothing if Blaze wasn't enabled.
+ * Do not put two hooks on the same hub. This hook does nothing if the OpMode isn't a [BlazeOpMode].
  */
 class BlazeBulkReadHook(val hub: NextLynxModule.Type, val fastMode: Boolean) : OpModeHook {
   override fun afterConstruction(opMode: NextOpMode) {
-    if (!RobotController.blazeEnabled) {
+    if (opMode !is BlazeOpMode) {
       return
     }
     BlazeFTC.load()
