@@ -21,6 +21,7 @@ dependencyResolutionManagement {
     google()
     maven("https://repo.dairy.foundation/releases")
     maven("https://repo.dairy.foundation/snapshots")
+    maven("https://maven.anygeneric.dev/")
     mavenLocal()
   }
 }
