@@ -3,6 +3,8 @@ package dev.nextftc.robot.opmode
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
+import dev.anygeneric.blazeftc.BlazeDummyPlug
+import dev.anygeneric.blazeftc.BlazeFTC
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.robot.NextFTCException
 import dev.nextftc.robot.NextRobot
@@ -25,12 +27,10 @@ abstract class NextOpMode internal constructor(internal val hooks: MutableList<O
    * @param hooks Additional custom hooks to execute during the OpMode lifecycle.
    */
   constructor(robot: NextRobot, vararg hooks: OpModeHook) : this(hooks.toMutableList()) {
-    this.hooks.add(0, BlazeStartHook)
     this.hooks += RobotHook(robot)
     this.hooks += SchedulerHook
     this.hooks += MotorHook
     this.hooks += TelemetryHook
-    this.hooks += BlazeEndHook
   }
 
   /** The primary gamepad provided by the Driver Station. */
@@ -82,22 +82,18 @@ abstract class NextOpMode internal constructor(internal val hooks: MutableList<O
   }
 }
 
-internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode, private val enableBlaze: Boolean) : LinearOpMode() {
+internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode) : LinearOpMode() {
   override fun runOpMode() {
     NextOpMode.activeGamepad1 = this.gamepad1
     NextOpMode.activeGamepad2 = this.gamepad2
     NextOpMode.activeTelemetry = this.telemetry
     NextOpMode.activeHardwareMap = this.hardwareMap
 
-    RobotController.blazeEnabled = enableBlaze
-
     var opMode: NextOpMode? = null
 
     try {
       opMode = opModeConstructor()
-
-      opMode.hooks.forEach(OpModeHook::afterConstruction)
-      opMode.hooks.forEach { it.withNextOpMode(opMode) }
+      opMode.hooks.forEach { it.afterConstruction(opMode) }
       while (opModeInInit()) {
         opMode.hooks.forEach(OpModeHook::beforeDisabled)
         opMode.disabledPeriodic()
@@ -124,6 +120,59 @@ internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode, private 
           RobotLog.warn("${hook::class.displayName} threw while cleaning up after the OpMode.", throwable)
         }
       }
+
+      NextOpMode.activeGamepad1 = null
+      NextOpMode.activeGamepad2 = null
+      NextOpMode.activeTelemetry = null
+      NextOpMode.activeHardwareMap = null
+    }
+  }
+}
+
+internal class BlazeBoundOpMode(val opModeConstructor: () -> NextOpMode) : LinearOpMode() {
+  override fun runOpMode() {
+    NextOpMode.activeGamepad1 = this.gamepad1
+    NextOpMode.activeGamepad2 = this.gamepad2
+    NextOpMode.activeTelemetry = this.telemetry
+    NextOpMode.activeHardwareMap = this.hardwareMap
+
+    RobotController.blazeEnabled = true
+
+    var opMode: NextOpMode? = null
+
+    try {
+      opMode = opModeConstructor()
+
+      BlazeDummyPlug.initializeBlazeFTC(RobotController.hardwareMap)
+      opMode.hooks.forEach { it.afterConstruction(opMode) }
+      while (opModeInInit()) {
+        opMode.hooks.forEach(OpModeHook::beforeDisabled)
+        opMode.disabledPeriodic()
+        opMode.hooks.forEach(OpModeHook::afterDisabled)
+      }
+      waitForStart()
+      BlazeFTC.run(0)
+      opMode.hooks.forEach(OpModeHook::beforeStart)
+      opMode.start()
+      opMode.hooks.forEach(OpModeHook::afterStart)
+      while (opModeIsActive()) {
+        opMode.hooks.forEach(OpModeHook::beforePeriodic)
+        opMode.periodic()
+        opMode.hooks.forEach(OpModeHook::afterPeriodic)
+      }
+      opMode.hooks.forEach(OpModeHook::beforeEnd)
+      opMode.end()
+    } finally {
+      // even if the OpMode didn't finish execution we still want to clean up the hooks
+      // and clear the static references to the SDK objects
+      opMode?.hooks?.forEach { hook ->
+        try {
+          hook.afterEnd()
+        } catch (throwable: Throwable) {
+          RobotLog.warn("${hook::class.displayName} threw while cleaning up after the OpMode.", throwable)
+        }
+      }
+      BlazeDummyPlug.closeBlazeFTC()
 
       NextOpMode.activeGamepad1 = null
       NextOpMode.activeGamepad2 = null

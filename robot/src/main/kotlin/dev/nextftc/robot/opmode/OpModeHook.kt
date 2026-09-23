@@ -29,14 +29,8 @@ import dev.nextftc.robot.triggers.Trigger
  */
 interface OpModeHook {
 
-  /**
-   * Called immediately after the OpMode's onInit phase.
-   * Hands a reference to the NextOpMode to the Hook in case it needs to call methods.
-   */
-  fun withNextOpMode(opMode: NextOpMode) {}
-
   /** Called immediately after the OpMode's onInit phase. */
-  fun afterConstruction() {}
+  fun afterConstruction(opMode: NextOpMode) {}
 
   /** Called immediately before the OpMode's disabledPeriodic (init_loop) phase. */
   fun beforeDisabled() {}
@@ -154,7 +148,7 @@ object BulkReadHook : OpModeHook {
  * Do not put two hooks on the same hub. This hook does nothing if Blaze wasn't enabled.
  */
 class BlazeBulkReadHook(val hub: NextLynxModule.Type, val fastMode: Boolean) : OpModeHook {
-  override fun withNextOpMode(opMode: NextOpMode) {
+  override fun afterConstruction(opMode: NextOpMode) {
     if (!RobotController.blazeEnabled) {
       return
     }
@@ -171,23 +165,5 @@ class BlazeBulkReadHook(val hub: NextLynxModule.Type, val fastMode: Boolean) : O
         opMode.onExpansionHubBulkData()
       }
     }
-  }
-}
-
-object BlazeStartHook : OpModeHook {
-  override fun afterConstruction() {
-    if (RobotController.blazeEnabled)
-      BlazeDummyPlug.initializeBlazeFTC(RobotController.hardwareMap)
-  }
-
-  override fun beforeStart() {
-      if (RobotController.blazeEnabled)
-        BlazeFTC.run(0)
-  }
-}
-object BlazeEndHook : OpModeHook {
-  override fun afterEnd() {
-    if (RobotController.blazeEnabled)
-      BlazeDummyPlug.closeBlazeFTC()
   }
 }

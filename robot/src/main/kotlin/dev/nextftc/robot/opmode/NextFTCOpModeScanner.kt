@@ -51,7 +51,12 @@ object NextFTCOpModeScanner : OpModeScanner() {
         when (val constructorResult = opModeConstructorFromClass(kcls)) {
           is OpModeConstructorCheckResult.FoundConstructor -> {
             RobotLog.info("Found NextFTC OpMode class: $cls")
-            registrationHelper.register(metaResult.meta) { BoundNextOpMode(constructorResult.constructor, enableBlaze) }
+            registrationHelper.register(metaResult.meta) {
+              if (enableBlaze)
+                BlazeBoundOpMode(constructorResult.constructor)
+              else
+                BoundNextOpMode(constructorResult.constructor)
+            }
           }
           is OpModeConstructorCheckResult.NoConstructorFound -> {
             RobotLog.Global.addWarning(
