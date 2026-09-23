@@ -60,7 +60,9 @@ open class NextServo @JvmOverloads constructor(
     cacheTolerance: Double = 0.01,
     direction: NextMotor.Direction = NextMotor.Direction.FORWARD,
   ) : this(
-    { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
+    {
+      module.servo(port)
+    },
     cacheTolerance,
     direction,
   ) {

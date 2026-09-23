@@ -82,7 +82,9 @@ class NextMotor @JvmOverloads constructor(
     anglePerCount: Angle = 1.0.radians,
     cacheTolerance: Double = 0.01,
   ) : this(
-    { DcMotorImplEx(module.motorController, port) },
+    {
+      module.motor(port)
+    },
     anglePerCount,
     cacheTolerance,
   ) {
@@ -103,7 +105,9 @@ class NextMotor @JvmOverloads constructor(
     anglePerCount: Angle = 1.0.radians,
     cacheTolerance: Double = 0.01,
   ) : this(
-    { RobotController.hardwareMap[name] as DcMotorImplEx },
+    {
+      RobotController.hardwareMap[name] as DcMotorImplEx
+    },
     anglePerCount,
     cacheTolerance,
   )

@@ -8,7 +8,6 @@
 
 package dev.nextftc.hardware.sensors
 
-import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.hardware.DigitalChannel
 import com.qualcomm.robotcore.hardware.DigitalChannelImpl
 import dev.nextftc.hardware.RobotController
@@ -56,7 +55,9 @@ class NextDigitalSensor @JvmOverloads constructor(
     port: Int,
     inverted: Boolean = true,
   ) : this(
-    { DigitalChannelImpl(module.digitalController, port) },
+    {
+      module.digitalChannel(port)
+    },
     inverted,
   ) {
     require(port in 0..7) { "Expected port in range [0, 7], got $port" }
@@ -67,7 +68,9 @@ class NextDigitalSensor @JvmOverloads constructor(
     name: String,
     inverted: Boolean = true,
   ) : this(
-    { RobotController.hardwareMap[name] as DigitalChannel },
+    {
+      RobotController.hardwareMap[name] as DigitalChannel
+    },
     inverted,
   )
 
