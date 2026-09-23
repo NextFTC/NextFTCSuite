@@ -6,7 +6,7 @@
  *  https://opensource.org/license/bsd-3-clause.
  */
 
-package dev.nextftc.robot.pedro
+package dev.nextftc.v2.pedro
 
 import com.pedropathing.follower.Follower
 import com.qualcomm.robotcore.hardware.HardwareMap
@@ -22,23 +22,23 @@ import java.util.function.Function
  * it's required for the follower to actually do anything.
  */
 object Pedro {
-  private var factory: Function<HardwareMap, Follower>? = null
-  internal var follower: Follower? = null
+    private var factory: Function<HardwareMap, Follower>? = null
+    internal var follower: Follower? = null
 
-  /** Registers the function used to build the [Follower] */
-  @JvmStatic
-  fun configure(followerFactory: Function<HardwareMap, Follower>) {
-    factory = followerFactory
-  }
+    /** Registers the function used to build the [Follower] */
+    @JvmStatic
+    fun configure(followerFactory: Function<HardwareMap, Follower>) {
+        factory = followerFactory
+    }
 
-  /** Returns the active [Follower], building it on first access. */
-  @JvmStatic
-  fun follower(): Follower {
-    follower?.let { return it }
-    val f = factory
-      ?: error(
-        "Call Pedro.configure()",
-      )
-    return f.apply(RobotController.hardwareMap).also { follower = it }
-  }
+    /** Returns the active [Follower], building it on first access. */
+    @JvmStatic
+    fun follower(): Follower {
+        follower?.let { return it }
+        val f = factory
+            ?: error(
+                "Call Pedro.configure()",
+            )
+        return f.apply(RobotController.hardwareMap).also { follower = it }
+    }
 }

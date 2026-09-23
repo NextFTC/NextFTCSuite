@@ -8,6 +8,10 @@ sloth = "0.3.2"
 ejml = "0.41"
 ivy = "1.1.1"
 pedro = "3.0.1"
+junit = "4.13.2"
+runner = "1.0.2"
+espressoCore = "3.0.2"
+appcompatV7 = "28.0.0"
 
 [libraries]
 dokka-mathjax-plugin = { module = "org.jetbrains.dokka:mathjax-plugin" }
@@ -25,6 +29,10 @@ sloth = { module = "dev.frozenmilk.sinister:Sloth", version.ref = "sloth" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 ivy = { module = "com.pedropathing.ivy:core", version.ref = "ivy" }
 pedro = { module = "com.pedropathing:revhub", version.ref = "pedro" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+runner = { group = "com.android.support.test", name = "runner", version.ref = "runner" }
+espresso-core = { group = "com.android.support.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+appcompat-v7 = { group = "com.android.support", name = "appcompat-v7", version.ref = "appcompatV7" }
 
 [bundles]
 kotest = ["kotest-runner", "kotest-assertations", "kotest-property", "kotest-data-driven"]

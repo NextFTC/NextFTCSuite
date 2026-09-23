@@ -6,15 +6,16 @@
  *  https://opensource.org/license/bsd-3-clause.
  */
 
-package dev.nextftc.robot.pedro
+package dev.nextftc.v2.pedro
 
 import dev.nextftc.robot.opmode.OpModeHook
-object PedroHook : OpModeHook {
-  override fun beforePeriodic() {
-    Pedro.follower?.update()
-  }
 
-  override fun afterEnd() {
-    Pedro.follower = null
-  }
+object PedroHook : OpModeHook {
+    override fun beforePeriodic() {
+        Pedro.follower?.update()
+    }
+
+    override fun afterEnd() {
+        Pedro.follower = null
+    }
 }
