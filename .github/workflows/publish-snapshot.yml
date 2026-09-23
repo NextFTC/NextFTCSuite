@@ -1,0 +1,51 @@
+name: Publish Snapshot
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "publish-snapshot"
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Set up JDK
+        uses: actions/setup-java@v6
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Verify version is a snapshot
+        run: |
+          VERSION="$(grep -E '^version[[:space:]]*=' gradle.properties | head -1 | cut -d= -f2- | xargs)"
+          echo "Project version is $VERSION"
+          case "$VERSION" in
+            *-SNAPSHOT) ;;
+            *)
+              echo "::error::Version $VERSION is not a -SNAPSHOT; refusing to publish to the snapshot repository."
+              exit 1
+              ;;
+          esac
+
+      - name: Publish to Maven Central Snapshots
+        env:
+          SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
+          MVN_GPG_KEY: ${{ secrets.MVN_GPG_KEY }}
+          MVN_GPG_PASSWORD: ${{ secrets.MVN_GPG_PASSWORD }}
+        run: ./gradlew deployNexusSnapshot --no-configuration-cache
