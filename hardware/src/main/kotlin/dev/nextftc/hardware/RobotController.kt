@@ -119,7 +119,6 @@ object RobotController : OnCreateEventLoop {
    */
   @JvmStatic
   var blazeEnabled: Boolean = false
-    set(value) {field = field || value}
 
   /**
    * Lifecycle callback used to initialize runtime context for hardware access.

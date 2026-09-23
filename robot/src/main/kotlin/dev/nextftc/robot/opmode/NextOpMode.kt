@@ -91,10 +91,8 @@ abstract class BlazeOpMode(robot: NextRobot, vararg hooks: OpModeHook) : NextOpM
   open fun onLocalizationData() {}
 }
 
-internal class BoundNextOpMode(
-  val opModeConstructor: () -> NextOpMode,
-  val blaze: Boolean = false,
-) : LinearOpMode() {
+internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode, val blaze: Boolean = false) :
+  LinearOpMode() {
   override fun runOpMode() {
     NextOpMode.activeGamepad1 = this.gamepad1
     NextOpMode.activeGamepad2 = this.gamepad2

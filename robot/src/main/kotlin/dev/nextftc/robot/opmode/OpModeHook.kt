@@ -176,7 +176,9 @@ class BlazeBulkReadHook(val hub: NextLynxModule.Type, val fastMode: Boolean) : O
     val hw = RobotController.hardwareMap
     val hub = if (hub == NextLynxModule.Type.CONTROL_HUB) {
       Hub.CtrlHub
-    } else { Hub.ExHub }
+    } else {
+      Hub.ExHub
+    }
     val packets = if (fastMode) 2 else 1
     BlazeDummyPlug.engageBulkReadAcceleration(hw, hub, packets) {
       if (hub == Hub.CtrlHub) {
