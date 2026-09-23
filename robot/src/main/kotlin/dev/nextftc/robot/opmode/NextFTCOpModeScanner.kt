@@ -52,10 +52,7 @@ object NextFTCOpModeScanner : OpModeScanner() {
           is OpModeConstructorCheckResult.FoundConstructor -> {
             RobotLog.info("Found NextFTC OpMode class: $cls")
             registrationHelper.register(metaResult.meta) {
-              if (enableBlaze)
-                BlazeBoundOpMode(constructorResult.constructor)
-              else
-                BoundNextOpMode(constructorResult.constructor)
+              BoundNextOpMode(constructorResult.constructor, enableBlaze)
             }
           }
           is OpModeConstructorCheckResult.NoConstructorFound -> {

@@ -142,6 +142,26 @@ object BulkReadHook : OpModeHook {
 }
 
 /**
+ * Internal hook responsible for the Blaze lifecycle. Added to the front of the hook list by
+ * [BoundNextOpMode] for OpModes annotated with [BlazeEnabled], so it is set up before and torn
+ * down after every other hook.
+ */
+internal object BlazeHook : OpModeHook {
+  override fun afterConstruction(opMode: NextOpMode) {
+    BlazeDummyPlug.initializeBlazeFTC(RobotController.hardwareMap)
+  }
+
+  override fun beforeStart() {
+    BlazeFTC.run(0)
+  }
+
+  override fun afterEnd() {
+    BlazeDummyPlug.closeBlazeFTC()
+    RobotController.blazeEnabled = false
+  }
+}
+
+/**
  * Hook to enable Blaze control of Bulk Reads on a single hub. Do not run this with BulkReadHook.
  * fastMode controls the level of concurrency. false will run at ~500 hz and is very stable.
  * true is stable but if you enable it and then do too many writes, it could become unstable.
