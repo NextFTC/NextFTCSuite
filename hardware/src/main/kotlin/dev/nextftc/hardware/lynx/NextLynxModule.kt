@@ -1,12 +1,21 @@
 package dev.nextftc.hardware.lynx
 
+import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver
 import com.qualcomm.hardware.lynx.LynxAnalogInputController
 import com.qualcomm.hardware.lynx.LynxDcMotorController
 import com.qualcomm.hardware.lynx.LynxDigitalChannelController
+import com.qualcomm.hardware.lynx.LynxI2cColorRangeSensor
 import com.qualcomm.hardware.lynx.LynxI2cDeviceSynch
 import com.qualcomm.hardware.lynx.LynxI2cDeviceSynchV2
 import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.hardware.lynx.LynxServoController
+import com.qualcomm.robotcore.hardware.AnalogInput
+import com.qualcomm.robotcore.hardware.CRServoImplEx
+import com.qualcomm.robotcore.hardware.DcMotorImplEx
+import com.qualcomm.robotcore.hardware.DigitalChannel
+import com.qualcomm.robotcore.hardware.DigitalChannelImpl
+import com.qualcomm.robotcore.hardware.ServoImplEx
+import com.qualcomm.robotcore.hardware.configuration.typecontainers.ServoConfigurationType
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.celsius
@@ -32,6 +41,24 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
 
   private val i2cControllers = Array(4) { bus ->
     LazyHardware { LynxI2cDeviceSynchV2(RobotController.appContext, module, bus) }
+  }
+
+  enum class PortKind {
+    MOTOR,
+    SERVO,
+    I2C,
+    DIGITAL,
+    ANALOG,
+  }
+
+  /** Tracks used ports. Resets each OpMode. */
+  private val usedPorts by LazyHardware { HashSet<Pair<PortKind, Int>>() }
+
+  /** Throws if this port is already used on this hub. */
+  private fun claim(kind: PortKind, port: Int) {
+    check(usedPorts.add(kind to port)) {
+      "Port conflict on $type: ${kind.name.lowercase()} port $port is used by more than one device"
+    }
   }
 
   /** Current module temperature. */
@@ -70,5 +97,47 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
   /** Creates or gets a [LynxAnalogInputController] bound to this module. */
   val analogController: LynxAnalogInputController by LazyHardware {
     LynxAnalogInputController(RobotController.appContext, module)
+  }
+
+  /** Motor controller for [port], claiming the port. */
+  internal fun motor(port: Int): DcMotorImplEx {
+    claim(PortKind.MOTOR, port)
+    return DcMotorImplEx(motorController, port)
+  }
+
+  /** Servo controller for [port], claiming the port. */
+  internal fun servo(port: Int): ServoImplEx {
+    claim(PortKind.SERVO, port)
+    return ServoImplEx(servoController, port, ServoConfigurationType.getStandardServoType())
+  }
+
+  /** CRServo controller for [port], claiming the port. */
+  internal fun crServo(port: Int): CRServoImplEx {
+    claim(PortKind.SERVO, port)
+    return CRServoImplEx(servoController, port, ServoConfigurationType.getStandardServoType())
+  }
+
+  /** Creates a [LynxI2cColorRangeSensor] on [bus], claiming the bus. */
+  internal fun colorRangeSensor(bus: Int): LynxI2cColorRangeSensor {
+    claim(PortKind.I2C, bus)
+    return LynxI2cColorRangeSensor(i2cController(bus), true)
+  }
+
+  /** Creates a [GoBildaPinpointDriver] on [bus], claiming the bus. */
+  internal fun pinpoint(bus: Int): GoBildaPinpointDriver {
+    claim(PortKind.I2C, bus)
+    return GoBildaPinpointDriver(i2cController(bus), true)
+  }
+
+  /** Digital controller for [port], claiming the port. */
+  internal fun digitalChannel(port: Int): DigitalChannel {
+    claim(PortKind.DIGITAL, port)
+    return DigitalChannelImpl(digitalController, port)
+  }
+
+  /** Analog controller for [port], claiming the port. */
+  internal fun analogChannel(port: Int): AnalogInput {
+    claim(PortKind.ANALOG, port)
+    return AnalogInput(analogController, port)
   }
 }

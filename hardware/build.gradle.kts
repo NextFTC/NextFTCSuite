@@ -23,6 +23,7 @@ dependencies {
   api(libs.functional.interfaces)
   compileOnly(libs.bundles.ftc)
   implementation(libs.sloth)
+  compileOnly(libs.blaze)
 
   testImplementation(libs.bundles.kotest)
   testImplementation(libs.mockk)

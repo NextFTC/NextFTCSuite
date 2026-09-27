@@ -44,13 +44,16 @@ object NextFTCOpModeScanner : OpModeScanner() {
       RobotLog.info("Skipping disabled NextFTC OpMode class: $kcls")
       return
     }
+    val enableBlaze = BlazeOpMode::class.java.isAssignableFrom(cls)
 
     when (val metaResult = opModeMetaFromClass(kcls)) {
       is OpModeMetaCheckResult.FoundAnnotation -> {
         when (val constructorResult = opModeConstructorFromClass(kcls)) {
           is OpModeConstructorCheckResult.FoundConstructor -> {
             RobotLog.info("Found NextFTC OpMode class: $cls")
-            registrationHelper.register(metaResult.meta) { BoundNextOpMode(constructorResult.constructor) }
+            registrationHelper.register(metaResult.meta) {
+              BoundNextOpMode(constructorResult.constructor, enableBlaze)
+            }
           }
           is OpModeConstructorCheckResult.NoConstructorFound -> {
             RobotLog.Global.addWarning(

@@ -8,10 +8,13 @@
 
 package dev.nextftc.hardware.actuators
 
+import com.qualcomm.hardware.lynx.LynxController
+import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorImplEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Servo
+import dev.anygeneric.blazeftc.BlazeFTC
 import dev.nextftc.control.feedback.PIDCoefficients
 import dev.nextftc.control.feedback.PIDController
 import dev.nextftc.control.feedforward.SimpleFFCoefficients
@@ -79,7 +82,9 @@ class NextMotor @JvmOverloads constructor(
     anglePerCount: Angle = 1.0.radians,
     cacheTolerance: Double = 0.01,
   ) : this(
-    { DcMotorImplEx(module.motorController, port) },
+    {
+      module.motor(port)
+    },
     anglePerCount,
     cacheTolerance,
   ) {
@@ -100,7 +105,9 @@ class NextMotor @JvmOverloads constructor(
     anglePerCount: Angle = 1.0.radians,
     cacheTolerance: Double = 0.01,
   ) : this(
-    { RobotController.hardwareMap[name] as DcMotorImplEx },
+    {
+      RobotController.hardwareMap[name] as DcMotorImplEx
+    },
     anglePerCount,
     cacheTolerance,
   )
@@ -151,6 +158,17 @@ class NextMotor @JvmOverloads constructor(
   var controlType: ControlType = ControlType.Throttle(0.0)
     private set
 
+  private var hubId: Int = -1
+    get() = if (field == -1) {
+      val lcField = LynxController::class.java.getField("module")
+      lcField.isAccessible = true
+      val module = lcField.get(motor.controller) as LynxModule
+      hubId = module.moduleAddress
+      field
+    } else {
+      field
+    }
+
   /**
    * Raw motor power (throttle) in the range [-1.0, 1.0].
    *
@@ -159,7 +177,12 @@ class NextMotor @JvmOverloads constructor(
    */
   private var power by Caching(cacheTolerance) {
     if (it != null) {
-      motor.power = it
+      if (RobotController.blazeEnabled) {
+        val port = this.motor.portNumber
+        BlazeFTC.setMotorPower(hubId, port, it)
+      } else {
+        motor.power = it
+      }
     }
   }
 

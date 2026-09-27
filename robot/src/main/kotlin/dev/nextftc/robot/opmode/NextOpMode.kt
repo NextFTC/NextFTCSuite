@@ -3,6 +3,7 @@ package dev.nextftc.robot.opmode
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.hardware.Gamepad
 import com.qualcomm.robotcore.hardware.HardwareMap
+import dev.nextftc.hardware.RobotController
 import dev.nextftc.robot.NextFTCException
 import dev.nextftc.robot.NextRobot
 import dev.nextftc.robot.RobotLog
@@ -70,19 +71,42 @@ abstract class NextOpMode internal constructor(internal val hooks: MutableList<O
   }
 }
 
-internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode) : LinearOpMode() {
+/**
+ * Base class for NextFTC OpModes that run with Blaze enabled.
+ *
+ * Extending this class instead of [NextOpMode] routes motor writes through Blaze for the whole
+ * OpMode and exposes callbacks for data Blaze provides.
+ *
+ * @param robot The automatically resolved [dev.nextftc.robot.NextRobot] instance.
+ * @param hooks Additional custom hooks to execute during the OpMode lifecycle.
+ */
+abstract class BlazeOpMode(robot: NextRobot, vararg hooks: OpModeHook) : NextOpMode(robot, *hooks) {
+  /** Run when Blaze provides new Control Hub Bulk Data. Requires a [BlazeBulkReadHook]. */
+  open fun onControlHubBulkData() {}
+
+  /** Run when Blaze provides new Expansion Hub Bulk Data. Requires a [BlazeBulkReadHook]. */
+  open fun onExpansionHubBulkData() {}
+
+  /** Run when Blaze provides new localization data */
+  open fun onLocalizationData() {}
+}
+
+internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode, val blaze: Boolean = false) :
+  LinearOpMode() {
   override fun runOpMode() {
     NextOpMode.activeGamepad1 = this.gamepad1
     NextOpMode.activeGamepad2 = this.gamepad2
     NextOpMode.activeTelemetry = this.telemetry
     NextOpMode.activeHardwareMap = this.hardwareMap
 
+    if (blaze) RobotController.blazeEnabled = true
+
     var opMode: NextOpMode? = null
 
     try {
       opMode = opModeConstructor()
-
-      opMode.hooks.forEach(OpModeHook::afterConstruction)
+      if (blaze) opMode.hooks.add(0, BlazeHook)
+      opMode.hooks.forEach { it.afterConstruction(opMode) }
       while (opModeInInit()) {
         opMode.hooks.forEach(OpModeHook::beforeDisabled)
         opMode.disabledPeriodic()
@@ -101,14 +125,17 @@ internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode) : Linear
       opMode.end()
     } finally {
       // even if the OpMode didn't finish execution we still want to clean up the hooks
-      // and clear the static references to the SDK objects
-      opMode?.hooks?.forEach { hook ->
+      // and clear the static references to the SDK objects.
+      // hooks are torn down in reverse so hooks set up first are torn down last
+      opMode?.hooks?.asReversed()?.forEach { hook ->
         try {
           hook.afterEnd()
         } catch (throwable: Throwable) {
           RobotLog.warn("${hook::class.displayName} threw while cleaning up after the OpMode.", throwable)
         }
       }
+
+      RobotController.blazeEnabled = false
 
       NextOpMode.activeGamepad1 = null
       NextOpMode.activeGamepad2 = null
