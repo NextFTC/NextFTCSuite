@@ -16,12 +16,17 @@ import kotlin.math.roundToInt
  * @param distPerRotation linear distance traveled per one motor rotation
  */
 class LinearActuator(val motor: NextMotor, val distPerRotation: Per<DistanceUnit, AngleUnit>) {
+  private val distancePerRotation: Distance
+    get() = distPerRotation.unit.numerator.of(distPerRotation.magnitude)
+
   var position: Distance
-    get() = Inches.of(motor.encoderPosition.into(Rotations) * distPerRotation.magnitude)
+    get() {
+      val rotations = motor.encoderPosition.into(distPerRotation.unit.denominator)
+      return distancePerRotation * rotations
+    }
     set(value) {
-      // convert distance to rotations
-      val rotations = value.into(Inches) / distPerRotation.magnitude
-      val angle: Angle = Rotations.of(rotations)
+      val rotations = value.into(distancePerRotation.unit) / distancePerRotation.magnitude
+      val angle = distPerRotation.unit.denominator.of(rotations)
       motor.setPositionSetpoint(angle)
     }
 
@@ -34,7 +39,7 @@ class LinearActuator(val motor: NextMotor, val distPerRotation: Per<DistanceUnit
   var positionTicks: Int
     get() = ((motor.encoderPosition / motor.anglePerCount).magnitude).roundToInt()
     set(value) {
-      val angle = (motor.anglePerCount * value) as Angle
+      val angle = (motor.anglePerCount * value.toDouble()) as Angle
       motor.setPositionSetpoint(angle)
     }
 
