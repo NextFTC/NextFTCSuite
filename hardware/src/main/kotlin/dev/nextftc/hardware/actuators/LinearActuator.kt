@@ -19,6 +19,9 @@ class LinearActuator(val motor: NextMotor, val distPerRotation: Per<DistanceUnit
   private val distancePerRotation: Distance
     get() = distPerRotation.unit.numerator.of(distPerRotation.magnitude)
 
+  /**
+   * The position of this linear actuator in linear [Distance] units.
+   */
   var position: Distance
     get() {
       val rotations = motor.encoderPosition.into(distPerRotation.unit.denominator)
@@ -30,16 +33,22 @@ class LinearActuator(val motor: NextMotor, val distPerRotation: Per<DistanceUnit
       motor.setPositionSetpoint(angle)
     }
 
+  /**
+   * The position of this linear actuator in inches.
+   */
   var positionInches: Double
     get() = position.into(Inches)
     set(value) {
       position = Inches.of(value)
     }
 
-  var positionTicks: Int
-    get() = ((motor.encoderPosition / motor.anglePerCount).magnitude).roundToInt()
+  /**
+   * The position of this linear actuator in motor tick units.
+   */
+  var positionTicks: Double
+    get() = (motor.encoderPosition / motor.anglePerCount).magnitude
     set(value) {
-      val angle = (motor.anglePerCount * value.toDouble()) as Angle
+      val angle = motor.anglePerCount * value
       motor.setPositionSetpoint(angle)
     }
 
@@ -47,11 +56,5 @@ class LinearActuator(val motor: NextMotor, val distPerRotation: Per<DistanceUnit
     get() = motor.throttle
     set(value) {
       motor.throttle = value
-    }
-
-  var throttleContinuous: Double
-    get() = throttle
-    set(value) {
-      throttle = value
     }
 }
