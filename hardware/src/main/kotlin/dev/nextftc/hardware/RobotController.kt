@@ -12,21 +12,34 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.qualcomm.ftccommon.FtcEventLoop
 import com.qualcomm.hardware.lynx.LynxModule
+import com.qualcomm.robotcore.eventloop.opmode.OpMode
+import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerNotifier
 import com.qualcomm.robotcore.hardware.HardwareMap
 import com.qualcomm.robotcore.hardware.configuration.LynxConstants
 import dev.frozenmilk.sinister.sdk.apphooks.OnCreateEventLoop
 import dev.nextftc.hardware.lynx.NextLynxModule
+import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.celsius
 import dev.nextftc.units.measuretypes.Temperature
 import dev.nextftc.units.measuretypes.Voltage
 import dev.nextftc.units.volts
 import org.firstinspires.ftc.robotcore.external.navigation.TempUnit
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit
+import java.util.Collections
+import java.util.WeakHashMap
 
 /**
  * Centralized access to FTC hardware/runtime context and Lynx hub telemetry.
  */
-object RobotController : OnCreateEventLoop {
+object RobotController : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
+  // weakly held so lazies created inside an op mode can be garbage collected
+  private val hardwareObjects: MutableSet<LazyHardware<*>> =
+    Collections.synchronizedSet(Collections.newSetFromMap(WeakHashMap()))
+
+  internal fun register(hardware: LazyHardware<*>) {
+    hardwareObjects += hardware
+  }
+
   /**
    * Application context captured when the event loop is created.
    *
@@ -129,5 +142,17 @@ object RobotController : OnCreateEventLoop {
   override fun onCreateEventLoop(context: Context, ftcEventLoop: FtcEventLoop) {
     appContext = context
     eventLoop = ftcEventLoop
+    ftcEventLoop.opModeManager.registerListener(this)
+  }
+
+  override fun onOpModePreInit(opMode: OpMode?) {}
+
+  override fun onOpModePreStart(opMode: OpMode?) {}
+
+  /**
+   * Discards all cached hardware objects so they are re-initialized in the next op mode.
+   */
+  override fun onOpModePostStop(opMode: OpMode?) {
+    synchronized(hardwareObjects) { hardwareObjects.toList() }.forEach { it.reset() }
   }
 }

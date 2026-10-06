@@ -80,6 +80,25 @@ class LazyHardwareTest :
       configured shouldBe "device"
     }
 
+    test("op mode stop re-initializes the value and replays applyAfterInit callbacks") {
+      var calls = 0
+      val configured = mutableListOf<Int>()
+      lateinit var lazyRef: LazyHardware<Int>
+      class Holder {
+        val value by LazyHardware { ++calls }.also { lazyRef = it }
+      }
+      val holder = Holder()
+      lazyRef.applyAfterInit(Configurator { configured += it })
+
+      holder.value shouldBe 1
+      RobotController.onOpModePostStop(null)
+      holder.value shouldBe 2
+      holder.value shouldBe 2
+
+      calls shouldBe 2
+      configured shouldBe listOf(1, 2)
+    }
+
     test("multiple queued callbacks all run once the value is initialized") {
       lateinit var lazyRef: LazyHardware<String>
       class Holder {

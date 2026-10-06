@@ -25,6 +25,9 @@ dependencies {
   implementation(libs.sloth)
   compileOnly(libs.blaze)
 
+  // RobotController implements an SDK interface, so it must be loadable in unit tests
+  testImplementation(libs.ftc.robot.core) { isTransitive = false }
+  testImplementation(libs.ftc.common) { isTransitive = false }
   testImplementation(libs.bundles.kotest)
   testImplementation(libs.mockk)
 }
