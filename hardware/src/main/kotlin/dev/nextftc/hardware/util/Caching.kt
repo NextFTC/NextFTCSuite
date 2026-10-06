@@ -14,10 +14,19 @@ class Caching(private val cacheTolerance: Double, private val whenSet: (Double?)
 
   override fun setValue(thisRef: Any?, property: KProperty<*>, value: Double) {
     if (cachedValue.isNaN() || abs(cachedValue - value) > cacheTolerance) {
-      cachedValue = value
+      // written first: the write may initialize the hardware, which resets this cache
       whenSet(value)
+      cachedValue = value
     } else {
       whenSet(null)
     }
+  }
+
+  /**
+   * Forgets the cached value so the next set is always written to the hardware. Call this
+   * whenever the underlying hardware object is re-created.
+   */
+  fun reset() {
+    cachedValue = Double.NaN
   }
 }

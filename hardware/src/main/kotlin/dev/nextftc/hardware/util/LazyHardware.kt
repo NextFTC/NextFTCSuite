@@ -19,7 +19,7 @@ class LazyHardware<T>(private val initializer: () -> T) : ReadOnlyProperty<Any?,
   internal val isInitialized: Boolean
     get() = value != null
 
-  private val onInit = mutableListOf<Configurator<T>>()
+  private val onInit = LinkedHashMap<Any, Configurator<T>>()
 
   init {
     RobotController.register(this)
@@ -30,7 +30,7 @@ class LazyHardware<T>(private val initializer: () -> T) : ReadOnlyProperty<Any?,
 
     return initializer.invoke().also { hardwareObject ->
       value = hardwareObject
-      onInit.forEach { block -> block.configure(hardwareObject) }
+      onInit.values.toList().forEach { block -> block.configure(hardwareObject) }
       Log.d(
         "NextFTC",
         "Initialized lazy $hardwareObject in property ${property.name} in class ${thisRef?.let {
@@ -40,8 +40,18 @@ class LazyHardware<T>(private val initializer: () -> T) : ReadOnlyProperty<Any?,
     }
   }
 
-  fun applyAfterInit(block: Configurator<T>) {
-    onInit += block
+  /**
+   * Runs [block] on the hardware object now if it is initialized, and again after every
+   * (re-)initialization.
+   */
+  fun applyAfterInit(block: Configurator<T>) = applyAfterInit(Any(), block)
+
+  /**
+   * Like [applyAfterInit], but replaces any earlier block registered with the same [key], so
+   * repeatedly updating one setting does not accumulate blocks.
+   */
+  fun applyAfterInit(key: Any, block: Configurator<T>) {
+    onInit[key] = block
     value?.let { block.configure(it) }
   }
 

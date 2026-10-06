@@ -119,6 +119,22 @@ class NextMotor @JvmOverloads constructor(
   private val lazyMotor = LazyHardware(initializer)
   private val motor by lazyMotor
 
+  private val powerCache = Caching(cacheTolerance) {
+    if (it != null) {
+      if (RobotController.blazeEnabled) {
+        val port = this.motor.portNumber
+        BlazeFTC.setMotorPower(hubId, port, it)
+      } else {
+        motor.power = it
+      }
+    }
+  }
+
+  init {
+    // a re-created motor does not hold the previously written power
+    lazyMotor.applyAfterInit("powerCache") { powerCache.reset() }
+  }
+
   /**
    * Position control constants (PID and feedforward gains).
    *
@@ -175,16 +191,7 @@ class NextMotor @JvmOverloads constructor(
    * This backing field is managed by the caching delegate to reduce
    * redundant hardware writes.
    */
-  private var power by Caching(cacheTolerance) {
-    if (it != null) {
-      if (RobotController.blazeEnabled) {
-        val port = this.motor.portNumber
-        BlazeFTC.setMotorPower(hubId, port, it)
-      } else {
-        motor.power = it
-      }
-    }
-  }
+  private var power by powerCache
 
   /**
    * Motor rotation direction (FORWARD or REVERSE).
@@ -194,11 +201,7 @@ class NextMotor @JvmOverloads constructor(
   var direction = Direction.FORWARD
     set(value) {
       field = value
-      if (lazyMotor.isInitialized) {
-        motor.direction = value.sdkDirection
-      } else {
-        lazyMotor.applyAfterInit { it.direction = value.sdkDirection }
-      }
+      lazyMotor.applyAfterInit("direction") { it.direction = value.sdkDirection }
     }
 
   /**
@@ -209,11 +212,7 @@ class NextMotor @JvmOverloads constructor(
   var zeroPowerBehavior = ZeroPowerBehavior.FLOAT
     set(value) {
       field = value
-      if (lazyMotor.isInitialized) {
-        motor.zeroPowerBehavior = value.sdkZeroPowerBehavior
-      } else {
-        lazyMotor.applyAfterInit { it.zeroPowerBehavior = value.sdkZeroPowerBehavior }
-      }
+      lazyMotor.applyAfterInit("zeroPowerBehavior") { it.zeroPowerBehavior = value.sdkZeroPowerBehavior }
     }
 
   /**
@@ -233,11 +232,7 @@ class NextMotor @JvmOverloads constructor(
   var currentAlert: Current
     get() = motor.getCurrentAlert(CurrentUnit.AMPS).amperes
     set(value) {
-      if (lazyMotor.isInitialized) {
-        motor.setCurrentAlert(value.magnitude, CurrentUnit.AMPS)
-      } else {
-        lazyMotor.applyAfterInit { it.setCurrentAlert(value.magnitude, CurrentUnit.AMPS) }
-      }
+      lazyMotor.applyAfterInit("currentAlert") { it.setCurrentAlert(value.magnitude, CurrentUnit.AMPS) }
     }
 
   /**

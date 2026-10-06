@@ -68,13 +68,20 @@ open class NextCRServo @JvmOverloads constructor(
   private val lazyServo = LazyHardware(initializer)
   private val servo by lazyServo
 
-  /**
-   * Power applied to the servo, in the range [-1.0, 1.0].
-   */
-  var power: Double by Caching(cacheTolerance) {
+  private val powerCache = Caching(cacheTolerance) {
     if (it != null) {
       servo.power = it
     }
+  }
+
+  /**
+   * Power applied to the servo, in the range [-1.0, 1.0].
+   */
+  var power: Double by powerCache
+
+  init {
+    // a re-created servo does not hold the previously written power
+    lazyServo.applyAfterInit("powerCache") { powerCache.reset() }
   }
 
   /**
@@ -85,11 +92,7 @@ open class NextCRServo @JvmOverloads constructor(
   var direction: NextMotor.Direction = NextMotor.Direction.FORWARD
     set(value) {
       field = value
-      if (lazyServo.isInitialized) {
-        servo.direction = value.sdkDirection
-      } else {
-        lazyServo.applyAfterInit { it.direction = value.sdkDirection }
-      }
+      lazyServo.applyAfterInit("direction") { it.direction = value.sdkDirection }
     }
 
   /**

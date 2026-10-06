@@ -94,9 +94,20 @@ open class NextServo @JvmOverloads constructor(
   )
 
   private val lazyServo = LazyHardware(initializer).apply {
-    applyAfterInit { it.direction = direction.servoDirection }
+    applyAfterInit("direction") { it.direction = direction.servoDirection }
   }
   private val servo by lazyServo
+
+  private val positionCache = Caching(cacheTolerance) {
+    if (it != null) {
+      servo.position = it
+    }
+  }
+
+  init {
+    // a re-created servo does not hold the previously written position
+    lazyServo.applyAfterInit("positionCache") { positionCache.reset() }
+  }
 
   /**
    * Allows user to change servo's direction configuration
@@ -110,11 +121,7 @@ open class NextServo @JvmOverloads constructor(
    */
   var direction: NextMotor.Direction = direction
     set(direction) {
-      if (lazyServo.isInitialized) {
-        servo.direction = direction.servoDirection
-      } else {
-        lazyServo.applyAfterInit { it.direction = direction.servoDirection }
-      }
+      lazyServo.applyAfterInit("direction") { it.direction = direction.servoDirection }
       field = direction
     }
 
@@ -124,11 +131,7 @@ open class NextServo @JvmOverloads constructor(
    * Assigning a value writes through to the backing [ServoImplEx], while reads
    * are handled by the [Caching] delegate.
    */
-  var position: Double by Caching(cacheTolerance) {
-    if (it != null) {
-      servo.position = it
-    }
-  }
+  var position: Double by positionCache
 
   /**
    * Provides access to the servo's PWM range configuration.
@@ -143,11 +146,7 @@ open class NextServo @JvmOverloads constructor(
   var pwmRange: PwmControl.PwmRange
     get() = servo.pwmRange
     set(range) {
-      if (lazyServo.isInitialized) {
-        servo.pwmRange = range
-      } else {
-        lazyServo.applyAfterInit { it.pwmRange = range }
-      }
+      lazyServo.applyAfterInit("pwmRange") { it.pwmRange = range }
     }
 
   /**
