@@ -131,8 +131,8 @@ class NextMotor @JvmOverloads constructor(
   }
 
   init {
-    // a re-created motor does not hold the previously written power
-    lazyMotor.applyAfterInit("powerCache") { powerCache.reset() }
+    // a skipped write never touches the lazy, so the cache must be dropped on stop, not on re-init
+    lazyMotor.onOpModeStop { powerCache.reset() }
   }
 
   /**

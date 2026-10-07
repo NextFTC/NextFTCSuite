@@ -80,8 +80,8 @@ open class NextCRServo @JvmOverloads constructor(
   var power: Double by powerCache
 
   init {
-    // a re-created servo does not hold the previously written power
-    lazyServo.applyAfterInit("powerCache") { powerCache.reset() }
+    // a skipped write never touches the lazy, so the cache must be dropped on stop, not on re-init
+    lazyServo.onOpModeStop { powerCache.reset() }
   }
 
   /**

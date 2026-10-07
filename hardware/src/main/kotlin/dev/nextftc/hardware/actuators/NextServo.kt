@@ -76,8 +76,6 @@ open class NextServo @JvmOverloads constructor(
    * ```
    * // Creates a NextServo with the config name: "armServo"
    * val servo = NextServo("armServo")
-   * ```
-   *
    * @param name The configuration name for the servo, usually found on the Driver Station
    * @param cacheTolerance Tolerance used by the [Caching] delegate for position updates; defaults to 0.01.
    * @param direction The initial direction of the servo defined by the user
@@ -105,8 +103,8 @@ open class NextServo @JvmOverloads constructor(
   }
 
   init {
-    // a re-created servo does not hold the previously written position
-    lazyServo.applyAfterInit("positionCache") { positionCache.reset() }
+    // a skipped write never touches the lazy, so the cache must be dropped on stop, not on re-init
+    lazyServo.onOpModeStop { positionCache.reset() }
   }
 
   /**

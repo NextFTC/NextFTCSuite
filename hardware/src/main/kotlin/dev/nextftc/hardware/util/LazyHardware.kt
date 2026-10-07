@@ -20,6 +20,7 @@ class LazyHardware<T>(private val initializer: () -> T) : ReadOnlyProperty<Any?,
     get() = value != null
 
   private val onInit = LinkedHashMap<Any, Configurator<T>>()
+  private val onStop = mutableListOf<() -> Unit>()
 
   init {
     RobotController.register(this)
@@ -56,9 +57,18 @@ class LazyHardware<T>(private val initializer: () -> T) : ReadOnlyProperty<Any?,
   }
 
   /**
+   * Runs [block] every time the cached object is discarded (for example when an OpMode stops).
+   * Use this to invalidate state that mirrors the hardware, such as write caches.
+   */
+  fun onOpModeStop(block: () -> Unit) {
+    onStop += block
+  }
+
+  /**
    * Discards the cached object so the next access re-initializes it.
    */
   internal fun reset() {
     value = null
+    onStop.toList().forEach { it() }
   }
 }
