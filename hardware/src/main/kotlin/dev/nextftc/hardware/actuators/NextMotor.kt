@@ -132,7 +132,10 @@ class NextMotor @JvmOverloads constructor(
 
   init {
     // a skipped write never touches the lazy, so the cache must be dropped on stop, not on re-init
-    lazyMotor.onOpModeStop { powerCache.reset() }
+    lazyMotor.onOpModeStop {
+      powerCache.reset()
+      controlType = ControlType.Throttle(0.0)
+    }
   }
 
   /**
