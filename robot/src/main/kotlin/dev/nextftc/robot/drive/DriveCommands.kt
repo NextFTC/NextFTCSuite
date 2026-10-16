@@ -70,16 +70,16 @@ fun mecanumDriveFieldCentric(
   kinematics: MecanumKinematics = MecanumKinematics(),
 ): Command = Commands.infinite {
   val rawY = gamepad.left_stick_x.toDouble()
-  val rawX = -gamepad.left_stick_y.toDouble()
+  val rawX = gamepad.left_stick_y.toDouble()
   val h = heading.get()
   val c = cos(-h)
   val sinH = sin(-h)
 
   val powers = kinematics.calculate(
     DriveInput(
-      x = (rawX * c + rawY * sinH) * scalar,
-      y = (rawY * c - rawX * sinH) * scalar,
-      rx = gamepad.right_stick_x.toDouble() * scalar,
+        y = (rawX * c - rawY * sinH) * scalar,
+        x = (rawX * sinH + rawY * c) * scalar,
+        rx = gamepad.right_stick_x.toDouble() * scalar,
     ),
   )
   frontLeft.throttle = powers.frontLeft
