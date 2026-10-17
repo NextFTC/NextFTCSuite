@@ -77,9 +77,9 @@ fun mecanumDriveFieldCentric(
 
   val powers = kinematics.calculate(
     DriveInput(
-        y = (rawX * c - rawY * sinH) * scalar,
-        x = (rawX * sinH + rawY * c) * scalar,
-        rx = gamepad.right_stick_x.toDouble() * scalar,
+      y = (rawX * c - rawY * sinH) * scalar,
+      x = (rawX * sinH + rawY * c) * scalar,
+      rx = gamepad.right_stick_x.toDouble() * scalar,
     ),
   )
   frontLeft.throttle = powers.frontLeft
