@@ -36,8 +36,16 @@ object RobotController : OnCreateEventLoop, OpModeManagerNotifier.Notifications 
   private val hardwareObjects: MutableSet<LazyHardware<*>> =
     Collections.synchronizedSet(Collections.newSetFromMap(WeakHashMap()))
 
+  /** Tracks the last observed hardware-map identity so stale cached hardware can be reset after reconnects. */
+  private var lastHardwareMapSignature: String? = null
+
   internal fun register(hardware: LazyHardware<*>) {
     hardwareObjects += hardware
+  }
+
+  internal fun resetHardwareState() {
+    synchronized(hardwareObjects) { hardwareObjects.toList() }.forEach { it.reset() }
+    lastHardwareMapSignature = null
   }
 
   /**
@@ -145,7 +153,18 @@ object RobotController : OnCreateEventLoop, OpModeManagerNotifier.Notifications 
     ftcEventLoop.opModeManager.registerListener(this)
   }
 
-  override fun onOpModePreInit(opMode: OpMode?) {}
+  override fun onOpModePreInit(opMode: OpMode?) {
+    val hardwareSignature = try {
+      hardwareMap.toString()
+    } catch (_: Throwable) {
+      ""
+    }
+
+    if (lastHardwareMapSignature != null && lastHardwareMapSignature != hardwareSignature) {
+      resetHardwareState()
+    }
+    lastHardwareMapSignature = hardwareSignature
+  }
 
   override fun onOpModePreStart(opMode: OpMode?) {}
 
@@ -153,6 +172,6 @@ object RobotController : OnCreateEventLoop, OpModeManagerNotifier.Notifications 
    * Discards all cached hardware objects so they are re-initialized in the next op mode.
    */
   override fun onOpModePostStop(opMode: OpMode?) {
-    synchronized(hardwareObjects) { hardwareObjects.toList() }.forEach { it.reset() }
+    resetHardwareState()
   }
 }

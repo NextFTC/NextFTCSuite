@@ -116,11 +116,7 @@ internal object RobotScanner : Scanner {
     val instance = try {
       constructor()
     } catch (throwable: Throwable) {
-      reportError(
-        "Failed to create an instance of $kClass. " +
-          "Check its constructor and property initializers for code that throws.",
-        throwable,
-      )
+      reportError(creationFailureMessage(kClass, throwable), throwable)
       return
     }
 
@@ -136,6 +132,19 @@ internal object RobotScanner : Scanner {
   }
 
   override fun unload(loader: ClassLoader, cls: Class<*>) {}
+
+  internal fun creationFailureMessage(kClass: KClass<*>, throwable: Throwable): String {
+    val rootCause = throwable.message?.takeIf { it.isNotBlank() }
+      ?: throwable.javaClass.simpleName
+    val hint = when (throwable) {
+      is NoSuchElementException ->
+        "This usually means a mechanism is trying to resolve a hardware object that is missing or misnamed in the FTC configuration. Check each mechanism's lazy hardware property, the registered names in RobotController.hardwareMap, and the robot config before restarting."
+
+      else ->
+        "Check the robot constructor and property initializers for code that throws."
+    }
+    return "Failed to create an instance of $kClass. Root cause: $rootCause. $hint"
+  }
 
   private fun reportError(message: String, throwable: Throwable? = null) {
     reportedError = true
