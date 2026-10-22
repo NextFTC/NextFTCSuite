@@ -21,27 +21,27 @@ import dev.nextftc.hardware.lynx.NextLynxModule
  * without any special handling.
  */
 class NextMecanumConfig(config: Configuration<NextMecanumConfig>) {
-    val frontLeftModule: ConfigVar<NextLynxModule> = ConfigVar.required()
-    val frontLeftPort: ConfigVar<Int> = ConfigVar.required()
-    val frontRightModule: ConfigVar<NextLynxModule> = ConfigVar.required()
-    val frontRightPort: ConfigVar<Int> = ConfigVar.required()
-    val backLeftModule: ConfigVar<NextLynxModule> = ConfigVar.required()
-    val backLeftPort: ConfigVar<Int> = ConfigVar.required()
-    val backRightModule: ConfigVar<NextLynxModule> = ConfigVar.required()
-    val backRightPort: ConfigVar<Int> = ConfigVar.required()
+  val frontLeftModule: ConfigVar<NextLynxModule> = ConfigVar.required()
+  val frontLeftPort: ConfigVar<Int> = ConfigVar.required()
+  val frontRightModule: ConfigVar<NextLynxModule> = ConfigVar.required()
+  val frontRightPort: ConfigVar<Int> = ConfigVar.required()
+  val backLeftModule: ConfigVar<NextLynxModule> = ConfigVar.required()
+  val backLeftPort: ConfigVar<Int> = ConfigVar.required()
+  val backRightModule: ConfigVar<NextLynxModule> = ConfigVar.required()
+  val backRightPort: ConfigVar<Int> = ConfigVar.required()
 
-    val frontLeftDirection: ConfigVar<DcMotorSimple.Direction> = ConfigVar.required()
-    val frontRightDirection: ConfigVar<DcMotorSimple.Direction> = ConfigVar.required()
-    val backLeftDirection: ConfigVar<DcMotorSimple.Direction> = ConfigVar.required()
-    val backRightDirection: ConfigVar<DcMotorSimple.Direction> = ConfigVar.required()
+  val frontLeftDirection: ConfigVar<DcMotorSimple.Direction> = ConfigVar.required()
+  val frontRightDirection: ConfigVar<DcMotorSimple.Direction> = ConfigVar.required()
+  val backLeftDirection: ConfigVar<DcMotorSimple.Direction> = ConfigVar.required()
+  val backRightDirection: ConfigVar<DcMotorSimple.Direction> = ConfigVar.required()
 
-    /** Whether ZeroPowerBrake mode is enabled in manual mode. */
-    val manualBrakeMode: ConfigVar<Boolean> = ConfigVar.of(true)
+  /** Whether ZeroPowerBrake mode is enabled in manual mode. */
+  val manualBrakeMode: ConfigVar<Boolean> = ConfigVar.of(true)
 
-    /** Smallest power change that triggers a hardware write. */
-    val powerThreshold: ConfigVar<Double> = ConfigVar.of(0.01, nonnegative())
+  /** Smallest power change that triggers a hardware write. */
+  val powerThreshold: ConfigVar<Double> = ConfigVar.of(0.01, nonnegative())
 
-    init {
-        config.configure(this)
-    }
+  init {
+    config.configure(this)
+  }
 }
