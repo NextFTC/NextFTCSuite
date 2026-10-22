@@ -7,34 +7,33 @@
  */
 
 plugins {
-    id("dev.nextftc.suite.android-library")
+  id("dev.nextftc.suite.android-library")
 }
 
 android {
-    namespace = "dev.nextftc.v2.pedro"
+  namespace = "dev.nextftc.v2.pedro"
 }
 
 dependencies {
-    api(project(":robot"))
-    api(project(":hardware"))
-    api(libs.pedro)
-    compileOnly(libs.bundles.ftc)
-    implementation(libs.sloth)
+  api(project(":robot"))
+  api(project(":hardware"))
+  api(libs.pedro)
+  compileOnly(libs.bundles.ftc)
+  implementation(libs.sloth)
 
-
-    testImplementation(libs.bundles.kotest)
-    testImplementation(kotlin("test"))
+  testImplementation(libs.bundles.kotest)
+  testImplementation(kotlin("test"))
 }
 
 description = "Pedro Pathing integration for NextFTC."
 
 nextFTCPublishing {
-    displayName = "NextFTC Pedro"
-    logoPath = "../assets/logo-icon.svg"
+  displayName = "NextFTC Pedro"
+  logoPath = "../assets/logo-icon.svg"
 }
 
 dokka {
-    dokkaSourceSets.configureEach {
-        includes.from("Module.md")
-    }
+  dokkaSourceSets.configureEach {
+    includes.from("Module.md")
+  }
 }
