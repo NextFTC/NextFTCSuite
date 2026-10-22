@@ -179,7 +179,7 @@ class NextMotor @JvmOverloads constructor(
 
   private var hubId: Int = -1
     get() = if (field == -1) {
-      val lcField = LynxController::class.java.getField("module")
+      val lcField = LynxController::class.java.getDeclaredField("module")
       lcField.isAccessible = true
       val module = lcField.get(motor.controller) as LynxModule
       hubId = module.moduleAddress
