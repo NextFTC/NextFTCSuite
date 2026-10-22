@@ -79,7 +79,7 @@ open class NextAnalogInput @JvmOverloads constructor(
     customTransformation: (Double) -> Double = { n: Double -> n },
     maxVoltage: Voltage = 3.3.volts,
   ) : this(
-    { AnalogInput(module.analogController, channel) },
+    { module.analogChannel(channel) },
     customTransformation,
     maxVoltage,
   ) {

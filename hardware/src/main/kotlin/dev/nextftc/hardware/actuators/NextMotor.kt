@@ -8,10 +8,13 @@
 
 package dev.nextftc.hardware.actuators
 
+import com.qualcomm.hardware.lynx.LynxController
+import com.qualcomm.hardware.lynx.LynxModule
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorImplEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.Servo
+import dev.anygeneric.blazeftc.BlazeFTC
 import dev.nextftc.control.feedback.PIDCoefficients
 import dev.nextftc.control.feedback.PIDController
 import dev.nextftc.control.feedforward.SimpleFFCoefficients
@@ -79,7 +82,9 @@ class NextMotor @JvmOverloads constructor(
     anglePerCount: Angle = 1.0.radians,
     cacheTolerance: Double = 0.01,
   ) : this(
-    { DcMotorImplEx(module.motorController, port) },
+    {
+      module.motor(port)
+    },
     anglePerCount,
     cacheTolerance,
   ) {
@@ -100,7 +105,9 @@ class NextMotor @JvmOverloads constructor(
     anglePerCount: Angle = 1.0.radians,
     cacheTolerance: Double = 0.01,
   ) : this(
-    { RobotController.hardwareMap[name] as DcMotorImplEx },
+    {
+      RobotController.hardwareMap[name] as DcMotorImplEx
+    },
     anglePerCount,
     cacheTolerance,
   )
@@ -111,6 +118,25 @@ class NextMotor @JvmOverloads constructor(
 
   private val lazyMotor = LazyHardware(initializer)
   private val motor by lazyMotor
+
+  private val powerCache = Caching(cacheTolerance) {
+    if (it != null) {
+      if (RobotController.blazeEnabled) {
+        val port = this.motor.portNumber
+        BlazeFTC.setMotorPower(hubId, port, it)
+      } else {
+        motor.power = it
+      }
+    }
+  }
+
+  init {
+    // a skipped write never touches the lazy, so the cache must be dropped on stop, not on re-init
+    lazyMotor.onOpModeStop {
+      powerCache.reset()
+      controlType = ControlType.Throttle(0.0)
+    }
+  }
 
   /**
    * Position control constants (PID and feedforward gains).
@@ -151,17 +177,24 @@ class NextMotor @JvmOverloads constructor(
   var controlType: ControlType = ControlType.Throttle(0.0)
     private set
 
+  private var hubId: Int = -1
+    get() = if (field == -1) {
+      val lcField = LynxController::class.java.getDeclaredField("module")
+      lcField.isAccessible = true
+      val module = lcField.get(motor.controller) as LynxModule
+      hubId = module.moduleAddress
+      field
+    } else {
+      field
+    }
+
   /**
    * Raw motor power (throttle) in the range [-1.0, 1.0].
    *
    * This backing field is managed by the caching delegate to reduce
    * redundant hardware writes.
    */
-  private var power by Caching(cacheTolerance) {
-    if (it != null) {
-      motor.power = it
-    }
-  }
+  private var power by powerCache
 
   /**
    * Motor rotation direction (FORWARD or REVERSE).
@@ -171,11 +204,7 @@ class NextMotor @JvmOverloads constructor(
   var direction = Direction.FORWARD
     set(value) {
       field = value
-      if (lazyMotor.isInitialized) {
-        motor.direction = value.sdkDirection
-      } else {
-        lazyMotor.applyAfterInit { it.direction = value.sdkDirection }
-      }
+      lazyMotor.applyAfterInit("direction") { it.direction = value.sdkDirection }
     }
 
   /**
@@ -186,11 +215,7 @@ class NextMotor @JvmOverloads constructor(
   var zeroPowerBehavior = ZeroPowerBehavior.FLOAT
     set(value) {
       field = value
-      if (lazyMotor.isInitialized) {
-        motor.zeroPowerBehavior = value.sdkZeroPowerBehavior
-      } else {
-        lazyMotor.applyAfterInit { it.zeroPowerBehavior = value.sdkZeroPowerBehavior }
-      }
+      lazyMotor.applyAfterInit("zeroPowerBehavior") { it.zeroPowerBehavior = value.sdkZeroPowerBehavior }
     }
 
   /**
@@ -210,11 +235,7 @@ class NextMotor @JvmOverloads constructor(
   var currentAlert: Current
     get() = motor.getCurrentAlert(CurrentUnit.AMPS).amperes
     set(value) {
-      if (lazyMotor.isInitialized) {
-        motor.setCurrentAlert(value.magnitude, CurrentUnit.AMPS)
-      } else {
-        lazyMotor.applyAfterInit { it.setCurrentAlert(value.magnitude, CurrentUnit.AMPS) }
-      }
+      lazyMotor.applyAfterInit("currentAlert") { it.setCurrentAlert(value.magnitude, CurrentUnit.AMPS) }
     }
 
   /**

@@ -60,7 +60,9 @@ open class NextServo @JvmOverloads constructor(
     cacheTolerance: Double = 0.01,
     direction: NextMotor.Direction = NextMotor.Direction.FORWARD,
   ) : this(
-    { ServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
+    {
+      module.servo(port)
+    },
     cacheTolerance,
     direction,
   ) {
@@ -74,8 +76,6 @@ open class NextServo @JvmOverloads constructor(
    * ```
    * // Creates a NextServo with the config name: "armServo"
    * val servo = NextServo("armServo")
-   * ```
-   *
    * @param name The configuration name for the servo, usually found on the Driver Station
    * @param cacheTolerance Tolerance used by the [Caching] delegate for position updates; defaults to 0.01.
    * @param direction The initial direction of the servo defined by the user
@@ -92,9 +92,20 @@ open class NextServo @JvmOverloads constructor(
   )
 
   private val lazyServo = LazyHardware(initializer).apply {
-    applyAfterInit { it.direction = direction.servoDirection }
+    applyAfterInit("direction") { it.direction = direction.servoDirection }
   }
   private val servo by lazyServo
+
+  private val positionCache = Caching(cacheTolerance) {
+    if (it != null) {
+      servo.position = it
+    }
+  }
+
+  init {
+    // a skipped write never touches the lazy, so the cache must be dropped on stop, not on re-init
+    lazyServo.onOpModeStop { positionCache.reset() }
+  }
 
   /**
    * Allows user to change servo's direction configuration
@@ -108,11 +119,7 @@ open class NextServo @JvmOverloads constructor(
    */
   var direction: NextMotor.Direction = direction
     set(direction) {
-      if (lazyServo.isInitialized) {
-        servo.direction = direction.servoDirection
-      } else {
-        lazyServo.applyAfterInit { it.direction = direction.servoDirection }
-      }
+      lazyServo.applyAfterInit("direction") { it.direction = direction.servoDirection }
       field = direction
     }
 
@@ -122,11 +129,7 @@ open class NextServo @JvmOverloads constructor(
    * Assigning a value writes through to the backing [ServoImplEx], while reads
    * are handled by the [Caching] delegate.
    */
-  var position: Double by Caching(cacheTolerance) {
-    if (it != null) {
-      servo.position = it
-    }
-  }
+  var position: Double by positionCache
 
   /**
    * Provides access to the servo's PWM range configuration.
@@ -141,11 +144,7 @@ open class NextServo @JvmOverloads constructor(
   var pwmRange: PwmControl.PwmRange
     get() = servo.pwmRange
     set(range) {
-      if (lazyServo.isInitialized) {
-        servo.pwmRange = range
-      } else {
-        lazyServo.applyAfterInit { it.pwmRange = range }
-      }
+      lazyServo.applyAfterInit("pwmRange") { it.pwmRange = range }
     }
 
   /**

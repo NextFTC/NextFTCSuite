@@ -70,7 +70,7 @@ fun mecanumDriveFieldCentric(
   kinematics: MecanumKinematics = MecanumKinematics(),
 ): Command = Commands.infinite {
   val rawY = gamepad.left_stick_x.toDouble()
-  val rawX = -gamepad.left_stick_y.toDouble()
+  val rawX = gamepad.left_stick_y.toDouble()
   val h = heading.get()
   val c = cos(-h)
   val sinH = sin(-h)

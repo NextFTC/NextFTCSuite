@@ -83,9 +83,14 @@ class NextColorDistanceSensor @JvmOverloads constructor(
     bus: Int,
     hasDistance: Boolean = false,
   ) : this(
-    { LynxI2cColorRangeSensor(module.i2cController(bus), true) },
+    {
+      module.colorRangeSensor(bus)
+    },
     if (hasDistance) {
-      { LynxI2cColorRangeSensor(module.i2cController(bus), true) as DistanceSensor }
+      {
+        // Same device as the color sensor so allows it to claim same port.
+        LynxI2cColorRangeSensor(module.i2cController(bus), true) as DistanceSensor
+      }
     } else {
       null
     },
@@ -119,11 +124,7 @@ class NextColorDistanceSensor @JvmOverloads constructor(
   var gain: Float
     get() = colorSensor.gain
     set(gain) {
-      if (lazySensor.isInitialized) {
-        colorSensor.gain = gain
-      } else {
-        lazySensor.applyAfterInit { it.gain = gain }
-      }
+      lazySensor.applyAfterInit("gain") { it.gain = gain }
     }
 
   /** Reads the color sensor (and distance sensor, if present) and refreshes the cache. Call this once per loop, before reading any properties. */

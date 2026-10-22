@@ -49,7 +49,9 @@ open class NextCRServo @JvmOverloads constructor(
     port: Int,
     cacheTolerance: Double = 0.01,
   ) : this(
-    { CRServoImplEx(module.servoController, port, ServoConfigurationType.getStandardServoType()) },
+    {
+      module.crServo(port)
+    },
     cacheTolerance,
   ) {
     require(port in 0..5) { "Expected port in range [0, 5], got $port" }
@@ -66,13 +68,20 @@ open class NextCRServo @JvmOverloads constructor(
   private val lazyServo = LazyHardware(initializer)
   private val servo by lazyServo
 
-  /**
-   * Power applied to the servo, in the range [-1.0, 1.0].
-   */
-  var power: Double by Caching(cacheTolerance) {
+  private val powerCache = Caching(cacheTolerance) {
     if (it != null) {
       servo.power = it
     }
+  }
+
+  /**
+   * Power applied to the servo, in the range [-1.0, 1.0].
+   */
+  var power: Double by powerCache
+
+  init {
+    // a skipped write never touches the lazy, so the cache must be dropped on stop, not on re-init
+    lazyServo.onOpModeStop { powerCache.reset() }
   }
 
   /**
@@ -83,11 +92,7 @@ open class NextCRServo @JvmOverloads constructor(
   var direction: NextMotor.Direction = NextMotor.Direction.FORWARD
     set(value) {
       field = value
-      if (lazyServo.isInitialized) {
-        servo.direction = value.sdkDirection
-      } else {
-        lazyServo.applyAfterInit { it.direction = value.sdkDirection }
-      }
+      lazyServo.applyAfterInit("direction") { it.direction = value.sdkDirection }
     }
 
   /**

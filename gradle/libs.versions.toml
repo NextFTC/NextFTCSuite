@@ -28,11 +28,8 @@ ftc-common = { group = "org.firstinspires.ftc", name = "FtcCommon", version.ref 
 sloth = { module = "dev.frozenmilk.sinister:Sloth", version.ref = "sloth" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 ivy = { module = "com.pedropathing.ivy:core", version.ref = "ivy" }
+blaze = { module = "dev.anygeneric:blazeftc", version = "0.1.66"}
 pedro = { module = "com.pedropathing:revhub", version.ref = "pedro" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-runner = { group = "com.android.support.test", name = "runner", version.ref = "runner" }
-espresso-core = { group = "com.android.support.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-appcompat-v7 = { group = "com.android.support", name = "appcompat-v7", version.ref = "appcompatV7" }
 
 [bundles]
 kotest = ["kotest-runner", "kotest-assertations", "kotest-property", "kotest-data-driven"]

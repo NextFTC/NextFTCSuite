@@ -9,6 +9,7 @@
 package dev.nextftc.hardware
 
 import dev.nextftc.functionalInterfaces.Configurator
+import dev.nextftc.hardware.util.Caching
 import dev.nextftc.hardware.util.LazyHardware
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
@@ -78,6 +79,56 @@ class LazyHardwareTest :
 
       holder.value
       configured shouldBe "device"
+    }
+
+    test("op mode stop re-initializes the value and replays applyAfterInit callbacks") {
+      var calls = 0
+      val configured = mutableListOf<Int>()
+      lateinit var lazyRef: LazyHardware<Int>
+      class Holder {
+        val value by LazyHardware { ++calls }.also { lazyRef = it }
+      }
+      val holder = Holder()
+      lazyRef.applyAfterInit(Configurator { configured += it })
+
+      holder.value shouldBe 1
+      RobotController.onOpModePostStop(null)
+      holder.value shouldBe 2
+      holder.value shouldBe 2
+
+      calls shouldBe 2
+      configured shouldBe listOf(1, 2)
+    }
+
+    test("a keyed applyAfterInit replaces the earlier block with the same key") {
+      var calls = 0
+      val configured = mutableListOf<String>()
+      lateinit var lazyRef: LazyHardware<Int>
+      class Holder {
+        val value by LazyHardware { ++calls }.also { lazyRef = it }
+      }
+      val holder = Holder()
+
+      lazyRef.applyAfterInit("setting", Configurator { configured += "first" })
+      holder.value
+      lazyRef.applyAfterInit("setting", Configurator { configured += "second" })
+      RobotController.onOpModePostStop(null)
+      holder.value
+
+      configured shouldBe listOf("first", "second", "second")
+    }
+
+    test("Caching writes again after reset even for an unchanged value") {
+      val writes = mutableListOf<Double?>()
+      val cache = Caching(0.01) { writes += it }
+      var power by cache
+
+      power = 0.5
+      power = 0.5
+      cache.reset()
+      power = 0.5
+
+      writes shouldBe listOf(0.5, null, 0.5)
     }
 
     test("multiple queued callbacks all run once the value is initialized") {
