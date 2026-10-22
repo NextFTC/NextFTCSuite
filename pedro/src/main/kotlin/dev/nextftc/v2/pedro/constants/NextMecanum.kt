@@ -10,6 +10,7 @@ package dev.nextftc.v2.pedro.constants
 
 import com.pedropathing.drivetrain.DrivePowers
 import com.pedropathing.drivetrain.Drivetrain
+import com.pedropathing.revhub.drivetrains.MecanumConfig
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.HardwareMap
 import dev.nextftc.hardware.actuators.NextMotor
@@ -20,9 +21,11 @@ import kotlin.math.sin
 /**
  * Drop-in replacement for Pedro's own [com.pedropathing.revhub.drivetrains.Mecanum].
  *
- * Two ways to build one:
+ * Three ways to build one:
  * - `NextMecanum(hardwareMap, config)` — builds its own [NextMotor]s from a [NextMecanumConfig],
  *   mirroring Pedro's own `Mecanum(HardwareMap, MecanumConfig)` constructor shape.
+ * - `NextMecanum(hardwareMap, config)` with Pedro's own [MecanumConfig] — looks the motors up by
+ *   name, so an existing Pedro config can be reused as is.
  * - `NextMecanum(frontLeft, frontRight, backLeft, backRight)` — reuses [NextMotor]s you've
  *   already constructed elsewhere, e.g. an existing drivetrain [dev.nextftc.robot.Mechanism].
  */
@@ -55,6 +58,18 @@ class NextMecanum @JvmOverloads constructor(
             config.backRightPort.get(),
             cacheTolerance = config.powerThreshold.get(),
         ).apply { direction = toNextDirection(config.backRightDirection.get()) },
+        config.manualBrakeMode.get(),
+    )
+
+    constructor(hardwareMap: HardwareMap, config: MecanumConfig) : this(
+        NextMotor(config.frontLeftName.get(), cacheTolerance = config.powerThreshold.get())
+            .apply { direction = toNextDirection(config.frontLeftDirection.get()) },
+        NextMotor(config.frontRightName.get(), cacheTolerance = config.powerThreshold.get())
+            .apply { direction = toNextDirection(config.frontRightDirection.get()) },
+        NextMotor(config.backLeftName.get(), cacheTolerance = config.powerThreshold.get())
+            .apply { direction = toNextDirection(config.backLeftDirection.get()) },
+        NextMotor(config.backRightName.get(), cacheTolerance = config.powerThreshold.get())
+            .apply { direction = toNextDirection(config.backRightDirection.get()) },
         config.manualBrakeMode.get(),
     )
 

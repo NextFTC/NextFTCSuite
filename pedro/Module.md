@@ -4,7 +4,7 @@ Pedro Pathing integration for NextFTC. Wraps the Pedro `Follower` so it can be d
 
 # Package dev.nextftc.v2.pedro
 
-Core Pedro integration, including the `Pedro` entry point and the `PedroHook` that ties the follower into the OpMode lifecycle.
+Core Pedro integration, including `PedroMechanism`, which owns the follower and updates it every loop.
 
 # Package dev.nextftc.v2.pedro.constants
 
