@@ -12,6 +12,7 @@ dependencies {
   dokka(project(":control"))
   dokka(project(":hardware"))
   dokka(project(":telemetry"))
+  dokka(project(":telemetry-ftc"))
   dokka(project(":robot"))
   dokkaPlugin(libs.dokka.mathjax.plugin)
 }

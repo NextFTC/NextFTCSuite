@@ -20,6 +20,7 @@ to [kdoc.nextftc.dev](https://kdoc.nextftc.dev/).
 | [`control`](control/Module.md)   | Feedback controllers (PID, LQR), feedforward models, signal filters, motion profiling, and typed 2D geometry (`Pose2d`, `Rotation2d`, etc.).             |
 | [`hardware`](hardware/Module.md) | Kotlin wrappers around FTC SDK hardware (motors, servos, sensors, IMUs, odometry computers, vision) that lazily resolve from the hardware map.           |
 | [`telemetry`](telemetry/Module.md) | A pure-JVM WPILOG writer, NetworkTables 4 server (on Ktor), and WPILib struct schemas for logging and streaming robot data to AdvantageScope. |
+| [`telemetry-ftc`](telemetry-ftc/Module.md) | FTC lifecycle integration for `telemetry`: a WPILOG and NetworkTables 4 server for each OpMode, usable without `robot`. |
 | [`robot`](robot/Module.md)       | A command-based robot framework (`NextRobot`/`Mechanism`/`NextOpMode`) with reflection-based OpMode registration, built on PedroPathing's Ivy scheduler. |
 
 `control`, `linalg`, and parts of `units` are heavily adapted from and inspired by

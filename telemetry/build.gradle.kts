@@ -34,9 +34,6 @@ kotlin {
   compilerOptions {
     freeCompilerArgs.add("-jvm-default=no-compatibility")
   }
-
-  // The simulator test reads the simulator's internal classes.
-  target.compilations.getByName("test").associateWith(target.compilations.getByName("simulator"))
 }
 
 // The simulator is its own source set, in src/simulator: a fake robot built on the main code and
@@ -52,6 +49,11 @@ configurations[simulator.runtimeOnlyConfigurationName].extendsFrom(configuration
 sourceSets.test {
   compileClasspath += simulator.output
   runtimeClasspath += simulator.output
+}
+
+// The simulator test reads the simulator's internal classes.
+kotlin {
+  target.compilations.getByName("test").associateWith(target.compilations.getByName("simulator"))
 }
 
 // A fake robot that serves NetworkTables 4 on port 5810 and writes a log for each OpMode. Options go
