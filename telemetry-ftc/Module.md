@@ -20,6 +20,12 @@ FtcTelemetry.config.serverPort = 5810
 Telemetry.log("Drive/Pose", pose)
 ```
 
+Two utility OpModes, "Disable NextFTC Telemetry Server" and "Enable NextFTC Telemetry Server", turn
+the NetworkTables server off for competition and back on afterward. The choice is saved on the Robot
+Controller, so it holds after the app restarts. `FtcTelemetry.setServerEnabled` does the same from
+code. The log file and Driver Station lines are unaffected. Settings in `FtcTelemetry.config` are not
+saved: they come from your code each time.
+
 The hook is found by Sloth when the event loop is created, so there is nothing to register.
 
 # Package dev.nextftc.telemetry.ftc

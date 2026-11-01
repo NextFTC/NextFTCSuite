@@ -10,6 +10,7 @@ package dev.nextftc.telemetry.ftc
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import com.qualcomm.ftccommon.FtcEventLoop
 import com.qualcomm.robotcore.eventloop.opmode.OpMode
 import com.qualcomm.robotcore.eventloop.opmode.OpModeManagerImpl
@@ -70,12 +71,15 @@ class FtcTelemetryConfig {
  * loop. From then on every OpMode gets a [WPILogBackend] (if [FtcTelemetryConfig.logToFile]), a
  * [NT4Backend] (if [FtcTelemetryConfig.liveServer]) and a [DriverStationBackend] (if
  * [FtcTelemetryConfig.driverStation]) registered on [Telemetry.registry] before its `init`, and
- * closed after it stops.
+ * closed after it stops. The server also needs [isServerEnabled], which the "Enable/Disable NextFTC
+ * Telemetry Server" OpModes switch, so it can be turned off for competition.
  * The server outlives the OpModes, so a dashboard stays connected between them, and is stopped when
  * the Robot Controller app is destroyed.
  */
 object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
   private const val TAG = "NextFTC-Telemetry"
+  private const val PREFS_NAME = "nextftc_telemetry"
+  private const val KEY_SERVER_ENABLED = "server_enabled"
 
   /** The settings used for each OpMode. */
   @JvmStatic val config: FtcTelemetryConfig = FtcTelemetryConfig()
@@ -86,9 +90,52 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
   private var log: WPILogBackend? = null
   private var live: NT4Backend? = null
   private var driverStation: DriverStationBackend? = null
+  private var prefs: SharedPreferences? = null
+
+  /**
+   * Whether the NetworkTables server may run, saved on the Robot Controller so it holds across app
+   * restarts. The server runs when this and [FtcTelemetryConfig.liveServer] are both true. Change it
+   * with [setServerEnabled], or the "Enable/Disable NextFTC Telemetry Server" OpModes.
+   */
+  @JvmStatic
+  @Volatile
+  var isServerEnabled: Boolean = true
+    private set
+
+  /**
+   * Turns the NetworkTables server on or off, and saves the choice so it holds across app restarts.
+   *
+   * Turning it off stops the server now, and disconnects dashboards. Turning it on takes effect when
+   * the next OpMode is initialized.
+   */
+  @JvmStatic
+  @Synchronized
+  fun setServerEnabled(enabled: Boolean) {
+    isServerEnabled = enabled
+    try {
+      prefs?.edit()?.putBoolean(KEY_SERVER_ENABLED, enabled)?.apply()
+    } catch (e: Exception) {
+      RobotLog.ee(TAG, e, "Couldn't save the telemetry server setting")
+    }
+    if (enabled) return
+
+    live?.let {
+      Telemetry.registry.unregister(it)
+      it.close()
+      live = null
+    }
+    try {
+      server?.stop()
+    } catch (e: Exception) {
+      RobotLog.ee(TAG, e, "Couldn't stop the telemetry server")
+    }
+    server = null
+  }
 
   @Synchronized
   override fun onCreateEventLoop(context: Context, ftcEventLoop: FtcEventLoop) {
+    prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    isServerEnabled = prefs?.getBoolean(KEY_SERVER_ENABLED, true) ?: true
     eventLoop = ftcEventLoop
     Telemetry.registry.warningHandler = TelemetryWarningHandler { RobotLog.ww(TAG, it) }
     ftcEventLoop.opModeManager.registerListener(this)
@@ -99,7 +146,8 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
     closeBackends()
     val registry = Telemetry.registry
     val name = eventLoop?.opModeManager?.activeOpModeName ?: opMode?.javaClass?.simpleName ?: "OpMode"
-    if (name == OpModeManagerImpl.DEFAULT_OP_MODE_NAME) return
+    // The server switches aren't worth a log of their own
+    if (name == OpModeManagerImpl.DEFAULT_OP_MODE_NAME || opMode is ServerToggleOpMode) return
 
     if (config.logToFile) {
       try {
@@ -122,7 +170,7 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
       }
     }
 
-    if (config.liveServer) {
+    if (config.liveServer && isServerEnabled) {
       try {
         val server = server ?: NT4Server(
           config.serverPort,
