@@ -12,6 +12,10 @@ plugins {
 
 android {
   namespace = "dev.nextftc.v2.telemetry.ftc"
+
+  testOptions {
+    unitTests.isReturnDefaultValues = true
+  }
 }
 
 dependencies {
@@ -19,7 +23,10 @@ dependencies {
   compileOnly(libs.bundles.ftc)
   implementation(libs.sloth)
 
+  // The backend implements telemetry types that live in the SDK, so tests need it on their classpath
+  testImplementation(libs.ftc.robot.core) { isTransitive = false }
   testImplementation(libs.bundles.kotest)
+  testImplementation(libs.mockk)
 }
 
 description =

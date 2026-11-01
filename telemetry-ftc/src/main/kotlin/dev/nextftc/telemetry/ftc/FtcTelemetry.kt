@@ -50,14 +50,27 @@ class FtcTelemetryConfig {
   /** The port the NetworkTables 4 server listens on. Read when the Robot Controller app starts. */
   @JvmField @Volatile
   var serverPort: Int = NT4Server.DEFAULT_PORT
+
+  /** Whether to show logged values on the Driver Station with a [DriverStationBackend]. */
+  @JvmField @Volatile
+  var driverStation: Boolean = true
+
+  /**
+   * If not empty, the Driver Station only shows values on these paths or under them, such as
+   * `/Drive`. The log and the server always get everything.
+   */
+  @JvmField @Volatile
+  var driverStationPrefixes: List<String> = emptyList()
 }
 
 /**
  * Connects [Telemetry] to the FTC OpMode lifecycle, with no other part of NextFTC involved.
  *
  * Sloth finds this object and calls [onCreateEventLoop] when the Robot Controller creates its event
- * loop. From then on every OpMode gets a [WPILogBackend] (if [FtcTelemetryConfig.logToFile]) and a
- * [NT4Backend] registered on [Telemetry.registry] before its `init`, and closed after it stops.
+ * loop. From then on every OpMode gets a [WPILogBackend] (if [FtcTelemetryConfig.logToFile]), a
+ * [NT4Backend] (if [FtcTelemetryConfig.liveServer]) and a [DriverStationBackend] (if
+ * [FtcTelemetryConfig.driverStation]) registered on [Telemetry.registry] before its `init`, and
+ * closed after it stops.
  * The server outlives the OpModes, so a dashboard stays connected between them, and is stopped when
  * the Robot Controller app is destroyed.
  */
@@ -72,6 +85,7 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
   private var server: NT4Server? = null
   private var log: WPILogBackend? = null
   private var live: NT4Backend? = null
+  private var driverStation: DriverStationBackend? = null
 
   @Synchronized
   override fun onCreateEventLoop(context: Context, ftcEventLoop: FtcEventLoop) {
@@ -126,6 +140,26 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
         RobotLog.ee(TAG, e, "Couldn't start the telemetry server")
       }
     }
+
+    val sdkTelemetry = opMode?.telemetry
+    if (config.driverStation && sdkTelemetry != null) {
+      DriverStationBackend(sdkTelemetry).also {
+        driverStation = it
+        registry.register(it, *config.driverStationPrefixes.toTypedArray())
+      }
+    }
+  }
+
+  /**
+   * Sends the values logged since the last update to the Driver Station, like `telemetry.update()`
+   * but only for the lines this library added. A `LinearOpMode` has to call it (or
+   * `telemetry.update()`) every loop, because the SDK only updates after each loop of an iterative
+   * `OpMode`. It does nothing when [FtcTelemetryConfig.driverStation] is off.
+   */
+  @JvmStatic
+  @Synchronized
+  fun update() {
+    driverStation?.update()
   }
 
   @Synchronized
@@ -149,7 +183,7 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
 
   private fun closeBackends() {
     val registry = Telemetry.registry
-    for (backend in listOfNotNull(log, live)) {
+    for (backend in listOfNotNull(log, live, driverStation)) {
       registry.unregister(backend)
       try {
         backend.close()
@@ -159,6 +193,7 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
     }
     log = null
     live = null
+    driverStation = null
   }
 }
 
