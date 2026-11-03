@@ -1,0 +1,376 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Trigger</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":robot/main">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":robot/main" data-filter=":robot/main">
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextFTC Robot::dev.nextftc.robot.triggers/Trigger///PointingToDeclaration//-919244207">
+  <div class="breadcrumbs"><a href="../../index.html">NextFTC Robot</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.robot.triggers</a><span class="delimiter">/</span><span class="current">Trigger</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Trigger</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">Trigger</a>&nbsp;<span><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a>&nbsp;</span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">loop<span class="token operator">: </span><a href="../../../hardware/dev.nextftc.hardware.util/-event-loop/index.html">EventLoop</a><span class="token operator"> = </span>defaultEventLoop<span class="token punctuation">, </span></span><span class="parameter ">condition<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-function0/index.html">Function0</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator">&gt; </span></div><p class="paragraph">This class provides an easy way to link commands to conditions.</p><p>It is very easy to link a button to a command. For instance, you could link the trigger button
+of a joystick to a "score" command.</p><p>Triggers can easily be composed for advanced functionality using the [and], [or], [negate] operators.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="766186853%2FConstructors%2F-919244207" anchor-label="Trigger" id="766186853%2FConstructors%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-trigger.html"><span><span>Trigger</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="766186853%2FConstructors%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">loop<span class="token operator">: </span><a href="../../../hardware/dev.nextftc.hardware.util/-event-loop/index.html">EventLoop</a><span class="token operator"> = </span>defaultEventLoop<span class="token punctuation">, </span></span><span class="parameter ">condition<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-1017101530%2FClasslikes%2F-919244207" anchor-label="Companion" id="-1017101530%2FClasslikes%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1017101530%2FClasslikes%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1164973750%2FFunctions%2F-919244207" anchor-label="and" id="1164973750%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="and.html"><span><span>and</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1164973750%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="and.html"><span class="token function">and</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">trigger<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Composes two triggers with logical AND.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1004098684%2FFunctions%2F-919244207" anchor-label="debounce" id="1004098684%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="debounce.html"><span><span>debounce</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1004098684%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="debounce.html"><span class="token function">debounce</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">seconds<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">type<span class="token operator">: </span><a href="../../../control/dev.nextftc.control.filters/-debouncer/-debounce-type/index.html">Debouncer.DebounceType</a><span class="token operator"> = </span>Debouncer.DebounceType.RISING</span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Creates a new debounced trigger from this trigger - it will become active when this trigger has been active for longer than the specified period.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="516692347%2FFunctions%2F-919244207" anchor-label="getAsBoolean" id="516692347%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="get-as-boolean.html"><span>get</span><wbr><span>As</span><wbr><span><span>Boolean</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="516692347%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="get-as-boolean.html"><span class="token function">getAsBoolean</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="826444643%2FFunctions%2F-919244207" anchor-label="invoke" id="826444643%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="invoke.html"><span><span>invoke</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="826444643%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="invoke.html"><span class="token function">invoke</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="314959316%2FFunctions%2F-919244207" anchor-label="multiPress" id="314959316%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="multi-press.html"><span>multi</span><wbr><span><span>Press</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="314959316%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="multi-press.html"><span class="token function">multiPress</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">requiredPresses<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">windowTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Creates a new multi-press trigger from this trigger - it will become active when this trigger has been activated the required number of times within the specified time window.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="7944217%2FFunctions%2F-919244207" anchor-label="negate" id="7944217%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="negate.html"><span><span>negate</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="7944217%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="negate.html"><span class="token function">negate</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Creates a new trigger that is active when this trigger is inactive, i.e. that acts as the negation of this trigger.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1451973907%2FFunctions%2F-919244207" anchor-label="onChange" id="1451973907%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-change.html"><span>on</span><wbr><span><span>Change</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1451973907%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="on-change.html"><span class="token function">onChange</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">command<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">Command</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Starts the command when the condition changes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1444522206%2FFunctions%2F-919244207" anchor-label="onFalse" id="-1444522206%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-false.html"><span>on</span><wbr><span><span>False</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1444522206%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="on-false.html"><span class="token function">onFalse</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">command<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">Command</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Starts the given command whenever the condition changes from <code class="lang-kotlin">true</code> to <code class="lang-kotlin">false</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1693920693%2FFunctions%2F-919244207" anchor-label="onTrue" id="1693920693%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-true.html"><span>on</span><wbr><span><span>True</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1693920693%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="on-true.html"><span class="token function">onTrue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">command<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">Command</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Starts the given command whenever the condition changes from <code class="lang-kotlin">false</code> to <code class="lang-kotlin">true</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1825076058%2FFunctions%2F-919244207" anchor-label="or" id="-1825076058%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="or.html"><span><span>or</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1825076058%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="or.html"><span class="token function">or</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">trigger<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Composes two triggers with logical OR.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1024323818%2FFunctions%2F-919244207" anchor-label="toggleOnFalse" id="-1024323818%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="toggle-on-false.html"><span>toggle</span><wbr><span>On</span><wbr><span><span>False</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1024323818%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="toggle-on-false.html"><span class="token function">toggleOnFalse</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">command<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">Command</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Toggles a command when the condition changes from <code class="lang-kotlin">true</code> to <code class="lang-kotlin">false</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1202018495%2FFunctions%2F-919244207" anchor-label="toggleOnTrue" id="-1202018495%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="toggle-on-true.html"><span>toggle</span><wbr><span>On</span><wbr><span><span>True</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1202018495%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="toggle-on-true.html"><span class="token function">toggleOnTrue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">command<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">Command</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Toggles a command when the condition changes from <code class="lang-kotlin">false</code> to <code class="lang-kotlin">true</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-216227984%2FFunctions%2F-919244207" anchor-label="whileFalse" id="-216227984%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="while-false.html"><span>while</span><wbr><span><span>False</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-216227984%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="while-false.html"><span class="token function">whileFalse</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">command<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">Command</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Starts the given command when the condition changes to <code class="lang-kotlin">false</code> and cancels it when the condition changes to <code class="lang-kotlin">true</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1456448423%2FFunctions%2F-919244207" anchor-label="whileTrue" id="1456448423%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="while-true.html"><span>while</span><wbr><span><span>True</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1456448423%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="while-true.html"><span class="token function">whileTrue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">command<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">Command</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Trigger</a></div><div class="brief "><p class="paragraph">Starts the given command when the condition changes to <code class="lang-kotlin">true</code> and cancels it when the condition changes to <code class="lang-kotlin">false</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

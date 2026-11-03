@@ -1,0 +1,506 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>CommandGamepad</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":robot/main">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":robot/main" data-filter=":robot/main">
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextFTC Robot::dev.nextftc.robot.triggers/CommandGamepad///PointingToDeclaration//-919244207">
+  <div class="breadcrumbs"><a href="../../index.html">NextFTC Robot</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.robot.triggers</a><span class="delimiter">/</span><span class="current">CommandGamepad</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Command</span><wbr><span><span>Gamepad</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">CommandGamepad</a>&nbsp;<span><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a>&nbsp;</span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">gamepad<span class="token operator">: </span><span data-unresolved-link="com.qualcomm.robotcore.hardware/Gamepad///PointingToDeclaration/">Gamepad</span><span class="token punctuation">, </span></span><span class="parameter ">eventLoop<span class="token operator">: </span><a href="../../../hardware/dev.nextftc.hardware.util/-event-loop/index.html">EventLoop</a><span class="token operator"> = </span>Trigger.defaultEventLoop</span></span><span class="token punctuation">)</span></div><p class="paragraph">A wrapper around the standard FTC <span data-unresolved-link="com.qualcomm.robotcore.hardware/Gamepad///PointingToDeclaration/">Gamepad</span> that exposes its buttons as command-based <a href="../-trigger/index.html">Trigger</a>s.</p><p class="paragraph">This allows you to easily map controller inputs directly to Ivy commands using the WPILib-style Trigger API (e.g., <code class="lang-kotlin">gamepad.a.onTrue(scoreCommand)</code>).</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>event</span><wbr><span><span>Loop</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The event loop to bind the button triggers to.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>gamepad</span></span></u></div></span></div><div><div class="title"><p class="paragraph">The underlying FTC gamepad instance to read data from.</p></div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-784576301%2FConstructors%2F-919244207" anchor-label="CommandGamepad" id="-784576301%2FConstructors%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-command-gamepad.html"><span>Command</span><wbr><span><span>Gamepad</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-784576301%2FConstructors%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">gamepad<span class="token operator">: </span><span data-unresolved-link="com.qualcomm.robotcore.hardware/Gamepad///PointingToDeclaration/">Gamepad</span><span class="token punctuation">, </span></span><span class="parameter ">eventLoop<span class="token operator">: </span><a href="../../../hardware/dev.nextftc.hardware.util/-event-loop/index.html">EventLoop</a><span class="token operator"> = </span>Trigger.defaultEventLoop</span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-1625563446%2FProperties%2F-919244207" anchor-label="a" id="-1625563446%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="a.html"><span><span>a</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1625563446%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"a"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="a.html">a</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the A button (cross on PlayStation) is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1594543639%2FProperties%2F-919244207" anchor-label="b" id="-1594543639%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="b.html"><span><span>b</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1594543639%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"b"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="b.html">b</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the B button (circle on PlayStation) is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1637767592%2FProperties%2F-919244207" anchor-label="back" id="1637767592%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="back.html"><span><span>back</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1637767592%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"back"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="back.html">back</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the back button is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1932375391%2FProperties%2F-919244207" anchor-label="circle" id="1932375391%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="circle.html"><span><span>circle</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1932375391%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"circle"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="circle.html">circle</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the circle button (B on Xbox) is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="47691979%2FProperties%2F-919244207" anchor-label="cross" id="47691979%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="cross.html"><span><span>cross</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="47691979%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"cross"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="cross.html">cross</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the cross button (A on Xbox) is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1374698018%2FProperties%2F-919244207" anchor-label="dpadDown" id="-1374698018%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="dpad-down.html"><span>dpad</span><wbr><span><span>Down</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1374698018%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dpadDown"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="dpad-down.html">dpadDown</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the d-pad down is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-853903847%2FProperties%2F-919244207" anchor-label="dpadLeft" id="-853903847%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="dpad-left.html"><span>dpad</span><wbr><span><span>Left</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-853903847%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dpadLeft"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="dpad-left.html">dpadLeft</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the d-pad left is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="532192510%2FProperties%2F-919244207" anchor-label="dpadRight" id="532192510%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="dpad-right.html"><span>dpad</span><wbr><span><span>Right</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="532192510%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dpadRight"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="dpad-right.html">dpadRight</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the d-pad right is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1386210619%2FProperties%2F-919244207" anchor-label="dpadUp" id="-1386210619%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="dpad-up.html"><span>dpad</span><wbr><span><span>Up</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1386210619%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"dpadUp"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="dpad-up.html">dpadUp</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the d-pad up is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1649200347%2FProperties%2F-919244207" anchor-label="leftBumper" id="-1649200347%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="left-bumper.html"><span>left</span><wbr><span><span>Bumper</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1649200347%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"leftBumper"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="left-bumper.html">leftBumper</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the left bumper is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="387258000%2FProperties%2F-919244207" anchor-label="leftStickButton" id="387258000%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="left-stick-button.html"><span>left</span><wbr><span>Stick</span><wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="387258000%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"leftStickButton"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="left-stick-button.html">leftStickButton</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the left stick is clicked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1215485280%2FProperties%2F-919244207" anchor-label="leftStickX" id="1215485280%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="left-stick-x.html"><span>left</span><wbr><span>Stick</span><wbr><span><span>X</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1215485280%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"leftStickX"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="left-stick-x.html">leftStickX</a><span class="token operator">: </span><a href="../-range-trigger/index.html">RangeTrigger</a></div><div class="brief "><p class="paragraph">A range trigger that evaluates to how far the x value of the left stick is moved.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1246505087%2FProperties%2F-919244207" anchor-label="leftStickY" id="1246505087%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="left-stick-y.html"><span>left</span><wbr><span>Stick</span><wbr><span><span>Y</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1246505087%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"leftStickY"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="left-stick-y.html">leftStickY</a><span class="token operator">: </span><a href="../-range-trigger/index.html">RangeTrigger</a></div><div class="brief "><p class="paragraph">A range trigger that evaluates to how far the y value of the left stick is moved.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1256302586%2FProperties%2F-919244207" anchor-label="leftTrigger" id="1256302586%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="left-trigger.html"><span>left</span><wbr><span><span>Trigger</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1256302586%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"leftTrigger"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="left-trigger.html">leftTrigger</a><span class="token operator">: </span><a href="../-range-trigger/index.html">RangeTrigger</a></div><div class="brief "><p class="paragraph">A range trigger that evaluates to how far the left trigger is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2005531188%2FProperties%2F-919244207" anchor-label="rightBumper" id="-2005531188%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="right-bumper.html"><span>right</span><wbr><span><span>Bumper</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2005531188%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"rightBumper"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="right-bumper.html">rightBumper</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the right bumper is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="205444169%2FProperties%2F-919244207" anchor-label="rightStickButton" id="205444169%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="right-stick-button.html"><span>right</span><wbr><span>Stick</span><wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="205444169%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"rightStickButton"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="right-stick-button.html">rightStickButton</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the right stick is clicked.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="859154439%2FProperties%2F-919244207" anchor-label="rightStickX" id="859154439%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="right-stick-x.html"><span>right</span><wbr><span>Stick</span><wbr><span><span>X</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="859154439%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"rightStickX"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="right-stick-x.html">rightStickX</a><span class="token operator">: </span><a href="../-range-trigger/index.html">RangeTrigger</a></div><div class="brief "><p class="paragraph">A range trigger that evaluates to how far the x value of the right stick is moved.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="890174246%2FProperties%2F-919244207" anchor-label="rightStickY" id="890174246%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="right-stick-y.html"><span>right</span><wbr><span>Stick</span><wbr><span><span>Y</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="890174246%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"rightStickY"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="right-stick-y.html">rightStickY</a><span class="token operator">: </span><a href="../-range-trigger/index.html">RangeTrigger</a></div><div class="brief "><p class="paragraph">A range trigger that evaluates to how far the y value of the right stick is moved.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1200018893%2FProperties%2F-919244207" anchor-label="rightTrigger" id="-1200018893%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="right-trigger.html"><span>right</span><wbr><span><span>Trigger</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1200018893%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"rightTrigger"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="right-trigger.html">rightTrigger</a><span class="token operator">: </span><a href="../-range-trigger/index.html">RangeTrigger</a></div><div class="brief "><p class="paragraph">A range trigger that evaluates to how far the right trigger is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1185703502%2FProperties%2F-919244207" anchor-label="square" id="-1185703502%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="square.html"><span><span>square</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1185703502%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"square"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="square.html">square</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the square button (X on Xbox) is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-44296471%2FProperties%2F-919244207" anchor-label="start" id="-44296471%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="start.html"><span><span>start</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-44296471%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"start"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="start.html">start</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the start button is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-90185049%2FProperties%2F-919244207" anchor-label="triangle" id="-90185049%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="triangle.html"><span><span>triangle</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-90185049%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"triangle"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="triangle.html">triangle</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the triangle button (Y on Xbox) is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-912107885%2FProperties%2F-919244207" anchor-label="x" id="-912107885%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="x.html"><span><span>x</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-912107885%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"x"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="x.html">x</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the X button (square on PlayStation) is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-881088078%2FProperties%2F-919244207" anchor-label="y" id="-881088078%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="y.html"><span><span>y</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-881088078%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"y"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="y.html">y</a><span class="token operator">: </span><a href="../-trigger/index.html">Trigger</a></div><div class="brief "><p class="paragraph">A trigger that evaluates to true when the Y button (triangle on PlayStation) is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

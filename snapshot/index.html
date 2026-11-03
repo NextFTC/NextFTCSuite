@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>All modules</title>
+    <link href="images/logo-icon.svg" rel="icon" type="image/svg">
+        <script>var pathToRoot = "";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="scripts/sourceset_dependencies.js" async="async"></script>
+<link href="styles/style.css" rel="Stylesheet">
+<link href="styles/main.css" rel="Stylesheet">
+<link href="styles/prism.css" rel="Stylesheet">
+<link href="styles/logo-styles.css" rel="Stylesheet">
+<link href="ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="scripts/navigation-loader.js" async="async"></script>
+<script type="text/javascript" src="scripts/platform-content-handler.js" async="async"></script>
+<script type="text/javascript" src="scripts/main.js" defer="defer"></script>
+<script type="text/javascript" src="scripts/prism.js" async="async"></script>
+<script type="text/javascript" src="ui-kit/ui-kit.min.js" defer="defer"></script>
+</head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+            <a class="library-name--link" href="index.html" tabindex="1">
+                    NextFTC Suite
+            </a>
+        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle"
+                type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">
+0.3.1-SNAPSHOT        </div>
+        <div class="navigation-controls">
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button"
+                    type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config='{"defaultSize": 280, "minSize": 200, "maxSize": 400}'>
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list"
+                    data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" id="content" pageIds="NextFTC Suite::.ext/allModules///PointingToDeclaration//0">
+  <div class="breadcrumbs"></div>
+  <div class="cover ">
+    <h2 class="">All modules:</h2>
+    <div class="table"><a data-name="92286979%2FMain%2F0" anchor-label="NextControl" id="92286979%2FMain%2F0" data-filterable-set=""></a>
+      <div class="table-row table-row_multimodule">
+        <div class="main-subrow ">
+          <div class="w-100"><span class="inline-flex">
+              <div><a href="control/index.html">NextControl</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="92286979%2FMain%2F0"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div><span class="brief-comment">
+              <p class="paragraph">A WPIMath-style control theory library for FTC robots, built on <code class="lang-kotlin">units</code> for dimensioned measurements and <code class="lang-kotlin">linalg</code> for matrix/vector math. It has the usual closed-loop building blocks: feedback controllers, feedforward models, signal filters, motion profiling, and typed 2D geometry for tracking robot pose and motion.</p>
+            </span></div>
+        </div>
+      </div>
+<a data-name="-410097294%2FMain%2F0" anchor-label="NextControl Linear Algebra" id="-410097294%2FMain%2F0" data-filterable-set=""></a>
+      <div class="table-row table-row_multimodule">
+        <div class="main-subrow ">
+          <div class="w-100"><span class="inline-flex">
+              <div><a href="linalg/index.html">NextControl Linear Algebra</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-410097294%2FMain%2F0"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div><span class="brief-comment">
+              <p class="paragraph">A Kotlin wrapper around EJML's <code class="lang-kotlin">SimpleMatrix</code> for NextControl's linear algebra needs. There are two flavors: <code class="lang-kotlin">Matrix&lt;R, C&gt;</code>/<code class="lang-kotlin">Vector&lt;N&gt;</code>, which use <code class="lang-kotlin">Nat</code> phantom types so dimension mismatches are caught at compile time, and <code class="lang-kotlin">DynamicMatrix</code>/<code class="lang-kotlin">DynamicVector</code>, which check dimensions at runtime for cases where the size isn't known ahead of time.</p>
+            </span></div>
+        </div>
+      </div>
+<a data-name="-122670540%2FMain%2F0" anchor-label="NextControl Units" id="-122670540%2FMain%2F0" data-filterable-set=""></a>
+      <div class="table-row table-row_multimodule">
+        <div class="main-subrow ">
+          <div class="w-100"><span class="inline-flex">
+              <div><a href="units/index.html">NextControl Units</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-122670540%2FMain%2F0"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div><span class="brief-comment">
+              <p class="paragraph">A type-safe units library for FTC robot code, modeled after WPILib's units library. Distances, times, masses, forces, torques, energy, power, current, voltage, temperature, and angles (plus their velocity and acceleration derivatives) are all represented as <code class="lang-kotlin">Measure</code> values tied to <code class="lang-kotlin">Unit</code> definitions, instead of raw doubles that leave you guessing what unit they're in.</p>
+            </span></div>
+        </div>
+      </div>
+<a data-name="99840495%2FMain%2F0" anchor-label="NextFTC Hardware" id="99840495%2FMain%2F0" data-filterable-set=""></a>
+      <div class="table-row table-row_multimodule">
+        <div class="main-subrow ">
+          <div class="w-100"><span class="inline-flex">
+              <div><a href="hardware/index.html">NextFTC Hardware</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="99840495%2FMain%2F0"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div><span class="brief-comment">
+              <p class="paragraph">NextFTC's hardware layer. It wraps the raw FTC SDK hardware classes — motors, servos, IMUs, distance/color/digital sensors, odometry computers, and vision sensors like Limelight and HuskyLens — in Kotlin classes that lazily resolve devices from the hardware map or Lynx modules on first use, instead of requiring manual <code class="lang-kotlin">hardwareMap.get(...)</code> calls everywhere.</p>
+            </span></div>
+        </div>
+      </div>
+<a data-name="1601387553%2FMain%2F0" anchor-label="NextFTC Robot" id="1601387553%2FMain%2F0" data-filterable-set=""></a>
+      <div class="table-row table-row_multimodule">
+        <div class="main-subrow ">
+          <div class="w-100"><span class="inline-flex">
+              <div><a href="robot/index.html">NextFTC Robot</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1601387553%2FMain%2F0"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div><span class="brief-comment">
+              <p class="paragraph">The robot library for NextFTC, designed to provide a robust, command-based framework for FTC robots. It features a reflection-based architecture powered by Sinister that automates OpMode registration and instantiation, reducing boilerplate and creating a seamless developer experience.</p>
+            </span></div>
+        </div>
+      </div>
+<a data-name="-526308174%2FMain%2F0" anchor-label="NextFTC Telemetry" id="-526308174%2FMain%2F0" data-filterable-set=""></a>
+      <div class="table-row table-row_multimodule">
+        <div class="main-subrow ">
+          <div class="w-100"><span class="inline-flex">
+              <div><a href="telemetry/index.html">NextFTC Telemetry</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-526308174%2FMain%2F0"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div><span class="brief-comment">
+              <p class="paragraph">Logging and live telemetry for FTC robot code, in formats AdvantageScope understands. It has no FTC SDK or Android dependency, so it runs in unit tests or a desktop tool as easily as on a Robot Controller, and it doesn't depend on the other NextFTC modules.</p>
+            </span></div>
+        </div>
+      </div>
+<a data-name="-1308698435%2FMain%2F0" anchor-label="NextFTC Telemetry FTC" id="-1308698435%2FMain%2F0" data-filterable-set=""></a>
+      <div class="table-row table-row_multimodule">
+        <div class="main-subrow ">
+          <div class="w-100"><span class="inline-flex">
+              <div><a href="telemetry-ftc/index.html">NextFTC Telemetry FTC</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1308698435%2FMain%2F0"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div><span class="brief-comment">
+              <p class="paragraph">FTC lifecycle integration for the <code class="lang-kotlin">telemetry</code> module, for teams that want logging and live telemetry without using the rest of NextFTC. It doesn't depend on <code class="lang-kotlin">robot</code> or <code class="lang-kotlin">hardware</code>, and it needs no OpMode base class. Adding the dependency is enough.</p>
+            </span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2026 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

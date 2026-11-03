@@ -1,0 +1,446 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>TelemetryTable</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":telemetry/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":telemetry/main" data-filter=":telemetry/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextFTC Telemetry::dev.nextftc.telemetry/TelemetryTable///PointingToDeclaration//-1101253081">
+  <div class="breadcrumbs"><a href="../../index.html">NextFTC Telemetry</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.telemetry</a><span class="delimiter">/</span><span class="current">TelemetryTable</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Telemetry</span><wbr><span><span>Table</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">TelemetryTable</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/NextFTC/NextFTCSuite/blob/main/telemetry/src/main/kotlin/dev/nextftc/telemetry/TelemetryTable.kt#L91">source</a>)</span></span></div><p class="paragraph">A namespace of logged values: a path like <code class="lang-kotlin">/Drive</code>, whose topics are <code class="lang-kotlin">/Drive/leftVelocity</code> and so on, and whose children are tables like <code class="lang-kotlin">/Drive/Odometry</code>.</p><p class="paragraph">A table caches the tables and handles it hands out by name, but each lookup still splits the name and hits a map, so hold on to a table or a topic in a field rather than looking it up every loop. The fastest way to log is a typed handle:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">private val table = Telemetry.table("Shooter")<br>private val velocity = table.doubleTopic("wheelVelocity")<br>private val ready = table.booleanTopic("ready")<br><br>fun periodic() {<br>  velocity.set(encoder.velocity)<br>  ready.set(atSpeed())<br>}</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><p class="paragraph"><code class="lang-kotlin">log</code> is the shorter way, which looks the handle up each time: <code class="lang-kotlin">table.log("wheelVelocity", encoder.velocity)</code>.</p><h2 class="">Names</h2><p class="paragraph">A name with slashes, like <code class="lang-kotlin">a/b</code>, is the same as asking for the table <code class="lang-kotlin">a</code> and then the name <code class="lang-kotlin">b</code>. Leading and doubled slashes are ignored, and so are all the slashes of a table name. A topic name that ends in a slash has no name, so it warns and drops the value.</p><h2 class="">Types</h2><p class="paragraph">A path holds one type for as long as a backend is registered. Logging a different type to a path that a backend already has warns, and the value doesn't reach that backend. Telemetry never throws into the code that calls it. It reports what it can't log through the registry's warning handler.</p><p class="paragraph">Because the rule belongs to the backend, not the program, each OpMode starts clean: its backends are new, so it can give a path a type that an earlier OpMode gave it a different one for.</p><h2 class="">Struct values</h2><p class="paragraph">Any other object is logged as a struct, with its schema reflected from its class by the registry's <a href="../-telemetry-registry/structs.html">TelemetryRegistry.structs</a>. See <a href="../../dev.nextftc.telemetry.struct/-struct-schema-registry/index.html">dev.nextftc.telemetry.struct.StructSchemaRegistry</a> for what is supported, and use <a href="topic.html">topic</a> with a hand-written <a href="../../dev.nextftc.telemetry.struct/-struct-schema/index.html">StructSchema</a> for a class that can't be reflected or to log faster.</p><p class="paragraph">A list can't be logged with <code class="lang-kotlin">log</code>, because its element type is erased. Use <a href="array-topic.html">arrayTopic</a>, or the <a href="../log-array.html">logArray</a> extension.</p><p class="paragraph">A table may be used from any thread.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION,EXTENSION_PROPERTY,EXTENSION_FUNCTION">Members &amp; Extensions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1014359001%2FProperties%2F-1101253081" anchor-label="path" id="1014359001%2FProperties%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="path.html"><span><span>path</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1014359001%2FProperties%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="path.html">path</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">The path of this table, such as <code class="lang-kotlin">/Drive</code>, or empty for the root</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="268079124%2FFunctions%2F-1101253081" anchor-label="arrayTopic" id="268079124%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="array-topic.html"><span>array</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="268079124%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="array-topic.html"><span class="token function">arrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">schema<span class="token operator">: </span><a href="../../dev.nextftc.telemetry.struct/-struct-schema/index.html">StructSchema</a><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="array-topic.html">name</a> that holds arrays of structs of <a href="array-topic.html">schema</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="array-topic.html"><span class="token function">arrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">type<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html">Class</a><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="array-topic.html">name</a> that holds arrays of structs of <a href="array-topic.html">type</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="array-topic.html"><span class="token function">arrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="array-topic.html">name</a> that holds arrays of structs of <a href="array-topic.html">type</a>. See <a href="topic.html">topic</a> for how the schema is found.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1887470718%2FFunctions%2F-1101253081" anchor-label="arrayTopic" id="-1887470718%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../array-topic.html"><span>array</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1887470718%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../array-topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="index.html">TelemetryTable</a><span class="token punctuation">.</span><a href="../array-topic.html"><span class="token function">arrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../array-topic.html">T</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="../array-topic.html">name</a> that holds arrays of structs of <a href="../array-topic.html">T</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="959224806%2FFunctions%2F-1101253081" anchor-label="booleanArrayTopic" id="959224806%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="boolean-array-topic.html"><span>boolean</span><wbr><span>Array</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="959224806%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="boolean-array-topic.html"><span class="token function">booleanArrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean-array/index.html">BooleanArray</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="boolean-array-topic.html">name</a> that holds arrays of booleans.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1126075149%2FFunctions%2F-1101253081" anchor-label="booleanTopic" id="1126075149%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="boolean-topic.html"><span>boolean</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1126075149%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="boolean-topic.html"><span class="token function">booleanTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-boolean-topic/index.html">BooleanTopic</a></div><div class="brief "><p class="paragraph">Returns the handle for the <code class="lang-kotlin">boolean</code> topic <a href="boolean-topic.html">name</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-207564115%2FFunctions%2F-1101253081" anchor-label="doubleArrayTopic" id="-207564115%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="double-array-topic.html"><span>double</span><wbr><span>Array</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-207564115%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="double-array-topic.html"><span class="token function">doubleArrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double-array/index.html">DoubleArray</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="double-array-topic.html">name</a> that holds arrays of doubles.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-101256218%2FFunctions%2F-1101253081" anchor-label="doubleTopic" id="-101256218%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="double-topic.html"><span>double</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-101256218%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="double-topic.html"><span class="token function">doubleTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-double-topic/index.html">DoubleTopic</a></div><div class="brief "><p class="paragraph">Returns the handle for the <code class="lang-kotlin">double</code> topic <a href="double-topic.html">name</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="347962970%2FFunctions%2F-1101253081" anchor-label="floatArrayTopic" id="347962970%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="float-array-topic.html"><span>float</span><wbr><span>Array</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="347962970%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="float-array-topic.html"><span class="token function">floatArrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float-array/index.html">FloatArray</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="float-array-topic.html">name</a> that holds arrays of floats.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-780210151%2FFunctions%2F-1101253081" anchor-label="floatTopic" id="-780210151%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="float-topic.html"><span>float</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-780210151%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="float-topic.html"><span class="token function">floatTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-float-topic/index.html">FloatTopic</a></div><div class="brief "><p class="paragraph">Returns the handle for the <code class="lang-kotlin">float</code> topic <a href="float-topic.html">name</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1089295917%2FFunctions%2F-1101253081" anchor-label="intArrayTopic" id="1089295917%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="int-array-topic.html"><span>int</span><wbr><span>Array</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1089295917%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="int-array-topic.html"><span class="token function">intArrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int-array/index.html">IntArray</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="int-array-topic.html">name</a> that holds arrays of integers.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="549863526%2FFunctions%2F-1101253081" anchor-label="intTopic" id="549863526%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="int-topic.html"><span>int</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="549863526%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="int-topic.html"><span class="token function">intTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-int-topic/index.html">IntTopic</a></div><div class="brief "><p class="paragraph">Returns the handle for the integer topic <a href="int-topic.html">name</a>, for values that fit in an <code class="lang-kotlin">Int</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="425995088%2FFunctions%2F-1101253081" anchor-label="log" id="425995088%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="log.html"><span><span>log</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="425995088%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log.html">value</a> at <a href="log.html">name</a>, choosing how from what it is.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log.html">value</a> to the <code class="lang-kotlin">boolean</code> topic <a href="log.html">name</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean-array/index.html">BooleanArray</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log.html">value</a> to the topic <a href="log.html">name</a> that holds arrays of booleans.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log.html">value</a> to the <code class="lang-kotlin">double</code> topic <a href="log.html">name</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double-array/index.html">DoubleArray</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log.html">value</a> to the topic <a href="log.html">name</a> that holds arrays of doubles.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float/index.html">Float</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log.html">value</a> to the <code class="lang-kotlin">float</code> topic <a href="log.html">name</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-float-array/index.html">FloatArray</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log.html">value</a> to the topic <a href="log.html">name</a> that holds arrays of floats.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log.html">value</a> to the integer topic <a href="log.html">name</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int-array/index.html">IntArray</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long-array/index.html">LongArray</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log.html">value</a> to the topic <a href="log.html">name</a> that holds arrays of integers.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="log.html"><span class="token function">log</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log.html">value</a> to the string topic <a href="log.html">name</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1572528879%2FFunctions%2F-1101253081" anchor-label="logArray" id="-1572528879%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../log-array.html"><span>log</span><wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1572528879%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../log-array.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="index.html">TelemetryTable</a><span class="token punctuation">.</span><a href="../log-array.html"><span class="token function">logArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">values<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="../log-array.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="../log-array.html">values</a>, a list of structs of <a href="../log-array.html">T</a>, to the topic <a href="../log-array.html">name</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="852463384%2FFunctions%2F-1101253081" anchor-label="longArrayTopic" id="852463384%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="long-array-topic.html"><span>long</span><wbr><span>Array</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="852463384%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="long-array-topic.html"><span class="token function">longArrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long-array/index.html">LongArray</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="long-array-topic.html">name</a> that holds arrays of integers.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1073275035%2FFunctions%2F-1101253081" anchor-label="longTopic" id="1073275035%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="long-topic.html"><span>long</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1073275035%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="long-topic.html"><span class="token function">longTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-long-topic/index.html">LongTopic</a></div><div class="brief "><p class="paragraph">Returns the handle for the integer topic <a href="long-topic.html">name</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1863137005%2FFunctions%2F-1101253081" anchor-label="stringArrayTopic" id="1863137005%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="string-array-topic.html"><span>string</span><wbr><span>Array</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1863137005%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="string-array-topic.html"><span class="token function">stringArrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="string-array-topic.html">name</a> that holds arrays of strings.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2131957850%2FFunctions%2F-1101253081" anchor-label="stringTopic" id="-2131957850%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="string-topic.html"><span>string</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2131957850%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="string-topic.html"><span class="token function">stringTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the string topic <a href="string-topic.html">name</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="453840022%2FFunctions%2F-1101253081" anchor-label="table" id="453840022%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="table.html"><span><span>table</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="453840022%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="table.html"><span class="token function">table</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">TelemetryTable</a></div><div class="brief "><p class="paragraph">Returns the child table <a href="table.html">name</a>, creating it if needed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="909601605%2FFunctions%2F-1101253081" anchor-label="topic" id="909601605%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="topic.html"><span><span>topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="909601605%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="topic.html"><span class="token function">topic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">schema<span class="token operator">: </span><a href="../../dev.nextftc.telemetry.struct/-struct-schema/index.html">StructSchema</a><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the struct topic <a href="topic.html">name</a>, which holds values of <a href="topic.html">schema</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="topic.html"><span class="token function">topic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">type<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html">Class</a><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator">&gt;</span></div><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="topic.html"><span class="token function">topic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the struct topic <a href="topic.html">name</a>, which holds values of <a href="topic.html">type</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1338830707%2FFunctions%2F-1101253081" anchor-label="topic" id="1338830707%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-togglable="EXTENSION_FUNCTION" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../topic.html"><span><span>topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1338830707%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="index.html">TelemetryTable</a><span class="token punctuation">.</span><a href="../topic.html"><span class="token function">topic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="../topic.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the struct topic <a href="../topic.html">name</a>, which holds values of <a href="../topic.html">T</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1886483726%2FFunctions%2F-1101253081" anchor-label="toString" id="-1886483726%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-string.html"><span>to</span><wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1886483726%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

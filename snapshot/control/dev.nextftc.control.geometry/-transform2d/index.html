@@ -1,0 +1,305 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Transform2d</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS_SVG&amp;latest" async></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":control/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":control/main" data-filter=":control/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextControl::dev.nextftc.control.geometry/Transform2d///PointingToDeclaration//-823247477">
+  <div class="breadcrumbs"><a href="../../index.html">NextControl</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.control.geometry</a><span class="delimiter">/</span><span class="current">Transform2d</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Transform2d</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">Transform2d</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>translation<span class="token operator">: </span><a href="../-vector2d/index.html">Vector2d</a><span class="token operator">&lt;</span><a href="../../../units/dev.nextftc.units.unittypes/-distance-unit/index.html">DistanceUnit</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>rotation<span class="token operator">: </span><a href="../-rotation2d/index.html">Rotation2d</a></span></span><span class="token punctuation">)</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/NextFTC/NextFTCSuite/blob/main/control/src/main/kotlin/dev/nextftc/control/geometry/Transform2d.kt#L92">source</a>)</span></span></div><span class="kdoc-tag"><span class="kdoc-tag"><p class="paragraph">Represents a finite transformation (relative pose) in 2D space.</p><p class="paragraph">A Transform2d represents the <strong>change in pose</strong> from one pose to another. Unlike <a href="../-twist2d/index.html">Twist2d</a> which represents infinitesimal displacements in the Lie algebra, Transform2d represents finite relative transformations in SE(2).</p><h2 class="">Transform2d vs Twist2d vs Pose2d</h2><ul><li><p class="paragraph"><strong>Pose2d</strong>: An absolute pose in the global frame (position + heading)</p></li><li><p class="paragraph"><strong>Transform2d</strong>: A relative pose change - the transformation from one pose to another</p></li><li><p class="paragraph"><strong>Twist2d</strong>: An infinitesimal displacement in the Lie algebra (used for velocities)</p></li></ul><h2 class="">Mathematical Representation</h2><p class="paragraph">A transform can be thought of as a pose relative to another pose: \(T_{A \to B} = P_A^{-1} \circ P_B\)</p><p class="paragraph">Where \(P_A\) and \(P_B\) are absolute poses.</p><h2 class="">Common Use Cases</h2><p class="paragraph"><strong>Relative Localization</strong>: Expressing one pose relative to another:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val robotPose = Pose2d(Vector2d(10.0.inches, 5.0.inches), Math.PI / 4)<br>val targetPose = Pose2d(Vector2d(15.0.inches, 8.0.inches), Math.PI / 2)<br>val transform = robotPose.relativeTo(targetPose)  // Transform from robot to target</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><p class="paragraph"><strong>Odometry Updates</strong>: Representing the change in pose between measurements:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val prevPose = odometry.getPose()<br>// ... robot moves ...<br>val currPose = odometry.getPose()<br>val delta = Transform2d(prevPose, currPose)  // How much the robot moved</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><p class="paragraph"><strong>Coordinate Frame Transformations</strong>: Converting between coordinate frames:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val cameraToRobot = Transform2d(<br>    Vector2d(6.0.inches, 0.0.inches),  // Camera is 6" forward<br>    Rotation2d.exp(0.0)<br>)<br>val targetInCameraFrame = Vector2d(24.0.inches, 12.0.inches)<br>val targetInRobotFrame = cameraToRobot * targetInCameraFrame</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><h2 class="">Example Usage</h2><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">// Create a transform: 5 inches forward, rotated 30 degrees<br>val transform = Transform2d(<br>    Vector2d(5.0.inches, 0.0.inches),<br>    Math.PI / 6<br>)<br><br>// Apply transform to a pose<br>val initialPose = Pose2d(Vector2d(0.0.inches, 0.0.inches), 0.0)<br>val finalPose = initialPose + transform<br><br>// Compose transforms<br>val transform1 = Transform2d(Vector2d(5.0.inches, 0.0.inches), 0.0)<br>val transform2 = Transform2d(Vector2d(0.0.inches, 3.0.inches), Math.PI / 4)<br>val combined = transform1 + transform2<br><br>// Inverse transform<br>val inverse = transform.inverse()</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div></span></span><h4 class="tableheader">See also</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-pose2d/index.html"><span><span>Pose2d</span></span></a></div></span></div><div><div class="title"><p class="paragraph">for absolute poses</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-twist2d/index.html"><span><span>Twist2d</span></span></a></div></span></div><div><div class="title"><p class="paragraph">for infinitesimal displacements</p></div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="-756920614%2FConstructors%2F-823247477" anchor-label="Transform2d" id="-756920614%2FConstructors%2F-823247477" data-filterable-set=":control/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":control/main" data-filterable-set=":control/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-transform2d.html"><span><span>Transform2d</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-756920614%2FConstructors%2F-823247477"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">translation<span class="token operator">: </span><a href="../-vector2d/index.html">Vector2d</a><span class="token operator">&lt;</span><a href="../../../units/dev.nextftc.units.unittypes/-distance-unit/index.html">DistanceUnit</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">rotation<span class="token operator">: </span><a href="../-rotation2d/index.html">Rotation2d</a></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">translation<span class="token operator">: </span><a href="../-vector2d/index.html">Vector2d</a><span class="token operator">&lt;</span><a href="../../../units/dev.nextftc.units.unittypes/-distance-unit/index.html">DistanceUnit</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">rotation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Constructs a Transform2d from a translation vector and rotation angle.</p></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-distance/index.html">Distance</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-distance/index.html">Distance</a><span class="token punctuation">, </span></span><span class="parameter ">rotation<span class="token operator">: </span><a href="../-rotation2d/index.html">Rotation2d</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Constructs a Transform2d from x and y distance measurements and a rotation.</p></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-distance/index.html">Distance</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-distance/index.html">Distance</a><span class="token punctuation">, </span></span><span class="parameter ">rotation<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angle/index.html">Angle</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Constructs a Transform2d from x and y distance measurements and a rotation angle.</p></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">rotation<span class="token operator">: </span><a href="../-rotation2d/index.html">Rotation2d</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Constructs a Transform2d from x and y coordinates (in inches) and a rotation.</p></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">x<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">y<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token punctuation">, </span></span><span class="parameter ">rotation<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Constructs a Transform2d from x and y coordinates (in inches) and a rotation angle (in radians).</p></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">initial<span class="token operator">: </span><a href="../-pose2d/index.html">Pose2d</a><span class="token punctuation">, </span></span><span class="parameter ">final<span class="token operator">: </span><a href="../-pose2d/index.html">Pose2d</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Constructs a Transform2d representing the transformation from one pose to another.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-327793060%2FClasslikes%2F-823247477" anchor-label="Companion" id="-327793060%2FClasslikes%2F-823247477" data-filterable-set=":control/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-327793060%2FClasslikes%2F-823247477"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-614006361%2FProperties%2F-823247477" anchor-label="rotation" id="-614006361%2FProperties%2F-823247477" data-filterable-set=":control/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="rotation.html"><span><span>rotation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-614006361%2FProperties%2F-823247477"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-field/index.html"><span class="token annotation builtin">JvmField</span></a></div></div><span class="token keyword">val </span><a href="rotation.html">rotation</a><span class="token operator">: </span><a href="../-rotation2d/index.html">Rotation2d</a></div><div class="brief "><p class="paragraph">the rotational component</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2088191364%2FProperties%2F-823247477" anchor-label="translation" id="2088191364%2FProperties%2F-823247477" data-filterable-set=":control/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="translation.html"><span><span>translation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2088191364%2FProperties%2F-823247477"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-field/index.html"><span class="token annotation builtin">JvmField</span></a></div></div><span class="token keyword">val </span><a href="translation.html">translation</a><span class="token operator">: </span><a href="../-vector2d/index.html">Vector2d</a><span class="token operator">&lt;</span><a href="../../../units/dev.nextftc.units.unittypes/-distance-unit/index.html">DistanceUnit</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">the translational component</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="61923360%2FFunctions%2F-823247477" anchor-label="div" id="61923360%2FFunctions%2F-823247477" data-filterable-set=":control/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="61923360%2FFunctions%2F-823247477"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scalar<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Transform2d</a></div><div class="brief "><p class="paragraph">Divides the transform by a scalar.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-610794011%2FFunctions%2F-823247477" anchor-label="inverse" id="-610794011%2FFunctions%2F-823247477" data-filterable-set=":control/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="inverse.html"><span><span>inverse</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-610794011%2FFunctions%2F-823247477"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="inverse.html"><span class="token function">inverse</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Transform2d</a></div><div class="brief "><p class="paragraph">Computes the inverse transformation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1148139035%2FFunctions%2F-823247477" anchor-label="lerp" id="1148139035%2FFunctions%2F-823247477" data-filterable-set=":control/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="lerp.html"><span><span>lerp</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1148139035%2FFunctions%2F-823247477"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="lerp.html"><span class="token function">lerp</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Transform2d</a><span class="token punctuation">, </span></span><span class="parameter ">t<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Transform2d</a></div><div class="brief "><p class="paragraph">Linear interpolation (lerp) toward another transform.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1420958387%2FFunctions%2F-823247477" anchor-label="minus" id="-1420958387%2FFunctions%2F-823247477" data-filterable-set=":control/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="minus.html"><span><span>minus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1420958387%2FFunctions%2F-823247477"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Transform2d</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Transform2d</a></div><div class="brief "><p class="paragraph">Subtracts (de-composes) two transforms.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1579524019%2FFunctions%2F-823247477" anchor-label="plus" id="1579524019%2FFunctions%2F-823247477" data-filterable-set=":control/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="plus.html"><span><span>plus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1579524019%2FFunctions%2F-823247477"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">Transform2d</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Transform2d</a></div><div class="brief "><p class="paragraph">Adds (composes) two transforms.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="524169717%2FFunctions%2F-823247477" anchor-label="times" id="524169717%2FFunctions%2F-823247477" data-filterable-set=":control/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="524169717%2FFunctions%2F-823247477"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">vec<span class="token operator">: </span><a href="../-vector2d/index.html">Vector2d</a><span class="token operator">&lt;</span><a href="../../../units/dev.nextftc.units.unittypes/-distance-unit/index.html">DistanceUnit</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-vector2d/index.html">Vector2d</a><span class="token operator">&lt;</span><a href="../../../units/dev.nextftc.units.unittypes/-distance-unit/index.html">DistanceUnit</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Transforms a vector by this transformation.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scalar<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Transform2d</a></div><div class="brief "><p class="paragraph">Scales the transform by a scalar.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-988169212%2FFunctions%2F-823247477" anchor-label="unaryMinus" id="-988169212%2FFunctions%2F-823247477" data-filterable-set=":control/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":control/main" data-filterable-set=":control/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="unary-minus.html"><span>unary</span><wbr><span><span>Minus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-988169212%2FFunctions%2F-823247477"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":control/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="unary-minus.html"><span class="token function">unaryMinus</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">Transform2d</a></div><div class="brief "><p class="paragraph">Negates the transform (same as inverse).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

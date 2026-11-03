@@ -1,0 +1,525 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>CoroutineCommandBuilder</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":robot/main">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":robot/main" data-filter=":robot/main">
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextFTC Robot::dev.nextftc.robot.coroutine/CoroutineCommandBuilder///PointingToDeclaration//-919244207">
+  <div class="breadcrumbs"><a href="../../index.html">NextFTC Robot</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.robot.coroutine</a><span class="delimiter">/</span><span class="current">CoroutineCommandBuilder</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Coroutine</span><wbr><span>Command</span><wbr><span><span>Builder</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">CoroutineCommandBuilder</a> : <span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">Command</span></div><p class="paragraph">Builds a <a href="../-coroutine-command/index.html">CoroutineCommand</a>, in the same fluent style as <span data-unresolved-link="com.pedropathing.ivy/CommandBuilder///PointingToDeclaration/">com.pedropathing.ivy.CommandBuilder</span>.</p><p class="paragraph">The builder is itself a <span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">com.pedropathing.ivy.Command</span>, so it can be scheduled or composed with the usual Ivy operators without calling <a href="build.html">build</a>:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">coroutineCommand {<br>  await(arm.toHigh())<br>  wait(0.5)<br>  fork(claw.open())<br>}.requiring(arm).setPriority(1).schedule()</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><p class="paragraph">A fresh <a href="../-coroutine-command/index.html">CoroutineCommand</a> is created from the current configuration every time the builder is started, so one builder can be scheduled repeatedly.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="49991580%2FConstructors%2F-919244207" anchor-label="CoroutineCommandBuilder" id="49991580%2FConstructors%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-coroutine-command-builder.html"><span>Coroutine</span><wbr><span>Command</span><wbr><span><span>Builder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="49991580%2FConstructors%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-655276239%2FProperties%2F-919244207" anchor-label="isScheduled" id="-655276239%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-655276239%2FProperties%2F-919244207"><span>is</span><wbr><span><span>Scheduled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-655276239%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#-655276239%2FProperties%2F-919244207">isScheduled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1228647846%2FFunctions%2F-919244207" anchor-label="blockedBehavior" id="1228647846%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="blocked-behavior.html"><span>blocked</span><wbr><span><span>Behavior</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1228647846%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="blocked-behavior.html"><span class="token function">blockedBehavior</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy.behaviors/BlockedBehavior///PointingToDeclaration/">BlockedBehavior</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1615090262%2FFunctions%2F-919244207" anchor-label="build" id="1615090262%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="build.html"><span><span>build</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1615090262%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="build.html"><span class="token function">build</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-coroutine-command/index.html">CoroutineCommand</a></div><div class="brief "><p class="paragraph">Creates a <a href="../-coroutine-command/index.html">CoroutineCommand</a> from the current configuration. Later changes to the builder do not affect commands it has already built.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1740012692%2FFunctions%2F-919244207" anchor-label="cancel" id="-1740012692%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1740012692%2FFunctions%2F-919244207"><span><span>cancel</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1740012692%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1740012692%2FFunctions%2F-919244207"><span class="token function">cancel</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="335947858%2FFunctions%2F-919244207" anchor-label="conflictBehavior" id="335947858%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="conflict-behavior.html"><span>conflict</span><wbr><span><span>Behavior</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="335947858%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="conflict-behavior.html"><span class="token function">conflictBehavior</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy.behaviors/ConflictBehavior///PointingToDeclaration/">ConflictBehavior</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1287509076%2FFunctions%2F-919244207" anchor-label="done" id="1287509076%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="done.html"><span><span>done</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1287509076%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="done.html"><span class="token function">done</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-166740582%2FFunctions%2F-919244207" anchor-label="end" id="-166740582%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="end.html"><span><span>end</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-166740582%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="end.html"><span class="token function">end</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">endCondition<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy.behaviors/EndCondition///PointingToDeclaration/">EndCondition</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1980280465%2FFunctions%2F-919244207" anchor-label="execute" id="-1980280465%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="execute.html"><span><span>execute</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1980280465%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="execute.html"><span class="token function">execute</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-147380080%2FFunctions%2F-919244207" anchor-label="interruptedBehavior" id="-147380080%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="interrupted-behavior.html"><span>interrupted</span><wbr><span><span>Behavior</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-147380080%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="interrupted-behavior.html"><span class="token function">interruptedBehavior</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy.behaviors/InterruptedBehavior///PointingToDeclaration/">InterruptedBehavior</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="924431346%2FFunctions%2F-919244207" anchor-label="priority" id="924431346%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="priority.html"><span><span>priority</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="924431346%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="priority.html"><span class="token function">priority</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1493688070%2FFunctions%2F-919244207" anchor-label="proxy" id="1493688070%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1493688070%2FFunctions%2F-919244207"><span><span>proxy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1493688070%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1493688070%2FFunctions%2F-919244207"><span class="token function">proxy</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/CommandBuilder///PointingToDeclaration/">CommandBuilder</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1182140776%2FFunctions%2F-919244207" anchor-label="raceWith" id="-1182140776%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1182140776%2FFunctions%2F-919244207"><span>race</span><wbr><span><span>With</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1182140776%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1182140776%2FFunctions%2F-919244207"><span class="token function">raceWith</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>commands<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">Command</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/CommandBuilder///PointingToDeclaration/">CommandBuilder</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1059982854%2FFunctions%2F-919244207" anchor-label="requirements" id="1059982854%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="requirements.html"><span><span>requirements</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1059982854%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="requirements.html"><span class="token function">requirements</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-330986744%2FFunctions%2F-919244207" anchor-label="requiring" id="-330986744%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="requiring.html"><span><span>requiring</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-330986744%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="requiring.html"><span class="token function">requiring</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">requirements<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-set/index.html">Set</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">CoroutineCommandBuilder</a></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="requiring.html"><span class="token function">requiring</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>requirements<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">CoroutineCommandBuilder</a></div><div class="brief "><p class="paragraph">Sets the requirements of the command.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1812689839%2FFunctions%2F-919244207" anchor-label="schedule" id="1812689839%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1812689839%2FFunctions%2F-919244207"><span><span>schedule</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1812689839%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1812689839%2FFunctions%2F-919244207"><span class="token function">schedule</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1336582907%2FFunctions%2F-919244207" anchor-label="setBlockedBehavior" id="1336582907%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-blocked-behavior.html"><span>set</span><wbr><span>Blocked</span><wbr><span><span>Behavior</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1336582907%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-blocked-behavior.html"><span class="token function">setBlockedBehavior</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">blockedBehavior<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy.behaviors/BlockedBehavior///PointingToDeclaration/">BlockedBehavior</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">CoroutineCommandBuilder</a></div><div class="brief "><p class="paragraph">Sets what the command does when blocked by a command with a higher priority.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="704802152%2FFunctions%2F-919244207" anchor-label="setBody" id="704802152%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-body.html"><span>set</span><wbr><span><span>Body</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="704802152%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-body.html"><span class="token function">setBody</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">body<span class="token operator">: </span><span class="token keyword">suspend </span><a href="../-command-scope/index.html">CommandScope</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">CoroutineCommandBuilder</a></div><div class="brief "><p class="paragraph">Sets the body of the command. See <a href="../-command-scope/index.html">CommandScope</a> for what it can suspend on.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-87470655%2FFunctions%2F-919244207" anchor-label="setConflictBehavior" id="-87470655%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-conflict-behavior.html"><span>set</span><wbr><span>Conflict</span><wbr><span><span>Behavior</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-87470655%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-conflict-behavior.html"><span class="token function">setConflictBehavior</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">conflictBehavior<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy.behaviors/ConflictBehavior///PointingToDeclaration/">ConflictBehavior</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">CoroutineCommandBuilder</a></div><div class="brief "><p class="paragraph">Sets what the command does when a conflicting command with an equal priority is running.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1567558223%2FFunctions%2F-919244207" anchor-label="setInterruptedBehavior" id="1567558223%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-interrupted-behavior.html"><span>set</span><wbr><span>Interrupted</span><wbr><span><span>Behavior</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1567558223%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-interrupted-behavior.html"><span class="token function">setInterruptedBehavior</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">interruptedBehavior<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy.behaviors/InterruptedBehavior///PointingToDeclaration/">InterruptedBehavior</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">CoroutineCommandBuilder</a></div><div class="brief "><p class="paragraph">Sets what the command does when interrupted.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-233526660%2FFunctions%2F-919244207" anchor-label="setPriority" id="-233526660%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-priority.html"><span>set</span><wbr><span><span>Priority</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-233526660%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-priority.html"><span class="token function">setPriority</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">priority<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">CoroutineCommandBuilder</a></div><div class="brief "><p class="paragraph">Sets the priority the command has over commands with conflicting requirements.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="828321506%2FFunctions%2F-919244207" anchor-label="start" id="828321506%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="start.html"><span><span>start</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="828321506%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="start.html"><span class="token function">start</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="160615922%2FFunctions%2F-919244207" anchor-label="then" id="160615922%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#160615922%2FFunctions%2F-919244207"><span><span>then</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="160615922%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#160615922%2FFunctions%2F-919244207"><span class="token function">then</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>commands<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">Command</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/CommandBuilder///PointingToDeclaration/">CommandBuilder</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1907667658%2FFunctions%2F-919244207" anchor-label="unless" id="-1907667658%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#-1907667658%2FFunctions%2F-919244207"><span><span>unless</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1907667658%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1907667658%2FFunctions%2F-919244207"><span class="token function">unless</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">condition<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/util/function/BooleanSupplier.html">BooleanSupplier</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/CommandBuilder///PointingToDeclaration/">CommandBuilder</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1570039704%2FFunctions%2F-919244207" anchor-label="until" id="1570039704%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1570039704%2FFunctions%2F-919244207"><span><span>until</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1570039704%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1570039704%2FFunctions%2F-919244207"><span class="token function">until</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">condition<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/util/function/BooleanSupplier.html">BooleanSupplier</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/CommandBuilder///PointingToDeclaration/">CommandBuilder</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1025793001%2FFunctions%2F-919244207" anchor-label="with" id="1025793001%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#1025793001%2FFunctions%2F-919244207"><span><span>with</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1025793001%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1025793001%2FFunctions%2F-919244207"><span class="token function">with</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>commands<span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/Command///PointingToDeclaration/">Command</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="com.pedropathing.ivy/CommandBuilder///PointingToDeclaration/">CommandBuilder</span><span class="token operator">?</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

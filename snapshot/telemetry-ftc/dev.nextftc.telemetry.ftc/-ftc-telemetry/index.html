@@ -1,0 +1,266 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>FtcTelemetry</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":telemetry-ftc/main">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":telemetry-ftc/main" data-filter=":telemetry-ftc/main">
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextFTC Telemetry FTC::dev.nextftc.telemetry.ftc/FtcTelemetry///PointingToDeclaration//-1606803814">
+  <div class="breadcrumbs"><a href="../../index.html">NextFTC Telemetry FTC</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.telemetry.ftc</a><span class="delimiter">/</span><span class="current">FtcTelemetry</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Ftc</span><wbr><span><span>Telemetry</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry-ftc/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">FtcTelemetry</a> : <span data-unresolved-link="dev.frozenmilk.sinister.sdk.apphooks/OnCreateEventLoop///PointingToDeclaration/">OnCreateEventLoop</span>, <span data-unresolved-link="com.qualcomm.robotcore.eventloop.opmode/OpModeManagerNotifier.Notifications///PointingToDeclaration/">OpModeManagerNotifier.Notifications</span></div><p class="paragraph">Connects <a href="../../../telemetry/dev.nextftc.telemetry/-telemetry/index.html">Telemetry</a> to the FTC OpMode lifecycle, with no other part of NextFTC involved.</p><p class="paragraph">Sloth finds this object and calls <a href="on-create-event-loop.html">onCreateEventLoop</a> when the Robot Controller creates its event loop. From then on every OpMode gets a <a href="../../../telemetry/dev.nextftc.telemetry.wpilog/-w-p-i-log-backend/index.html">WPILogBackend</a> (if <a href="../-ftc-telemetry-config/log-to-file.html">FtcTelemetryConfig.logToFile</a>), a <a href="../../../telemetry/dev.nextftc.telemetry.nt/-n-t4-backend/index.html">NT4Backend</a> (if <a href="../-ftc-telemetry-config/live-server.html">FtcTelemetryConfig.liveServer</a>) and a <a href="../-driver-station-backend/index.html">DriverStationBackend</a> (if <a href="../-ftc-telemetry-config/driver-station.html">FtcTelemetryConfig.driverStation</a>) registered on <a href="../../../telemetry/dev.nextftc.telemetry/-telemetry/registry.html">Telemetry.registry</a> before its <code class="lang-kotlin">init</code>, and closed after it stops. The server also needs <a href="is-server-enabled.html">isServerEnabled</a>, which the "Enable/Disable NextFTC Telemetry Server" OpModes switch, so it can be turned off for competition. The server outlives the OpModes, so a dashboard stays connected between them, and is stopped when the Robot Controller app is destroyed.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="490843356%2FProperties%2F-1606803814" anchor-label="adjacencyRule" id="490843356%2FProperties%2F-1606803814" data-filterable-set=":telemetry-ftc/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry-ftc/main" data-filterable-set=":telemetry-ftc/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="index.html#490843356%2FProperties%2F-1606803814"><span>adjacency</span><wbr><span><span>Rule</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="490843356%2FProperties%2F-1606803814"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry-ftc/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">val </span><a href="index.html#490843356%2FProperties%2F-1606803814">adjacencyRule</a><span class="token operator">: </span><span data-unresolved-link="dev.frozenmilk.util.graph.rule/AdjacencyRule///PointingToDeclaration/">AdjacencyRule</span><span class="token operator">&lt;</span><span data-unresolved-link="dev.frozenmilk.sinister.sdk.apphooks/OnCreateEventLoop///PointingToDeclaration/">OnCreateEventLoop</span><span class="token punctuation">, </span><span data-unresolved-link="dev.frozenmilk.util.graph/Graph///PointingToDeclaration/">Graph</span><span class="token operator">&lt;</span><span data-unresolved-link="dev.frozenmilk.sinister.sdk.apphooks/OnCreateEventLoop///PointingToDeclaration/">OnCreateEventLoop</span><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2126955740%2FProperties%2F-1606803814" anchor-label="config" id="-2126955740%2FProperties%2F-1606803814" data-filterable-set=":telemetry-ftc/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry-ftc/main" data-filterable-set=":telemetry-ftc/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="config.html"><span><span>config</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2126955740%2FProperties%2F-1606803814"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry-ftc/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div></div><span class="token keyword">val </span><a href="config.html">config</a><span class="token operator">: </span><a href="../-ftc-telemetry-config/index.html">FtcTelemetryConfig</a></div><div class="brief "><p class="paragraph">The settings used for each OpMode.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1742003840%2FProperties%2F-1606803814" anchor-label="isServerEnabled" id="1742003840%2FProperties%2F-1606803814" data-filterable-set=":telemetry-ftc/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry-ftc/main" data-filterable-set=":telemetry-ftc/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-server-enabled.html"><span>is</span><wbr><span>Server</span><wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1742003840%2FProperties%2F-1606803814"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry-ftc/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-volatile/index.html"><span class="token annotation builtin">Volatile</span></a></div></div><span class="token keyword">var </span><a href="is-server-enabled.html">isServerEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether the NetworkTables server may run, saved on the Robot Controller so it holds across app restarts. The server runs when this and <a href="../-ftc-telemetry-config/live-server.html">FtcTelemetryConfig.liveServer</a> are both true. Change it with <a href="set-server-enabled.html">setServerEnabled</a>, or the "Enable/Disable NextFTC Telemetry Server" OpModes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-510937380%2FFunctions%2F-1606803814" anchor-label="onCreateEventLoop" id="-510937380%2FFunctions%2F-1606803814" data-filterable-set=":telemetry-ftc/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry-ftc/main" data-filterable-set=":telemetry-ftc/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-create-event-loop.html"><span>on</span><wbr><span>Create</span><wbr><span>Event</span><wbr><span><span>Loop</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-510937380%2FFunctions%2F-1606803814"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry-ftc/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-synchronized/index.html"><span class="token annotation builtin">Synchronized</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-create-event-loop.html"><span class="token function">onCreateEventLoop</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">ftcEventLoop<span class="token operator">: </span><span data-unresolved-link="com.qualcomm.ftccommon/FtcEventLoop///PointingToDeclaration/">FtcEventLoop</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-137008811%2FFunctions%2F-1606803814" anchor-label="onOpModePostStop" id="-137008811%2FFunctions%2F-1606803814" data-filterable-set=":telemetry-ftc/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry-ftc/main" data-filterable-set=":telemetry-ftc/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-op-mode-post-stop.html"><span>on</span><wbr><span>Op</span><wbr><span>Mode</span><wbr><span>Post</span><wbr><span><span>Stop</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-137008811%2FFunctions%2F-1606803814"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry-ftc/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-synchronized/index.html"><span class="token annotation builtin">Synchronized</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-op-mode-post-stop.html"><span class="token function">onOpModePostStop</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">opMode<span class="token operator">: </span><span data-unresolved-link="com.qualcomm.robotcore.eventloop.opmode/OpMode///PointingToDeclaration/">OpMode</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-207208654%2FFunctions%2F-1606803814" anchor-label="onOpModePreInit" id="-207208654%2FFunctions%2F-1606803814" data-filterable-set=":telemetry-ftc/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry-ftc/main" data-filterable-set=":telemetry-ftc/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-op-mode-pre-init.html"><span>on</span><wbr><span>Op</span><wbr><span>Mode</span><wbr><span>Pre</span><wbr><span><span>Init</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-207208654%2FFunctions%2F-1606803814"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry-ftc/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-synchronized/index.html"><span class="token annotation builtin">Synchronized</span></a></div></div><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-op-mode-pre-init.html"><span class="token function">onOpModePreInit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">opMode<span class="token operator">: </span><span data-unresolved-link="com.qualcomm.robotcore.eventloop.opmode/OpMode///PointingToDeclaration/">OpMode</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1355710702%2FFunctions%2F-1606803814" anchor-label="onOpModePreStart" id="-1355710702%2FFunctions%2F-1606803814" data-filterable-set=":telemetry-ftc/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry-ftc/main" data-filterable-set=":telemetry-ftc/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-op-mode-pre-start.html"><span>on</span><wbr><span>Op</span><wbr><span>Mode</span><wbr><span>Pre</span><wbr><span><span>Start</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1355710702%2FFunctions%2F-1606803814"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry-ftc/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-op-mode-pre-start.html"><span class="token function">onOpModePreStart</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">opMode<span class="token operator">: </span><span data-unresolved-link="com.qualcomm.robotcore.eventloop.opmode/OpMode///PointingToDeclaration/">OpMode</span><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-398033681%2FFunctions%2F-1606803814" anchor-label="setServerEnabled" id="-398033681%2FFunctions%2F-1606803814" data-filterable-set=":telemetry-ftc/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry-ftc/main" data-filterable-set=":telemetry-ftc/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-server-enabled.html"><span>set</span><wbr><span>Server</span><wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-398033681%2FFunctions%2F-1606803814"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry-ftc/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-synchronized/index.html"><span class="token annotation builtin">Synchronized</span></a></div></div><span class="token keyword">fun </span><a href="set-server-enabled.html"><span class="token function">setServerEnabled</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">enabled<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Turns the NetworkTables server on or off, and saves the choice so it holds across app restarts.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="467204989%2FFunctions%2F-1606803814" anchor-label="update" id="467204989%2FFunctions%2F-1606803814" data-filterable-set=":telemetry-ftc/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry-ftc/main" data-filterable-set=":telemetry-ftc/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="update.html"><span><span>update</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="467204989%2FFunctions%2F-1606803814"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry-ftc/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-synchronized/index.html"><span class="token annotation builtin">Synchronized</span></a></div></div><span class="token keyword">fun </span><a href="update.html"><span class="token function">update</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sends the values logged since the last update to the Driver Station, like <code class="lang-kotlin">telemetry.update()</code> but only for the lines this library added. A <code class="lang-kotlin">LinearOpMode</code> has to call it (or <code class="lang-kotlin">telemetry.update()</code>) every loop, because the SDK only updates after each loop of an iterative <code class="lang-kotlin">OpMode</code>. It does nothing when <a href="../-ftc-telemetry-config/driver-station.html">FtcTelemetryConfig.driverStation</a> is off.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

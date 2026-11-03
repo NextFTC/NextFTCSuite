@@ -1,0 +1,559 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>NextMotor</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":hardware/main">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":hardware/main" data-filter=":hardware/main">
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextFTC Hardware::dev.nextftc.hardware.actuators/NextMotor///PointingToDeclaration//1368919361">
+  <div class="breadcrumbs"><a href="../../index.html">NextFTC Hardware</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.hardware.actuators</a><span class="delimiter">/</span><span class="current">NextMotor</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Next</span><wbr><span><span>Motor</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">NextMotor</a>&nbsp;<span><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a>&nbsp;</span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">initializer<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://javadoc.io/doc/org.firstinspires.ftc/RobotCore/12.0.0/com/qualcomm/robotcore/hardware/DcMotorImplEx.html">DcMotorImplEx</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">var </span>anglePerCount<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angle/index.html">Angle</a><span class="token operator"> = </span>1.0.radians<span class="token punctuation">, </span></span><span class="parameter ">cacheTolerance<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator"> = </span><span class="token constant">0.01</span></span></span><span class="token punctuation">)</span></div><p class="paragraph">Comprehensive wrapper around a <a href="https://javadoc.io/doc/org.firstinspires.ftc/RobotCore/12.0.0/com/qualcomm/robotcore/hardware/DcMotorImplEx.html">DcMotorImplEx</a> supporting multiple control modes.</p><p class="paragraph"><a href="index.html">NextMotor</a> provides a high-level interface for DC motor control including:</p><ul><li><p class="paragraph"><strong>Throttle control</strong>: Direct power/PWM percentage.</p></li><li><p class="paragraph"><strong>Voltage control</strong>: Set power as a voltage relative to the input rail voltage.</p></li><li><p class="paragraph"><strong>Position control</strong>: PID-based regulation to reach and hold a target encoder position.</p></li><li><p class="paragraph"><strong>Velocity control</strong>: PID + feedforward to reach and hold a target velocity.</p></li></ul><p class="paragraph">The motor wraps a <a href="https://javadoc.io/doc/org.firstinspires.ftc/RobotCore/12.0.0/com/qualcomm/robotcore/hardware/DcMotorImplEx.html">DcMotorImplEx</a> obtained lazily through an initializer, supporting construction from a Lynx module/port, hardware map name, or a raw initializer function.</p><p class="paragraph">Encoder readings are automatically converted to <a href="../../../units/dev.nextftc.units.measuretypes/-angle/index.html">Angle</a> and <a href="../../../units/dev.nextftc.units.measuretypes/-angular-velocity/index.html">AngularVelocity</a> using the configured <a href="../../../hardware/dev.nextftc.hardware.actuators/-next-motor/--root--.html">anglePerCount</a> conversion factor.</p><p class="paragraph">Example:</p><div class="sample-container"><pre><code class="block lang-kotlin" theme="idea">val motor = NextMotor("driveMotor", anglePerCount = 0.05.radians)<br>motor.setVelocitySetpoint(12.0.radiansPerSecond)</code></pre><span class="copy-tooltip"><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div><span class="copy-icon"></span></span></div><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>initializer</span></span></u></div></span></div><div><div class="title"><p class="paragraph">A function that returns the backing <a href="https://javadoc.io/doc/org.firstinspires.ftc/RobotCore/12.0.0/com/qualcomm/robotcore/hardware/DcMotorImplEx.html">DcMotorImplEx</a>. Invoked lazily.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>angle</span><wbr><span>Per</span><wbr><span><span>Count</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Conversion factor from encoder counts to angle. Defaults to 1.0 radian.</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span>cache</span><wbr><span><span>Tolerance</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Power caching tolerance to reduce redundant hardware writes. Defaults to 0.01.</p></div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="950052628%2FConstructors%2F1368919361" anchor-label="NextMotor" id="950052628%2FConstructors%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-next-motor.html"><span>Next</span><wbr><span><span>Motor</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="950052628%2FConstructors%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">initializer<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://javadoc.io/doc/org.firstinspires.ftc/RobotCore/12.0.0/com/qualcomm/robotcore/hardware/DcMotorImplEx.html">DcMotorImplEx</a><span class="token punctuation">, </span></span><span class="parameter ">anglePerCount<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angle/index.html">Angle</a><span class="token operator"> = </span>1.0.radians<span class="token punctuation">, </span></span><span class="parameter ">cacheTolerance<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator"> = </span><span class="token constant">0.01</span></span></span><span class="token punctuation">)</span></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">module<span class="token operator">: </span><a href="../../dev.nextftc.hardware.lynx/-next-lynx-module/index.html">NextLynxModule</a><span class="token punctuation">, </span></span><span class="parameter ">port<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">anglePerCount<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angle/index.html">Angle</a><span class="token operator"> = </span>1.0.radians<span class="token punctuation">, </span></span><span class="parameter ">cacheTolerance<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator"> = </span><span class="token constant">0.01</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Constructs a motor from a Lynx hub module and port number.</p></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">anglePerCount<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angle/index.html">Angle</a><span class="token operator"> = </span>1.0.radians<span class="token punctuation">, </span></span><span class="parameter ">cacheTolerance<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator"> = </span><span class="token constant">0.01</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Constructs a motor by name from the current hardware map.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-1117621017%2FClasslikes%2F1368919361" anchor-label="Companion" id="-1117621017%2FClasslikes%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1117621017%2FClasslikes%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-499469412%2FClasslikes%2F1368919361" anchor-label="ControlType" id="-499469412%2FClasslikes%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-control-type/index.html"><span>Control</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-499469412%2FClasslikes%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">class </span><a href="-control-type/index.html">ControlType</a></div><div class="brief "><p class="paragraph">Motor control mode.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1013110828%2FClasslikes%2F1368919361" anchor-label="Direction" id="-1013110828%2FClasslikes%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-direction/index.html"><span><span>Direction</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1013110828%2FClasslikes%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-direction/index.html">Direction</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-direction/index.html">NextMotor.Direction</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Motor rotation direction.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1673464156%2FClasslikes%2F1368919361" anchor-label="ZeroPowerBehavior" id="-1673464156%2FClasslikes%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-zero-power-behavior/index.html"><span>Zero</span><wbr><span>Power</span><wbr><span><span>Behavior</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1673464156%2FClasslikes%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-zero-power-behavior/index.html">ZeroPowerBehavior</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-zero-power-behavior/index.html">NextMotor.ZeroPowerBehavior</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">Motor zero power behavior.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="704746843%2FProperties%2F1368919361" anchor-label="absoluteEncoder" id="704746843%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="absolute-encoder.html"><span>absolute</span><wbr><span><span>Encoder</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="704746843%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">var </span><a href="absolute-encoder.html">absoluteEncoder</a><span class="token operator">: </span><a href="../../dev.nextftc.hardware.util/-analog-feedback/index.html">AnalogFeedback</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Optional external absolute encoder via analog feedback.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="250572338%2FProperties%2F1368919361" anchor-label="absoluteEncoderPosition" id="250572338%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="absolute-encoder-position.html"><span>absolute</span><wbr><span>Encoder</span><wbr><span><span>Position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="250572338%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="absolute-encoder-position.html">absoluteEncoderPosition</a><span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angle/index.html">Angle</a></div><div class="brief "><p class="paragraph">Current absolute encoder position.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1863745061%2FProperties%2F1368919361" anchor-label="anglePerCount" id="-1863745061%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="angle-per-count.html"><span>angle</span><wbr><span>Per</span><wbr><span><span>Count</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1863745061%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">var </span><a href="angle-per-count.html">anglePerCount</a><span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angle/index.html">Angle</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1380523895%2FProperties%2F1368919361" anchor-label="controlType" id="-1380523895%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="control-type.html"><span>control</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1380523895%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">var </span><a href="control-type.html">controlType</a><span class="token operator">: </span><a href="-control-type/index.html">NextMotor.ControlType</a></div><div class="brief "><p class="paragraph">Current active control mode (THROTTLE, VOLTAGE, POSITION, or VELOCITY).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-530223865%2FProperties%2F1368919361" anchor-label="current" id="-530223865%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current.html"><span><span>current</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-530223865%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="current.html">current</a><span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-current/index.html">Current</a></div><div class="brief "><p class="paragraph">Current drawn by the motor.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1750932215%2FProperties%2F1368919361" anchor-label="currentAlert" id="1750932215%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="current-alert.html"><span>current</span><wbr><span><span>Alert</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1750932215%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">var </span><a href="current-alert.html">currentAlert</a><span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-current/index.html">Current</a></div><div class="brief "><p class="paragraph">Configured current alert threshold for the motor.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-27543295%2FProperties%2F1368919361" anchor-label="direction" id="-27543295%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="direction.html"><span><span>direction</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-27543295%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">var </span><a href="direction.html">direction</a><span class="token operator">: </span><a href="-direction/index.html">NextMotor.Direction</a></div><div class="brief "><p class="paragraph">Motor rotation direction (FORWARD or REVERSE).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2110771867%2FProperties%2F1368919361" anchor-label="encoderPosition" id="2110771867%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="encoder-position.html"><span>encoder</span><wbr><span><span>Position</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2110771867%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="encoder-position.html">encoderPosition</a><span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angle/index.html">Angle</a></div><div class="brief "><p class="paragraph">Current encoder position in physical angle units.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="88605031%2FProperties%2F1368919361" anchor-label="encoderVelocity" id="88605031%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="encoder-velocity.html"><span>encoder</span><wbr><span><span>Velocity</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="88605031%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="encoder-velocity.html">encoderVelocity</a><span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angular-velocity/index.html">AngularVelocity</a></div><div class="brief "><p class="paragraph">Current encoder velocity in physical angle per time units.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1982116859%2FProperties%2F1368919361" anchor-label="isOverCurrent" id="-1982116859%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="is-over-current.html"><span>is</span><wbr><span>Over</span><wbr><span><span>Current</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1982116859%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="is-over-current.html">isOverCurrent</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Whether the motor has exceeded its configured current alert threshold.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1134505670%2FProperties%2F1368919361" anchor-label="positionConstants" id="-1134505670%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="position-constants.html"><span>position</span><wbr><span><span>Constants</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1134505670%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="position-constants.html">positionConstants</a><span class="token operator">: </span><a href="../-motor-position-constants/index.html">MotorPositionConstants</a></div><div class="brief "><p class="paragraph">Position control constants (PID and feedforward gains).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1686236802%2FProperties%2F1368919361" anchor-label="positionPID" id="-1686236802%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="position-p-i-d.html"><span>position</span><wbr><span><span>PID</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1686236802%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="position-p-i-d.html">positionPID</a><span class="token operator">: </span><a href="../../../control/dev.nextftc.control.feedback/-p-i-d-controller/index.html">PIDController</a></div><div class="brief "><p class="paragraph">PID controller used for position setpoint tracking.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="614929296%2FProperties%2F1368919361" anchor-label="throttle" id="614929296%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="throttle.html"><span><span>throttle</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="614929296%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">var </span><a href="throttle.html">throttle</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Set throttle control mode and power.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-121468946%2FProperties%2F1368919361" anchor-label="velocityConstants" id="-121468946%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="velocity-constants.html"><span>velocity</span><wbr><span><span>Constants</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-121468946%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="velocity-constants.html">velocityConstants</a><span class="token operator">: </span><a href="../-motor-velocity-constants/index.html">MotorVelocityConstants</a></div><div class="brief "><p class="paragraph">Velocity control constants (PID and feedforward gains).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1353150339%2FProperties%2F1368919361" anchor-label="velocityFF" id="-1353150339%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="velocity-f-f.html"><span>velocity</span><wbr><span><span>FF</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1353150339%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="velocity-f-f.html">velocityFF</a><span class="token operator">: </span><a href="../../../control/dev.nextftc.control.feedforward/-simple-feedforward/index.html">SimpleFeedforward</a></div><div class="brief "><p class="paragraph">Feedforward calculator used in conjunction with velocity PID.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1447812914%2FProperties%2F1368919361" anchor-label="velocityPID" id="1447812914%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="velocity-p-i-d.html"><span>velocity</span><wbr><span><span>PID</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1447812914%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="velocity-p-i-d.html">velocityPID</a><span class="token operator">: </span><a href="../../../control/dev.nextftc.control.feedback/-p-i-d-controller/index.html">PIDController</a></div><div class="brief "><p class="paragraph">PID controller used for velocity setpoint tracking.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1558301378%2FProperties%2F1368919361" anchor-label="voltage" id="1558301378%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="voltage.html"><span><span>voltage</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1558301378%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">var </span><a href="voltage.html">voltage</a><span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-voltage/index.html">Voltage</a></div><div class="brief "><p class="paragraph">Returns the approximate motor voltage command.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1642703151%2FProperties%2F1368919361" anchor-label="zeroPowerBehavior" id="-1642703151%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="zero-power-behavior.html"><span>zero</span><wbr><span>Power</span><wbr><span><span>Behavior</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1642703151%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">var </span><a href="zero-power-behavior.html">zeroPowerBehavior</a><span class="token operator">: </span><a href="-zero-power-behavior/index.html">NextMotor.ZeroPowerBehavior</a></div><div class="brief "><p class="paragraph">Motor zero power behavior (FLOAT or BRAKE).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-258803835%2FFunctions%2F1368919361" anchor-label="follow" id="-258803835%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="follow.html"><span><span>follow</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-258803835%2FFunctions%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a></div></div><span class="token keyword">fun </span><a href="follow.html"><span class="token function">follow</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">motor<span class="token operator">: </span><a href="index.html">NextMotor</a><span class="token punctuation">, </span></span><span class="parameter ">direction<span class="token operator">: </span><a href="-direction/index.html">NextMotor.Direction</a><span class="token operator"> = </span>Direction.FORWARD</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Configures this motor to follow another motor's behavior and align its rotation direction.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="722890924%2FFunctions%2F1368919361" anchor-label="setAbsolutePositionSetpoint" id="722890924%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-absolute-position-setpoint.html"><span>set</span><wbr><span>Absolute</span><wbr><span>Position</span><wbr><span><span>Setpoint</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="722890924%2FFunctions%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-absolute-position-setpoint.html"><span class="token function">setAbsolutePositionSetpoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">setpoint<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angle/index.html">Angle</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Set absolute position control mode and position setpoint.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2143563235%2FFunctions%2F1368919361" anchor-label="setPositionSetpoint" id="2143563235%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-position-setpoint.html"><span>set</span><wbr><span>Position</span><wbr><span><span>Setpoint</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2143563235%2FFunctions%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-position-setpoint.html"><span class="token function">setPositionSetpoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">setpoint<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angle/index.html">Angle</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Set position control mode and position setpoint.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-224688157%2FFunctions%2F1368919361" anchor-label="setVelocitySetpoint" id="-224688157%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="set-velocity-setpoint.html"><span>set</span><wbr><span>Velocity</span><wbr><span><span>Setpoint</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-224688157%2FFunctions%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="set-velocity-setpoint.html"><span class="token function">setVelocitySetpoint</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">setpoint<span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-angular-velocity/index.html">AngularVelocity</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Set velocity control mode and velocity setpoint.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-417435119%2FFunctions%2F1368919361" anchor-label="update" id="-417435119%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="update.html"><span><span>update</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-417435119%2FFunctions%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="update.html"><span class="token function">update</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Updates the motor power based on the current active control mode.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

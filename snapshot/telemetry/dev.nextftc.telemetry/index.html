@@ -1,0 +1,476 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>dev.nextftc.telemetry</title>
+<link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":telemetry/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":telemetry/main" data-filter=":telemetry/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageids="NextFTC Telemetry::dev.nextftc.telemetry////PointingToDeclaration//-1101253081">
+  <div class="breadcrumbs"><a href="../index.html">NextFTC Telemetry</a><span class="delimiter">/</span><span class="current">dev.nextftc.telemetry</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+    <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><p class="paragraph"><code class="lang-kotlin">Telemetry</code>, the entry point, which wraps a shared <code class="lang-kotlin">TelemetryRegistry</code>. Log by name with <code class="lang-kotlin">Telemetry.log("Drive/Pose", pose)</code>, or hold a typed handle for the fast path: <code class="lang-kotlin">DoubleTopic</code>, <code class="lang-kotlin">IntTopic</code>, <code class="lang-kotlin">LongTopic</code>, <code class="lang-kotlin">FloatTopic</code> and <code class="lang-kotlin">BooleanTopic</code> for numbers and booleans, and <code class="lang-kotlin">Topic&lt;T&gt;</code> for strings, arrays, structs, and lists of structs. <code class="lang-kotlin">TelemetryTable</code> groups related topics under a path, and <code class="lang-kotlin">TelemetryLoggable</code> lets an object publish its own fields.</p><p class="paragraph">The registry stamps each value, sends it to every registered backend (or only those registered for a path prefix), and reports problems through a warning handler instead of throwing. A path keeps one type while a backend is registered, repeated numbers and strings are skipped unless a handle's <code class="lang-kotlin">keepDuplicates</code> is set, and a handle made before any backend exists starts working when one is registered.</p><p class="paragraph">A handle can carry properties, the first being a unit that dashboards such as AdvantageScope show and convert: <code class="lang-kotlin">table.doubleTopic("wheelVelocity").withUnit("m/s")</code>. They go out when the path is first published, as the <code class="lang-kotlin">properties</code> of the NetworkTables announcement and as the metadata of the log entry, laid out the way WPILib logs NetworkTables topics. Values are strings, booleans, or finite numbers.</p><p class="paragraph"><code class="lang-kotlin">TelemetryBackend</code> and <code class="lang-kotlin">TelemetryEntry</code> are what a destination implements.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-946390801%2FClasslikes%2F-1101253081" anchor-label="BooleanTopic" id="-946390801%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-boolean-topic/index.html"><span>Boolean</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-946390801%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-boolean-topic/index.html">BooleanTopic</a> : <a href="-telemetry-topic/index.html">TelemetryTopic</a></div><div class="brief "><p class="paragraph">A handle on a <code class="lang-kotlin">boolean</code> topic.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1823262546%2FClasslikes%2F-1101253081" anchor-label="DoubleTopic" id="-1823262546%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-double-topic/index.html"><span>Double</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1823262546%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-double-topic/index.html">DoubleTopic</a> : <a href="-telemetry-topic/index.html">TelemetryTopic</a></div><div class="brief "><p class="paragraph">A handle on a <code class="lang-kotlin">double</code> topic.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-185595549%2FClasslikes%2F-1101253081" anchor-label="FloatTopic" id="-185595549%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-float-topic/index.html"><span>Float</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-185595549%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-float-topic/index.html">FloatTopic</a> : <a href="-telemetry-topic/index.html">TelemetryTopic</a></div><div class="brief "><p class="paragraph">A handle on a <code class="lang-kotlin">float</code> topic.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1905657610%2FClasslikes%2F-1101253081" anchor-label="IntTopic" id="-1905657610%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-int-topic/index.html"><span>Int</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1905657610%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-int-topic/index.html">IntTopic</a> : <a href="-telemetry-topic/index.html">TelemetryTopic</a></div><div class="brief "><p class="paragraph">A handle on an integer topic, for values that fit in an <code class="lang-kotlin">Int</code>. For larger ones use <a href="-long-topic/index.html">LongTopic</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1608397017%2FClasslikes%2F-1101253081" anchor-label="LongTopic" id="1608397017%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-long-topic/index.html"><span>Long</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1608397017%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-long-topic/index.html">LongTopic</a> : <a href="-telemetry-topic/index.html">TelemetryTopic</a></div><div class="brief "><p class="paragraph">A handle on an integer topic.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1758296985%2FClasslikes%2F-1101253081" anchor-label="StructType" id="-1758296985%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-struct-type/index.html"><span>Struct</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1758296985%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-struct-type/index.html">StructType</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>schema<span class="token operator">: </span><a href="../dev.nextftc.telemetry.struct/-struct-schema/index.html">StructSchema</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>isArray<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span> : <a href="-telemetry-type/index.html">TelemetryType</a></div><div class="brief "><p class="paragraph">A struct, or an array of them, described by <a href="../../telemetry/dev.nextftc.telemetry/-struct-type/--root--.html">schema</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2017093645%2FClasslikes%2F-1101253081" anchor-label="Telemetry" id="-2017093645%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry/index.html"><span><span>Telemetry</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2017093645%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-telemetry/index.html">Telemetry</a></div><div class="brief "><p class="paragraph">The entry point for telemetry: a shared <a href="-telemetry-registry/index.html">TelemetryRegistry</a> and its root table.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1891156539%2FClasslikes%2F-1101253081" anchor-label="TelemetryBackend" id="1891156539%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry-backend/index.html"><span>Telemetry</span><wbr><span><span>Backend</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1891156539%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-telemetry-backend/index.html">TelemetryBackend</a> : <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html">AutoCloseable</a></div><div class="brief "><p class="paragraph">A destination for logged values: a log file, a live server, a test double.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-161258083%2FClasslikes%2F-1101253081" anchor-label="TelemetryEntry" id="-161258083%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry-entry/index.html"><span>Telemetry</span><wbr><span><span>Entry</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-161258083%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-telemetry-entry/index.html">TelemetryEntry</a></div><div class="brief "><p class="paragraph">Where the values of one path end up.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="287644406%2FClasslikes%2F-1101253081" anchor-label="TelemetryLoggable" id="287644406%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry-loggable/index.html"><span>Telemetry</span><wbr><span><span>Loggable</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="287644406%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-telemetry-loggable/index.html">TelemetryLoggable</a></div><div class="brief "><p class="paragraph">An object that knows how to publish itself into a <a href="-telemetry-table/index.html">TelemetryTable</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="377911168%2FClasslikes%2F-1101253081" anchor-label="TelemetryProperties" id="377911168%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry-properties/index.html"><span>Telemetry</span><wbr><span><span>Properties</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="377911168%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-telemetry-properties/index.html">TelemetryProperties</a></div><div class="brief "><p class="paragraph">The names of topic properties that dashboards understand.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="115070006%2FClasslikes%2F-1101253081" anchor-label="TelemetryRegistry" id="115070006%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry-registry/index.html"><span>Telemetry</span><wbr><span><span>Registry</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="115070006%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-telemetry-registry/index.html">TelemetryRegistry</a>&nbsp;<span><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a>&nbsp;</span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>timeSource<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-time-source/-with-comparable-marks/index.html">TimeSource.WithComparableMarks</a><span class="token operator"> = </span>TimeSource.Monotonic<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>origin<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-comparable-time-mark/index.html">ComparableTimeMark</a><span class="token operator"> = </span>timeSource.markNow()</span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">The set of <a href="-telemetry-backend/index.html">TelemetryBackend</a>s that logged values are routed to, plus the clock that stamps them.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2078241217%2FClasslikes%2F-1101253081" anchor-label="TelemetryTable" id="2078241217%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry-table/index.html"><span>Telemetry</span><wbr><span><span>Table</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2078241217%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-telemetry-table/index.html">TelemetryTable</a></div><div class="brief "><p class="paragraph">A namespace of logged values: a path like <code class="lang-kotlin">/Drive</code>, whose topics are <code class="lang-kotlin">/Drive/leftVelocity</code> and so on, and whose children are tables like <code class="lang-kotlin">/Drive/Odometry</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="973504384%2FClasslikes%2F-1101253081" anchor-label="TelemetryTopic" id="973504384%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry-topic/index.html"><span>Telemetry</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="973504384%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="-telemetry-topic/index.html">TelemetryTopic</a></div><div class="brief "><p class="paragraph">A handle on one telemetry path, which values are set on.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-266109735%2FClasslikes%2F-1101253081" anchor-label="TelemetryType" id="-266109735%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry-type/index.html"><span>Telemetry</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-266109735%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">sealed </span><span class="token keyword">interface </span><a href="-telemetry-type/index.html">TelemetryType</a></div><div class="brief "><p class="paragraph">What a telemetry path holds: one of the <a href="-value-type/index.html">ValueType</a>s, or a <a href="-struct-type/index.html">StructType</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="566642693%2FClasslikes%2F-1101253081" anchor-label="TelemetryWarningHandler" id="566642693%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry-warning-handler/index.html"><span>Telemetry</span><wbr><span>Warning</span><wbr><span><span>Handler</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="566642693%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token keyword">interface </span><a href="-telemetry-warning-handler/index.html">TelemetryWarningHandler</a></div><div class="brief "><p class="paragraph">Receives the warnings telemetry reports instead of throwing.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1035748541%2FClasslikes%2F-1101253081" anchor-label="Topic" id="1035748541%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-topic/index.html"><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1035748541%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="-topic/index.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span> : <a href="-telemetry-topic/index.html">TelemetryTopic</a></div><div class="brief "><p class="paragraph">A handle on a topic of reference values: strings, arrays, structs, and lists of structs.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1309167711%2FClasslikes%2F-1101253081" anchor-label="ValueType" id="-1309167711%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-value-type/index.html"><span>Value</span><wbr><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1309167711%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-value-type/index.html">ValueType</a> : <a href="-telemetry-type/index.html">TelemetryType</a>, <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-value-type/index.html">ValueType</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The types that aren't structs. Integers of every width are <a href="-value-type/-i-n-t-e-g-e-r/index.html">INTEGER</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="EXTENSION_FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1093678930%2FFunctions%2F-1101253081" anchor-label="arrayTopic" id="1093678930%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="array-topic.html"><span>array</span><wbr><span><span>Topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1093678930%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-telemetry/index.html">Telemetry</a><span class="token punctuation">.</span><a href="array-topic.html"><span class="token function">arrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="array-topic.html">name</a> under the root that holds arrays of structs of <a href="array-topic.html">T</a>.</p></div><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-telemetry-table/index.html">TelemetryTable</a><span class="token punctuation">.</span><a href="array-topic.html"><span class="token function">arrayTopic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="array-topic.html">T</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the topic <a href="array-topic.html">name</a> that holds arrays of structs of <a href="array-topic.html">T</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-525528112%2FFunctions%2F-1101253081" anchor-label="logArray" id="-525528112%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="log-array.html"><span>log</span><wbr><span><span>Array</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-525528112%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="log-array.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-telemetry/index.html">Telemetry</a><span class="token punctuation">.</span><a href="log-array.html"><span class="token function">logArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">values<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="log-array.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log-array.html">values</a>, a list of structs of <a href="log-array.html">T</a>, to the topic <a href="log-array.html">name</a> under the root.</p></div><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="log-array.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-telemetry-table/index.html">TelemetryTable</a><span class="token punctuation">.</span><a href="log-array.html"><span class="token function">logArray</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">values<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="log-array.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Logs <a href="log-array.html">values</a>, a list of structs of <a href="log-array.html">T</a>, to the topic <a href="log-array.html">name</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-228009966%2FFunctions%2F-1101253081" anchor-label="topic" id="-228009966%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="topic.html"><span><span>topic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-228009966%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-telemetry/index.html">Telemetry</a><span class="token punctuation">.</span><a href="topic.html"><span class="token function">topic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the struct topic <a href="topic.html">name</a> under the root, which holds values of <a href="topic.html">T</a>.</p></div><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="-telemetry-table/index.html">TelemetryTable</a><span class="token punctuation">.</span><a href="topic.html"><span class="token function">topic</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="-topic/index.html">Topic</a><span class="token operator">&lt;</span><a href="topic.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the handle for the struct topic <a href="topic.html">name</a>, which holds values of <a href="topic.html">T</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1922914680%2FFunctions%2F-1101253081" anchor-label="withProperties" id="-1922914680%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-properties.html"><span>with</span><wbr><span><span>Properties</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1922914680%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="with-properties.html">T</a><span class="token operator"> : </span><a href="-telemetry-topic/index.html">TelemetryTopic</a><span class="token operator">&gt; </span><a href="with-properties.html">T</a><span class="token punctuation">.</span><a href="with-properties.html"><span class="token function">withProperties</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">vararg </span>properties<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="with-properties.html">T</a></div><div class="brief "><p class="paragraph">Sets <a href="with-properties.html">properties</a> on <a href="with-properties.html">this</a> topic, in addition to the ones it has, and returns the handle.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1058951169%2FFunctions%2F-1101253081" anchor-label="withUnit" id="1058951169%2FFunctions%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="with-unit.html"><span>with</span><wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1058951169%2FFunctions%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="with-unit.html">T</a><span class="token operator"> : </span><a href="-telemetry-topic/index.html">TelemetryTopic</a><span class="token operator">&gt; </span><a href="with-unit.html">T</a><span class="token punctuation">.</span><a href="with-unit.html"><span class="token function">withUnit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">unit<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="with-unit.html">T</a></div><div class="brief "><p class="paragraph">Sets the unit of <a href="with-unit.html">this</a> topic's values, which dashboards show, and returns the handle.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>dev.nextftc.telemetry.nt</title>
+<link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":telemetry/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":telemetry/main" data-filter=":telemetry/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageids="NextFTC Telemetry::dev.nextftc.telemetry.nt////PointingToDeclaration//-1101253081">
+  <div class="breadcrumbs"><a href="../index.html">NextFTC Telemetry</a><span class="delimiter">/</span><span class="current">dev.nextftc.telemetry.nt</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+    <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><p class="paragraph"><code class="lang-kotlin">NT4Server</code>, a <a href="https://github.com/wpilibsuite/allwpilib/blob/main/ntcore/doc/networktables4.adoc">NetworkTables 4</a> server that dashboards such as AdvantageScope and Glass connect to. Publish a topic, set values on it, and subscribed clients are sent the topics they asked for, their current values, and every change after that. <code class="lang-kotlin">NT4Type</code> names the types of the values it can publish.</p><p class="paragraph">It is publish-only: clients can read but not write. It supports the 4.1 and 4.0 protocols and the RTT subprotocol, answers the clock-synchronization messages clients use, and publishes struct schemas as the <code class="lang-kotlin">/.schema/</code> topics AdvantageScope reads. A client that falls too far behind is disconnected so it can reconnect and catch up, instead of the robot waiting on it. It sends every change whatever a subscription's <code class="lang-kotlin">periodic</code> option says, and it has no <code class="lang-kotlin">$</code> meta topics.</p><p class="paragraph">A topic name keeps its type for as long as the server object exists, even after the topic is unpublished. Dashboards such as AdvantageScope key a field by name and keep its first type, and show a "Conflicting types" error for values of another, so the server refuses the new type and telemetry warns. A name can be published again with the type it had, which is what each OpMode does when its backend publishes the same topics again.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-1760428004%2FClasslikes%2F-1101253081" anchor-label="NT4Backend" id="-1760428004%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-n-t4-backend/index.html"><span><span>NT4Backend</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1760428004%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-n-t4-backend/index.html">NT4Backend</a>&nbsp;<span><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a>&nbsp;</span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>server<span class="token operator">: </span><a href="-n-t4-server/index.html">NT4Server</a><span class="token punctuation">, </span></span><span class="parameter ">stopServerOnClose<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span> : <a href="../dev.nextftc.telemetry/-telemetry-backend/index.html">TelemetryBackend</a></div><div class="brief "><p class="paragraph">Publishes logged values to an <a href="-n-t4-server/index.html">NT4Server</a>, one topic per path.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="249113199%2FClasslikes%2F-1101253081" anchor-label="NT4Server" id="249113199%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-n-t4-server/index.html"><span><span>NT4Server</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="249113199%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-n-t4-server/index.html">NT4Server</a>&nbsp;<span><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-overloads/index.html"><span class="token annotation builtin">JvmOverloads</span></a>&nbsp;</span><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>port<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator"> = </span>DEFAULT_PORT<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>host<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">"0.0.0.0"</span><span class="token punctuation">, </span></span><span class="parameter ">timeSource<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-time-source/-with-comparable-marks/index.html">TimeSource.WithComparableMarks</a><span class="token operator"> = </span>TimeSource.Monotonic<span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>origin<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.time/-comparable-time-mark/index.html">ComparableTimeMark</a><span class="token operator"> = </span>timeSource.markNow()</span></span><span class="token punctuation">)</span> : <a href="https://docs.oracle.com/javase/8/docs/api/java/io/Closeable.html">Closeable</a></div><div class="brief "><p class="paragraph">A <a href="https://github.com/wpilibsuite/allwpilib/blob/main/ntcore/doc/networktables4.adoc">NetworkTables 4</a> server that publishes values to dashboards such as AdvantageScope, Glass and Shuffleboard.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-399445352%2FClasslikes%2F-1101253081" anchor-label="NT4Type" id="-399445352%2FClasslikes%2F-1101253081" data-filterable-set=":telemetry/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":telemetry/main" data-filterable-set=":telemetry/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-n-t4-type/index.html"><span><span>NT4Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-399445352%2FClasslikes%2F-1101253081"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":telemetry/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-n-t4-type/index.html">NT4Type</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-n-t4-type/index.html">NT4Type</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">The NetworkTables 4 types for the values <a href="-n-t4-server/index.html">NT4Server</a> can publish.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

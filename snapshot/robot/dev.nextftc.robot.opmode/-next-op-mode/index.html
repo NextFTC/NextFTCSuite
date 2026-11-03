@@ -1,0 +1,289 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>NextOpMode</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":robot/main">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":robot/main" data-filter=":robot/main">
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextFTC Robot::dev.nextftc.robot.opmode/NextOpMode///PointingToDeclaration//-919244207">
+  <div class="breadcrumbs"><a href="../../index.html">NextFTC Robot</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.robot.opmode</a><span class="delimiter">/</span><span class="current">NextOpMode</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Next</span><wbr><span>Op</span><wbr><span><span>Mode</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">abstract </span><span class="token keyword">class </span><a href="index.html">NextOpMode</a></div><p class="paragraph">Base class for all NextFTC OpModes.</p><p class="paragraph">Automatically injects the scanned <a href="../../dev.nextftc.robot/-next-robot/index.html">dev.nextftc.robot.NextRobot</a> instance and handles the lifecycle execution, calling various <a href="../-op-mode-hook/index.html">OpModeHook</a>s and managing the internal command scheduler.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>hooks</span></span></u></div></span></div><div><div class="title"><p class="paragraph">Internal hooks used to manage robot mechanisms and the scheduler loop.</p></div></div></div></div></div><h4 class="tableheader">Inheritors</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><a href="../-blaze-op-mode/index.html">BlazeOpMode</a></div></span></div><div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="1144950701%2FConstructors%2F-919244207" anchor-label="NextOpMode" id="1144950701%2FConstructors%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-next-op-mode.html"><span>Next</span><wbr><span>Op</span><wbr><span><span>Mode</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1144950701%2FConstructors%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">robot<span class="token operator">: </span><a href="../../dev.nextftc.robot/-next-robot/index.html">NextRobot</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>hooks<span class="token operator">: </span><a href="../-op-mode-hook/index.html">OpModeHook</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Secondary constructor invoked by the <a href="../-next-f-t-c-op-mode-scanner/index.html">NextFTCOpModeScanner</a> during automatic registration.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-516400230%2FClasslikes%2F-919244207" anchor-label="Companion" id="-516400230%2FClasslikes%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-516400230%2FClasslikes%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1844353911%2FProperties%2F-919244207" anchor-label="gamepad1" id="1844353911%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="gamepad1.html"><span><span>gamepad1</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1844353911%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-field/index.html"><span class="token annotation builtin">JvmField</span></a></div></div><span class="token keyword">val </span><a href="gamepad1.html">gamepad1</a><span class="token operator">: </span><span data-unresolved-link="com.qualcomm.robotcore.hardware/Gamepad///PointingToDeclaration/">Gamepad</span></div><div class="brief "><p class="paragraph">The primary gamepad provided by the Driver Station.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1875373718%2FProperties%2F-919244207" anchor-label="gamepad2" id="1875373718%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="gamepad2.html"><span><span>gamepad2</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1875373718%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-field/index.html"><span class="token annotation builtin">JvmField</span></a></div></div><span class="token keyword">val </span><a href="gamepad2.html">gamepad2</a><span class="token operator">: </span><span data-unresolved-link="com.qualcomm.robotcore.hardware/Gamepad///PointingToDeclaration/">Gamepad</span></div><div class="brief "><p class="paragraph">The secondary gamepad provided by the Driver Station.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1957911297%2FProperties%2F-919244207" anchor-label="hardwareMap" id="-1957911297%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="hardware-map.html"><span>hardware</span><wbr><span><span>Map</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1957911297%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-field/index.html"><span class="token annotation builtin">JvmField</span></a></div></div><span class="token keyword">val </span><a href="hardware-map.html">hardwareMap</a><span class="token operator">: </span><span data-unresolved-link="com.qualcomm.robotcore.hardware/HardwareMap///PointingToDeclaration/">HardwareMap</span></div><div class="brief "><p class="paragraph">The hardware map provided by the FTC SDK.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2147297094%2FProperties%2F-919244207" anchor-label="telemetry" id="-2147297094%2FProperties%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="telemetry.html"><span><span>telemetry</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2147297094%2FProperties%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-field/index.html"><span class="token annotation builtin">JvmField</span></a></div></div><span class="token keyword">val </span><a href="telemetry.html">telemetry</a><span class="token operator">: </span><span data-unresolved-link="org.firstinspires.ftc.robotcore.external/Telemetry///PointingToDeclaration/">Telemetry</span></div><div class="brief "><p class="paragraph">The standard SDK telemetry provided by the Driver Station.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="1439091472%2FFunctions%2F-919244207" anchor-label="disabledPeriodic" id="1439091472%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="disabled-periodic.html"><span>disabled</span><wbr><span><span>Periodic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1439091472%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="disabled-periodic.html"><span class="token function">disabledPeriodic</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Called repeatedly while the OpMode is in the INIT phase.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="220939864%2FFunctions%2F-919244207" anchor-label="end" id="220939864%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="end.html"><span><span>end</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="220939864%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="end.html"><span class="token function">end</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Called exactly once when the OpMode finishes execution.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1968271316%2FFunctions%2F-919244207" anchor-label="periodic" id="-1968271316%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="periodic.html"><span><span>periodic</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1968271316%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="periodic.html"><span class="token function">periodic</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Called repeatedly while the OpMode is actively running.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="306041649%2FFunctions%2F-919244207" anchor-label="start" id="306041649%2FFunctions%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="start.html"><span><span>start</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="306041649%2FFunctions%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="start.html"><span class="token function">start</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Called exactly once after the PLAY button is pressed.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

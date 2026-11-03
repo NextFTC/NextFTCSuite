@@ -1,0 +1,664 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>DynamicVector</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":linalg/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":linalg/main" data-filter=":linalg/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextControl Linear Algebra::dev.nextftc.linalg/DynamicVector///PointingToDeclaration//-1140905685">
+  <div class="breadcrumbs"><a href="../../index.html">NextControl Linear Algebra</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.linalg</a><span class="delimiter">/</span><span class="current">DynamicVector</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Dynamic</span><wbr><span><span>Vector</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">DynamicVector</a> : <a href="../-dynamic-matrix/index.html">DynamicMatrix</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/NextFTC/NextFTCSuite/blob/main/linalg/src/main/kotlin/dev/nextftc/linalg/DynamicVector.kt#L19">source</a>)</span></span></div><p class="paragraph">Represents a column vector of doubles with dynamic (runtime-checked) dimensions. This is essentially a <a href="../-dynamic-matrix/index.html">DynamicMatrix</a> with a single column.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="608579633%2FConstructors%2F-1140905685" anchor-label="DynamicVector" id="608579633%2FConstructors%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-dynamic-vector.html"><span>Dynamic</span><wbr><span><span>Vector</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="608579633%2FConstructors%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">data<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double-array/index.html">DoubleArray</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Constructor to create a <a href="-dynamic-vector.html">DynamicVector</a> from an array of values.</p></div><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">data<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-collection/index.html">Collection</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Constructor to create a <a href="-dynamic-vector.html">DynamicVector</a> from a collection of values.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="995889616%2FClasslikes%2F-1140905685" anchor-label="Companion" id="995889616%2FClasslikes%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="995889616%2FClasslikes%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-1317039645%2FProperties%2F-1140905685" anchor-label="dimension" id="-1317039645%2FProperties%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="dimension.html"><span><span>dimension</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1317039645%2FProperties%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-field/index.html"><span class="token annotation builtin">JvmField</span></a></div></div><span class="token keyword">val </span><a href="dimension.html">dimension</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The dimension (length) of this vector.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="429895579%2FProperties%2F-1140905685" anchor-label="inverse" id="429895579%2FProperties%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/inverse.html"><span><span>inverse</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="429895579%2FProperties%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"inverse"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="../-dynamic-matrix/inverse.html">inverse</a><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">The inverse of this matrix. The matrix must be square and invertible. If the matrix is not square, use <a href="../-dynamic-matrix/pseudo-inverse.html">pseudoInverse</a> instead.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1552572537%2FProperties%2F-1140905685" anchor-label="magnitude" id="1552572537%2FProperties%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="magnitude.html"><span><span>magnitude</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1552572537%2FProperties%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"magnitude"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="magnitude.html">magnitude</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Returns the Euclidean norm (magnitude) of this vector.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-946325197%2FProperties%2F-1140905685" anchor-label="norm" id="-946325197%2FProperties%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/norm.html"><span><span>norm</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-946325197%2FProperties%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"norm"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="../-dynamic-matrix/norm.html">norm</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Returns the Frobenius norm of this matrix. The Frobenius norm is the square root of the sum of squares of all elements.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1248751016%2FProperties%2F-1140905685" anchor-label="numColumns" id="-1248751016%2FProperties%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/num-columns.html"><span>num</span><wbr><span><span>Columns</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1248751016%2FProperties%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-dynamic-matrix/num-columns.html">numColumns</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The number of columns in the matrix.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1789010732%2FProperties%2F-1140905685" anchor-label="numRows" id="1789010732%2FProperties%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/num-rows.html"><span>num</span><wbr><span><span>Rows</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1789010732%2FProperties%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-dynamic-matrix/num-rows.html">numRows</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div><div class="brief "><p class="paragraph">The number of rows in the matrix.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1011696903%2FProperties%2F-1140905685" anchor-label="pseudoInverse" id="-1011696903%2FProperties%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/pseudo-inverse.html"><span>pseudo</span><wbr><span><span>Inverse</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1011696903%2FProperties%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"pseudoInverse"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="../-dynamic-matrix/pseudo-inverse.html">pseudoInverse</a><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">The pseudo-inverse of this matrix. The matrix must be square and invertible.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1392545650%2FProperties%2F-1140905685" anchor-label="size" id="-1392545650%2FProperties%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/size.html"><span><span>size</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1392545650%2FProperties%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-dynamic-matrix/size.html">size</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-pair/index.html">Pair</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The size of the matrix.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-690883534%2FProperties%2F-1140905685" anchor-label="transpose" id="-690883534%2FProperties%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/transpose.html"><span><span>transpose</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-690883534%2FProperties%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@get:</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-name/index.html"><span class="token annotation builtin">JvmName</span></a><span class="token punctuation">(</span><span>name<span class="token operator"> = </span><span class="breakable-word"><span class="token string">"transpose"</span></span></span><wbr><span class="token punctuation">)</span></div></div><span class="token keyword">val </span><a href="../-dynamic-matrix/transpose.html">transpose</a><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">The transpose of this matrix.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="522219703%2FFunctions%2F-1140905685" anchor-label="column" id="522219703%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/column.html"><span><span>column</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="522219703%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-dynamic-matrix/column.html"><span class="token function">column</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">n<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">Returns the <a href="../-dynamic-matrix/column.html">n</a>th column of the matrix.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-158112356%2FFunctions%2F-1140905685" anchor-label="copy" id="-158112356%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="copy.html"><span><span>copy</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-158112356%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="copy.html"><span class="token function">copy</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DynamicVector</a></div><div class="brief "><p class="paragraph">Returns a copy of this vector.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="231527469%2FFunctions%2F-1140905685" anchor-label="diagonals" id="231527469%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/diagonals.html"><span><span>diagonals</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="231527469%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-dynamic-matrix/diagonals.html"><span class="token function">diagonals</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">Returns the diagonal elements of this matrix.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-879254192%2FFunctions%2F-1140905685" anchor-label="div" id="-879254192%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/div.html"><span><span>div</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-879254192%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-dynamic-matrix/div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scalar<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-dynamic-matrix/div.html"><span class="token function">div</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scalar<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">Divides this matrix by a scalar.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-339602244%2FFunctions%2F-1140905685" anchor-label="dot" id="-339602244%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="dot.html"><span><span>dot</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-339602244%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="dot.html"><span class="token function">dot</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">DynamicVector</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Computes the dot product of this vector with another vector.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1373185010%2FFunctions%2F-1140905685" anchor-label="equals" id="1373185010%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/equals.html"><span><span>equals</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1373185010%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../-dynamic-matrix/equals.html"><span class="token function">equals</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1943039054%2FFunctions%2F-1140905685" anchor-label="exp" id="1943039054%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/exp.html"><span><span>exp</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1943039054%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-dynamic-matrix/exp.html"><span class="token function">exp</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">Computes the matrix exponential of this matrix, using the Padé approximant.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1128277299%2FFunctions%2F-1140905685" anchor-label="get" id="1128277299%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/get.html"><span><span>get</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1128277299%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-dynamic-matrix/get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">i<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">j<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Returns the element at the given indices.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="get.html"><span class="token function">get</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">i<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Returns the element at the given index.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="646933684%2FFunctions%2F-1140905685" anchor-label="hashCode" id="646933684%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/hash-code.html"><span>hash</span><wbr><span><span>Code</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="646933684%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../-dynamic-matrix/hash-code.html"><span class="token function">hashCode</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-788004753%2FFunctions%2F-1140905685" anchor-label="ldlt" id="-788004753%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/ldlt.html"><span><span>ldlt</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-788004753%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-dynamic-matrix/ldlt.html"><span class="token function">ldlt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-l-d-l-t-decomposition/index.html">LDLTDecomposition</a></div><div class="brief "><p class="paragraph">Returns the LDLT decomposition of this matrix. Only works for symmetric matrices.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1629496151%2FFunctions%2F-1140905685" anchor-label="llt" id="1629496151%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/llt.html"><span><span>llt</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1629496151%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-dynamic-matrix/llt.html"><span class="token function">llt</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-l-l-t-decomposition/index.html">LLTDecomposition</a></div><div class="brief "><p class="paragraph">Returns the LLT (Cholesky) decomposition of this matrix. Only works for symmetric, positive-definite matrices. Provides in-place rank-1 update/downdate methods.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1797992314%2FFunctions%2F-1140905685" anchor-label="lu" id="-1797992314%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/lu.html"><span><span>lu</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1797992314%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-dynamic-matrix/lu.html"><span class="token function">lu</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-l-u-decomposition/index.html">LUDecomposition</a></div><div class="brief "><p class="paragraph">Returns the LU decomposition of this matrix.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="754305448%2FFunctions%2F-1140905685" anchor-label="minus" id="754305448%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/minus.html"><span><span>minus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="754305448%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-dynamic-matrix/minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">Subtracts another matrix from this matrix. The matrices must have the same dimensions.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="minus.html"><span class="token function">minus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">DynamicVector</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DynamicVector</a></div><div class="brief "><p class="paragraph">Subtracts another vector from this vector.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="714576218%2FFunctions%2F-1140905685" anchor-label="normalized" id="714576218%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="normalized.html"><span><span>normalized</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="714576218%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="normalized.html"><span class="token function">normalized</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DynamicVector</a></div><div class="brief "><p class="paragraph">Returns a normalized (unit) vector in the same direction.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-742899942%2FFunctions%2F-1140905685" anchor-label="plus" id="-742899942%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/plus.html"><span><span>plus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-742899942%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-dynamic-matrix/plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">Adds another matrix to this matrix. The matrices must have the same dimensions.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="plus.html"><span class="token function">plus</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="index.html">DynamicVector</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DynamicVector</a></div><div class="brief "><p class="paragraph">Adds another vector to this vector.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1377948946%2FFunctions%2F-1140905685" anchor-label="qr" id="-1377948946%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/qr.html"><span><span>qr</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1377948946%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-dynamic-matrix/qr.html"><span class="token function">qr</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-q-r-decomposition/index.html">QRDecomposition</a></div><div class="brief "><p class="paragraph">Returns the QR decomposition of this matrix.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-166466673%2FFunctions%2F-1140905685" anchor-label="row" id="-166466673%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/row.html"><span><span>row</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-166466673%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-dynamic-matrix/row.html"><span class="token function">row</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">n<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">Returns the <a href="../-dynamic-matrix/row.html">n</a>th row of the matrix.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="360778683%2FFunctions%2F-1140905685" anchor-label="set" id="360778683%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/set.html"><span><span>set</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="360778683%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-dynamic-matrix/set.html"><span class="token function">set</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">i<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">j<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets the element at the given indices to the given <a href="../-dynamic-matrix/set.html">value</a>.</p></div><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="set.html"><span class="token function">set</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">i<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Sets the element at the given index.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-635460858%2FFunctions%2F-1140905685" anchor-label="slice" id="-635460858%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/slice.html"><span><span>slice</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-635460858%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-dynamic-matrix/slice.html"><span class="token function">slice</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">startRow<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">endRow<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">startCol<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a><span class="token punctuation">, </span></span><span class="parameter ">endCol<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">Returns a submatrix of this matrix.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="780956938%2FFunctions%2F-1140905685" anchor-label="solve" id="780956938%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/solve.html"><span><span>solve</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="780956938%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../-dynamic-matrix/solve.html"><span class="token function">solve</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-770319019%2FFunctions%2F-1140905685" anchor-label="times" id="-770319019%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/times.html"><span><span>times</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-770319019%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">operator </span><span class="token keyword">fun </span><a href="../-dynamic-matrix/times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-dynamic-matrix/index.html">DynamicMatrix</a></div><div class="brief "><p class="paragraph">Multiplies this matrix by another matrix. The number of columns in this matrix must match the number of rows in the other matrix.</p></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scalar<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DynamicVector</a></div><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="times.html"><span class="token function">times</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">scalar<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-number/index.html">Number</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DynamicVector</a></div><div class="brief "><p class="paragraph">Multiplies this vector by a scalar.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="789708701%2FFunctions%2F-1140905685" anchor-label="toSizedMatrix" id="789708701%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-dynamic-matrix/to-sized-matrix.html"><span>to</span><wbr><span>Sized</span><wbr><span><span>Matrix</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="789708701%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="../-dynamic-matrix/to-sized-matrix.html">R</a><span class="token operator"> : </span><a href="../-nat/index.html">Nat</a><span class="token punctuation">, </span><a href="../-dynamic-matrix/to-sized-matrix.html">C</a><span class="token operator"> : </span><a href="../-nat/index.html">Nat</a><span class="token operator">&gt; </span><a href="../-dynamic-matrix/to-sized-matrix.html"><span class="token function">toSizedMatrix</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">rows<span class="token operator">: </span><a href="../-dynamic-matrix/to-sized-matrix.html">R</a><span class="token punctuation">, </span></span><span class="parameter ">cols<span class="token operator">: </span><a href="../-dynamic-matrix/to-sized-matrix.html">C</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-matrix/index.html">Matrix</a><span class="token operator">&lt;</span><a href="../-dynamic-matrix/to-sized-matrix.html">R</a><span class="token punctuation">, </span><a href="../-dynamic-matrix/to-sized-matrix.html">C</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a <a href="../-matrix/index.html">Matrix</a> with the same dimensions as this matrix. The dimensions are checked at runtime.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1362902149%2FFunctions%2F-1140905685" anchor-label="toString" id="1362902149%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="to-string.html"><span>to</span><wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1362902149%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1391288080%2FFunctions%2F-1140905685" anchor-label="unaryMinus" id="1391288080%2FFunctions%2F-1140905685" data-filterable-set=":linalg/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":linalg/main" data-filterable-set=":linalg/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="unary-minus.html"><span>unary</span><wbr><span><span>Minus</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1391288080%2FFunctions%2F-1140905685"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":linalg/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="unary-minus.html"><span class="token function">unaryMinus</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">DynamicVector</a></div><div class="brief "><p class="paragraph">Negates all elements of this vector.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
