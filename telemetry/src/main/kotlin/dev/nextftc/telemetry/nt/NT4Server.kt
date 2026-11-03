@@ -202,7 +202,8 @@ constructor(
           serverConfig {
             module {
               install(WebSockets) {
-                maxFrameSize = Long.MAX_VALUE
+                // NT4 messages are small; this stops a client from making the server buffer a huge frame
+                maxFrameSize = MAX_FRAME_SIZE
                 masking = false
               }
               routing {
@@ -784,6 +785,9 @@ constructor(
 
     /** The number of frames queued for one client before it is dropped for being too slow. */
     private const val CLIENT_QUEUE_CAPACITY = 16_384
+
+    /** The largest WebSocket frame, in bytes, the server will accept from a client. */
+    private const val MAX_FRAME_SIZE = 1L shl 20
 
     private const val PING_INTERVAL_MILLIS = 1_000L
     private const val PING_TIMEOUT_MILLIS = 5_000L

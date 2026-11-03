@@ -45,14 +45,19 @@ class NT4Backend @JvmOverloads constructor(
   @Volatile private var closed = false
 
   override fun entry(path: String, type: TelemetryType, properties: Map<String, Any>): TelemetryEntry {
-    val existing = created.computeIfAbsent(path) {
-      val id = publish(path, type, properties)
-      Created(type, id, TopicEntry(id))
+    // Held with close so a topic can't be published after close has unpublished everything
+    synchronized(created) {
+      // Once closed, hand out an entry that drops its values rather than announce a new topic
+      if (closed) return TopicEntry(-1)
+      val existing = created.getOrPut(path) {
+        val id = publish(path, type, properties)
+        Created(type, id, TopicEntry(id))
+      }
+      require(existing.type == type) {
+        "'$path' was already published as ${existing.type}, so it can't be $type"
+      }
+      return existing.entry
     }
-    require(existing.type == type) {
-      "'$path' was already published as ${existing.type}, so it can't be $type"
-    }
-    return existing.entry
   }
 
   private fun publish(path: String, type: TelemetryType, properties: Map<String, Any>): Int = when (type) {
@@ -79,10 +84,12 @@ class NT4Backend @JvmOverloads constructor(
    * Does nothing if already closed.
    */
   override fun close() {
-    if (closed) return
-    closed = true
-    for (topic in created.values) server.unpublish(topic.id)
-    created.clear()
+    synchronized(created) {
+      if (closed) return
+      closed = true
+      for (topic in created.values) server.unpublish(topic.id)
+      created.clear()
+    }
     if (stopServerOnClose) server.stop()
   }
 

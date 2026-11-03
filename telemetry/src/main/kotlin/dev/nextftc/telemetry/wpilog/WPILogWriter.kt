@@ -477,6 +477,7 @@ constructor(
 
   private fun writeRecord(entryId: Int, timestamp: Long, payload: ByteArray, length: Int) {
     check(!closed) { "The WPILOG writer is closed" }
+    require(timestamp >= 0) { "A timestamp can't be negative, but it was $timestamp" }
     val idLength = bytesNeeded(entryId.toLong() and 0xFFFFFFFFL)
     val sizeLength = bytesNeeded(length.toLong())
     val timestampLength = bytesNeeded(timestamp)

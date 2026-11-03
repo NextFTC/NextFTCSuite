@@ -181,13 +181,20 @@ class WPILogWriterTest :
           it.appendRaw(id, byteArrayOf(3), 256)
           it.appendRaw(id, byteArrayOf(4), 0x1_0000_0000L)
           it.appendRaw(id, bigPayload, 7)
-          it.appendRaw(id, byteArrayOf(5), -1)
+          it.appendRaw(id, byteArrayOf(5), Long.MAX_VALUE)
         }
 
       val data = parsed.records.filterNot { it.isControl }
       data.map { it.timestamp } shouldContainExactly
-        listOf(0L, 255L, 256L, 0x1_0000_0000L, 7L, -1L)
+        listOf(0L, 255L, 256L, 0x1_0000_0000L, 7L, Long.MAX_VALUE)
       data[4].payload.contentEquals(bigPayload) shouldBe true
+    }
+
+    test("a negative timestamp is rejected") {
+      log {
+        val id = it.startEntry("/raw", WPILogType.RAW, 0)
+        shouldThrow<IllegalArgumentException> { it.appendRaw(id, byteArrayOf(1), -1) }
+      }
     }
 
     test("an entry id above 255 is written in two bytes") {
