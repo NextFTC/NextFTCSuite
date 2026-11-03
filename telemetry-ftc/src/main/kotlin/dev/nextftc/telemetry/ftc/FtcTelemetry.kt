@@ -30,6 +30,9 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.TimeMark
+import kotlin.time.TimeSource
 
 /**
  * Settings for [FtcTelemetry]. Change them before an OpMode is initialized; they are read each time
@@ -43,6 +46,14 @@ class FtcTelemetryConfig {
   /** Where logs are written. */
   @JvmField @Volatile
   var logDirectory: File = File(AppUtil.FIRST_FOLDER, "nextftc/logs")
+
+  /**
+   * How often, in milliseconds, [FtcTelemetry.update] flushes the log to disk, so a crash or power
+   * loss only costs the last interval. Zero or less turns it off, and the log is only flushed when
+   * `flush()  is called, its buffer fills or the OpMode stops.
+   */
+  @JvmField @Volatile
+  var logFlushIntervalMillis: Long = 250
 
   /** Whether to serve NetworkTables 4 for dashboards such as AdvantageScope. */
   @JvmField @Volatile
@@ -91,6 +102,7 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
   private var live: NT4Backend? = null
   private var driverStation: DriverStationBackend? = null
   private var prefs: SharedPreferences? = null
+  private var lastFlush: TimeMark = TimeSource.Monotonic.markNow()
 
   /**
    * Whether the NetworkTables server may run, saved on the Robot Controller so it holds across app
@@ -163,6 +175,7 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
         )
         WPILogBackend(writer).also {
           log = it
+          lastFlush = registry.timeSource.markNow()
           registry.register(it)
         }
       } catch (e: Exception) {
@@ -203,11 +216,28 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
    * but only for the lines this library added. A `LinearOpMode` has to call it (or
    * `telemetry.update()`) every loop, because the SDK only updates after each loop of an iterative
    * `OpMode`. It does nothing when [FtcTelemetryConfig.driverStation] is off.
+   *
+   * It also flushes the log once every [FtcTelemetryConfig.logFlushIntervalMillis], so call it every
+   * loop even with the Driver Station off.
    */
   @JvmStatic
   @Synchronized
   fun update() {
     driverStation?.update()
+    flushLogIfDue()
+  }
+
+  private fun flushLogIfDue() {
+    val log = log ?: return
+    val interval = config.logFlushIntervalMillis
+    if (interval <= 0) return
+    if (lastFlush.elapsedNow() < interval.milliseconds) return
+    lastFlush = Telemetry.registry.timeSource.markNow()
+    try {
+      log.writer.flush()
+    } catch (e: Exception) {
+      RobotLog.ee(TAG, e, "Couldn't flush the telemetry log")
+    }
   }
 
   @Synchronized
