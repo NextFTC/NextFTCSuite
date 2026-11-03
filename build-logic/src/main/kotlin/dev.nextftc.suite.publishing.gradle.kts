@@ -34,7 +34,7 @@ configure<DokkaExtension> {
 
       sourceLink {
         localDirectory.set(file("src/main/kotlin"))
-        remoteUrl("https://github.com/NextFTC/NextFTCSuite/blob/main/${project.name}/src/main/kotlin")
+        remoteUrl("https://github.com/NextFTC/NextFTCSuite/blob/${providers.gradleProperty("docs.sourceRef").getOrElse("main")}/${project.name}/src/main/kotlin")
         remoteLineSuffix.set("#L")
       }
     }
