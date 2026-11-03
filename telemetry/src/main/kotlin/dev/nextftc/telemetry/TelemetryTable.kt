@@ -42,8 +42,8 @@ fun interface TelemetryLoggable {
  * A namespace of logged values: a path like `/Drive`, whose topics are `/Drive/leftVelocity` and so
  * on, and whose children are tables like `/Drive/Odometry`.
  *
- * Tables are cheap and cache what they hand out, but hold on to a table or a topic in a field rather
- * than looking it up every loop. The fastest way to log is a typed handle:
+ * A table caches the tables and handles it hands out by name, but each lookup still splits the name
+ * and hits a map, so hold on to a table or a topic in a field rather than looking it up every loop. The fastest way to log is a typed handle:
  *
  * ```kotlin
  * private val table = Telemetry.table("Shooter")

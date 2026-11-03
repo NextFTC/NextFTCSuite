@@ -2,7 +2,7 @@
 
 FTC lifecycle integration for the `telemetry` module, for teams that want logging and live telemetry
 without using the rest of NextFTC. It doesn't depend on `robot` or `hardware`, and it needs no
-OpMode base class: depending on it is enough.
+OpMode base class. Adding the dependency is enough.
 
 For each OpMode, `FtcTelemetry` opens a WPILOG in `/sdcard/FIRST/nextftc/logs` and, if enabled,
 publishes the same values over a NetworkTables 4 server on port 5810 for AdvantageScope. Both are
@@ -24,7 +24,7 @@ Two utility OpModes, "Disable NextFTC Telemetry Server" and "Enable NextFTC Tele
 the NetworkTables server off for competition and back on afterward. The choice is saved on the Robot
 Controller, so it holds after the app restarts. `FtcTelemetry.setServerEnabled` does the same from
 code. The log file and Driver Station lines are unaffected. Settings in `FtcTelemetry.config` are not
-saved: they come from your code each time.
+saved. They come from your code each time.
 
 The hook is found by Sloth when the event loop is created, so there is nothing to register.
 

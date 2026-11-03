@@ -43,7 +43,7 @@ fun interface TelemetryWarningHandler {
  * ## Warnings
  *
  * Telemetry reports a wrong type, a value it can't log, or a backend that threw through
- * [warningHandler], then carries on. A logging mistake should not end a match. Each distinct message
+ * [warningHandler], then carries on, so a bad value can't crash an OpMode. Each distinct message
  * is reported once, so a bad value logged every loop doesn't flood the output.
  *
  * @param timeSource The clock that stamps values
