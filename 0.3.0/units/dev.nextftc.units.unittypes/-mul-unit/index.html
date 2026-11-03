@@ -1,0 +1,420 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>MulUnit</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.0-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":units/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":units/main" data-filter=":units/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextControl Units::dev.nextftc.units.unittypes/MulUnit///PointingToDeclaration//436612445">
+  <div class="breadcrumbs"><a href="../../index.html">NextControl Units</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.units.unittypes</a><span class="delimiter">/</span><span class="current">MulUnit</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Mul</span><wbr><span><span>Unit</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="index.html">MulUnit</a><span class="token operator">&lt;</span><a href="index.html">N</a><span class="token operator"> : </span><a href="../../dev.nextftc.units/-unit/index.html">Unit</a><span class="token operator">&lt;</span><a href="index.html">N</a><span class="token operator">&gt;</span><span class="token punctuation">, </span><a href="index.html">D</a><span class="token operator"> : </span><a href="../../dev.nextftc.units/-unit/index.html">Unit</a><span class="token operator">&lt;</span><a href="index.html">D</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>first<span class="token operator">: </span><a href="index.html">N</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>second<span class="token operator">: </span><a href="index.html">D</a></span></span><span class="token punctuation">)</span> : <a href="../../dev.nextftc.units/-unit/index.html">Unit</a><span class="token operator">&lt;</span><a href="index.html">MulUnit</a><span class="token operator">&lt;</span><a href="index.html">N</a><span class="token punctuation">, </span><a href="index.html">D</a><span class="token operator">&gt;</span><span class="token operator">&gt; </span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/NextFTC/NextFTCSuite/blob/main/units/src/main/kotlin/dev/nextftc/units/unittypes/MulUnit.kt#L29">source</a>)</span></span></div><p class="paragraph">Represents a unit that is the product of two other units (e.g., Newton-meters for torque, kilowatt-hours for energy).</p><p class="paragraph">The MulUnit automatically normalizes to use base units for internal calculations. For example, if you create a MulUnit with Kilometers and Hours, it internally works with Meters and Seconds (the base units), ensuring that conversions work correctly.</p><h4 class="tableheader">Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>first</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the first unit (e.g., Newtons, Meters)</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>second</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the second unit (e.g., Meters, Seconds)</p></div></div></div></div></div><h4 class="tableheader">Type Parameters</h4><div class="table"><div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>N</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the type of the first unit</p></div></div></div></div><div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main"><div class="main-subrow keyValue "><div class=""><span class="inline-flex"><div><u><span><span>D</span></span></u></div></span></div><div><div class="title"><p class="paragraph">the type of the second unit</p></div></div></div></div></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="1290868095%2FConstructors%2F436612445" anchor-label="MulUnit" id="1290868095%2FConstructors%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-mul-unit.html"><span>Mul</span><wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1290868095%2FConstructors%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">first<span class="token operator">: </span><a href="index.html">N</a><span class="token punctuation">, </span></span><span class="parameter ">second<span class="token operator">: </span><a href="index.html">D</a></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="222132619%2FProperties%2F436612445" anchor-label="baseMulUnit" id="222132619%2FProperties%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="base-mul-unit.html"><span>base</span><wbr><span>Mul</span><wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="222132619%2FProperties%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="base-mul-unit.html">baseMulUnit</a><span class="token operator">: </span><a href="index.html">MulUnit</a><span class="token operator">&lt;</span><a href="index.html">N</a><span class="token punctuation">, </span><a href="index.html">D</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The base MulUnit using the base units of both first and second. For example, Kilometers⋅Hours would have a baseMulUnit of Meters⋅Seconds.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1637751682%2FProperties%2F436612445" anchor-label="baseUnit" id="1637751682%2FProperties%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/base-unit.html"><span>base</span><wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1637751682%2FProperties%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../../dev.nextftc.units/-unit/base-unit.html">baseUnit</a><span class="token operator">: </span><a href="index.html">MulUnit</a><span class="token operator">&lt;</span><a href="index.html">N</a><span class="token punctuation">, </span><a href="index.html">D</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The base unit for this unit's measurement system. This is found by traversing the parent chain until reaching a unit with no parent. For example:</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="683502610%2FProperties%2F436612445" anchor-label="first" id="683502610%2FProperties%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="first.html"><span><span>first</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="683502610%2FProperties%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="first.html">first</a><span class="token operator">: </span><a href="index.html">N</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1227491996%2FProperties%2F436612445" anchor-label="second" id="-1227491996%2FProperties%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="second.html"><span><span>second</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1227491996%2FProperties%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="second.html">second</a><span class="token operator">: </span><a href="index.html">D</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-1680680054%2FFunctions%2F436612445" anchor-label="equals" id="-1680680054%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/equals.html"><span><span>equals</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1680680054%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/equals.html"><span class="token function">equals</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2066476495%2FFunctions%2F436612445" anchor-label="equivalent" id="2066476495%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/equivalent.html"><span><span>equivalent</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2066476495%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/equivalent.html"><span class="token function">equivalent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">other<span class="token operator">: </span><a href="../../dev.nextftc.units/-unit/index.html">Unit</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Checks if this unit is equivalent to another one. Equivalence is determined by both units having the same base type and treat the same base unit magnitude as the same magnitude in their own units, to within <a href="../../dev.nextftc.units/-measure/-companion/-e-q-u-i-v-a-l-e-n-c-e_-t-h-r-e-s-h-o-l-d.html">Measure.EQUIVALENCE_THRESHOLD</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="407094229%2FFunctions%2F436612445" anchor-label="fromBaseUnits" id="407094229%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/from-base-units.html"><span>from</span><wbr><span>Base</span><wbr><span><span>Units</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="407094229%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/from-base-units.html"><span class="token function">fromBaseUnits</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">valueInBaseUnits<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Converts a value in terms of base units to a value in terms of this unit.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="630475292%2FFunctions%2F436612445" anchor-label="hashCode" id="630475292%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/hash-code.html"><span>hash</span><wbr><span><span>Code</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="630475292%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/hash-code.html"><span class="token function">hashCode</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1439120632%2FFunctions%2F436612445" anchor-label="isBaseUnit" id="1439120632%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/is-base-unit.html"><span>is</span><wbr><span>Base</span><wbr><span><span>Unit</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1439120632%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/is-base-unit.html"><span class="token function">isBaseUnit</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Checks if this unit is the base unit for its own system of measurement.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="744863404%2FFunctions%2F436612445" anchor-label="name" id="744863404%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/name.html"><span><span>name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="744863404%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/name.html"><span class="token function">name</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Gets the name of this unit.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-955237373%2FFunctions%2F436612445" anchor-label="of" id="-955237373%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="of.html"><span><span>of</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-955237373%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="of.html"><span class="token function">of</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">magnitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.nextftc.units.measuretypes/-mul/index.html">Mul</a><span class="token operator">&lt;</span><a href="index.html">N</a><span class="token punctuation">, </span><a href="index.html">D</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Creates a new immutable measurement of the given magnitude in terms of this unit. Implementations are <strong>strongly</strong> recommended to sharpen the return type to a unit-specific measurement implementation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2139349321%2FFunctions%2F436612445" anchor-label="ofBaseUnits" id="2139349321%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="of-base-units.html"><span>of</span><wbr><span>Base</span><wbr><span><span>Units</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2139349321%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="of-base-units.html"><span class="token function">ofBaseUnits</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">baseUnitMagnitude<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.nextftc.units.measuretypes/-mul/index.html">Mul</a><span class="token operator">&lt;</span><a href="index.html">N</a><span class="token punctuation">, </span><a href="index.html">D</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Creates a new immutable measurement of the given magnitude in terms of this unit's base unit. Implementations are <strong>strongly</strong> recommended to sharpen the return type to a unit-specific measurement implementation.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-622207555%2FFunctions%2F436612445" anchor-label="one" id="-622207555%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/one.html"><span><span>one</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-622207555%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/one.html"><span class="token function">one</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.nextftc.units/-measure/index.html">Measure</a><span class="token operator">&lt;</span><a href="index.html">MulUnit</a><span class="token operator">&lt;</span><a href="index.html">N</a><span class="token punctuation">, </span><a href="index.html">D</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Gets a measure with a magnitude of 1.0 in terms of this unit. The returned object is guaranteed to be of the same type returned by <a href="../../dev.nextftc.units/-unit/of.html">of</a>. Subclasses are encouraged to override this method to sharpen the return type.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-55414856%2FFunctions%2F436612445" anchor-label="per" id="-55414856%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/per.html"><span><span>per</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-55414856%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/per.html"><span class="token function">per</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">time<span class="token operator">: </span><a href="../-time-unit/index.html">TimeUnit</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-per-unit/index.html">PerUnit</a><span class="token operator">&lt;</span><a href="index.html">MulUnit</a><span class="token operator">&lt;</span><a href="index.html">N</a><span class="token punctuation">, </span><a href="index.html">D</a><span class="token operator">&gt;</span><span class="token punctuation">, </span><a href="../-time-unit/index.html">TimeUnit</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Combines this unit with a unit of time. This often - but not always - results in a velocity. Subclasses should sharpen the return type to be unit-specific.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="155907519%2FFunctions%2F436612445" anchor-label="symbol" id="155907519%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/symbol.html"><span><span>symbol</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="155907519%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/symbol.html"><span class="token function">symbol</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Gets the symbol of this unit.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1098034332%2FFunctions%2F436612445" anchor-label="toBaseUnits" id="-1098034332%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/to-base-units.html"><span>to</span><wbr><span>Base</span><wbr><span><span>Units</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1098034332%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/to-base-units.html"><span class="token function">toBaseUnits</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">valueInNativeUnits<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-double/index.html">Double</a></div><div class="brief "><p class="paragraph">Converts a value in terms of this unit to a value in terms of the base unit.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="452309227%2FFunctions%2F436612445" anchor-label="toString" id="452309227%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/to-string.html"><span>to</span><wbr><span><span>String</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="452309227%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/to-string.html"><span class="token function">toString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="276503855%2FFunctions%2F436612445" anchor-label="zero" id="276503855%2FFunctions%2F436612445" data-filterable-set=":units/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":units/main" data-filterable-set=":units/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../../dev.nextftc.units/-unit/zero.html"><span><span>zero</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="276503855%2FFunctions%2F436612445"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="../../dev.nextftc.units/-unit/zero.html"><span class="token function">zero</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../../dev.nextftc.units/-measure/index.html">Measure</a><span class="token operator">&lt;</span><a href="index.html">MulUnit</a><span class="token operator">&lt;</span><a href="index.html">N</a><span class="token punctuation">, </span><a href="index.html">D</a><span class="token operator">&gt;</span><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Gets a measure of zero magnitude in terms of this unit. The returned object is guaranteed to be of the same type returned by <a href="../../dev.nextftc.units/-unit/of.html">of</a>. Subclasses are encouraged to override this method to sharpen the return type.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

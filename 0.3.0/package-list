@@ -1,0 +1,32 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+
+module:NextControl
+dev.nextftc.control.drive
+dev.nextftc.control.feedback
+dev.nextftc.control.feedforward
+dev.nextftc.control.filters
+dev.nextftc.control.geometry
+dev.nextftc.control.model
+dev.nextftc.control.profiles
+dev.nextftc.control.util
+module:NextFTC Hardware
+dev.nextftc.hardware
+dev.nextftc.hardware.actuators
+dev.nextftc.hardware.lynx
+dev.nextftc.hardware.sensors
+dev.nextftc.hardware.sensors.colors
+dev.nextftc.hardware.util
+dev.nextftc.hardware.webcams
+module:NextControl Linear Algebra
+dev.nextftc.linalg
+module:NextFTC Robot
+dev.nextftc.robot
+dev.nextftc.robot.coroutine
+dev.nextftc.robot.drive
+dev.nextftc.robot.opmode
+dev.nextftc.robot.triggers
+module:NextControl Units
+dev.nextftc.units
+dev.nextftc.units.measuretypes
+dev.nextftc.units.unittypes

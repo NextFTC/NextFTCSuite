@@ -39,7 +39,7 @@
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.2.1
+        <div class="library-version" id="library-version">0.3.0-SNAPSHOT
         </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
@@ -94,7 +94,7 @@
   <div class="breadcrumbs"><a href="../../index.html">NextFTC Hardware</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.hardware</a><span class="delimiter">/</span><span class="current">RobotController</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Robot</span><wbr><span><span>Controller</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">RobotController</a> : <span data-unresolved-link="dev.frozenmilk.sinister.sdk.apphooks/OnCreateEventLoop///PointingToDeclaration/">OnCreateEventLoop</span></div><p class="paragraph">Centralized access to FTC hardware/runtime context and Lynx hub telemetry.</p></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">RobotController</a> : <span data-unresolved-link="dev.frozenmilk.sinister.sdk.apphooks/OnCreateEventLoop///PointingToDeclaration/">OnCreateEventLoop</span>, <a href="https://javadoc.io/doc/org.firstinspires.ftc/RobotCore/12.0.0/com/qualcomm/robotcore/eventloop/opmode/OpModeManagerNotifier.Notifications.html">OpModeManagerNotifier.Notifications</a></div><p class="paragraph">Centralized access to FTC hardware/runtime context and Lynx hub telemetry.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
@@ -127,6 +127,21 @@
               <div>
                 <div class="title">
                   <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div></div><span class="token keyword">val </span><a href="auxiliary-voltage.html">auxiliaryVoltage</a><span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-voltage/index.html">Voltage</a></div><div class="brief "><p class="paragraph">Current Control Hub auxiliary voltage.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="353043891%2FProperties%2F1368919361" anchor-label="blazeEnabled" id="353043891%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="blaze-enabled.html"><span>blaze</span><wbr><span><span>Enabled</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="353043891%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-static/index.html"><span class="token annotation builtin">JvmStatic</span></a></div></div><span class="token keyword">var </span><a href="blaze-enabled.html">blazeEnabled</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a></div><div class="brief "><p class="paragraph">Blaze has been enabled</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -236,6 +251,51 @@
               <div>
                 <div class="title">
                   <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-create-event-loop.html"><span class="token function">onCreateEventLoop</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/android/content/Context.html">Context</a><span class="token punctuation">, </span></span><span class="parameter ">ftcEventLoop<span class="token operator">: </span><span data-unresolved-link="com.qualcomm.ftccommon/FtcEventLoop///PointingToDeclaration/">FtcEventLoop</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Lifecycle callback used to initialize runtime context for hardware access.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="619080777%2FFunctions%2F1368919361" anchor-label="onOpModePostStop" id="619080777%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-op-mode-post-stop.html"><span>on</span><wbr><span>Op</span><wbr><span>Mode</span><wbr><span>Post</span><wbr><span><span>Stop</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="619080777%2FFunctions%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-op-mode-post-stop.html"><span class="token function">onOpModePostStop</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">opMode<span class="token operator">: </span><a href="https://javadoc.io/doc/org.firstinspires.ftc/RobotCore/12.0.0/com/qualcomm/robotcore/eventloop/opmode/OpMode.html">OpMode</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Discards all cached hardware objects so they are re-initialized in the next op mode.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1202654654%2FFunctions%2F1368919361" anchor-label="onOpModePreInit" id="1202654654%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-op-mode-pre-init.html"><span>on</span><wbr><span>Op</span><wbr><span>Mode</span><wbr><span>Pre</span><wbr><span><span>Init</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1202654654%2FFunctions%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-op-mode-pre-init.html"><span class="token function">onOpModePreInit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">opMode<span class="token operator">: </span><a href="https://javadoc.io/doc/org.firstinspires.ftc/RobotCore/12.0.0/com/qualcomm/robotcore/eventloop/opmode/OpMode.html">OpMode</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-599621114%2FFunctions%2F1368919361" anchor-label="onOpModePreStart" id="-599621114%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-op-mode-pre-start.html"><span>on</span><wbr><span>Op</span><wbr><span>Mode</span><wbr><span>Pre</span><wbr><span><span>Start</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-599621114%2FFunctions%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="on-op-mode-pre-start.html"><span class="token function">onOpModePreStart</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">opMode<span class="token operator">: </span><a href="https://javadoc.io/doc/org.firstinspires.ftc/RobotCore/12.0.0/com/qualcomm/robotcore/eventloop/opmode/OpMode.html">OpMode</a><span class="token operator">?</span></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>

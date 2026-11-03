@@ -1,0 +1,300 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>NextLynxModule</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.0-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":hardware/main">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":hardware/main" data-filter=":hardware/main">
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextFTC Hardware::dev.nextftc.hardware.lynx/NextLynxModule///PointingToDeclaration//1368919361">
+  <div class="breadcrumbs"><a href="../../index.html">NextFTC Hardware</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.hardware.lynx</a><span class="delimiter">/</span><span class="current">NextLynxModule</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Next</span><wbr><span>Lynx</span><wbr><span><span>Module</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">NextLynxModule</a></div><p class="paragraph">Represents a Lynx module. A module can be a control hub, expansion hub, or servo hub.</p><p class="paragraph">Users should not instantiate this class directly. Instead, use <a href="../../dev.nextftc.hardware/-robot-controller/control-hub.html">RobotController.controlHub</a>, <a href="../../dev.nextftc.hardware/-robot-controller/expansion-hub.html">RobotController.expansionHub</a>, or <a href="../../dev.nextftc.hardware/-robot-controller/servo-hubs.html">RobotController.servoHubs</a> to access the available modules.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-221680069%2FClasslikes%2F1368919361" anchor-label="PortKind" id="-221680069%2FClasslikes%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-port-kind/index.html"><span>Port</span><wbr><span><span>Kind</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-221680069%2FClasslikes%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-port-kind/index.html">PortKind</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-port-kind/index.html">NextLynxModule.PortKind</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="521139670%2FClasslikes%2F1368919361" anchor-label="Type" id="521139670%2FClasslikes%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-type/index.html"><span><span>Type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="521139670%2FClasslikes%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="-type/index.html">Type</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="-type/index.html">NextLynxModule.Type</a><span class="token operator">&gt; </span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-1176643345%2FProperties%2F1368919361" anchor-label="analogController" id="-1176643345%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="analog-controller.html"><span>analog</span><wbr><span><span>Controller</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1176643345%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="analog-controller.html">analogController</a><span class="token operator">: </span><a href="https://javadoc.io/doc/org.firstinspires.ftc/Hardware/12.0.0/com/qualcomm/hardware/lynx/LynxAnalogInputController.html">LynxAnalogInputController</a></div><div class="brief "><p class="paragraph">Creates or gets a <a href="https://javadoc.io/doc/org.firstinspires.ftc/Hardware/12.0.0/com/qualcomm/hardware/lynx/LynxAnalogInputController.html">LynxAnalogInputController</a> bound to this module.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-149650589%2FProperties%2F1368919361" anchor-label="auxiliaryVoltage" id="-149650589%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="auxiliary-voltage.html"><span>auxiliary</span><wbr><span><span>Voltage</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-149650589%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="auxiliary-voltage.html">auxiliaryVoltage</a><span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-voltage/index.html">Voltage</a></div><div class="brief "><p class="paragraph">Current module auxiliary voltage.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1921557045%2FProperties%2F1368919361" anchor-label="digitalController" id="-1921557045%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="digital-controller.html"><span>digital</span><wbr><span><span>Controller</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1921557045%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="digital-controller.html">digitalController</a><span class="token operator">: </span><a href="https://javadoc.io/doc/org.firstinspires.ftc/Hardware/12.0.0/com/qualcomm/hardware/lynx/LynxDigitalChannelController.html">LynxDigitalChannelController</a></div><div class="brief "><p class="paragraph">Creates or gets a <a href="https://javadoc.io/doc/org.firstinspires.ftc/Hardware/12.0.0/com/qualcomm/hardware/lynx/LynxDigitalChannelController.html">LynxDigitalChannelController</a> bound to this module.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="501635431%2FProperties%2F1368919361" anchor-label="inputVoltage" id="501635431%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="input-voltage.html"><span>input</span><wbr><span><span>Voltage</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="501635431%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="input-voltage.html">inputVoltage</a><span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-voltage/index.html">Voltage</a></div><div class="brief "><p class="paragraph">Current module input voltage.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="227065550%2FProperties%2F1368919361" anchor-label="motorController" id="227065550%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="motor-controller.html"><span>motor</span><wbr><span><span>Controller</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="227065550%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="motor-controller.html">motorController</a><span class="token operator">: </span><a href="https://javadoc.io/doc/org.firstinspires.ftc/Hardware/12.0.0/com/qualcomm/hardware/lynx/LynxDcMotorController.html">LynxDcMotorController</a></div><div class="brief "><p class="paragraph">Creates or gets a <a href="https://javadoc.io/doc/org.firstinspires.ftc/Hardware/12.0.0/com/qualcomm/hardware/lynx/LynxDcMotorController.html">LynxDcMotorController</a> bound to this module.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1469668950%2FProperties%2F1368919361" anchor-label="servoController" id="-1469668950%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="servo-controller.html"><span>servo</span><wbr><span><span>Controller</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1469668950%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="servo-controller.html">servoController</a><span class="token operator">: </span><a href="https://javadoc.io/doc/org.firstinspires.ftc/Hardware/12.0.0/com/qualcomm/hardware/lynx/LynxServoController.html">LynxServoController</a></div><div class="brief "><p class="paragraph">Creates or gets a <a href="https://javadoc.io/doc/org.firstinspires.ftc/Hardware/12.0.0/com/qualcomm/hardware/lynx/LynxServoController.html">LynxServoController</a> bound to this module.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1203024469%2FProperties%2F1368919361" anchor-label="temperature" id="-1203024469%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="temperature.html"><span><span>temperature</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1203024469%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="temperature.html">temperature</a><span class="token operator">: </span><a href="../../../units/dev.nextftc.units.measuretypes/-temperature/index.html">Temperature</a></div><div class="brief "><p class="paragraph">Current module temperature.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2040954657%2FProperties%2F1368919361" anchor-label="type" id="2040954657%2FProperties%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="type.html"><span><span>type</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2040954657%2FProperties%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-jvm-field/index.html"><span class="token annotation builtin">JvmField</span></a></div></div><span class="token keyword">val </span><a href="type.html">type</a><span class="token operator">: </span><a href="-type/index.html">NextLynxModule.Type</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-1554309273%2FFunctions%2F1368919361" anchor-label="i2cController" id="-1554309273%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="i2c-controller.html"><span>i2c</span><wbr><span><span>Controller</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1554309273%2FFunctions%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="i2c-controller.html"><span class="token function">i2cController</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">bus<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://javadoc.io/doc/org.firstinspires.ftc/Hardware/12.0.0/com/qualcomm/hardware/lynx/LynxI2cDeviceSynch.html">LynxI2cDeviceSynch</a></div><div class="brief "><p class="paragraph">Creates or gets a <a href="https://javadoc.io/doc/org.firstinspires.ftc/Hardware/12.0.0/com/qualcomm/hardware/lynx/LynxI2cDeviceSynch.html">LynxI2cDeviceSynch</a> bound to this module.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

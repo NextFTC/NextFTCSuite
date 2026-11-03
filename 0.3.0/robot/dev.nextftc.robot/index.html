@@ -1,0 +1,232 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>dev.nextftc.robot</title>
+<link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.0-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":robot/main">androidJvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":robot/main" data-filter=":robot/main">
+                                <span class="checkbox--icon"></span>
+                                androidJvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageids="NextFTC Robot::dev.nextftc.robot////PointingToDeclaration//-919244207">
+  <div class="breadcrumbs"><a href="../index.html">NextFTC Robot</a><span class="delimiter">/</span><span class="current">dev.nextftc.robot</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+    <div class="platform-hinted UnderCoverText" data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><p class="paragraph">The core robot architecture and command-based wrappers.</p><ul><li><p class="paragraph"><strong>Robot Structure</strong>: <code class="lang-kotlin">NextRobot</code> represents the root of your robot, containing multiple <code class="lang-kotlin">Mechanism</code> instances. <code class="lang-kotlin">NextOpMode</code> is the base class for your OpModes that seamlessly injects your <code class="lang-kotlin">NextRobot</code> instance.</p></li><li><p class="paragraph"><strong>Scanning </strong>&amp;<strong> Registration</strong>: <code class="lang-kotlin">RobotScanner</code> and <code class="lang-kotlin">NextFTCOpModeScanner</code> work alongside Sinister to automatically discover your robot implementations and register your custom OpModes to the FTC dashboard without manual <code class="lang-kotlin">@TeleOp</code> or <code class="lang-kotlin">@Autonomous</code> configuration clutter.</p></li><li><p class="paragraph"><strong>Event System</strong>: <code class="lang-kotlin">Trigger</code> and <code class="lang-kotlin">EventLoop</code> provide a WPILib-style API for binding commands to conditional states, allowing commands to run based on arbitrary boolean conditions.</p></li></ul></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-1238795646%2FClasslikes%2F-919244207" anchor-label="Mechanism" id="-1238795646%2FClasslikes%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-mechanism/index.html"><span><span>Mechanism</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1238795646%2FClasslikes%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-mechanism/index.html">Mechanism</a></div><div class="brief "><p class="paragraph">Represents a subsystem or mechanism on the robot (e.g., an arm, drivetrain, or intake).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-72065798%2FClasslikes%2F-919244207" anchor-label="NextFTCException" id="-72065798%2FClasslikes%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-next-f-t-c-exception/index.html"><span>Next</span><wbr><span><span>FTCException</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-72065798%2FClasslikes%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">class </span><a href="-next-f-t-c-exception/index.html">NextFTCException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/index.html">Throwable</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="https://developer.android.com/reference/kotlin/java/lang/RuntimeException.html">RuntimeException</a></div><div class="brief "><p class="paragraph">Base class for all exceptions thrown by NextFTC.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-883981212%2FClasslikes%2F-919244207" anchor-label="NextRobot" id="-883981212%2FClasslikes%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-next-robot/index.html"><span>Next</span><wbr><span><span>Robot</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-883981212%2FClasslikes%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-next-robot/index.html">NextRobot</a></div><div class="brief "><p class="paragraph">The root container for your robot's hardware and mechanisms.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2032345311%2FClasslikes%2F-919244207" anchor-label="RobotScanException" id="2032345311%2FClasslikes%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-robot-scan-exception/index.html"><span>Robot</span><wbr><span>Scan</span><wbr><span><span>Exception</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2032345311%2FClasslikes%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-robot-scan-exception/index.html">RobotScanException</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">message<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">cause<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-throwable/index.html">Throwable</a><span class="token operator">?</span><span class="token operator"> = </span>null</span></span><span class="token punctuation">)</span> : <a href="-next-f-t-c-exception/index.html">NextFTCException</a></div><div class="brief "><p class="paragraph">Thrown when the <a href="-next-robot/index.html">NextRobot</a> implementation in the user's project could not be found, instantiated, or unambiguously resolved by <a href="../../robot/dev.nextftc.robot/-robot-scanner/index.html">RobotScanner</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1967486848%2FClasslikes%2F-919244207" anchor-label="RobotState" id="1967486848%2FClasslikes%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-robot-state/index.html"><span>Robot</span><wbr><span><span>State</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1967486848%2FClasslikes%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-robot-state/index.html">RobotState</a> : <span data-unresolved-link="dev.frozenmilk.sinister.sdk.apphooks/OnCreateEventLoop///PointingToDeclaration/">OnCreateEventLoop</span></div><div class="brief "><p class="paragraph">Holder for the NextFTC robot class and instance. This is initialized during the <span data-unresolved-link="dev.frozenmilk.sinister.sdk.apphooks/OnCreateEventLoop///PointingToDeclaration/">OnCreateEventLoop</span> phase of the app lifecycle. The robot instance is created using the constructor found by <a href="../../robot/dev.nextftc.robot/-robot-scanner/index.html">RobotScanner</a>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1222449630%2FClasslikes%2F-919244207" anchor-label="Telemetry" id="-1222449630%2FClasslikes%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry/index.html"><span><span>Telemetry</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1222449630%2FClasslikes%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-telemetry/index.html">Telemetry</a></div><div class="brief "><p class="paragraph">Unified telemetry routing system.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1556017452%2FClasslikes%2F-919244207" anchor-label="TelemetryBackend" id="1556017452%2FClasslikes%2F-919244207" data-filterable-set=":robot/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":robot/main" data-filterable-set=":robot/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-telemetry-backend/index.html"><span>Telemetry</span><wbr><span><span>Backend</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1556017452%2FClasslikes%2F-919244207"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":robot/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-telemetry-backend/index.html">TelemetryBackend</a></div><div class="brief "><p class="paragraph">Defines a destination that can receive telemetry data. Implement this interface to create custom telemetry outputs (e.g., FtcDashboard, file logger).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

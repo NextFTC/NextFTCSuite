@@ -39,7 +39,7 @@
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.2.1
+        <div class="library-version" id="library-version">0.3.0-SNAPSHOT
         </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
@@ -94,7 +94,7 @@
   <div class="breadcrumbs"><a href="../../index.html">NextFTC Hardware</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.hardware.util</a><span class="delimiter">/</span><span class="current">LazyHardware</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Lazy</span><wbr><span><span>Hardware</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">LazyHardware</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">initializer<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.properties/-read-only-property/index.html">ReadOnlyProperty</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token punctuation">, </span><a href="index.html">T</a><span class="token operator">&gt; </span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">LazyHardware</a><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">initializer<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="index.html">T</a></span></span><span class="token punctuation">)</span> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.properties/-read-only-property/index.html">ReadOnlyProperty</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token punctuation">, </span><a href="index.html">T</a><span class="token operator">&gt; </span></div><p class="paragraph">Lazily initializes a hardware object on first access.</p><p class="paragraph">The cached object is discarded when an OpMode stops (see <a href="../../dev.nextftc.hardware/-robot-controller/index.html">RobotController</a>), so the next access re-runs the initializer against the new hardware map. Blocks passed to <a href="apply-after-init.html">applyAfterInit</a> are re-applied on every initialization.</p></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
@@ -120,17 +120,17 @@
       </div>
       <div data-togglable="FUNCTION">
         <h2 class="tableheader">Functions</h2>
-        <div class="table"><a data-name="-1631203515%2FFunctions%2F1368919361" anchor-label="applyAfterInit" id="-1631203515%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
+        <div class="table"><a data-name="-1858123110%2FFunctions%2F1368919361" anchor-label="applyAfterInit" id="-1858123110%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
           <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="apply-after-init.html"><span>apply</span><wbr><span>After</span><wbr><span><span>Init</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1631203515%2FFunctions%2F1368919361"></span>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1858123110%2FFunctions%2F1368919361"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="apply-after-init.html"><span class="token function">applyAfterInit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><span data-unresolved-link="dev.nextftc.functionalInterfaces/Configurator///PointingToDeclaration/">Configurator</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="apply-after-init.html"><span class="token function">applyAfterInit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><span data-unresolved-link="dev.nextftc.functionalInterfaces/Configurator///PointingToDeclaration/">Configurator</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Runs <a href="apply-after-init.html">block</a> on the hardware object now if it is initialized, and again after every (re-)initialization.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="apply-after-init.html"><span class="token function">applyAfterInit</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">key<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token punctuation">, </span></span><span class="parameter ">block<span class="token operator">: </span><span data-unresolved-link="dev.nextftc.functionalInterfaces/Configurator///PointingToDeclaration/">Configurator</span><span class="token operator">&lt;</span><a href="index.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Like <a href="apply-after-init.html">applyAfterInit</a>, but replaces any earlier block registered with the same <a href="apply-after-init.html">key</a>, so repeatedly updating one setting does not accumulate blocks.</p></div></div></div>
                 </div>
               </div>
             </div>
@@ -146,6 +146,21 @@
               <div>
                 <div class="title">
                   <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">operator override </span><span class="token keyword">fun </span><a href="get-value.html"><span class="token function">getValue</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">thisRef<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">?</span><span class="token punctuation">, </span></span><span class="parameter ">property<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-property/index.html">KProperty</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">T</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-411362571%2FFunctions%2F1368919361" anchor-label="onOpModeStop" id="-411362571%2FFunctions%2F1368919361" data-filterable-set=":hardware/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":hardware/main" data-filterable-set=":hardware/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="on-op-mode-stop.html"><span>on</span><wbr><span>Op</span><wbr><span>Mode</span><wbr><span><span>Stop</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-411362571%2FFunctions%2F1368919361"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":hardware/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="on-op-mode-stop.html"><span class="token function">onOpModeStop</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">block<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Runs <a href="on-op-mode-stop.html">block</a> every time the cached object is discarded (for example when an OpMode stops). Use this to invalidate state that mirrors the hardware, such as write caches.</p></div></div></div>
                 </div>
               </div>
             </div>
