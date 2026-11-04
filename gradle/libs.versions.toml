@@ -11,6 +11,7 @@ blaze = "0.1.67"
 ktor = "3.6.1"
 kotlinx-serialization = "1.12.0"
 msgpack = "0.9.12"
+pedro = "3.0.1"
 
 [libraries]
 dokka-mathjax-plugin = { module = "org.jetbrains.dokka:mathjax-plugin" }
@@ -34,6 +35,7 @@ ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-websockets = { module = "io.ktor:ktor-client-websockets", version.ref = "ktor" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 msgpack-core = { module = "org.msgpack:msgpack-core", version.ref = "msgpack" }
+pedro = { module = "com.pedropathing:revhub", version.ref = "pedro" }
 
 [bundles]
 kotest = ["kotest-runner", "kotest-assertations", "kotest-property", "kotest-data-driven"]
