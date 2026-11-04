@@ -18,9 +18,9 @@ import dev.nextftc.hardware.actuators.NextMotor
 import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.robot.Mechanism
 import dev.nextftc.robot.NextRobot
-import dev.nextftc.robot.Telemetry
 import dev.nextftc.robot.forceDefaultCommand
 import dev.nextftc.robot.triggers.Trigger
+import dev.nextftc.telemetry.ftc.FtcTelemetry
 
 /**
  * Provides lifecycle hooks that tap into the various stages of a [NextOpMode].
@@ -88,17 +88,17 @@ internal object SchedulerHook : OpModeHook {
 }
 
 /**
- * Internal hook responsible for pushing updates to the unified [dev.nextftc.robot.Telemetry] system.
- * Automatically synchronizes backend telemetry outputs during both the init_loop
- * and active periodic phases.
+ * Internal hook that sends logged telemetry to the Driver Station through [FtcTelemetry.update]
+ * during both the init_loop and the active periodic phases. A [NextOpMode] runs as a
+ * `LinearOpMode`, so the SDK doesn't update telemetry after each loop for it.
  */
 internal object TelemetryHook : OpModeHook {
   override fun afterDisabled() {
-    Telemetry.update()
+    FtcTelemetry.update()
   }
 
   override fun afterPeriodic() {
-    Telemetry.update()
+    FtcTelemetry.update()
   }
 }
 

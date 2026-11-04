@@ -8,12 +8,9 @@
 
 package dev.nextftc.robot
 
-import android.content.Context
-import com.qualcomm.ftccommon.FtcEventLoop
 import com.qualcomm.robotcore.eventloop.opmode.Disabled
 import dev.frozenmilk.sinister.Scanner
 import dev.frozenmilk.sinister.loaders.SlothClassLoader
-import dev.frozenmilk.sinister.sdk.apphooks.OnCreateEventLoop
 import dev.frozenmilk.sinister.sdk.apphooks.OnCreateEventLoopScanner
 import dev.frozenmilk.sinister.targeting.SearchTarget
 import dev.frozenmilk.sinister.targeting.TeamCodeSearch
@@ -157,10 +154,10 @@ internal object RobotScanner : Scanner {
 }
 
 /**
- * Holder for the NextFTC robot class and instance. This is initialized during the [OnCreateEventLoop] phase of the app lifecycle.
+ * Holder for the NextFTC robot class and instance.
  * The robot instance is created using the constructor found by [RobotScanner].
  */
-object RobotState : OnCreateEventLoop {
+object RobotState {
   internal var robotInstance: NextRobot? = null
   internal var robotClass: KClass<out NextRobot>? = null
   val robot: NextRobot
@@ -168,8 +165,4 @@ object RobotState : OnCreateEventLoop {
       "Robot instance not initialized",
       RobotScanException("Robot instance not initialized"),
     )
-
-  override fun onCreateEventLoop(context: Context, ftcEventLoop: FtcEventLoop) {
-    ftcEventLoop.opModeManager.registerListener(DriverStationTelemetry)
-  }
 }
