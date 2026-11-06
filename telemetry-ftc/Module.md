@@ -20,6 +20,13 @@ FtcTelemetry.config.serverPort = 5810
 Telemetry.log("Drive/Pose", pose)
 ```
 
+While the server is running, it also serves your logs. `/download` is a page that lists every
+log with its OpMode name and start time, newest first. On a Control Hub that is
+`http://192.168.43.1:5810/download`, and on a Robot Controller phone it is
+`http://192.168.49.1:5810/download` over Wi-Fi Direct. `/logs` returns the same list as JSON, and
+`/logs/<file name>` downloads one file. A log that is still being written is listed but can't be
+downloaded until its OpMode stops.
+
 Two utility OpModes, "Disable NextFTC Telemetry Server" and "Enable NextFTC Telemetry Server", turn
 the NetworkTables server off for competition and back on afterward. The choice is saved on the Robot
 Controller, so it holds after the app restarts. `FtcTelemetry.setServerEnabled` does the same from

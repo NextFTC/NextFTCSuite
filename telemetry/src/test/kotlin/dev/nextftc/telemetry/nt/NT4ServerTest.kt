@@ -22,7 +22,10 @@ import io.ktor.client.plugins.websocket.WebSockets
 import io.ktor.client.plugins.websocket.webSocket
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.get
 import io.ktor.websocket.Frame
 import io.ktor.websocket.readBytes
 import io.ktor.websocket.readText
@@ -653,6 +656,37 @@ class NT4ServerTest :
           response.status.value shouldBe 200
           response.headers["Access-Control-Allow-Origin"] shouldBe "*"
         }
+      }
+    }
+
+    test("extra routes are served on the same port, and don't replace the server's own") {
+      val server = NT4Server(
+        port = 0,
+        host = "127.0.0.1",
+        routes = {
+          get("/extra") { call.respondText("hello") }
+          // The server's own route is installed first, so this one is never reached
+          get("/") { call.respondText("replaced") }
+        },
+      )
+      server.start()
+      val http = HttpClient(CIO) { install(WebSockets) }
+      try {
+        val base = "http://127.0.0.1:${server.boundPort}"
+
+        http.get("$base/extra").bodyAsText() shouldBe "hello"
+        http.get("$base/").bodyAsText() shouldBe ""
+        http.get("$base/nothing").status.value shouldBe 404
+
+        // And the NetworkTables protocol still works beside them
+        server.publish("/a", NT4Type.DOUBLE)
+        http.connect(server) {
+          sendText(subscribeMessage(1, "/a"))
+          nextAnnounce().string("name") shouldBe "/a"
+        }
+      } finally {
+        http.close()
+        server.stop()
       }
     }
 

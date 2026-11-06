@@ -25,6 +25,7 @@ dependencies {
   }
   compileOnly(libs.bundles.ftc)
   implementation(libs.sloth)
+  implementation(libs.kotlinx.serialization.json)
 
   // The backend implements telemetry types that live in the SDK, so tests need it on their classpath
   testImplementation(libs.ftc.robot.core) { isTransitive = false }
