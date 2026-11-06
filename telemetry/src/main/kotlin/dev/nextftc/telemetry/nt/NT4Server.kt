@@ -19,6 +19,7 @@ import io.ktor.server.engine.connector
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.response.header
 import io.ktor.server.response.respondText
+import io.ktor.server.routing.Routing
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
 import io.ktor.server.websocket.DefaultWebSocketServerSession
@@ -128,6 +129,9 @@ enum class NT4Type(val typeString: String, internal val id: Int) {
  * @param origin The moment timestamp zero refers to, a mark from [timeSource]. The default is the
  *   moment the server is created. Share one origin between sinks that should agree on every
  *   timestamp.
+ * @param routes Adds Ktor routes to the server, for pages or downloads on the same port. They are
+ *   installed after the server's own, so they can't replace `/` or `/nt/...`. It runs each time
+ *   [start] is called.
  * @throws IllegalArgumentException if [origin] isn't from [timeSource], or is in the future
  */
 class NT4Server
@@ -137,6 +141,7 @@ constructor(
   val host: String = "0.0.0.0",
   private val timeSource: TimeSource.WithComparableMarks = TimeSource.Monotonic,
   val origin: ComparableTimeMark = timeSource.markNow(),
+  private val routes: (Routing.() -> Unit)? = null,
 ) : Closeable {
   init {
     // Subtracting marks from different sources throws, which checks that they match.
@@ -220,6 +225,7 @@ constructor(
                 // Plain HTTP requests are how browser-based dashboards check that the server is there.
                 get("/") { respondAlive() }
                 get("/nt/{name}") { respondAlive() }
+                routes?.invoke(this)
               }
             }
           },

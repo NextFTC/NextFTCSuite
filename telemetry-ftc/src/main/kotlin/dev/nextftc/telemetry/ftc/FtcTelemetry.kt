@@ -24,6 +24,8 @@ import dev.nextftc.telemetry.nt.NT4Backend
 import dev.nextftc.telemetry.nt.NT4Server
 import dev.nextftc.telemetry.wpilog.WPILogBackend
 import dev.nextftc.telemetry.wpilog.WPILogWriter
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import org.firstinspires.ftc.robotcore.internal.system.AppUtil
 import java.io.File
 import java.io.FileOutputStream
@@ -99,6 +101,14 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
   private var eventLoop: FtcEventLoop? = null
   private var server: NT4Server? = null
   private var log: WPILogBackend? = null
+
+  /** The file [log] writes to, which the download page won't serve until it is closed. */
+  @Volatile
+  private var activeLogFile: File? = null
+
+  /** Serves `/download`, `/logs` and `/logs/<name>` on the server's port. */
+  private val logDownloads =
+    LogDownloads(directory = { config.logDirectory }, activeFile = { activeLogFile })
   private var live: NT4Backend? = null
   private var driverStation: DriverStationBackend? = null
   private var prefs: SharedPreferences? = null
@@ -169,12 +179,16 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
           File(config.logDirectory, "${stamp}__${name.replace(Regex("[^A-Za-z0-9_.-]"), "_")}.wpilog")
         val writer = WPILogWriter(
           FileOutputStream(file),
-          extraHeader = """{"source":"NextFTC","opMode":"${name.replace("\"", "'")}"}""",
+          extraHeader = buildJsonObject {
+            put("source", "NextFTC")
+            put("opMode", name)
+          }.toString(),
           timeSource = registry.timeSource,
           origin = registry.origin,
         )
         WPILogBackend(writer).also {
           log = it
+          activeLogFile = file
           lastFlush = registry.timeSource.markNow()
           registry.register(it)
         }
@@ -189,6 +203,7 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
           config.serverPort,
           timeSource = registry.timeSource,
           origin = registry.origin,
+          routes = { logDownloads.install(this) },
         ).also {
           it.start()
           server = it
@@ -270,6 +285,7 @@ object FtcTelemetry : OnCreateEventLoop, OpModeManagerNotifier.Notifications {
       }
     }
     log = null
+    activeLogFile = null
     live = null
     driverStation = null
   }
