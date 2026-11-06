@@ -19,7 +19,10 @@ android {
 }
 
 dependencies {
-  api(project(":telemetry"))
+  // the FTC SDK bundles its own slf4j-api dependency that conflicts with ktor's
+  api(project(":telemetry")) {
+    exclude(group = "org.slf4j")
+  }
   compileOnly(libs.bundles.ftc)
   implementation(libs.sloth)
 
