@@ -40,6 +40,10 @@ object RobotController : OnCreateEventLoop, OpModeManagerNotifier.Notifications 
     hardwareObjects += hardware
   }
 
+  private fun resetHardware() {
+    synchronized(hardwareObjects) { hardwareObjects.toList() }.forEach { it.reset() }
+  }
+
   /**
    * Application context captured when the event loop is created.
    *
@@ -145,7 +149,9 @@ object RobotController : OnCreateEventLoop, OpModeManagerNotifier.Notifications 
     ftcEventLoop.opModeManager.registerListener(this)
   }
 
-  override fun onOpModePreInit(opMode: OpMode?) {}
+  override fun onOpModePreInit(opMode: OpMode?) {
+    resetHardware()
+  }
 
   override fun onOpModePreStart(opMode: OpMode?) {}
 
@@ -153,6 +159,6 @@ object RobotController : OnCreateEventLoop, OpModeManagerNotifier.Notifications 
    * Discards all cached hardware objects so they are re-initialized in the next op mode.
    */
   override fun onOpModePostStop(opMode: OpMode?) {
-    synchronized(hardwareObjects) { hardwareObjects.toList() }.forEach { it.reset() }
+    resetHardware()
   }
 }
