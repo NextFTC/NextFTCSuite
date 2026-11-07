@@ -10,13 +10,16 @@ package dev.nextftc.hardware.sensors
 
 import com.qualcomm.hardware.gobilda.GoBildaPinpointDriver
 import dev.nextftc.control.geometry.Pose2d
+import dev.nextftc.control.geometry.PoseAcceleration2d
 import dev.nextftc.control.geometry.PoseVelocity2d
 import dev.nextftc.control.geometry.Vector2d
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.inchesPerSecond
+import dev.nextftc.units.inchesPerSecondSquared
 import dev.nextftc.units.radiansPerSecond
+import dev.nextftc.units.radiansPerSecondSquared
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 import org.firstinspires.ftc.robotcore.external.navigation.UnnormalizedAngleUnit
@@ -43,7 +46,24 @@ class NextPinpoint(initializer: () -> GoBildaPinpointDriver) {
   val device: GoBildaPinpointDriver get() = driver
 
   /** Updates the position data from the device. Call this each loop. */
-  fun update() = driver.update()
+  fun update() {
+    oldVelocity = Triple(
+      driver.getVelX(DistanceUnit.INCH),
+      driver.getVelY(DistanceUnit.INCH),
+      driver.getHeadingVelocity(UnnormalizedAngleUnit.RADIANS),
+    )
+
+    val currentTime = System.nanoTime()
+
+    driver.update()
+
+    deltaTime = (currentTime - lastTime) / 1e9
+    lastTime = currentTime
+  }
+
+  private var deltaTime = 0.0
+  private var oldVelocity = Triple(0.0, 0.0, 0.0)
+  private var lastTime = System.nanoTime()
 
   /** Resets the odometry position tracking. */
   fun resetPosAndIMU() = driver.resetPosAndIMU()
@@ -64,6 +84,22 @@ class NextPinpoint(initializer: () -> GoBildaPinpointDriver) {
         driver.getVelY(DistanceUnit.INCH).inchesPerSecond,
       ),
       driver.getHeadingVelocity(UnnormalizedAngleUnit.RADIANS).radiansPerSecond,
+    )
+  }
+
+  val acceleration: PoseAcceleration2d get() {
+    return PoseAcceleration2d(
+      Vector2d(
+        ((driver.getVelX(DistanceUnit.INCH) - oldVelocity.first) / deltaTime).inchesPerSecondSquared,
+        ((driver.getVelY(DistanceUnit.INCH) - oldVelocity.second) / deltaTime).inchesPerSecondSquared,
+      ),
+      (
+        (
+          driver.getHeadingVelocity(
+            UnnormalizedAngleUnit.RADIANS,
+          ) - oldVelocity.third
+          ) / deltaTime
+        ).radiansPerSecondSquared,
     )
   }
 }

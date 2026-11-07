@@ -179,10 +179,9 @@ class NextMotor @JvmOverloads constructor(
 
   private var hubId: Int = -1
     get() = if (field == -1) {
-      val lcField = LynxController::class.java.getField("module")
-      lcField.isAccessible = true
-      val module = lcField.get(motor.controller) as LynxModule
-      hubId = module.moduleAddress
+      val match1 = "(?<=module )[0-9]*".toRegex()
+      val hub1 = motor.controller.connectionInfo
+      hubId = match1.find(hub1)!!.value.toInt()
       field
     } else {
       field

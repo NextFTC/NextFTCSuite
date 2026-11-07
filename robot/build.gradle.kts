@@ -16,6 +16,7 @@ android {
 
 dependencies {
   api(project(":hardware"))
+  api(project(":telemetry-ftc"))
   api(libs.ivy)
   implementation(libs.functional.interfaces)
   compileOnly(libs.bundles.ftc)
