@@ -9,11 +9,14 @@
 package dev.nextftc.control.geometry
 
 import dev.nextftc.units.InchesPerSecond
+import dev.nextftc.units.MetersPerSecond
 import dev.nextftc.units.RadiansPerSecond
 import dev.nextftc.units.measuretypes.AngularVelocity
 import dev.nextftc.units.unittypes.DistanceUnit
 import dev.nextftc.units.unittypes.PerUnit
 import dev.nextftc.units.unittypes.TimeUnit
+import dev.nextftc.util.struct.StructSchema
+import dev.nextftc.util.struct.structSchema
 
 /**
  * @usesMathJax
@@ -168,5 +171,16 @@ data class PoseVelocity2d(
   companion object {
     @JvmField
     val zero = PoseVelocity2d(Vector2d.zero(InchesPerSecond), RadiansPerSecond.of(0.0))
+
+    /**
+     * The WPILib `ChassisVelocities` struct, which WPILib uses for field-frame velocities too: `vx`
+     * and `vy` in meters per second and `omega` in radians per second.
+     */
+    @JvmField
+    val struct: StructSchema<PoseVelocity2d> = structSchema("ChassisVelocities") {
+      float64("vx") { it.linearVel.x.into(MetersPerSecond) }
+      float64("vy") { it.linearVel.y.into(MetersPerSecond) }
+      float64("omega") { it.angVel.into(RadiansPerSecond) }
+    }
   }
 }

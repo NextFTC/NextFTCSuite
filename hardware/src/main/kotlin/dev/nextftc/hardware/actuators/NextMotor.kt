@@ -23,7 +23,6 @@ import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.hardware.util.AnalogFeedback
 import dev.nextftc.hardware.util.Caching
-import dev.nextftc.util.EventLoop
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.amperes
 import dev.nextftc.units.measuretypes.Angle
@@ -32,6 +31,7 @@ import dev.nextftc.units.measuretypes.Current
 import dev.nextftc.units.radians
 import dev.nextftc.units.seconds
 import dev.nextftc.units.volts
+import dev.nextftc.util.EventLoop
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit
 import kotlin.math.sign
 import dev.nextftc.units.measuretypes.Voltage as VoltageMeasure

@@ -10,11 +10,11 @@ package dev.nextftc.telemetry.backend
 
 import dev.nextftc.telemetry.TelemetryRegistry
 import dev.nextftc.telemetry.ValueType
-import dev.nextftc.util.struct.structSchema
 import dev.nextftc.telemetry.withUnit
 import dev.nextftc.telemetry.wpilog.ParsedLog
 import dev.nextftc.telemetry.wpilog.WPILogBackend
 import dev.nextftc.telemetry.wpilog.WPILogWriter
+import dev.nextftc.util.struct.structSchema
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly

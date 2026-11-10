@@ -8,9 +8,20 @@
 
 package dev.nextftc.telemetry
 
+import dev.nextftc.control.geometry.ChassisAccelerations
+import dev.nextftc.control.geometry.ChassisVelocities
+import dev.nextftc.control.geometry.Pose2d
+import dev.nextftc.control.geometry.PoseAcceleration2d
+import dev.nextftc.control.geometry.PoseVelocity2d
+import dev.nextftc.control.geometry.Rotation2d
+import dev.nextftc.control.geometry.Transform2d
+import dev.nextftc.control.geometry.Twist2d
 import dev.nextftc.telemetry.backend.MockTelemetryBackend
 import dev.nextftc.telemetry.nt.NT4Server
 import dev.nextftc.telemetry.wpilog.WPILogWriter
+import dev.nextftc.units.degrees
+import dev.nextftc.units.inches
+import dev.nextftc.units.inchesPerSecond
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
@@ -20,6 +31,11 @@ import java.util.Collections
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.TestTimeSource
+
+private fun Double.roundTo(digits: Int): Double {
+  val scale = Math.pow(10.0, digits.toDouble())
+  return Math.round(this * scale) / scale
+}
 
 private class Env {
   val clock = TestTimeSource()
@@ -60,6 +76,37 @@ private class ClosingBackend(private val fail: Boolean = false) : TelemetryBacke
 
 class TelemetryRegistryTest :
   FunSpec({
+    test("the control geometry types are registered as structs") {
+      val structs = TelemetryRegistry().structs
+
+      structs.schemaOf<Pose2d>() shouldBe Pose2d.struct
+      structs.schemaOf<Rotation2d>() shouldBe Rotation2d.struct
+      structs.schemaOf<Transform2d>() shouldBe Transform2d.struct
+      structs.schemaOf<Twist2d>() shouldBe Twist2d.struct
+      structs.schemaOf<ChassisVelocities>() shouldBe ChassisVelocities.struct
+      structs.schemaOf<ChassisAccelerations>() shouldBe ChassisAccelerations.struct
+      structs.schemaOf<PoseVelocity2d>() shouldBe PoseVelocity2d.struct
+      structs.schemaOf<PoseAcceleration2d>() shouldBe PoseAcceleration2d.struct
+    }
+
+    test("a measure is logged as a double in its base unit, labeled with that unit") {
+      val env = Env()
+      val mock = MockTelemetryBackend().also { env.registry.register(it) }
+
+      env.registry.root.log("distance", 100.0.inches)
+      env.registry.root.log("speed", 100.0.inchesPerSecond)
+      env.registry.root.log("angle", 180.0.degrees)
+      env.registry.root.log("distance", 200.0.inches)
+
+      mock.valuesAt("/distance").map { (it as Double).roundTo(6) } shouldBe listOf(2.54, 5.08)
+      (mock.valuesAt("/speed").single() as Double).roundTo(6) shouldBe 2.54
+      (mock.valuesAt("/angle").single() as Double).roundTo(6) shouldBe 3.141593
+      mock.propertiesAt("/distance") shouldBe mapOf("unit" to "m")
+      mock.propertiesAt("/speed") shouldBe mapOf("unit" to "m/s")
+      mock.propertiesAt("/angle") shouldBe mapOf("unit" to "rad")
+      env.warnings shouldBe emptyList()
+    }
+
     test("logging with no backend registered is harmless") {
       val env = Env()
       val handle = env.registry.root.doubleTopic("x")

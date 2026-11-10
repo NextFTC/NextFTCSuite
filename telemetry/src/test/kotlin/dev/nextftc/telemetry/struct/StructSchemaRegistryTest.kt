@@ -180,13 +180,23 @@ class StructSchemaRegistryTest :
       schema.nested.single() shouldBe custom
     }
 
-    test("registering a type that already has a schema is rejected") {
+    test("registering a type that already has a different schema is rejected") {
       val registry = StructSchemaRegistry()
       registry.schemaOf<Vec2>()
 
       shouldThrow<IllegalArgumentException> {
         registry.register(Vec2::class, structSchema<Vec2>("Other") { float64("x") { it.x } })
       }
+    }
+
+    test("registering an identical schema for a type that already has one does nothing") {
+      val registry = StructSchemaRegistry()
+      val first = registry.schemaOf<Vec2>()
+
+      registry.register(Vec2::class, first)
+      registry.register(Vec2::class, StructSchemaRegistry().schemaOf<Vec2>())
+
+      registry.schemaOf<Vec2>() shouldBe first
     }
 
     test("a nullable property is rejected, naming the property") {

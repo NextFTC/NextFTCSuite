@@ -8,6 +8,10 @@
 
 package dev.nextftc.telemetry
 
+import dev.nextftc.units.Measure
+import dev.nextftc.units.Unit
+import dev.nextftc.units.unittypes.MulUnit
+import dev.nextftc.units.unittypes.PerUnit
 import dev.nextftc.util.struct.StructSchema
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.KClass
@@ -317,8 +321,9 @@ class TelemetryTable internal constructor(private val registry: TelemetryRegistr
    *
    * Numbers, booleans, strings, and primitive arrays go to the topics above, with a `Byte` or
    * `Short` logged as an integer. An array of objects is logged as an array of structs, or of
-   * strings. A [TelemetryLoggable] is logged into the child table [name]. Anything else is logged as
-   * a struct.
+   * strings. A [Measure] is logged as a `double` in its base unit, with that unit's symbol as the
+   * topic's unit, so `12.0.inches` is logged as `0.3048` in `m`. A [TelemetryLoggable] is logged into
+   * the child table [name]. Anything else is logged as a struct.
    *
    * A collection or map is rejected with a warning, because its element type is erased. Use
    * [arrayTopic] or [logArray] for a list.
@@ -346,6 +351,7 @@ class TelemetryTable internal constructor(private val registry: TelemetryRegistr
       is LongArray -> log(name, value)
       is FloatArray -> log(name, value)
       is DoubleArray -> log(name, value)
+      is Measure<*> -> logMeasure(name, value)
       is TelemetryLoggable -> value.logTo(table(name))
       is Collection<*>,
       is Map<*, *>,
@@ -357,6 +363,20 @@ class TelemetryTable internal constructor(private val registry: TelemetryRegistr
       is Array<*> -> logObjectArray(name, value)
       else -> topic(name, value.javaClass.kotlin).set(value)
     }
+  }
+
+  // Measures are logged using their base unit
+  private fun logMeasure(name: String, value: Measure<*>) {
+    val topic = doubleTopic(name)
+    if (topic.unit == null) topic.unit = baseSymbolOf(value.unit)
+    topic.set(value.baseUnitMagnitude)
+  }
+
+  // The base unit of compound unit types are built from the base unit of their components
+  private fun baseSymbolOf(unit: Unit<*>): String = when (unit) {
+    is PerUnit<*, *> -> "${baseSymbolOf(unit.numerator)}/${baseSymbolOf(unit.denominator)}"
+    is MulUnit<*, *> -> "${baseSymbolOf(unit.first)}⋅${baseSymbolOf(unit.second)}"
+    else -> unit.baseUnit.symbol()
   }
 
   @Suppress("UNCHECKED_CAST")

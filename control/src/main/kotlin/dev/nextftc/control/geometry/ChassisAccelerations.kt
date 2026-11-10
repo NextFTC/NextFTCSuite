@@ -9,12 +9,15 @@
 package dev.nextftc.control.geometry
 
 import dev.nextftc.units.InchesPerSecondSquared
+import dev.nextftc.units.MetersPerSecondSquared
 import dev.nextftc.units.RadiansPerSecondSquared
 import dev.nextftc.units.measuretypes.AngularAcceleration
 import dev.nextftc.units.measuretypes.Time
 import dev.nextftc.units.unittypes.DistanceUnit
 import dev.nextftc.units.unittypes.PerUnit
 import dev.nextftc.units.unittypes.TimeUnit
+import dev.nextftc.util.struct.StructSchema
+import dev.nextftc.util.struct.structSchema
 
 /**
  * @usesMathJax
@@ -180,5 +183,16 @@ data class ChassisAccelerations(
       Vector2d.zero(InchesPerSecondSquared),
       RadiansPerSecondSquared.of(0.0),
     )
+
+    /**
+     * The WPILib `ChassisAccelerations` struct: `ax` and `ay` in meters per second squared and
+     * `alpha` in radians per second squared.
+     */
+    @JvmField
+    val struct: StructSchema<ChassisAccelerations> = structSchema("ChassisAccelerations") {
+      float64("ax") { it.linearAcc.x.into(MetersPerSecondSquared) }
+      float64("ay") { it.linearAcc.y.into(MetersPerSecondSquared) }
+      float64("alpha") { it.angAcc.into(RadiansPerSecondSquared) }
+    }
   }
 }

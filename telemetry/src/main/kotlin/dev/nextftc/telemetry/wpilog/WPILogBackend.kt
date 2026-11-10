@@ -13,8 +13,8 @@ import dev.nextftc.telemetry.TelemetryBackend
 import dev.nextftc.telemetry.TelemetryEntry
 import dev.nextftc.telemetry.TelemetryType
 import dev.nextftc.telemetry.ValueType
-import dev.nextftc.util.struct.StructSchema
 import dev.nextftc.telemetry.toJsonObject
+import dev.nextftc.util.struct.StructSchema
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import java.util.concurrent.ConcurrentHashMap

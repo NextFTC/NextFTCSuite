@@ -8,8 +8,8 @@
 
 package dev.nextftc.telemetry.nt
 
-import dev.nextftc.util.struct.structSchema
 import dev.nextftc.telemetry.wpilog.WPILogWriter
+import dev.nextftc.util.struct.structSchema
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly

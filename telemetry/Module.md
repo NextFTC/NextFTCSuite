@@ -2,7 +2,8 @@
 
 Logging and live telemetry for FTC robot code, in formats AdvantageScope understands. It has no FTC
 SDK or Android dependency, so it runs in unit tests or a desktop tool as easily as on a Robot
-Controller. Its only NextFTC dependency is `util`, which supplies the struct schemas.
+Controller. It depends on `util`, which supplies the struct schemas, and on `control`, whose
+geometry types are registered as structs.
 
 Robot code logs to `Telemetry`, a table, or a typed handle, and the values go to whatever backends
 are registered: a WPILOG file, a NetworkTables 4 server, or a mock for tests. A model of WPILib's

@@ -26,10 +26,7 @@ internal object GlobalLog {
   /**
    * Replaces the global error message with [message] and throws [exception] (defaulting to a [NextFTCException] with [message]).
    */
-  fun setErrorAndThrow(
-    message: String,
-    exception: NextFTCException = NextFTCException(message),
-  ): Nothing {
+  fun setErrorAndThrow(message: String, exception: NextFTCException = NextFTCException(message)): Nothing {
     setError(message)
     throw exception
   }
