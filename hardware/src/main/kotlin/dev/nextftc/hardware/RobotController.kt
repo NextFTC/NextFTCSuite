@@ -114,6 +114,8 @@ object RobotController : OnCreateEventLoop, OpModeManagerNotifier.Notifications 
   /**
    * Event loop for hardware access and updates.
    */
+  @JvmStatic
+  @get:JvmName("hardwareEventLoop")
   val hardwareEventLoop: EventLoop = EventLoop()
 
   /**

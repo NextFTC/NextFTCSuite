@@ -482,7 +482,7 @@ class NextMotor @JvmOverloads constructor(
 
   companion object {
     @Deprecated("Use RobotController.hardwareEventLoop.", ReplaceWith("RobotController.hardwareEventLoop"))
-    val motorEventLoop: EventLoop get() = RobotController.hardwareEventLoop
+    val motorEventLoop: EventLoop = RobotController.hardwareEventLoop
   }
 }
 
