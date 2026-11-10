@@ -11,7 +11,7 @@ package dev.nextftc.telemetry.ftc
 import dev.nextftc.telemetry.TelemetryBackend
 import dev.nextftc.telemetry.TelemetryEntry
 import dev.nextftc.telemetry.TelemetryType
-import dev.nextftc.telemetry.struct.StructSchema
+import dev.nextftc.util.struct.StructSchema
 import java.util.concurrent.ConcurrentHashMap
 import org.firstinspires.ftc.robotcore.external.Telemetry as SdkTelemetry
 

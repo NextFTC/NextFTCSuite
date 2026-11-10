@@ -12,6 +12,8 @@ import dev.nextftc.units.Inches
 import dev.nextftc.units.measuretypes.Angle
 import dev.nextftc.units.measuretypes.Distance
 import dev.nextftc.units.unittypes.DistanceUnit
+import dev.nextftc.util.struct.StructSchema
+import dev.nextftc.util.struct.structSchema
 
 /**
  * @usesMathJax
@@ -268,5 +270,14 @@ data class Transform2d(
      */
     @JvmField
     val identity = Transform2d(Vector2d.zero(Inches), Rotation2d.zero)
+
+    /**
+     * The WPILib `Transform2d` struct: a translation in meters and a rotation in radians.
+     */
+    @JvmField
+    val struct: StructSchema<Transform2d> = structSchema("Transform2d") {
+      struct("translation", Vector2d.translation2dStruct) { it.translation }
+      struct("rotation", Rotation2d.struct) { it.rotation }
+    }
   }
 }

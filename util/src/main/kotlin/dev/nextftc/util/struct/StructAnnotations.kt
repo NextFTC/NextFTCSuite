@@ -6,7 +6,7 @@
  *  https://opensource.org/license/bsd-3-clause.
  */
 
-package dev.nextftc.telemetry.struct
+package dev.nextftc.util.struct
 
 /**
  * Sets the struct type name of a class when a [StructSchemaRegistry] reflects it, instead of the

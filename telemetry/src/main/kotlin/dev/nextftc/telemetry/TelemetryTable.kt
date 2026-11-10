@@ -8,7 +8,7 @@
 
 package dev.nextftc.telemetry
 
-import dev.nextftc.telemetry.struct.StructSchema
+import dev.nextftc.util.struct.StructSchema
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.KClass
 
@@ -77,7 +77,7 @@ fun interface TelemetryLoggable {
  * ## Struct values
  *
  * Any other object is logged as a struct, with its schema reflected from its class by the registry's
- * [TelemetryRegistry.structs]. See [dev.nextftc.telemetry.struct.StructSchemaRegistry] for what is
+ * [TelemetryRegistry.structs]. See [dev.nextftc.util.struct.StructSchemaRegistry] for what is
  * supported, and use [topic] with a hand-written [StructSchema] for a class that can't be reflected
  * or to log faster.
  *
@@ -317,8 +317,9 @@ class TelemetryTable internal constructor(private val registry: TelemetryRegistr
    *
    * Numbers, booleans, strings, and primitive arrays go to the topics above, with a `Byte` or
    * `Short` logged as an integer. An array of objects is logged as an array of structs, or of
-   * strings. A [TelemetryLoggable] is logged into the child table [name]. Anything else is logged as
-   * a struct.
+   * strings. A value with a [TelemetryTypeHandler] registered for its type, such as a `Measure`, is
+   * logged by that handler. A [TelemetryLoggable] is logged into the child table [name]. Anything
+   * else is logged as a struct.
    *
    * A collection or map is rejected with a warning, because its element type is erased. Use
    * [arrayTopic] or [logArray] for a list.
@@ -346,14 +347,32 @@ class TelemetryTable internal constructor(private val registry: TelemetryRegistr
       is LongArray -> log(name, value)
       is FloatArray -> log(name, value)
       is DoubleArray -> log(name, value)
+      else -> logObject(name, value)
+    }
+  }
+
+  // Everything without a fixed encoding: a registered handler first, then the value's own way of
+  // logging itself, then as a struct.
+  private fun logObject(name: String, value: Any) {
+    val handler = registry.handlers.find(value.javaClass)
+    if (handler != null) {
+      handler.log(this, name, value)
+      return
+    }
+
+    val struct = registry.structs.existingSchemaOf(value.javaClass)
+    if (struct != null) {
+      topic(name, struct).set(value)
+      return
+    }
+
+    when (value) {
       is TelemetryLoggable -> value.logTo(table(name))
-      is Collection<*>,
-      is Map<*, *>,
-      ->
-        registry.warn(
-          "Could not log '${pathOf(name)}': a ${value.javaClass.simpleName} has an erased element " +
-            "type. Use arrayTopic or logArray to log a list of structs.",
-        )
+      is Collection<*>, is Map<*, *> -> registry.warn(
+        "Could not log '${pathOf(name)}': a ${value.javaClass.simpleName} has an erased element " +
+          "type. Use arrayTopic or logArray to log a list of structs.",
+      )
+
       is Array<*> -> logObjectArray(name, value)
       else -> topic(name, value.javaClass.kotlin).set(value)
     }

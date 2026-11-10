@@ -1,7 +1,7 @@
 package dev.nextftc.robot.triggers
 
 import com.qualcomm.robotcore.hardware.Gamepad
-import dev.nextftc.hardware.util.EventLoop
+import dev.nextftc.util.EventLoop
 
 /**
  * A wrapper around the standard FTC [Gamepad] that exposes its buttons as command-based [Trigger]s.

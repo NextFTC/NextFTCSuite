@@ -4,7 +4,9 @@ Pedro Pathing integration for NextFTC. Wraps the Pedro `Follower` so it can be d
 
 # Package dev.nextftc.v2.pedro
 
-Core Pedro integration, including `PedroMechanism`, which owns the follower and updates it every loop.
+Core Pedro integration, including `PedroMechanism`, which owns the follower and updates it every loop,
+and `PedroStructs`, the telemetry struct schemas for Pedro's `Pose`, `Vector2D`, `Twist` and
+`Velocity`, which `PedroMechanism` registers on creation.
 
 # Package dev.nextftc.v2.pedro.constants
 

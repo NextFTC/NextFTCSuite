@@ -12,6 +12,8 @@ import dev.nextftc.units.Radians
 import dev.nextftc.units.Unit
 import dev.nextftc.units.inches
 import dev.nextftc.units.measuretypes.Angle
+import dev.nextftc.util.struct.StructSchema
+import dev.nextftc.util.struct.structSchema
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
@@ -214,5 +216,13 @@ data class Rotation2d(@JvmField val real: Double, @JvmField val imag: Double) {
      */
     @JvmField
     val zero = Rotation2d(1.0, 0.0)
+
+    /**
+     * The WPILib `Rotation2d` struct: `double value`, the angle in radians.
+     */
+    @JvmField
+    val struct: StructSchema<Rotation2d> = structSchema("Rotation2d") {
+      float64("value") { it.log() }
+    }
   }
 }

@@ -8,8 +8,16 @@
 
 package dev.nextftc.telemetry
 
-import dev.nextftc.telemetry.struct.StructSchema
-import dev.nextftc.telemetry.struct.StructSchemaRegistry
+import dev.nextftc.control.geometry.ChassisAccelerations
+import dev.nextftc.control.geometry.ChassisVelocities
+import dev.nextftc.control.geometry.Pose2d
+import dev.nextftc.control.geometry.PoseAcceleration2d
+import dev.nextftc.control.geometry.PoseVelocity2d
+import dev.nextftc.control.geometry.Rotation2d
+import dev.nextftc.control.geometry.Transform2d
+import dev.nextftc.control.geometry.Twist2d
+import dev.nextftc.util.struct.StructSchema
+import dev.nextftc.util.struct.StructSchemaRegistry
 import java.util.Collections
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArrayList
@@ -62,8 +70,25 @@ constructor(
     require(!(timeSource.markNow() - origin).isNegative()) { "The origin is in the future" }
   }
 
-  /** Builds and keeps the schemas of the classes that are logged as structs. */
-  val structs = StructSchemaRegistry()
+  /**
+   * Builds and keeps the schemas of the classes that are logged as structs. By default this includes the `control` geometry types.
+   */
+  val structs = StructSchemaRegistry().apply {
+    register(Rotation2d::class, Rotation2d.struct)
+    register(Pose2d::class, Pose2d.struct)
+    register(Transform2d::class, Transform2d.struct)
+    register(Twist2d::class, Twist2d.struct)
+    register(ChassisVelocities::class, ChassisVelocities.struct)
+    register(ChassisAccelerations::class, ChassisAccelerations.struct)
+    register(PoseVelocity2d::class, PoseVelocity2d.struct)
+    register(PoseAcceleration2d::class, PoseAcceleration2d.struct)
+  }
+
+  /**
+   * The handlers that log values of types that can't log themselves. By default this includes one for
+   * `Measure`.
+   */
+  val handlers = TelemetryTypeHandlers()
 
   /** Returns the current time as a timestamp in microseconds since [origin]. */
   fun now(): Long = timestampOf(timeSource.markNow())

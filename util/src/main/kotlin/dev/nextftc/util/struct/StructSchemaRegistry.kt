@@ -6,7 +6,7 @@
  *  https://opensource.org/license/bsd-3-clause.
  */
 
-package dev.nextftc.telemetry.struct
+package dev.nextftc.util.struct
 
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
@@ -68,15 +68,42 @@ class StructSchemaRegistry {
    * Uses [schema] for [type], both when it is requested directly and when it appears as a field of
    * a reflected class. Use it for a class you can't annotate or that reflection can't handle.
    *
-   * @throws IllegalArgumentException if [type] already has a schema, whether registered or reflected
+   * Registering a schema identical to the one [type] already has does nothing. Two schemas are
+   * identical when they have the same type name, size and schema text.
+   *
+   * @throws IllegalArgumentException if [type] already has a different schema, whether registered or
+   *   reflected
    */
   @Synchronized
   fun <T : Any> register(type: KClass<T>, schema: StructSchema<T>) {
-    require(type !in schemas) {
-      "${type.qualifiedName} already has a struct schema, so it can't be registered again"
+    val existing = schemas[type]
+    if (existing == null) {
+      schemas[type] = schema
+      return
     }
-    schemas[type] = schema
+    require(existing.isIdenticalTo(schema)) {
+      "${type.qualifiedName} already has a different struct schema (${existing.typeString}: " +
+        "${existing.schema}), so ${schema.typeString}: ${schema.schema} can't be registered for it"
+    }
   }
+
+  private fun StructSchema<*>.isIdenticalTo(other: StructSchema<*>) =
+    typeName == other.typeName && size == other.size && schema == other.schema
+
+  /**
+   * Returns the schema for [type] if it already exists, or null otherwise.
+   */
+  @Suppress("UNCHECKED_CAST")
+  @Synchronized
+  fun <T : Any> existingSchemaOf(type: KClass<T>): StructSchema<T>? = schemas[type] as? StructSchema<T>
+
+  /**
+   * Returns the schema for [type] if it already exists, or null otherwise.
+   */
+  @Suppress("UNCHECKED_CAST")
+  @Synchronized
+  fun <T : Any> existingSchemaOf(type: Class<T>): StructSchema<T>? =
+    schemas[type.kotlin] as? StructSchema<T>
 
   /**
    * Returns the schema for [type], registered or reflected.

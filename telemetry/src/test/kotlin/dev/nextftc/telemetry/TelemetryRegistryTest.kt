@@ -8,9 +8,20 @@
 
 package dev.nextftc.telemetry
 
+import dev.nextftc.control.geometry.ChassisAccelerations
+import dev.nextftc.control.geometry.ChassisVelocities
+import dev.nextftc.control.geometry.Pose2d
+import dev.nextftc.control.geometry.PoseAcceleration2d
+import dev.nextftc.control.geometry.PoseVelocity2d
+import dev.nextftc.control.geometry.Rotation2d
+import dev.nextftc.control.geometry.Transform2d
+import dev.nextftc.control.geometry.Twist2d
 import dev.nextftc.telemetry.backend.MockTelemetryBackend
 import dev.nextftc.telemetry.nt.NT4Server
 import dev.nextftc.telemetry.wpilog.WPILogWriter
+import dev.nextftc.units.degrees
+import dev.nextftc.units.inches
+import dev.nextftc.units.inchesPerSecond
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
@@ -20,6 +31,11 @@ import java.util.Collections
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.TestTimeSource
+
+private fun Double.roundTo(digits: Int): Double {
+  val scale = Math.pow(10.0, digits.toDouble())
+  return Math.round(this * scale) / scale
+}
 
 private class Env {
   val clock = TestTimeSource()
@@ -58,8 +74,100 @@ private class ClosingBackend(private val fail: Boolean = false) : TelemetryBacke
   }
 }
 
+private open class HandledColor(val hex: String)
+
+private class SubColor(hex: String) : HandledColor(hex)
+
+private interface Named {
+  val label: String
+}
+
+private class NamedThing(override val label: String) : Named
+
+private class SelfLogging : TelemetryLoggable {
+  override fun logTo(table: TelemetryTable) = table.log("self", "own")
+}
+
 class TelemetryRegistryTest :
   FunSpec({
+    test("the control geometry types are registered as structs") {
+      val structs = TelemetryRegistry().structs
+
+      structs.schemaOf<Pose2d>() shouldBe Pose2d.struct
+      structs.schemaOf<Rotation2d>() shouldBe Rotation2d.struct
+      structs.schemaOf<Transform2d>() shouldBe Transform2d.struct
+      structs.schemaOf<Twist2d>() shouldBe Twist2d.struct
+      structs.schemaOf<ChassisVelocities>() shouldBe ChassisVelocities.struct
+      structs.schemaOf<ChassisAccelerations>() shouldBe ChassisAccelerations.struct
+      structs.schemaOf<PoseVelocity2d>() shouldBe PoseVelocity2d.struct
+      structs.schemaOf<PoseAcceleration2d>() shouldBe PoseAcceleration2d.struct
+    }
+
+    test("a measure is logged as a double in its base unit, labeled with that unit") {
+      val env = Env()
+      val mock = MockTelemetryBackend().also { env.registry.register(it) }
+
+      env.registry.root.log("distance", 100.0.inches)
+      env.registry.root.log("speed", 100.0.inchesPerSecond)
+      env.registry.root.log("angle", 180.0.degrees)
+      env.registry.root.log("distance", 200.0.inches)
+
+      mock.valuesAt("/distance").map { (it as Double).roundTo(6) } shouldBe listOf(2.54, 5.08)
+      (mock.valuesAt("/speed").single() as Double).roundTo(6) shouldBe 2.54
+      (mock.valuesAt("/angle").single() as Double).roundTo(6) shouldBe 3.141593
+      mock.propertiesAt("/distance") shouldBe mapOf("unit" to "m")
+      mock.propertiesAt("/speed") shouldBe mapOf("unit" to "m/s")
+      mock.propertiesAt("/angle") shouldBe mapOf("unit" to "rad")
+      env.warnings shouldBe emptyList()
+    }
+
+    test("a registered handler logs values of its type") {
+      val env = Env()
+      val mock = MockTelemetryBackend().also { env.registry.register(it) }
+      env.registry.handlers.register<HandledColor> { table, name, color -> table.log(name, color.hex) }
+
+      env.registry.root.log("color", HandledColor("#ff0000"))
+
+      mock.valuesAt("/color") shouldBe listOf("#ff0000")
+      env.warnings shouldBe emptyList()
+    }
+
+    test("a handler applies to subtypes, and the nearest type's handler wins") {
+      val env = Env()
+      val mock = MockTelemetryBackend().also { env.registry.register(it) }
+      env.registry.handlers.register<HandledColor> { table, name, _ -> table.log(name, "base") }
+
+      env.registry.root.log("sub", SubColor("#00ff00"))
+      env.registry.handlers.register<SubColor> { table, name, _ -> table.log(name, "sub") }
+      env.registry.root.log("sub2", SubColor("#00ff00"))
+
+      mock.valuesAt("/sub") shouldBe listOf("base")
+      mock.valuesAt("/sub2") shouldBe listOf("sub")
+    }
+
+    test("a handler for an interface applies to its implementers") {
+      val env = Env()
+      val mock = MockTelemetryBackend().also { env.registry.register(it) }
+      env.registry.handlers.register<Named> { table, name, value -> table.log(name, value.label) }
+
+      env.registry.root.log("n", NamedThing("thing"))
+
+      mock.valuesAt("/n") shouldBe listOf("thing")
+    }
+
+    test("a handler beats the value's own TelemetryLoggable, and unregistering restores it") {
+      val env = Env()
+      val mock = MockTelemetryBackend().also { env.registry.register(it) }
+      env.registry.handlers.register<SelfLogging> { table, name, _ -> table.log(name, "handler") }
+
+      env.registry.root.log("a", SelfLogging())
+      env.registry.handlers.unregister(SelfLogging::class)
+      env.registry.root.log("b", SelfLogging())
+
+      mock.valuesAt("/a") shouldBe listOf("handler")
+      mock.valuesAt("/b/self") shouldBe listOf("own")
+    }
+
     test("logging with no backend registered is harmless") {
       val env = Env()
       val handle = env.registry.root.doubleTopic("x")

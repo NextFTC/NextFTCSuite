@@ -13,6 +13,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.robot.Mechanism
+import dev.nextftc.telemetry.Telemetry
 import java.util.function.Function
 
 /**
@@ -25,6 +26,10 @@ import java.util.function.Function
  * its starting pose at the beginning of each OpMode.
  */
 class PedroMechanism(followerFactory: (HardwareMap) -> Follower) : Mechanism {
+  init {
+    PedroStructs.registerAll(Telemetry.registry.structs)
+  }
+
   /** The [Follower], built on first access. */
   @get:JvmName("follower")
   val follower: Follower by LazyHardware { followerFactory(RobotController.hardwareMap) }

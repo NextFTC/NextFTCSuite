@@ -1,4 +1,4 @@
-package dev.nextftc.hardware.util
+package dev.nextftc.util
 
 /**
  * A lightweight execution loop for polling boolean triggers and executing bound actions.

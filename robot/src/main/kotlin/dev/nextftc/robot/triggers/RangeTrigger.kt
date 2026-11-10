@@ -1,6 +1,6 @@
 package dev.nextftc.robot.triggers
 
-import dev.nextftc.hardware.util.EventLoop
+import dev.nextftc.util.EventLoop
 
 /**
  * A wrapper around an analog gamepad input (e.g. a trigger  or joystick) that exposes

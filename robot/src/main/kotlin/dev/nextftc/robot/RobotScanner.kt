@@ -17,6 +17,8 @@ import dev.frozenmilk.sinister.targeting.TeamCodeSearch
 import dev.frozenmilk.util.graph.Graph
 import dev.frozenmilk.util.graph.rule.AdjacencyRule
 import dev.frozenmilk.util.graph.rule.dependsOn
+import dev.nextftc.hardware.RobotLogSink
+import dev.nextftc.util.Log
 import java.lang.reflect.Modifier
 import kotlin.reflect.KClass
 import kotlin.reflect.KVisibility
@@ -39,6 +41,10 @@ internal object RobotScanner : Scanner {
 
   override val targets: SearchTarget = TeamCodeSearch()
 
+  init {
+    Log.sink = RobotLogSink
+  }
+
   override fun scan(loader: ClassLoader, cls: Class<*>) {
     val modifiers = cls.modifiers
     if (!Modifier.isPublic(modifiers) || Modifier.isAbstract(modifiers)) return
@@ -48,11 +54,11 @@ internal object RobotScanner : Scanner {
     val kcls = cls.kotlin
 
     if (kcls.hasAnnotation<Disabled>()) {
-      RobotLog.info("Skipping disabled NextFTC robot class: $kcls")
+      Log.info("Skipping disabled NextFTC robot class: $kcls")
       return
     }
 
-    RobotLog.info("Found NextFTC robot class: $kcls")
+    Log.info("Found NextFTC robot class: $kcls")
     candidates.add(RobotCandidate(cls.asSubclass(NextRobot::class.java).kotlin, constructorFor(kcls)))
   }
 
@@ -68,7 +74,7 @@ internal object RobotScanner : Scanner {
     }
     if (constructor != null) return { constructor.call() as NextRobot }
 
-    RobotLog.Global.addWarning(
+    GlobalLog.addWarning(
       "Unable to find appropriate constructor for $kcls. " +
         "Ensure it is either a singleton object or has a public no-argument constructor.",
     )
@@ -93,7 +99,7 @@ internal object RobotScanner : Scanner {
     }
 
     if (candidates.size > 1) {
-      RobotLog.Global.addWarning(
+      GlobalLog.addWarning(
         "Multiple NextFTC robot classes found: ${candidates.map { it.kClass }}. " +
           "Ensure you have only one class that implements NextRobot.",
       )
@@ -121,7 +127,7 @@ internal object RobotScanner : Scanner {
       return
     }
 
-    RobotLog.info("Using NextFTC robot class: $kClass")
+    Log.info("Using NextFTC robot class: $kClass")
     RobotState.robotClass = kClass
     RobotState.robotInstance = instance
   }
@@ -137,9 +143,9 @@ internal object RobotScanner : Scanner {
   private fun reportError(message: String, throwable: Throwable? = null) {
     reportedError = true
     if (throwable == null) {
-      RobotLog.Global.setError(message)
+      GlobalLog.setError(message)
     } else {
-      RobotLog.Global.setError(message, throwable)
+      GlobalLog.setError(message, throwable)
     }
   }
 
@@ -147,7 +153,7 @@ internal object RobotScanner : Scanner {
   private fun clearReportedError() {
     if (!reportedError) return
     reportedError = false
-    RobotLog.Global.clearError()
+    GlobalLog.clearError()
   }
 
   private data class RobotCandidate(val kClass: KClass<out NextRobot>, val constructor: (() -> NextRobot)?)
@@ -161,7 +167,7 @@ object RobotState {
   internal var robotInstance: NextRobot? = null
   internal var robotClass: KClass<out NextRobot>? = null
   val robot: NextRobot
-    get() = robotInstance ?: RobotLog.Global.setErrorAndThrow(
+    get() = robotInstance ?: GlobalLog.setErrorAndThrow(
       "Robot instance not initialized",
       RobotScanException("Robot instance not initialized"),
     )

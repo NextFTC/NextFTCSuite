@@ -9,9 +9,12 @@
 package dev.nextftc.control.geometry
 
 import dev.nextftc.units.Inches
+import dev.nextftc.units.Meters
 import dev.nextftc.units.measuretypes.Angle
 import dev.nextftc.units.measuretypes.Distance
 import dev.nextftc.units.unittypes.DistanceUnit
+import dev.nextftc.util.struct.StructSchema
+import dev.nextftc.util.struct.structSchema
 
 /**
  * @usesMathJax
@@ -171,5 +174,15 @@ data class Twist2d(@JvmField val line: Vector2d<DistanceUnit>, @JvmField val ang
   companion object {
     @JvmField
     val zero = Twist2d(Vector2d.zero(Inches), 0.0)
+
+    /**
+     * The WPILib `Twist2d` struct: `dx` and `dy` in meters and `dtheta` in radians.
+     */
+    @JvmField
+    val struct: StructSchema<Twist2d> = structSchema("Twist2d") {
+      float64("dx") { it.line.x.into(Meters) }
+      float64("dy") { it.line.y.into(Meters) }
+      float64("dtheta") { it.angle }
+    }
   }
 }

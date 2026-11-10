@@ -27,6 +27,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "NextFTC Suite"
+include(":util")
 include(":units")
 include(":linalg")
 include(":control")

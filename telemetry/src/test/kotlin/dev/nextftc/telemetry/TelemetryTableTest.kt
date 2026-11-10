@@ -9,8 +9,8 @@
 package dev.nextftc.telemetry
 
 import dev.nextftc.telemetry.backend.MockTelemetryBackend
-import dev.nextftc.telemetry.struct.StructName
-import dev.nextftc.telemetry.struct.structSchema
+import dev.nextftc.util.struct.StructName
+import dev.nextftc.util.struct.structSchema
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe

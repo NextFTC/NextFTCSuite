@@ -12,6 +12,8 @@ import dev.nextftc.units.Inches
 import dev.nextftc.units.measuretypes.Angle
 import dev.nextftc.units.measuretypes.Distance
 import dev.nextftc.units.unittypes.DistanceUnit
+import dev.nextftc.util.struct.StructSchema
+import dev.nextftc.util.struct.structSchema
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.sin
@@ -309,6 +311,15 @@ data class Pose2d(
   }
 
   companion object {
+    /**
+     * The WPILib `Pose2d` struct: a translation in meters and a rotation in radians.
+     */
+    @JvmField
+    val struct: StructSchema<Pose2d> = structSchema("Pose2d") {
+      struct("translation", Vector2d.translation2dStruct) { it.position }
+      struct("rotation", Rotation2d.struct) { it.heading }
+    }
+
     /**
      * Computes the pose exponential map from a twist.
      *

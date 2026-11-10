@@ -7,6 +7,8 @@ description =
   "WPILib struct schemas."
 
 dependencies {
+  api(project(":util"))
+  api(project(":control"))
   implementation(libs.kotlin.reflect)
   api(libs.ktor.server.core)
   implementation(libs.ktor.server.cio)

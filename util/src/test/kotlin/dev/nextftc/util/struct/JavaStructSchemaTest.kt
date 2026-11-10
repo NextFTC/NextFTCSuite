@@ -6,9 +6,9 @@
  *  https://opensource.org/license/bsd-3-clause.
  */
 
-package dev.nextftc.telemetry.struct
+package dev.nextftc.util.struct
 
-import dev.nextftc.telemetry.javatypes.JavaTypes
+import dev.nextftc.util.javatypes.JavaTypes
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe

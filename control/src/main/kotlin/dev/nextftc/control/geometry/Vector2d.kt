@@ -11,6 +11,7 @@
 package dev.nextftc.control.geometry
 
 import dev.nextftc.units.Measure
+import dev.nextftc.units.Meters
 import dev.nextftc.units.Unit
 import dev.nextftc.units.inches
 import dev.nextftc.units.inchesPerSecond
@@ -19,6 +20,8 @@ import dev.nextftc.units.measuretypes.Time
 import dev.nextftc.units.unittypes.DistanceUnit
 import dev.nextftc.units.unittypes.PerUnit
 import dev.nextftc.units.unittypes.TimeUnit
+import dev.nextftc.util.struct.StructSchema
+import dev.nextftc.util.struct.structSchema
 import kotlin.math.sqrt
 
 /**
@@ -181,6 +184,16 @@ data class Vector2d<U : Unit<U>>(@JvmField val x: Measure<U>, @JvmField val y: M
      */
     @JvmField
     val zero = Vector2d(0.0.inches, 0.0.inches)
+
+    /**
+     * The WPILib `Translation2d` struct: `x` and `y` in meters. It describes a displacement, so it
+     * applies to a `Vector2d<DistanceUnit>`.
+     */
+    @JvmField
+    val translation2dStruct: StructSchema<Vector2d<DistanceUnit>> = structSchema("Translation2d") {
+      float64("x") { it.x.into(Meters) }
+      float64("y") { it.y.into(Meters) }
+    }
 
     /**
      * Creates a zero vector with the specified unit.
