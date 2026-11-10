@@ -13,7 +13,7 @@ import dev.nextftc.telemetry.TelemetryBackend
 import dev.nextftc.telemetry.TelemetryEntry
 import dev.nextftc.telemetry.TelemetryType
 import dev.nextftc.telemetry.ValueType
-import dev.nextftc.telemetry.struct.StructSchema
+import dev.nextftc.util.struct.StructSchema
 import dev.nextftc.telemetry.toJsonObject
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put

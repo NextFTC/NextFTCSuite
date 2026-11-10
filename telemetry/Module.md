@@ -2,7 +2,7 @@
 
 Logging and live telemetry for FTC robot code, in formats AdvantageScope understands. It has no FTC
 SDK or Android dependency, so it runs in unit tests or a desktop tool as easily as on a Robot
-Controller, and it doesn't depend on the other NextFTC modules.
+Controller. Its only NextFTC dependency is `util`, which supplies the struct schemas.
 
 Robot code logs to `Telemetry`, a table, or a typed handle, and the values go to whatever backends
 are registered: a WPILOG file, a NetworkTables 4 server, or a mock for tests. A model of WPILib's
@@ -73,10 +73,8 @@ a "Conflicting types" error for values of another, so the server refuses the new
 warns. A name can be published again with the type it had, which is what each OpMode does when its
 backend publishes the same topics again.
 
-# Package dev.nextftc.telemetry.struct
+# Struct schemas
 
-`StructSchema`, the description of a WPILib struct (type name, fixed size, schema text, nested
-types, and a packer), and `structSchema`, a builder for defining one by hand.
-`StructSchemaRegistry` builds schemas by reflecting over a class's properties, or a Java class's
-public fields, getters, or record components, with `StructName`, `StructIgnore`, `StructSize` and
-`StructOrder` to adjust the result. The same schema works for both the log writer and the server.
+Struct schemas (`StructSchema`, `StructSchemaRegistry` and the `Struct*` annotations) come from
+`dev.nextftc.util.struct` in the `util` module. The same schema works for both the log writer and
+the server.

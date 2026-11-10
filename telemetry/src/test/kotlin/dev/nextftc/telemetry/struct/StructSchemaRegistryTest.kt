@@ -9,6 +9,12 @@
 package dev.nextftc.telemetry.struct
 
 import dev.nextftc.telemetry.wpilog.WPILogWriter
+import dev.nextftc.util.struct.StructIgnore
+import dev.nextftc.util.struct.StructName
+import dev.nextftc.util.struct.StructSchema
+import dev.nextftc.util.struct.StructSchemaRegistry
+import dev.nextftc.util.struct.StructSize
+import dev.nextftc.util.struct.structSchema
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
@@ -47,7 +53,8 @@ private data class Primitives(
 private data class Ignoring(val x: Double, @StructIgnore val label: String)
 
 private class Computed(val x: Double) {
-  @StructIgnore val doubled get() = x * 2
+  @StructIgnore
+  val doubled get() = x * 2
 }
 
 private data class WithArray(@StructSize(3) val values: DoubleArray)

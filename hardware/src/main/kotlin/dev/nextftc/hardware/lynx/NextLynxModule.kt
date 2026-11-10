@@ -16,13 +16,13 @@ import com.qualcomm.robotcore.hardware.DigitalChannel
 import com.qualcomm.robotcore.hardware.DigitalChannelImpl
 import com.qualcomm.robotcore.hardware.ServoImplEx
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.ServoConfigurationType
-import com.qualcomm.robotcore.util.RobotLog
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.celsius
 import dev.nextftc.units.measuretypes.Temperature
 import dev.nextftc.units.measuretypes.Voltage
 import dev.nextftc.units.volts
+import dev.nextftc.util.Log
 import org.firstinspires.ftc.robotcore.external.navigation.TempUnit
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit
 
@@ -60,10 +60,9 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
     val key = kind to port
     val first = usedPorts[key]
     if (first != null) {
-      RobotLog.ww(
-        "NextLynxModule",
-        first,
+      Log.warn(
         "Port conflict on $type: ${kind.name.lowercase()} port $port is used by more than one device",
+        first,
       )
       return
     }

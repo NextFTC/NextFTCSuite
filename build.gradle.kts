@@ -7,6 +7,7 @@ plugins {
 }
 
 dependencies {
+  dokka(project(":util"))
   dokka(project(":units"))
   dokka(project(":linalg"))
   dokka(project(":control"))

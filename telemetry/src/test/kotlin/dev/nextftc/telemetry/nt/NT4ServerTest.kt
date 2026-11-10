@@ -8,7 +8,7 @@
 
 package dev.nextftc.telemetry.nt
 
-import dev.nextftc.telemetry.struct.structSchema
+import dev.nextftc.util.struct.structSchema
 import dev.nextftc.telemetry.wpilog.WPILogWriter
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec

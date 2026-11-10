@@ -6,9 +6,10 @@ import dev.frozenmilk.sinister.sdk.opmodes.OpModeScanner
 import dev.frozenmilk.sinister.targeting.SearchTarget
 import dev.frozenmilk.sinister.targeting.WideSearch
 import dev.frozenmilk.util.graph.rule.dependsOn
-import dev.nextftc.robot.RobotLog
+import dev.nextftc.robot.GlobalLog
 import dev.nextftc.robot.RobotScanner
 import dev.nextftc.robot.RobotState
+import dev.nextftc.util.Log
 import org.firstinspires.ftc.robotcore.internal.opmode.OpModeMeta
 import java.lang.reflect.Modifier
 import kotlin.reflect.KClass
@@ -41,7 +42,7 @@ object NextFTCOpModeScanner : OpModeScanner() {
     val kcls = cls.kotlin as KClass<NextOpMode>
 
     if (kcls.hasAnnotation<Disabled>()) {
-      RobotLog.info("Skipping disabled NextFTC OpMode class: $kcls")
+      Log.info("Skipping disabled NextFTC OpMode class: $kcls")
       return
     }
     val enableBlaze = BlazeOpMode::class.java.isAssignableFrom(cls)
@@ -50,13 +51,13 @@ object NextFTCOpModeScanner : OpModeScanner() {
       is OpModeMetaCheckResult.FoundAnnotation -> {
         when (val constructorResult = opModeConstructorFromClass(kcls)) {
           is OpModeConstructorCheckResult.FoundConstructor -> {
-            RobotLog.info("Found NextFTC OpMode class: $cls")
+            Log.info("Found NextFTC OpMode class: $cls")
             registrationHelper.register(metaResult.meta) {
               BoundNextOpMode(constructorResult.constructor, enableBlaze)
             }
           }
           is OpModeConstructorCheckResult.NoConstructorFound -> {
-            RobotLog.Global.addWarning(
+            GlobalLog.addWarning(
               "No valid constructor found for NextFTC OpMode class $cls, so it was not " +
                 "registered. Ensure it has a public constructor that takes either no arguments " +
                 "or your NextRobot type.",
@@ -65,7 +66,7 @@ object NextFTCOpModeScanner : OpModeScanner() {
         }
       }
       is OpModeMetaCheckResult.NoAnnotationPresent -> {
-        RobotLog.Global.addWarning(
+        GlobalLog.addWarning(
           "No @NextAutonomous, @NextTeleop, or @NextUtility annotation found for NextFTC OpMode " +
             "class $cls, so it was not registered.",
         )

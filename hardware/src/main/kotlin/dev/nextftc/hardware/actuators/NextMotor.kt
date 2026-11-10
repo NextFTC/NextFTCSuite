@@ -23,7 +23,7 @@ import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.hardware.util.AnalogFeedback
 import dev.nextftc.hardware.util.Caching
-import dev.nextftc.hardware.util.EventLoop
+import dev.nextftc.util.EventLoop
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.amperes
 import dev.nextftc.units.measuretypes.Angle

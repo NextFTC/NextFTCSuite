@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.robot.NextFTCException
 import dev.nextftc.robot.NextRobot
-import dev.nextftc.robot.RobotLog
+import dev.nextftc.util.Log
 import org.firstinspires.ftc.robotcore.external.Telemetry as SdkTelemetry
 
 /**
@@ -131,7 +131,7 @@ internal class BoundNextOpMode(val opModeConstructor: () -> NextOpMode, val blaz
         try {
           hook.afterEnd()
         } catch (throwable: Throwable) {
-          RobotLog.warn("${hook::class.displayName} threw while cleaning up after the OpMode.", throwable)
+          Log.warn("${hook::class.displayName} threw while cleaning up after the OpMode.", throwable)
         }
       }
 

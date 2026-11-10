@@ -16,7 +16,7 @@ import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.hardware.sensors.colors.ColorProfile
 import dev.nextftc.hardware.sensors.colors.NextColor
-import dev.nextftc.hardware.util.EventLoop
+import dev.nextftc.util.EventLoop
 import dev.nextftc.hardware.util.LazyHardware
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 

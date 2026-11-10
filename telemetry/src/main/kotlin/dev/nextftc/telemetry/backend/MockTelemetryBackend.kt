@@ -11,7 +11,7 @@ package dev.nextftc.telemetry.backend
 import dev.nextftc.telemetry.TelemetryBackend
 import dev.nextftc.telemetry.TelemetryEntry
 import dev.nextftc.telemetry.TelemetryType
-import dev.nextftc.telemetry.struct.StructSchema
+import dev.nextftc.util.struct.StructSchema
 
 /**
  * Keeps everything it is given, for tests that want to check what robot code logged.

@@ -16,7 +16,7 @@ import dev.nextftc.telemetry.TelemetryWarningHandler
 import dev.nextftc.telemetry.arrayTopic
 import dev.nextftc.telemetry.nt.NT4Backend
 import dev.nextftc.telemetry.nt.NT4Server
-import dev.nextftc.telemetry.struct.StructName
+import dev.nextftc.util.struct.StructName
 import dev.nextftc.telemetry.topic
 import dev.nextftc.telemetry.withUnit
 import dev.nextftc.telemetry.wpilog.WPILogBackend

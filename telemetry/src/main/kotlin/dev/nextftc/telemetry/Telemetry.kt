@@ -8,7 +8,7 @@
 
 package dev.nextftc.telemetry
 
-import dev.nextftc.telemetry.struct.StructSchema
+import dev.nextftc.util.struct.StructSchema
 import kotlin.reflect.KClass
 
 /**

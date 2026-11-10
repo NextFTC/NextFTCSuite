@@ -8,7 +8,7 @@
 
 package dev.nextftc.telemetry.wpilog
 
-import dev.nextftc.telemetry.struct.StructSchema
+import dev.nextftc.util.struct.StructSchema
 import java.io.BufferedOutputStream
 import java.io.Closeable
 import java.io.Flushable

@@ -6,7 +6,7 @@
  *  https://opensource.org/license/bsd-3-clause.
  */
 
-package dev.nextftc.telemetry.struct
+package dev.nextftc.util.struct
 
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier

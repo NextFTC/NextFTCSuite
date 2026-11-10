@@ -10,7 +10,7 @@ package dev.nextftc.telemetry.backend
 
 import dev.nextftc.telemetry.TelemetryRegistry
 import dev.nextftc.telemetry.ValueType
-import dev.nextftc.telemetry.struct.structSchema
+import dev.nextftc.util.struct.structSchema
 import dev.nextftc.telemetry.withUnit
 import dev.nextftc.telemetry.wpilog.ParsedLog
 import dev.nextftc.telemetry.wpilog.WPILogBackend

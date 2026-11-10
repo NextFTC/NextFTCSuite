@@ -15,6 +15,7 @@ to [kdoc.nextftc.dev](https://kdoc.nextftc.dev/).
 
 | Module                           | Description                                                                                                                                              |
 |----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [`util`](util/Module.md)         | Pure-JVM pieces shared by every module: WPILib struct schemas, an `EventLoop`, and a `Log` facade.                                                       |
 | [`units`](units/Module.md)       | Type-safe physical units (distance, time, mass, force, voltage, angle, etc.) modeled after WPILib's units library.                                       |
 | [`linalg`](linalg/Module.md)     | A Kotlin wrapper around EJML with `Nat` phantom types, so matrix/vector dimension mismatches are caught at compile time.                                 |
 | [`control`](control/Module.md)   | Feedback controllers (PID, LQR), feedforward models, signal filters, motion profiling, and typed 2D geometry (`Pose2d`, `Rotation2d`, etc.).             |

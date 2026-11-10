@@ -21,7 +21,7 @@ import dev.nextftc.telemetry.nt.nextValue
 import dev.nextftc.telemetry.nt.sendText
 import dev.nextftc.telemetry.nt.string
 import dev.nextftc.telemetry.nt.subscribeMessage
-import dev.nextftc.telemetry.struct.structSchema
+import dev.nextftc.util.struct.structSchema
 import dev.nextftc.telemetry.withProperties
 import dev.nextftc.telemetry.withUnit
 import io.kotest.core.spec.style.FunSpec

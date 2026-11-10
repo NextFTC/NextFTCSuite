@@ -8,7 +8,7 @@
 
 package dev.nextftc.telemetry.nt
 
-import dev.nextftc.telemetry.struct.StructSchema
+import dev.nextftc.util.struct.StructSchema
 import dev.nextftc.telemetry.toJsonObject
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.install

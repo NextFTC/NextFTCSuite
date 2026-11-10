@@ -8,7 +8,7 @@
 
 package dev.nextftc.telemetry
 
-import dev.nextftc.telemetry.struct.StructSchema
+import dev.nextftc.util.struct.StructSchema
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.KClass
 
@@ -77,7 +77,7 @@ fun interface TelemetryLoggable {
  * ## Struct values
  *
  * Any other object is logged as a struct, with its schema reflected from its class by the registry's
- * [TelemetryRegistry.structs]. See [dev.nextftc.telemetry.struct.StructSchemaRegistry] for what is
+ * [TelemetryRegistry.structs]. See [dev.nextftc.util.struct.StructSchemaRegistry] for what is
  * supported, and use [topic] with a hand-written [StructSchema] for a class that can't be reflected
  * or to log faster.
  *

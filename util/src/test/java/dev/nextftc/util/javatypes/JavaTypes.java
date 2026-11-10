@@ -6,12 +6,12 @@
  *  https://opensource.org/license/bsd-3-clause.
  */
 
-package dev.nextftc.telemetry.javatypes;
+package dev.nextftc.util.javatypes;
 
-import dev.nextftc.telemetry.struct.StructIgnore;
-import dev.nextftc.telemetry.struct.StructName;
-import dev.nextftc.telemetry.struct.StructOrder;
-import dev.nextftc.telemetry.struct.StructSize;
+import dev.nextftc.util.struct.StructIgnore;
+import dev.nextftc.util.struct.StructName;
+import dev.nextftc.util.struct.StructOrder;
+import dev.nextftc.util.struct.StructSize;
 import java.util.List;
 
 /** Java classes for reflecting into struct schemas, written the way Java code usually is. */

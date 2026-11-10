@@ -8,7 +8,8 @@
 
 package dev.nextftc.telemetry.wpilog
 
-import dev.nextftc.telemetry.struct.structSchema
+import dev.nextftc.util.struct.StructSchema
+import dev.nextftc.util.struct.structSchema
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
@@ -289,7 +290,7 @@ class WPILogWriterTest :
 
     test("a schema that packs fewer bytes than it declares is rejected") {
       val lying =
-        object : dev.nextftc.telemetry.struct.StructSchema<Unit> {
+        object : StructSchema<Unit> {
           override val typeName = "Lying"
           override val size = 8
           override val schema = "float64 x"

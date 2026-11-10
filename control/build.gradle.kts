@@ -5,6 +5,7 @@ plugins {
 description = "A WPIMath inspired library for controls and other math classes and functions."
 
 dependencies {
+  api(project(":util"))
   api(project(":units"))
   api(project(":linalg"))
 

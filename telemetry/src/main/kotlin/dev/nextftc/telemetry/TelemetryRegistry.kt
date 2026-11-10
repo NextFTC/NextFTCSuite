@@ -8,8 +8,8 @@
 
 package dev.nextftc.telemetry
 
-import dev.nextftc.telemetry.struct.StructSchema
-import dev.nextftc.telemetry.struct.StructSchemaRegistry
+import dev.nextftc.util.struct.StructSchema
+import dev.nextftc.util.struct.StructSchemaRegistry
 import java.util.Collections
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArrayList

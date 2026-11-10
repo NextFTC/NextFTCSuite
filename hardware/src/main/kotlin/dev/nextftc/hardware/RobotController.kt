@@ -18,12 +18,13 @@ import com.qualcomm.robotcore.hardware.HardwareMap
 import com.qualcomm.robotcore.hardware.configuration.LynxConstants
 import dev.frozenmilk.sinister.sdk.apphooks.OnCreateEventLoop
 import dev.nextftc.hardware.lynx.NextLynxModule
-import dev.nextftc.hardware.util.EventLoop
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.celsius
 import dev.nextftc.units.measuretypes.Temperature
 import dev.nextftc.units.measuretypes.Voltage
 import dev.nextftc.units.volts
+import dev.nextftc.util.EventLoop
+import dev.nextftc.util.Log
 import org.firstinspires.ftc.robotcore.external.navigation.TempUnit
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit
 import java.util.Collections
@@ -152,6 +153,7 @@ object RobotController : OnCreateEventLoop, OpModeManagerNotifier.Notifications 
    * @param ftcEventLoop Active FTC event loop.
    */
   override fun onCreateEventLoop(context: Context, ftcEventLoop: FtcEventLoop) {
+    Log.sink = RobotLogSink
     appContext = context
     eventLoop = ftcEventLoop
     ftcEventLoop.opModeManager.registerListener(this)
