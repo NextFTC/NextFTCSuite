@@ -45,9 +45,23 @@ class FtcTelemetryConfig {
   @JvmField @Volatile
   var logToFile: Boolean = true
 
+  @Volatile
+  private var customLogDirectory: File? = null
+
+  private val defaultLogDirectory: File by lazy {
+    try {
+      File(AppUtil.FIRST_FOLDER, "nextftc/logs")
+    } catch (_: Throwable) {
+      File("nextftc/logs")
+    }
+  }
+
   /** Where logs are written. */
-  @JvmField @Volatile
-  var logDirectory: File = File(AppUtil.FIRST_FOLDER, "nextftc/logs")
+  var logDirectory: File
+    get() = customLogDirectory ?: defaultLogDirectory
+    set(value) {
+      customLogDirectory = value
+    }
 
   /**
    * How often, in milliseconds, [FtcTelemetry.update] flushes the log to disk, so a crash or power
