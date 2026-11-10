@@ -16,6 +16,7 @@ import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.lynx.NextLynxModule
 import dev.nextftc.hardware.sensors.colors.ColorProfile
 import dev.nextftc.hardware.sensors.colors.NextColor
+import dev.nextftc.hardware.util.EventLoop
 import dev.nextftc.hardware.util.LazyHardware
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 
@@ -33,7 +34,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
  * )
  *
  * override fun periodic() {
- *     sensor.update()
  *     if (sensor.isWithinDistance(4.0) && sensor.isColor(green)) { ... }
  * }
  * ```
@@ -98,6 +98,10 @@ class NextColorDistanceSensor @JvmOverloads constructor(
     require(bus in 0..3) { "Expected bus in range [0, 3], got $bus" }
   }
 
+  init {
+    RobotController.hardwareEventLoop.bind(this::update)
+  }
+
   private val lazySensor = LazyHardware(colorInitializer)
   private val colorSensor by lazySensor
   private val distanceSensor: DistanceSensor? by lazy { distanceInitializer?.invoke() }
@@ -106,6 +110,14 @@ class NextColorDistanceSensor @JvmOverloads constructor(
 
   private var cachedColor: NextColor = NextColor.rgb(0f, 0f, 0f)
   private var cachedHsv: FloatArray = FloatArray(3)
+
+  init {
+    lazySensor.onOpModeStop {
+      cachedDistanceCm = Double.NaN
+      cachedColor = NextColor.rgb(0f, 0f, 0f)
+      cachedHsv = FloatArray(3)
+    }
+  }
 
   /** Last cached reading as a [NextColor]. Black until [update] is called. */
   val color: NextColor

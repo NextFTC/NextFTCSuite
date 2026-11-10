@@ -108,7 +108,7 @@ internal object TelemetryHook : OpModeHook {
  */
 internal object MotorHook : OpModeHook {
   override fun afterPeriodic() {
-    NextMotor.motorEventLoop.poll()
+    RobotController.hardwareEventLoop.poll()
   }
 }
 

@@ -113,7 +113,7 @@ class NextMotor @JvmOverloads constructor(
   )
 
   init {
-    motorEventLoop.bind(this::update)
+    RobotController.hardwareEventLoop.bind(this::update)
   }
 
   private val lazyMotor = LazyHardware(initializer)
@@ -481,7 +481,8 @@ class NextMotor @JvmOverloads constructor(
   }
 
   companion object {
-    val motorEventLoop: EventLoop = EventLoop()
+    @Deprecated("Use RobotController.hardwareEventLoop.", ReplaceWith("RobotController.hardwareEventLoop"))
+    val motorEventLoop: EventLoop = RobotController.hardwareEventLoop
   }
 }
 
