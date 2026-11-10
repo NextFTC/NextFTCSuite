@@ -34,7 +34,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
  * )
  *
  * override fun periodic() {
- *     sensor.update()
  *     if (sensor.isWithinDistance(4.0) && sensor.isColor(green)) { ... }
  * }
  * ```
@@ -100,7 +99,7 @@ class NextColorDistanceSensor @JvmOverloads constructor(
   }
 
   init {
-    sensorEventLoop.bind(this::update)
+    RobotController.hardwareEventLoop.bind(this::update)
   }
 
   private val lazySensor = LazyHardware(colorInitializer)
@@ -195,9 +194,5 @@ class NextColorDistanceSensor @JvmOverloads constructor(
     }
 
     return "RGB=($r,$g,$b) HSV=($h,$s,$v) Dist=$d"
-  }
-
-  companion object {
-    val sensorEventLoop: EventLoop = EventLoop()
   }
 }

@@ -26,7 +26,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
  * Example:
  * ```
  * override fun periodic() {
- *     sensor.update()
  *     if (sensor.isWithinDistance(6.7)) { ... }
  * }
  * ```
@@ -65,7 +64,7 @@ class NextDistanceSensor(initializer: () -> DistanceSensor) {
   }
 
   init {
-    sensorEventLoop.bind(this::update)
+    RobotController.hardwareEventLoop.bind(this::update)
   }
 
   private val lazySensor = LazyHardware(initializer)
@@ -92,9 +91,5 @@ class NextDistanceSensor(initializer: () -> DistanceSensor) {
   fun isWithinDistance(threshold: Double, unit: DistanceUnit = DistanceUnit.CM): Boolean {
     val distance = getDistance(unit)
     return !distance.isNaN() && distance <= threshold
-  }
-
-  companion object {
-    val sensorEventLoop: EventLoop = EventLoop()
   }
 }

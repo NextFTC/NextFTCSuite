@@ -113,7 +113,7 @@ class NextMotor @JvmOverloads constructor(
   )
 
   init {
-    motorEventLoop.bind(this::update)
+    RobotController.hardwareEventLoop.bind(this::update)
   }
 
   private val lazyMotor = LazyHardware(initializer)
@@ -478,10 +478,6 @@ class NextMotor @JvmOverloads constructor(
      * Motor stops and brakes (resists movement after stopping).
      */
     BRAKE(DcMotor.ZeroPowerBehavior.BRAKE),
-  }
-
-  companion object {
-    val motorEventLoop: EventLoop = EventLoop()
   }
 }
 

@@ -18,6 +18,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap
 import com.qualcomm.robotcore.hardware.configuration.LynxConstants
 import dev.frozenmilk.sinister.sdk.apphooks.OnCreateEventLoop
 import dev.nextftc.hardware.lynx.NextLynxModule
+import dev.nextftc.hardware.util.EventLoop
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.celsius
 import dev.nextftc.units.measuretypes.Temperature
@@ -109,6 +110,11 @@ object RobotController : OnCreateEventLoop, OpModeManagerNotifier.Notifications 
     override val size: Int get() = hubs.size
     override fun get(index: Int): NextLynxModule = hubs[index]
   }
+
+  /**
+   * Event loop for hardware access and updates.
+   */
+  val hardwareEventLoop: EventLoop = EventLoop()
 
   /**
    * Current Control Hub temperature.
