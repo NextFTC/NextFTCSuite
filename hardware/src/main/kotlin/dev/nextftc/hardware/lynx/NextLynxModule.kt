@@ -16,6 +16,7 @@ import com.qualcomm.robotcore.hardware.DigitalChannel
 import com.qualcomm.robotcore.hardware.DigitalChannelImpl
 import com.qualcomm.robotcore.hardware.ServoImplEx
 import com.qualcomm.robotcore.hardware.configuration.typecontainers.ServoConfigurationType
+import com.qualcomm.robotcore.util.RobotLog
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.util.LazyHardware
 import dev.nextftc.units.celsius
@@ -54,15 +55,17 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
   /** Tracks used ports. Resets each OpMode. */
   private val usedPorts by LazyHardware { HashMap<Pair<PortKind, Int>, Throwable>() }
 
-  /** Throws if this port is already used on this hub. */
+  /** Logs a warning if this port is already used on this huh */
   private fun claim(kind: PortKind, port: Int) {
     val key = kind to port
     val first = usedPorts[key]
     if (first != null) {
-      throw IllegalStateException(
-        "Port conflict on $type: ${kind.name.lowercase()} port $port is used by more than one device",
+      RobotLog.ww(
+        "NextLynxModule",
         first,
+        "Port conflict on $type: ${kind.name.lowercase()} port $port is used by more than one device",
       )
+      return
     }
     usedPorts[key] = Throwable("Port first claimed here")
   }
