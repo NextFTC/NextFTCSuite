@@ -40,10 +40,11 @@ class DriverStationBackend(private val telemetry: SdkTelemetry) : TelemetryBacke
 
   override fun entry(path: String, type: TelemetryType, properties: Map<String, Any>): TelemetryEntry {
     val unit = (properties["unit"] as? String)?.takeIf { it.isNotEmpty() }
-    val item = items.computeIfAbsent(path) {
+    val item = items[path] ?: run {
       // An Any, so the SDK doesn't treat the value as a format string
       val empty: Any = ""
-      telemetry.addData(path.removePrefix("/"), empty).also { it.setRetained(true) }
+      val added: SdkTelemetry.Item? = telemetry.addData(path.removePrefix("/"), empty)
+      added?.also { it.setRetained(true) }?.let { items.putIfAbsent(path, it) ?: it }
     }
     return LineEntry(item, unit)
   }
@@ -67,11 +68,10 @@ class DriverStationBackend(private val telemetry: SdkTelemetry) : TelemetryBacke
 
   override fun toString() = "DriverStationBackend"
 
-  private inner class LineEntry(private val item: SdkTelemetry.Item, private val unit: String?) :
+  private inner class LineEntry(private val item: SdkTelemetry.Item?, private val unit: String?) :
     TelemetryEntry {
     private fun show(text: String) {
-      if (closed) return
-      // An Any, because the String overload of setValue is a format string and `%` would break it
+      if (closed || item == null) return
       val line: Any = if (unit == null) text else "$text $unit"
       item.setValue(line)
     }
