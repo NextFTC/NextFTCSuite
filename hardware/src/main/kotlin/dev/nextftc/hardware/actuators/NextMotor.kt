@@ -479,6 +479,11 @@ class NextMotor @JvmOverloads constructor(
      */
     BRAKE(DcMotor.ZeroPowerBehavior.BRAKE),
   }
+
+  companion object {
+    @Deprecated("Use RobotController.hardwareEventLoop.", ReplaceWith("RobotController.hardwareEventLoop"))
+    val motorEventLoop: EventLoop get() = RobotController.hardwareEventLoop
+  }
 }
 
 /**
