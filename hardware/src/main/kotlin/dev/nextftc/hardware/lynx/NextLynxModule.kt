@@ -52,13 +52,19 @@ class NextLynxModule internal constructor(initializer: () -> LynxModule, @JvmFie
   }
 
   /** Tracks used ports. Resets each OpMode. */
-  private val usedPorts by LazyHardware { HashSet<Pair<PortKind, Int>>() }
+  private val usedPorts by LazyHardware { HashMap<Pair<PortKind, Int>, Throwable>() }
 
   /** Throws if this port is already used on this hub. */
   private fun claim(kind: PortKind, port: Int) {
-    check(usedPorts.add(kind to port)) {
-      "Port conflict on $type: ${kind.name.lowercase()} port $port is used by more than one device"
+    val key = kind to port
+    val first = usedPorts[key]
+    if (first != null) {
+      throw IllegalStateException(
+        "Port conflict on $type: ${kind.name.lowercase()} port $port is used by more than one device",
+        first,
+      )
     }
+    usedPorts[key] = Throwable("Port first claimed here")
   }
 
   /** Current module temperature. */
