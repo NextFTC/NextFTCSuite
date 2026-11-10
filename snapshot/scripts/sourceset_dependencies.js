@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":linalg/main":[],":robot/main":[],":robot/release":[],":units/main":[],":hardware/main":[],":hardware/release":[],":telemetry/main":[],":telemetry-ftc/main":[],":telemetry-ftc/release":[],":control/main":[]}'
+sourceset_dependencies = '{":linalg/main":[],":robot/main":[],":robot/release":[],":units/main":[],":util/main":[],":hardware/main":[],":hardware/release":[],":telemetry/main":[],":telemetry-ftc/main":[],":telemetry-ftc/release":[],":control/main":[]}'

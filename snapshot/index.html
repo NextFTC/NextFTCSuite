@@ -152,7 +152,7 @@
                 <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
               </span></span></div>
           <div><span class="brief-comment">
-              <p class="paragraph">Logging and live telemetry for FTC robot code, in formats AdvantageScope understands. It has no FTC SDK or Android dependency, so it runs in unit tests or a desktop tool as easily as on a Robot Controller, and it doesn't depend on the other NextFTC modules.</p>
+              <p class="paragraph">Logging and live telemetry for FTC robot code, in formats AdvantageScope understands. It has no FTC SDK or Android dependency, so it runs in unit tests or a desktop tool as easily as on a Robot Controller. It depends on <code class="lang-kotlin">util</code>, which supplies the struct schemas, and on <code class="lang-kotlin">control</code>, whose geometry types are registered as structs.</p>
             </span></div>
         </div>
       </div>
@@ -166,6 +166,19 @@
               </span></span></div>
           <div><span class="brief-comment">
               <p class="paragraph">FTC lifecycle integration for the <code class="lang-kotlin">telemetry</code> module, for teams that want logging and live telemetry without using the rest of NextFTC. It doesn't depend on <code class="lang-kotlin">robot</code> or <code class="lang-kotlin">hardware</code>, and it needs no OpMode base class. Adding the dependency is enough.</p>
+            </span></div>
+        </div>
+      </div>
+<a data-name="1401052181%2FMain%2F0" anchor-label="NextFTC Util" id="1401052181%2FMain%2F0" data-filterable-set=""></a>
+      <div class="table-row table-row_multimodule">
+        <div class="main-subrow ">
+          <div class="w-100"><span class="inline-flex">
+              <div><a href="util/index.html">NextFTC Util</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1401052181%2FMain%2F0"></span>
+                <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+              </span></span></div>
+          <div><span class="brief-comment">
+              <p class="paragraph">Small pieces shared by the other NextFTC modules. It has no FTC SDK or Android dependency, so every module, including the pure-JVM ones, can depend on it.</p>
             </span></div>
         </div>
       </div>

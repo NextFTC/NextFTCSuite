@@ -1,0 +1,191 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>StructSchemaRegistry</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
+<link href="../../../images/logo-icon.svg"></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    NextFTC Suite
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.3.1-SNAPSHOT
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":util/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":util/main" data-filter=":util/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    NextFTC Suite
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="NextFTC Util::dev.nextftc.util.struct/StructSchemaRegistry///PointingToDeclaration//1606417922">
+  <div class="breadcrumbs"><a href="../../index.html">NextFTC Util</a><span class="delimiter">/</span><a href="../index.html">dev.nextftc.util.struct</a><span class="delimiter">/</span><span class="current">StructSchemaRegistry</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Struct</span><wbr><span>Schema</span><wbr><span><span>Registry</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":util/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">StructSchemaRegistry</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/NextFTC/NextFTCSuite/blob/main/util/src/main/kotlin/dev/nextftc/util/struct/StructSchemaRegistry.kt#L64">source</a>)</span></span></div><p class="paragraph">Finds or builds a <a href="../-struct-schema/index.html">StructSchema</a> for a class, reflecting over its fields.</p><p class="paragraph">A registry reflects a class the first time it is asked for it, then keeps the result, so every request for the same class returns the same schema. Classes nested in its fields are reflected too, and each becomes a nested struct. Give each logger its own registry, or share one.</p><h2 class="">What is reflected</h2><p class="paragraph">A Kotlin class contributes its public properties. A Java class contributes its public fields and its getters, which are public no-argument instance methods named <code class="lang-kotlin">getX</code>, or <code class="lang-kotlin">isX</code> returning a boolean, and the field is named <code class="lang-kotlin">x</code>. A Java record contributes its components. A field that is both a public field and a getter is read from the field.</p><p class="paragraph">Each field is named after its property, field, or getter, with these types:</p><ul><li><p class="paragraph"><code class="lang-kotlin">Boolean</code>, <code class="lang-kotlin">Byte</code>, <code class="lang-kotlin">Short</code>, <code class="lang-kotlin">Int</code>, <code class="lang-kotlin">Long</code>, <code class="lang-kotlin">Float</code> and <code class="lang-kotlin">Double</code>, and the Java primitives and boxes for them</p></li><li><p class="paragraph"><code class="lang-kotlin">DoubleArray</code>, which needs <a href="../-struct-size/index.html">StructSize</a> to declare its length</p></li><li><p class="paragraph">any other concrete class, as a nested struct</p></li></ul><h2 class="">Order</h2><p class="paragraph">The order is the layout on the wire, so changing it changes the schema:</p><ul><li><p class="paragraph">A Kotlin class uses primary constructor order, then any remaining properties alphabetically.</p></li><li><p class="paragraph">A Java record uses component order.</p></li><li><p class="paragraph">Any other class uses alphabetical order, because JVM bytecode doesn't keep declaration order for methods.</p></li></ul><p class="paragraph"><a href="../-struct-order/index.html">StructOrder</a> overrides this for any class. Fields marked <a href="../-struct-ignore/index.html">StructIgnore</a> are skipped, including computed ones you don't want logged.</p><p class="paragraph">Nullable properties, strings, collections, enums, and platform types have no struct encoding and are rejected with an error that names the field. Cyclic nesting is rejected too. For such a type, write a schema by hand with <a href="../struct-schema.html">structSchema</a> and <a href="register.html">register</a> it, or mark the field <a href="../-struct-ignore/index.html">StructIgnore</a>.</p><p class="paragraph">The struct's name is the class's simple name, or the value of <a href="../-struct-name/index.html">StructName</a> on it.</p><p class="paragraph">Reading fields by reflection boxes each value, so it suits a few structs logged each loop. For a hot path, use a hand-written schema.</p><p class="paragraph">Methods are safe to call from multiple threads.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="CONSTRUCTOR">
+        <h2 class="tableheader">Constructors</h2>
+        <div class="table"><a data-name="1571016577%2FConstructors%2F1606417922" anchor-label="StructSchemaRegistry" id="1571016577%2FConstructors%2F1606417922" data-filterable-set=":util/main"></a>
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":util/main" data-filterable-set=":util/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-struct-schema-registry.html"><span>Struct</span><wbr><span>Schema</span><wbr><span><span>Registry</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1571016577%2FConstructors%2F1606417922"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":util/main"><div class="symbol monospace"><span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-1981846843%2FFunctions%2F1606417922" anchor-label="existingSchemaOf" id="-1981846843%2FFunctions%2F1606417922" data-filterable-set=":util/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":util/main" data-filterable-set=":util/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="existing-schema-of.html"><span>existing</span><wbr><span>Schema</span><wbr><span><span>Of</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1981846843%2FFunctions%2F1606417922"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":util/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-synchronized/index.html"><span class="token annotation builtin">Synchronized</span></a></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="existing-schema-of.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="existing-schema-of.html"><span class="token function">existingSchemaOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html">Class</a><span class="token operator">&lt;</span><a href="existing-schema-of.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-struct-schema/index.html">StructSchema</a><span class="token operator">&lt;</span><a href="existing-schema-of.html">T</a><span class="token operator">&gt;</span><span class="token operator">?</span></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-synchronized/index.html"><span class="token annotation builtin">Synchronized</span></a></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="existing-schema-of.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="existing-schema-of.html"><span class="token function">existingSchemaOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="existing-schema-of.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-struct-schema/index.html">StructSchema</a><span class="token operator">&lt;</span><a href="existing-schema-of.html">T</a><span class="token operator">&gt;</span><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns the schema for <a href="existing-schema-of.html">type</a> if it already exists, or null otherwise.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="154775153%2FFunctions%2F1606417922" anchor-label="register" id="154775153%2FFunctions%2F1606417922" data-filterable-set=":util/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":util/main" data-filterable-set=":util/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="register.html"><span><span>register</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="154775153%2FFunctions%2F1606417922"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":util/main"><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-synchronized/index.html"><span class="token annotation builtin">Synchronized</span></a></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="register.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="register.html"><span class="token function">register</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="register.html">T</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter ">schema<span class="token operator">: </span><a href="../-struct-schema/index.html">StructSchema</a><span class="token operator">&lt;</span><a href="register.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Uses <a href="register.html">schema</a> for <a href="register.html">type</a>, both when it is requested directly and when it appears as a field of a reflected class. Use it for a class you can't annotate or that reflection can't handle.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1013139253%2FFunctions%2F1606417922" anchor-label="schemaOf" id="1013139253%2FFunctions%2F1606417922" data-filterable-set=":util/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":util/main" data-filterable-set=":util/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="schema-of.html"><span>schema</span><wbr><span><span>Of</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1013139253%2FFunctions%2F1606417922"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":util/main"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="schema-of.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="schema-of.html"><span class="token function">schemaOf</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-struct-schema/index.html">StructSchema</a><span class="token operator">&lt;</span><a href="schema-of.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the schema for <a href="schema-of.html">T</a>. See <a href="schema-of.html">schemaOf</a>.</p></div><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="schema-of.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="schema-of.html"><span class="token function">schemaOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Class.html">Class</a><span class="token operator">&lt;</span><a href="schema-of.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-struct-schema/index.html">StructSchema</a><span class="token operator">&lt;</span><a href="schema-of.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the schema for <a href="schema-of.html">type</a>. See <a href="schema-of.html">schemaOf</a>.</p></div><div class="symbol monospace"><div class="block"><div class="block"><span class="token annotation builtin">@</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.jvm/-synchronized/index.html"><span class="token annotation builtin">Synchronized</span></a></div></div><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="schema-of.html">T</a><span class="token operator"> : </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/index.html">Any</a><span class="token operator">&gt; </span><a href="schema-of.html"><span class="token function">schemaOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">type<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.reflect/-k-class/index.html">KClass</a><span class="token operator">&lt;</span><a href="schema-of.html">T</a><span class="token operator">&gt;</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="../-struct-schema/index.html">StructSchema</a><span class="token operator">&lt;</span><a href="schema-of.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns the schema for <a href="schema-of.html">type</a>, registered or reflected.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2026 NextFTC - Licensed under the BSD-3-Clause license.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
