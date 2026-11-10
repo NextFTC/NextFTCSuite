@@ -91,6 +91,21 @@ class StructSchemaRegistry {
     typeName == other.typeName && size == other.size && schema == other.schema
 
   /**
+   * Returns the schema for [type] if it already exists, or null otherwise.
+   */
+  @Suppress("UNCHECKED_CAST")
+  @Synchronized
+  fun <T : Any> existingSchemaOf(type: KClass<T>): StructSchema<T>? = schemas[type] as? StructSchema<T>
+
+  /**
+   * Returns the schema for [type] if it already exists, or null otherwise.
+   */
+  @Suppress("UNCHECKED_CAST")
+  @Synchronized
+  fun <T : Any> existingSchemaOf(type: Class<T>): StructSchema<T>? =
+    schemas[type.kotlin] as? StructSchema<T>
+
+  /**
    * Returns the schema for [type], registered or reflected.
    *
    * @throws IllegalArgumentException if [type] or something nested in it can't be a struct

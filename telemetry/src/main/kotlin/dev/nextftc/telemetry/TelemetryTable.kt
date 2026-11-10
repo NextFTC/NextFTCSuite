@@ -8,10 +8,6 @@
 
 package dev.nextftc.telemetry
 
-import dev.nextftc.units.Measure
-import dev.nextftc.units.Unit
-import dev.nextftc.units.unittypes.MulUnit
-import dev.nextftc.units.unittypes.PerUnit
 import dev.nextftc.util.struct.StructSchema
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.KClass
@@ -321,9 +317,9 @@ class TelemetryTable internal constructor(private val registry: TelemetryRegistr
    *
    * Numbers, booleans, strings, and primitive arrays go to the topics above, with a `Byte` or
    * `Short` logged as an integer. An array of objects is logged as an array of structs, or of
-   * strings. A [Measure] is logged as a `double` in its base unit, with that unit's symbol as the
-   * topic's unit, so `12.0.inches` is logged as `0.3048` in `m`. A [TelemetryLoggable] is logged into
-   * the child table [name]. Anything else is logged as a struct.
+   * strings. A value with a [TelemetryTypeHandler] registered for its type, such as a `Measure`, is
+   * logged by that handler. A [TelemetryLoggable] is logged into the child table [name]. Anything
+   * else is logged as a struct.
    *
    * A collection or map is rejected with a warning, because its element type is erased. Use
    * [arrayTopic] or [logArray] for a list.
@@ -351,32 +347,35 @@ class TelemetryTable internal constructor(private val registry: TelemetryRegistr
       is LongArray -> log(name, value)
       is FloatArray -> log(name, value)
       is DoubleArray -> log(name, value)
-      is Measure<*> -> logMeasure(name, value)
-      is TelemetryLoggable -> value.logTo(table(name))
-      is Collection<*>,
-      is Map<*, *>,
-      ->
-        registry.warn(
-          "Could not log '${pathOf(name)}': a ${value.javaClass.simpleName} has an erased element " +
-            "type. Use arrayTopic or logArray to log a list of structs.",
-        )
-      is Array<*> -> logObjectArray(name, value)
-      else -> topic(name, value.javaClass.kotlin).set(value)
+      else -> logObject(name, value)
     }
   }
 
-  // Measures are logged using their base unit
-  private fun logMeasure(name: String, value: Measure<*>) {
-    val topic = doubleTopic(name)
-    if (topic.unit == null) topic.unit = baseSymbolOf(value.unit)
-    topic.set(value.baseUnitMagnitude)
-  }
+  // Everything without a fixed encoding: a registered handler first, then the value's own way of
+  // logging itself, then as a struct.
+  private fun logObject(name: String, value: Any) {
+    val handler = registry.handlers.find(value.javaClass)
+    if (handler != null) {
+      handler.log(this, name, value)
+      return
+    }
 
-  // The base unit of compound unit types are built from the base unit of their components
-  private fun baseSymbolOf(unit: Unit<*>): String = when (unit) {
-    is PerUnit<*, *> -> "${baseSymbolOf(unit.numerator)}/${baseSymbolOf(unit.denominator)}"
-    is MulUnit<*, *> -> "${baseSymbolOf(unit.first)}⋅${baseSymbolOf(unit.second)}"
-    else -> unit.baseUnit.symbol()
+    val struct = registry.structs.existingSchemaOf(value.javaClass)
+    if (struct != null) {
+      topic(name, struct).set(value)
+      return
+    }
+
+    when (value) {
+      is TelemetryLoggable -> value.logTo(table(name))
+      is Collection<*>, is Map<*, *> -> registry.warn(
+        "Could not log '${pathOf(name)}': a ${value.javaClass.simpleName} has an erased element " +
+          "type. Use arrayTopic or logArray to log a list of structs.",
+      )
+
+      is Array<*> -> logObjectArray(name, value)
+      else -> topic(name, value.javaClass.kotlin).set(value)
+    }
   }
 
   @Suppress("UNCHECKED_CAST")

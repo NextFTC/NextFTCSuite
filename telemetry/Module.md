@@ -28,7 +28,9 @@ timestamp, so a value means the same moment in the log and on the wire.
 `Telemetry.log("Drive/Pose", pose)`, or hold a typed handle for the fast path:
 `DoubleTopic`, `IntTopic`, `LongTopic`, `FloatTopic` and `BooleanTopic` for numbers and booleans, and
 `Topic<T>` for strings, arrays, structs, and lists of structs. `TelemetryTable` groups related
-topics under a path, and `TelemetryLoggable` lets an object publish its own fields.
+topics under a path, and `TelemetryLoggable` lets an object publish its own fields. For a type you
+don't own, register a `TelemetryTypeHandler` in `TelemetryRegistry.handlers`; `Measure` has one by
+default, which logs the base-unit value with its unit.
 
 The registry stamps each value, sends it to every registered backend (or only those registered for
 a path prefix), and reports problems through a warning handler instead of throwing. A path keeps one

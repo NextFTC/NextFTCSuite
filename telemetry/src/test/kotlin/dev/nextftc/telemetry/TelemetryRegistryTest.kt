@@ -74,6 +74,20 @@ private class ClosingBackend(private val fail: Boolean = false) : TelemetryBacke
   }
 }
 
+private open class HandledColor(val hex: String)
+
+private class SubColor(hex: String) : HandledColor(hex)
+
+private interface Named {
+  val label: String
+}
+
+private class NamedThing(override val label: String) : Named
+
+private class SelfLogging : TelemetryLoggable {
+  override fun logTo(table: TelemetryTable) = table.log("self", "own")
+}
+
 class TelemetryRegistryTest :
   FunSpec({
     test("the control geometry types are registered as structs") {
@@ -105,6 +119,53 @@ class TelemetryRegistryTest :
       mock.propertiesAt("/speed") shouldBe mapOf("unit" to "m/s")
       mock.propertiesAt("/angle") shouldBe mapOf("unit" to "rad")
       env.warnings shouldBe emptyList()
+    }
+
+    test("a registered handler logs values of its type") {
+      val env = Env()
+      val mock = MockTelemetryBackend().also { env.registry.register(it) }
+      env.registry.handlers.register<HandledColor> { table, name, color -> table.log(name, color.hex) }
+
+      env.registry.root.log("color", HandledColor("#ff0000"))
+
+      mock.valuesAt("/color") shouldBe listOf("#ff0000")
+      env.warnings shouldBe emptyList()
+    }
+
+    test("a handler applies to subtypes, and the nearest type's handler wins") {
+      val env = Env()
+      val mock = MockTelemetryBackend().also { env.registry.register(it) }
+      env.registry.handlers.register<HandledColor> { table, name, _ -> table.log(name, "base") }
+
+      env.registry.root.log("sub", SubColor("#00ff00"))
+      env.registry.handlers.register<SubColor> { table, name, _ -> table.log(name, "sub") }
+      env.registry.root.log("sub2", SubColor("#00ff00"))
+
+      mock.valuesAt("/sub") shouldBe listOf("base")
+      mock.valuesAt("/sub2") shouldBe listOf("sub")
+    }
+
+    test("a handler for an interface applies to its implementers") {
+      val env = Env()
+      val mock = MockTelemetryBackend().also { env.registry.register(it) }
+      env.registry.handlers.register<Named> { table, name, value -> table.log(name, value.label) }
+
+      env.registry.root.log("n", NamedThing("thing"))
+
+      mock.valuesAt("/n") shouldBe listOf("thing")
+    }
+
+    test("a handler beats the value's own TelemetryLoggable, and unregistering restores it") {
+      val env = Env()
+      val mock = MockTelemetryBackend().also { env.registry.register(it) }
+      env.registry.handlers.register<SelfLogging> { table, name, _ -> table.log(name, "handler") }
+
+      env.registry.root.log("a", SelfLogging())
+      env.registry.handlers.unregister(SelfLogging::class)
+      env.registry.root.log("b", SelfLogging())
+
+      mock.valuesAt("/a") shouldBe listOf("handler")
+      mock.valuesAt("/b/self") shouldBe listOf("own")
     }
 
     test("logging with no backend registered is harmless") {

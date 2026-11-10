@@ -84,6 +84,12 @@ constructor(
     register(PoseAcceleration2d::class, PoseAcceleration2d.struct)
   }
 
+  /**
+   * The handlers that log values of types that can't log themselves. By default this includes one for
+   * `Measure`.
+   */
+  val handlers = TelemetryTypeHandlers()
+
   /** Returns the current time as a timestamp in microseconds since [origin]. */
   fun now(): Long = timestampOf(timeSource.markNow())
 
