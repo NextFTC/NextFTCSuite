@@ -12,6 +12,7 @@ import com.qualcomm.hardware.lynx.LynxI2cColorRangeSensor
 import com.qualcomm.robotcore.hardware.DistanceSensor
 import dev.nextftc.hardware.RobotController
 import dev.nextftc.hardware.lynx.NextLynxModule
+import dev.nextftc.hardware.util.EventLoop
 import dev.nextftc.hardware.util.LazyHardware
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit
 
@@ -63,9 +64,18 @@ class NextDistanceSensor(initializer: () -> DistanceSensor) {
     require(bus in 0..3) { "Expected bus in range [0, 3], got $bus" }
   }
 
-  private val distanceSensor by LazyHardware(initializer)
+  init {
+    sensorEventLoop.bind(this::update)
+  }
+
+  private val lazySensor = LazyHardware(initializer)
+  private val distanceSensor by lazySensor
 
   private var cachedDistanceCm: Double = Double.NaN
+
+  init {
+    lazySensor.onOpModeStop { cachedDistanceCm = Double.NaN }
+  }
 
   /** Reads the distance sensor and refreshes the cache. Call this once per loop, before reading any properties. */
   fun update() {
@@ -82,5 +92,9 @@ class NextDistanceSensor(initializer: () -> DistanceSensor) {
   fun isWithinDistance(threshold: Double, unit: DistanceUnit = DistanceUnit.CM): Boolean {
     val distance = getDistance(unit)
     return !distance.isNaN() && distance <= threshold
+  }
+
+  companion object {
+    val sensorEventLoop: EventLoop = EventLoop()
   }
 }
