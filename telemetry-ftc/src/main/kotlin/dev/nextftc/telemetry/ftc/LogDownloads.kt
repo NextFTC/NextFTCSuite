@@ -8,17 +8,18 @@
 
 package dev.nextftc.telemetry.ftc
 
-import io.ktor.http.CacheControl
 import io.ktor.http.ContentDisposition
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.withCharset
 import io.ktor.server.http.content.LocalFileContent
-import io.ktor.server.http.content.staticResources
 import io.ktor.server.response.header
 import io.ktor.server.response.respond
+import io.ktor.server.response.respondBytes
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.Routing
+import io.ktor.server.routing.RoutingContext
 import io.ktor.server.routing.get
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -67,9 +68,11 @@ internal class LogDownloads(private val directory: () -> File, private val activ
   }
 
   fun install(routing: Routing) = with(routing) {
-    staticResources(PAGE_PATH, PAGE_RESOURCES) {
-      cacheControl { listOf(CacheControl.NoCache(null)) }
+    for (path in listOf(PAGE_PATH, "$PAGE_PATH/")) {
+      get(path) { respondPageFile("index.html") }
     }
+
+    get("$PAGE_PATH/{file}") { respondPageFile(call.parameters["file"]) }
 
     get("/logs") {
       call.respondText(withContext(Dispatchers.IO) { json(entries()) }, ContentType.Application.Json)
@@ -96,6 +99,25 @@ internal class LogDownloads(private val directory: () -> File, private val activ
         }
       }
     }
+  }
+
+  private suspend fun RoutingContext.respondPageFile(name: String?) {
+    val type = PAGE_FILES[name]
+    val bytes = if (type == null) {
+      null
+    } else {
+      withContext(Dispatchers.IO) {
+        LogDownloads::class.java.classLoader?.getResourceAsStream("$PAGE_RESOURCES/$name")?.use {
+          it.readBytes()
+        }
+      }
+    }
+    if (type == null || bytes == null) {
+      call.respondText("Not found", status = HttpStatusCode.NotFound)
+      return
+    }
+    call.response.header(HttpHeaders.CacheControl, "no-cache")
+    call.respondBytes(bytes, type)
   }
 
   /** Every log in the directory, newest first. */
@@ -152,6 +174,13 @@ internal class LogDownloads(private val directory: () -> File, private val activ
      * Where the page is located in the resources directory.
      */
     const val PAGE_RESOURCES = "dev/nextftc/telemetry/ftc/download"
+
+    /** The files of the page, with their types. */
+    val PAGE_FILES = mapOf(
+      "index.html" to ContentType.Text.Html.withCharset(Charsets.UTF_8),
+      "logs.css" to ContentType.Text.CSS.withCharset(Charsets.UTF_8),
+      "logs.js" to ContentType.Application.JavaScript.withCharset(Charsets.UTF_8),
+    )
 
     /** The name [FtcTelemetry] gives a log: the stamp, then the sanitized OpMode name. */
     val NAME = Regex("""(\d{4}_\d{2}_\d{2}__\d{2}_\d{2}_\d{2})__(.*)\.wpilog""")
