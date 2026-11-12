@@ -15,6 +15,7 @@ import io.ktor.server.application.install
 import io.ktor.server.application.serverConfig
 import io.ktor.server.cio.CIO
 import io.ktor.server.engine.EmbeddedServer
+import io.ktor.server.engine.applicationEnvironment
 import io.ktor.server.engine.connector
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.response.header
@@ -49,6 +50,7 @@ import org.msgpack.core.MessagePack
 import org.msgpack.core.MessagePackException
 import org.msgpack.core.MessageUnpacker
 import org.msgpack.value.ValueType
+import org.slf4j.helpers.NOPLogger
 import java.io.Closeable
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -204,7 +206,11 @@ constructor(
       val server =
         embeddedServer(
           CIO,
-          serverConfig {
+          serverConfig(
+            environment = applicationEnvironment {
+              log = NOPLogger.NOP_LOGGER
+            },
+          ) {
             module {
               install(WebSockets) {
                 // NT4 messages are small; this stops a client from making the server buffer a huge frame
