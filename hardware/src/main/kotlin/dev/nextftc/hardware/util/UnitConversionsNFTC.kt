@@ -1,4 +1,5 @@
 @file:JvmName("UnitConversionsNFTC")
+
 package dev.nextftc.hardware.util
 
 import dev.nextftc.control.geometry.Pose2d
@@ -16,6 +17,7 @@ import dev.nextftc.units.Millivolts
 import dev.nextftc.units.Radians
 import dev.nextftc.units.Seconds
 import dev.nextftc.units.Volts
+import dev.nextftc.units.unittypes.AngularVelocityUnit
 import dev.nextftc.units.unittypes.TimeUnit
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit
 import org.firstinspires.ftc.robotcore.external.navigation.AngularVelocity
@@ -25,18 +27,17 @@ import org.firstinspires.ftc.robotcore.external.navigation.Pose2D
 import org.firstinspires.ftc.robotcore.external.navigation.TempUnit
 import org.firstinspires.ftc.robotcore.external.navigation.UnnormalizedAngleUnit
 import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit
-import dev.nextftc.units.unittypes.AngularVelocityUnit
 
 /**
  * Convert the official library [DistanceUnit] into the `units` library equivalent.
  */
 val DistanceUnit.nftc get() =
-    when (this) {
-        DistanceUnit.INCH -> Inches
-        DistanceUnit.MM -> Millimeters
-        DistanceUnit.CM -> Centimeters
-        DistanceUnit.METER -> Meters
-    }
+  when (this) {
+    DistanceUnit.INCH -> Inches
+    DistanceUnit.MM -> Millimeters
+    DistanceUnit.CM -> Centimeters
+    DistanceUnit.METER -> Meters
+  }
 
 /**
  * Combines this unit with a unit of time to create a velocity unit.
@@ -46,14 +47,15 @@ val DistanceUnit.nftc get() =
  * @return the combined velocity unit
  */
 fun DistanceUnit.per(time: TimeUnit) = nftc.per(time)
+
 /**
  * Convert the official library [AngleUnit] into the `units` library equivalent.
  */
 val AngleUnit.nftc get() =
-    when (this) {
-        AngleUnit.DEGREES -> Degrees
-        AngleUnit.RADIANS -> Radians
-    }
+  when (this) {
+    AngleUnit.DEGREES -> Degrees
+    AngleUnit.RADIANS -> Radians
+  }
 
 /**
  * Combines this unit with a unit of time to create a velocity unit.
@@ -68,10 +70,10 @@ fun AngleUnit.per(time: TimeUnit) = nftc.per(time)
  * Convert the official library [UnnormalizedAngleUnit] into the `units` library equivalent.
  */
 val UnnormalizedAngleUnit.nftc get() =
-    when (this) {
-        UnnormalizedAngleUnit.DEGREES -> Degrees
-        UnnormalizedAngleUnit.RADIANS -> Radians
-    }
+  when (this) {
+    UnnormalizedAngleUnit.DEGREES -> Degrees
+    UnnormalizedAngleUnit.RADIANS -> Radians
+  }
 
 /**
  * Combines this unit with a unit of time to create a velocity unit.
@@ -86,29 +88,29 @@ fun UnnormalizedAngleUnit.per(time: TimeUnit) = nftc.per(time)
  * Convert the official library [CurrentUnit] into the `units` library equivalent.
  */
 val CurrentUnit.nftc get() =
-    when (this) {
-        CurrentUnit.AMPS -> Amperes
-        CurrentUnit.MILLIAMPS -> Milliamperes
-    }
+  when (this) {
+    CurrentUnit.AMPS -> Amperes
+    CurrentUnit.MILLIAMPS -> Milliamperes
+  }
 
 /**
  * Convert the official library [VoltageUnit] into the `units` library equivalent.
  */
 val VoltageUnit.nftc get() =
-    when (this) {
-        VoltageUnit.VOLTS -> Volts
-        VoltageUnit.MILLIVOLTS -> Millivolts
-    }
+  when (this) {
+    VoltageUnit.VOLTS -> Volts
+    VoltageUnit.MILLIVOLTS -> Millivolts
+  }
 
 /**
  * Convert the official library [TempUnit] into the `units` library equivalent.
  */
 val TempUnit.nftc get() =
-    when (this) {
-        TempUnit.CELSIUS -> Celsius
-        TempUnit.FARENHEIT -> Fahrenheit
-        TempUnit.KELVIN -> Kelvin
-    }
+  when (this) {
+    TempUnit.CELSIUS -> Celsius
+    TempUnit.FARENHEIT -> Fahrenheit
+    TempUnit.KELVIN -> Kelvin
+  }
 
 /**
  * Get the [AngularVelocityUnit] for this [AngularVelocity].
@@ -120,4 +122,4 @@ val AngularVelocity.perUnit get() = this.angleUnit.per(Seconds)
  * The distance unit is inches, and the angle unit is radians.
  */
 val Pose2D.nftc get() =
-    Pose2d(getX(DistanceUnit.INCH), getY(DistanceUnit.INCH), getHeading(AngleUnit.RADIANS))
+  Pose2d(getX(DistanceUnit.INCH), getY(DistanceUnit.INCH), getHeading(AngleUnit.RADIANS))

@@ -1,4 +1,5 @@
 @file:JvmName("UnitConversionsFTC")
+
 package dev.nextftc.hardware.util
 
 import dev.nextftc.control.geometry.Pose2d
@@ -40,62 +41,65 @@ import org.firstinspires.ftc.robotcore.external.navigation.VoltageUnit.VOLTS
  * Convert the `units` library [DistanceUnit] into the official library equivalent, or null if there is not a corresponding unit.
  */
 val DistanceUnit.ftc get() =
-    when (this) {
-        Inches -> INCH
-        Millimeters -> MM
-        Centimeters -> CM
-        Meters -> METER
-        else -> null
-    }
+  when (this) {
+    Inches -> INCH
+    Millimeters -> MM
+    Centimeters -> CM
+    Meters -> METER
+    else -> null
+  }
 
 /**
  * Convert the `units` library [AngleUnit] into the official library equivalent, or null if there is not a corresponding unit.
  */
 val AngleUnit.ftc get() =
-    when (this) {
-        Degrees -> DEGREES
-        Radians -> RADIANS
-        else -> null
-    }
+  when (this) {
+    Degrees -> DEGREES
+    Radians -> RADIANS
+    else -> null
+  }
 
 /**
  * Convert the `units` library [CurrentUnit] into the official library equivalent, or null if there is not a corresponding unit.
  */
 val CurrentUnit.ftc get() =
-    when (this) {
-        Amperes -> AMPS
-        Milliamperes -> MILLIAMPS
-        else -> null
-    }
+  when (this) {
+    Amperes -> AMPS
+    Milliamperes -> MILLIAMPS
+    else -> null
+  }
 
 /**
  * Convert the `units` library [VoltageUnit] into the official library equivalent, or null if there is not a corresponding unit.
  */
 val VoltageUnit.ftc get() =
-    when (this) {
-        Volts -> VOLTS
-        Millivolts -> Millivolts
-        else -> null
-    }
+  when (this) {
+    Volts -> VOLTS
+    Millivolts -> Millivolts
+    else -> null
+  }
 
 /**
  * Convert the `units` library [TemperatureUnit] into the official library equivalent, or null if there is not a corresponding unit.
  */
 val TemperatureUnit.ftc get() =
-    when (this) {
-        Celsius -> CELSIUS
-        Fahrenheit -> FARENHEIT
-        Kelvin -> KELVIN
-        else -> null
-    }
+  when (this) {
+    Celsius -> CELSIUS
+    Fahrenheit -> FARENHEIT
+    Kelvin -> KELVIN
+    else -> null
+  }
 
 /**
  * Convert this [Pose2d] into the official library equivalent.
  */
 val Pose2d.ftc get(): Pose2D {
-    val unit = position.x.unit.ftc ?: INCH
-    return Pose2D(
-        unit, position.x.into(unit.nftc), position.y.into(unit.nftc),
-        RADIANS, heading.log()
-    )
+  val unit = position.x.unit.ftc ?: INCH
+  return Pose2D(
+    unit,
+    position.x.into(unit.nftc),
+    position.y.into(unit.nftc),
+    RADIANS,
+    heading.log(),
+  )
 }
