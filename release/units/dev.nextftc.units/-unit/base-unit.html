@@ -39,7 +39,7 @@
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.3.0-SNAPSHOT
+        <div class="library-version" id="library-version">0.4.0
         </div>
         <div class="navigation-controls">
         <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
@@ -95,7 +95,7 @@
   <div class="cover ">
     <h1 class="cover"><span>base</span><wbr><span><span>Unit</span></span></h1>
   </div>
-  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="base-unit.html">baseUnit</a><span class="token operator">: </span><a href="index.html">U</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/NextFTC/NextFTCSuite/blob/main/units/src/main/kotlin/dev/nextftc/units/Unit.kt#L68">source</a>)</span></span></div><p class="paragraph">The base unit for this unit's measurement system. This is found by traversing the parent chain until reaching a unit with no parent. For example:</p><ul><li><p class="paragraph">Seconds.baseUnit returns Seconds (it has no parent)</p></li><li><p class="paragraph">Milliseconds.baseUnit returns Seconds (direct parent is base)</p></li><li><p class="paragraph">Hours.baseUnit returns Seconds (traverses: Hours -&gt; Minutes -&gt; Seconds)</p></li><li><p class="paragraph">Days.baseUnit returns Seconds (traverses: Days -&gt; Hours -&gt; Minutes -&gt; Seconds)</p></li></ul><p class="paragraph">All units in the same measurement system share the same base unit.</p></div></div>
+  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":units/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="base-unit.html">baseUnit</a><span class="token operator">: </span><a href="index.html">U</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/NextFTC/NextFTCSuite/blob/v0.4.0/units/src/main/kotlin/dev/nextftc/units/Unit.kt#L68">source</a>)</span></span></div><p class="paragraph">The base unit for this unit's measurement system. This is found by traversing the parent chain until reaching a unit with no parent. For example:</p><ul><li><p class="paragraph">Seconds.baseUnit returns Seconds (it has no parent)</p></li><li><p class="paragraph">Milliseconds.baseUnit returns Seconds (direct parent is base)</p></li><li><p class="paragraph">Hours.baseUnit returns Seconds (traverses: Hours -&gt; Minutes -&gt; Seconds)</p></li><li><p class="paragraph">Days.baseUnit returns Seconds (traverses: Days -&gt; Hours -&gt; Minutes -&gt; Seconds)</p></li></ul><p class="paragraph">All units in the same measurement system share the same base unit.</p></div></div>
 </div>
     <div class="footer">
         <div class="footer--container">

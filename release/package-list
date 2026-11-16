@@ -26,7 +26,17 @@ dev.nextftc.robot.coroutine
 dev.nextftc.robot.drive
 dev.nextftc.robot.opmode
 dev.nextftc.robot.triggers
+module:NextFTC Telemetry
+dev.nextftc.telemetry
+dev.nextftc.telemetry.backend
+dev.nextftc.telemetry.nt
+dev.nextftc.telemetry.wpilog
+module:NextFTC Telemetry FTC
+dev.nextftc.telemetry.ftc
 module:NextControl Units
 dev.nextftc.units
 dev.nextftc.units.measuretypes
 dev.nextftc.units.unittypes
+module:NextFTC Util
+dev.nextftc.util
+dev.nextftc.util.struct
